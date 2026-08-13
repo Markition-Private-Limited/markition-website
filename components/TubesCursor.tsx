@@ -6,6 +6,7 @@ const randomColors = (count: number) =>
   Array.from({ length: count }, () =>
     "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0")
   );
+  // test
 
 export default function TubesCursor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
