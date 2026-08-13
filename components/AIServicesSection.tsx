@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 interface Service {
   id: string;
@@ -198,23 +199,28 @@ export default function AIServicesSection() {
   }
 
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6" style={{ background: "#030A28" }}>
+    <section className="py-16 sm:py-24 px-4 sm:px-6" style={{ background: "#000028" }}>
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-10 lg:gap-14 items-start">
 
-        {/* ── Left column — list (unchanged) ──────────────────────────── */}
+        {/* ── Left column — list ───────────────────────────────────────── */}
         <div style={{ fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)", position: "relative", zIndex: 0, overflow: "hidden" }}>
-          <h2
-            className="font-bold leading-tight mb-4"
-            style={{ fontSize: "38px" }}
-          >
-            Put AI To Work Across<br />
-            Your <span style={{ color: "#0040FF" }}>Business</span>
-          </h2>
 
-          <p className="text-sm text-white leading-relaxed mb-8 max-w-sm">
-            Autonomous systems, conversational agents, and intelligent workflows
-            engineered for enterprise scale and measurable business impact.
-          </p>
+          <ScrollReveal delay={80} threshold={0.2}>
+            <h2
+              className="font-bold leading-tight mb-4"
+              style={{ fontSize: "38px", letterSpacing: "-0.02em" }}
+            >
+              Put AI To Work Across<br />
+              Your <span style={{ color: "#0040FF" }}>Business</span>
+            </h2>
+          </ScrollReveal>
+
+          <ScrollReveal delay={160} threshold={0.2}>
+            <p className="text-[14px] text-white/70 leading-relaxed mb-8 max-w-sm">
+              Autonomous systems, conversational agents, and intelligent workflows
+              engineered for enterprise scale and measurable business impact.
+            </p>
+          </ScrollReveal>
 
           <div className="flex flex-col">
             {SERVICES.map((s, i) => (
@@ -274,9 +280,88 @@ export default function AIServicesSection() {
 
         {/* ── Right column — service detail card ──────────────────────── */}
         <div style={{ position: "relative", zIndex: 1 }}>
+          <div
+            className="rounded-2xl overflow-hidden"
+            style={{
+              background: "rgba(3, 7, 30, 0.88)",
+              border: "1px solid rgba(80, 120, 255, 0.22)",
+              backdropFilter: "blur(18px)",
+              WebkitBackdropFilter: "blur(18px)",
+              position: "relative",
+            }}
+          >
+
+          {/* Neon tube decorative background */}
+          <svg
+            aria-hidden="true"
+            overflow="hidden"
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              height: "65%",
+              pointerEvents: "none",
+              zIndex: 0,
+            }}
+            viewBox="0 0 600 380"
+            preserveAspectRatio="xMidYMid slice"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <filter id="neon-glow-a" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="7" result="b1"/>
+                <feGaussianBlur stdDeviation="2.5" result="b2"/>
+                <feMerge>
+                  <feMergeNode in="b1"/>
+                  <feMergeNode in="b2"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              <filter id="neon-glow-b" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="3.5" result="b"/>
+                <feMerge>
+                  <feMergeNode in="b"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              <linearGradient id="tg1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#7C3AED" stopOpacity="0"/>
+                <stop offset="25%" stopColor="#8B5CF6" stopOpacity="0.9"/>
+                <stop offset="70%" stopColor="#A855F7" stopOpacity="0.7"/>
+                <stop offset="100%" stopColor="#EC4899" stopOpacity="0.25"/>
+              </linearGradient>
+              <linearGradient id="tg2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#1D4ED8" stopOpacity="0"/>
+                <stop offset="35%" stopColor="#3B82F6" stopOpacity="0.85"/>
+                <stop offset="75%" stopColor="#7C3AED" stopOpacity="0.55"/>
+                <stop offset="100%" stopColor="#A855F7" stopOpacity="0.15"/>
+              </linearGradient>
+              <linearGradient id="tg3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#EC4899" stopOpacity="0"/>
+                <stop offset="45%" stopColor="#DB2777" stopOpacity="0.75"/>
+                <stop offset="100%" stopColor="#7C3AED" stopOpacity="0.2"/>
+              </linearGradient>
+            </defs>
+
+            {/* Purple tubes — kept well above the bottom edge (max y ≈ 330) */}
+            <path d="M -40,330 C 60,278 170,238 285,202 C 390,168 490,152 630,138" stroke="url(#tg1)" strokeWidth="3" fill="none" filter="url(#neon-glow-a)" opacity="0.88"/>
+            <path d="M -70,308 C 45,260 160,222 275,188 C 385,156 495,142 640,130" stroke="#A855F7" strokeWidth="1.5" fill="none" filter="url(#neon-glow-b)" opacity="0.52"/>
+
+            {/* Blue tubes */}
+            <path d="M 10,345 C 120,298 230,260 355,224 C 460,192 555,176 660,162" stroke="url(#tg2)" strokeWidth="2.5" fill="none" filter="url(#neon-glow-a)" opacity="0.82"/>
+            <path d="M -25,318 C 95,272 210,236 325,202 C 425,172 525,158 655,145" stroke="#60A5FA" strokeWidth="1" fill="none" filter="url(#neon-glow-b)" opacity="0.42"/>
+
+            {/* Pink accent tube */}
+            <path d="M -90,338 C 20,312 130,288 245,258 C 355,228 455,212 580,200" stroke="url(#tg3)" strokeWidth="2" fill="none" filter="url(#neon-glow-a)" opacity="0.72"/>
+
+            {/* Ultra-thin accent traces */}
+            <path d="M 40,352 C 150,314 260,278 380,244 C 480,212 575,196 675,182" stroke="#C084FC" strokeWidth="0.8" fill="none" opacity="0.32"/>
+            <path d="M -50,325 C 65,285 180,250 300,218 C 400,188 500,174 630,162" stroke="#818CF8" strokeWidth="0.8" fill="none" opacity="0.28"/>
+          </svg>
 
           {/* Card header */}
-          <div className="px-6 sm:px-8 pt-6 sm:pt-8 pb-5">
+          <div className="px-5 sm:px-7 pt-5 sm:pt-6 pb-4" style={{ position: "relative", zIndex: 1 }}>
             <div className="flex items-center gap-3 mb-3">
               {svc.iconSrc ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -291,53 +376,38 @@ export default function AIServicesSection() {
                 {svc.label}
               </h3>
             </div>
-            <p className="text-sm text-white leading-relaxed">{svc.description}</p>
+            <p className="text-sm text-white/75 leading-relaxed">{svc.description}</p>
           </div>
 
           {/* Features 2×2 grid */}
-          <div className="px-6 sm:px-8 pb-5 grid grid-cols-2 gap-2.5">
+          <div className="px-5 sm:px-7 pb-4 grid grid-cols-2 gap-2" style={{ position: "relative", zIndex: 1 }}>
             {svc.features.map((feature) => (
               <div
                 key={feature}
-                className="group flex items-center gap-2.5 px-3 py-2.5 rounded-lg border border-white/[0.12] cursor-default transition-all duration-200 hover:border-white/30 hover:bg-white/[0.04]"
+                className="group flex items-center gap-2.5 px-3 py-3 rounded-lg border border-white/[0.12] cursor-default transition-all duration-200 hover:border-white/30 hover:bg-white/[0.04]"
               >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  className="flex-shrink-0"
-                  aria-hidden="true"
-                >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="flex-shrink-0" aria-hidden="true">
                   <circle cx="8" cy="8" r="8" fill="#FAAE10" />
-                  <path
-                    d="M5 8.5L7 10.5L11 6"
-                    stroke="white"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                  <path d="M5 8.5L7 10.5L11 6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                <span className="text-[11px] sm:text-xs text-white leading-snug">
-                  {feature}
-                </span>
+                <span className="text-[11.5px] text-white leading-snug">{feature}</span>
               </div>
             ))}
           </div>
 
-          {/* ── Interactive demo panel (sourced from AICapabilities.tsx in external repo) ── */}
+          {/* ── Interactive demo panel ── */}
           <div
-            className="mx-6 sm:mx-8 mb-6 sm:mb-8 rounded-xl overflow-hidden"
+            className="mx-5 sm:mx-7 rounded-xl overflow-hidden"
             style={{
-              background: "rgba(0,2,24,0.8)",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: "rgba(0, 4, 28, 0.75)",
+              border: "1px solid rgba(255,255,255,0.07)",
+              position: "relative",
+              zIndex: 1,
             }}
           >
-            <div
-              className="p-4 sm:p-5 flex flex-col gap-3"
-              style={{ minHeight: "260px" }}
-            >
-              {/* Browser / App Chrome Bar */}
+            <div className="p-3 sm:p-4 flex flex-col gap-2.5" style={{ minHeight: "210px" }}>
+
+              {/* Chrome bar */}
               <div
                 className="flex items-center justify-between pb-3 mb-1"
                 style={{ borderBottom: "1px solid rgba(51,65,85,0.8)" }}
@@ -352,76 +422,118 @@ export default function AIServicesSection() {
                 </div>
                 <span
                   className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono"
-                  style={{
-                    background: "rgba(6,78,59,0.4)",
-                    color: "#34d399",
-                    border: "1px solid rgba(6,78,59,0.8)",
-                  }}
+                  style={{ background: "rgba(6,78,59,0.4)", color: "#34d399", border: "1px solid rgba(6,78,59,0.8)" }}
                 >
                   <IconActivity className="animate-pulse" />
                   LIVE ENGINE
                 </span>
               </div>
 
-              {/* DEMO 01: AI AGENTS — multi-step task trace */}
+              {/* DEMO 01: AI AGENTS — timeline */}
               {svc.id === "ai-agents" && (
-                <div className="space-y-3">
+                <div className="space-y-2">
+                  {/* Agent Goal row */}
                   <div
-                    className="p-3 rounded-lg text-xs font-mono"
-                    style={{
-                      background: "rgba(15,23,42,0.9)",
-                      border: "1px solid rgba(51,65,85,0.8)",
-                    }}
+                    className="flex items-start gap-3 p-3 rounded-xl"
+                    style={{ background: "rgba(15,25,70,0.55)", border: "1px solid rgba(80,130,255,0.18)" }}
                   >
-                    <div className="font-bold mb-1" style={{ color: "#60a5fa" }}>
-                      [Agent Multi-Step Task Triggered]
+                    <div
+                      className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ background: "rgba(30,60,180,0.4)", border: "1px solid rgba(80,130,255,0.35)" }}
+                    >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+                      </svg>
                     </div>
-                    <div style={{ color: "#cbd5e1" }}>
-                      Goal: Analyze inbound enterprise lead &amp; formulate personalized response strategy
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[9px] font-bold tracking-widest uppercase mb-0.5" style={{ color: "#60a5fa" }}>Agent Goal</div>
+                      <div className="text-[11px] leading-snug" style={{ color: "rgba(203,213,225,0.9)" }}>
+                        Analyze inbound enterprise lead &amp; formulate personalized response strategy
+                      </div>
+                    </div>
+                    <div className="flex-shrink-0 text-right ml-2 pt-0.5">
+                      <div className="text-[9px] mb-1" style={{ color: "rgba(100,116,139,1)" }}>Status</div>
+                      <div className="flex items-center gap-1 text-[11px] font-semibold" style={{ color: "#34d399" }}>
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 animate-pulse" />
+                        In Progress
+                      </div>
                     </div>
                   </div>
 
-                  <div className="space-y-2 text-xs">
+                  {/* Steps */}
+                  {([
+                    { step: "Step 1", title: "RAG Knowledge Base Query",                  desc: "Searching relevant information from knowledge base",   status: "completed",  time: "12ms"  },
+                    { step: "Step 2", title: "CRM Lead Intent Scoring (Gemini 1.5 Pro)",   desc: "Analyzing lead intent and scoring potential",           status: "completed",  time: "842ms" },
+                    { step: "Step 3", title: "Auto-Schedule Executive Consultation Call",   desc: "Scheduling and confirming consultation call",           status: "processing", time: "1.2s"  },
+                    { step: "Step 4", title: "Generate Personalized Strategy & Response",   desc: "Crafting tailored response and next steps",            status: "pending",    time: null    },
+                  ] as const).map((item, idx) => (
                     <div
-                      className="p-3 rounded-lg flex items-center justify-between"
-                      style={{
-                        background: "rgba(15,23,42,0.5)",
-                        border: "1px solid rgba(51,65,85,0.8)",
-                      }}
+                      key={idx}
+                      className="flex items-start gap-3 p-2.5 rounded-xl"
+                      style={{ background: "rgba(10,18,50,0.5)", border: "1px solid rgba(51,65,85,0.5)" }}
                     >
-                      <span style={{ color: "#cbd5e1" }}>Step 1: RAG Knowledge Base Query</span>
-                      <span className="font-bold" style={{ color: "#34d399" }}>✓ Executed (12ms)</span>
-                    </div>
-
-                    <div
-                      className="p-3 rounded-lg flex items-center justify-between"
-                      style={{
-                        background: "rgba(15,23,42,0.5)",
-                        border: "1px solid rgba(51,65,85,0.8)",
-                      }}
-                    >
-                      <span style={{ color: "#cbd5e1" }}>Step 2: CRM Lead Intent Scoring (Gemini 1.5 Pro)</span>
-                      <span className="font-bold" style={{ color: "#34d399" }}>✓ Score 96/100</span>
-                    </div>
-
-                    <div
-                      className="p-3 rounded-lg flex items-center justify-between"
-                      style={{
-                        background: "rgba(23,37,84,0.3)",
-                        border: "1px solid rgba(59,130,246,0.4)",
-                      }}
-                    >
-                      <span className="font-bold" style={{ color: "#93c5fd" }}>
-                        Step 3: Auto-Schedule Executive Consultation Call
-                      </span>
-                      <span
-                        className="font-bold flex items-center gap-1"
-                        style={{ color: "#22d3ee" }}
+                      {/* Step icon */}
+                      <div
+                        className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                        style={{
+                          background: item.status === "processing" ? "rgba(8,51,68,0.7)" : "rgba(20,30,70,0.5)",
+                          border: `1px solid ${item.status === "completed" ? "rgba(52,211,153,0.35)" : item.status === "processing" ? "rgba(34,211,238,0.4)" : "rgba(51,65,85,0.5)"}`,
+                        }}
                       >
-                        <IconZap className="animate-bounce" /> Processing...
-                      </span>
+                        {item.status === "completed" && (
+                          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <circle cx="8" cy="8" r="8" fill="rgba(52,211,153,0.25)"/>
+                            <path d="M4.5 8.5L6.5 10.5L11.5 5.5" stroke="#34d399" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        )}
+                        {item.status === "processing" && (
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true" className="animate-spin" style={{ animationDuration: "1.4s" }}>
+                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" strokeOpacity="0.4"/>
+                            <path d="M12 2v4" stroke="#22d3ee"/>
+                          </svg>
+                        )}
+                        {item.status === "pending" && (
+                          <span className="w-3 h-3 rounded-full border border-slate-500/60 flex-shrink-0" />
+                        )}
+                      </div>
+
+                      {/* Step text */}
+                      <div className="flex-1 min-w-0">
+                        <div className="text-[9px] font-bold tracking-widest uppercase mb-0.5" style={{ color: "rgba(100,116,139,1)" }}>{item.step}</div>
+                        <div className="text-[11px] font-medium leading-snug" style={{ color: item.status === "pending" ? "rgba(100,116,139,0.8)" : "#e2e8f0" }}>{item.title}</div>
+                        <div className="text-[10px] mt-0.5" style={{ color: "rgba(100,116,139,0.7)" }}>{item.desc}</div>
+                      </div>
+
+                      {/* Status badge */}
+                      <div className="flex-shrink-0 text-right ml-1 pt-0.5">
+                        {item.status === "completed" && (
+                          <>
+                            <div className="flex items-center gap-1 justify-end text-[11px] font-semibold" style={{ color: "#34d399" }}>
+                              Completed
+                            </div>
+                            <div className="flex items-center gap-1 justify-end mt-0.5 text-[10px]" style={{ color: "rgba(100,116,139,1)" }}>
+                              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                              {item.time}
+                            </div>
+                          </>
+                        )}
+                        {item.status === "processing" && (
+                          <>
+                            <div className="flex items-center gap-1 justify-end text-[11px] font-semibold" style={{ color: "#22d3ee" }}>
+                              Processing...
+                            </div>
+                            <div className="flex items-center gap-1 justify-end mt-0.5 text-[10px]" style={{ color: "rgba(100,116,139,1)" }}>
+                              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                              {item.time}
+                            </div>
+                          </>
+                        )}
+                        {item.status === "pending" && (
+                          <div className="text-[11px]" style={{ color: "rgba(100,116,139,0.7)" }}>Pending</div>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
               )}
 
@@ -639,10 +751,10 @@ export default function AIServicesSection() {
               )}
             </div>
 
-            {/* CTA button — tied to active service */}
-            <div className="px-4 sm:px-5 pb-4 sm:pb-5 pt-1">
+            {/* CTA button — left-aligned */}
+            <div className="px-3 sm:px-4 pb-3 sm:pb-4 pt-1" style={{ position: "relative", zIndex: 1 }}>
               <button
-                className="w-full text-center text-sm font-medium py-2.5 px-4 rounded-lg text-white transition-opacity hover:opacity-90 active:opacity-80"
+                className="inline-flex items-center gap-2 text-sm font-semibold py-2.5 px-6 rounded-lg text-white transition-opacity hover:opacity-90 active:opacity-80"
                 style={{ background: "#0137D7" }}
               >
                 {svc.cta} →
@@ -650,6 +762,7 @@ export default function AIServicesSection() {
             </div>
           </div>
 
+          </div>{/* end glassmorphism card */}
         </div>
       </div>
     </section>
