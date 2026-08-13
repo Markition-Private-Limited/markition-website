@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 
 const randomColors = (count: number) =>
   Array.from({ length: count }, () =>
     "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0")
   );
-  // test
 
 export default function TubesCursor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -27,26 +26,20 @@ export default function TubesCursor() {
           tubes: {
             colors: ["#5e72e4", "#8965e0", "#f5365c"],
             lights: {
-              intensity: 200,
+              intensity: 80,
               colors: ["#21d4fd", "#b721ff", "#f4d03f", "#11cdef"],
             },
           },
           lerp: 0.3,
           noise: 0,
-          // Default threshold is 0, which blooms the flat clear-color
-          // background too and washes it into a faint glow/haze. Raising it
-          // keeps bloom on the bright tubes/lights only, so the background
-          // stays exactly #000028.
-          bloom: { threshold: 0.15, strength: 1.5, radius: 0.5 },
+          bloom: { threshold: 0.2, strength: 0.8, radius: 0.4 },
         });
-        app.three.renderer.setClearColor("#000028", 1);
 
-        // The library redirects the tubes to a wide orbiting "sleep" path the
-        // instant the pointer leaves its hitbox, which reads as an overshoot
-        // toward the center. Gate the library's own per-frame callback on our
-        // own hover tracking: keep the real follow logic while hovering, and
-        // simply stop re-targeting once the pointer leaves — the tubes then
-        // settle and hold at the last cursor position instead of redirecting.
+        app.three.renderer.setClearColor("#000028", 1);
+        // Cap pixel ratio at 1× — retina renders 4× the pixels for no visible
+        // gain on a full-viewport WebGL canvas, and it's the main cause of lag.
+        app.three.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1));
+
         const originalOnBeforeRender = app.three.onBeforeRender;
         app.three.onBeforeRender = (e: unknown) => {
           if (hoveringRef.current) {
@@ -57,50 +50,57 @@ export default function TubesCursor() {
         };
 
         appRef.current = app;
+
+        // Fade in only after the library is ready so there's no flash on first load.
+        if (canvasRef.current) canvasRef.current.style.opacity = "1";
       } catch (e) {
         console.error("TubesCursor init failed:", e);
       }
     }, 100);
 
-    // Content sitting above the canvas (z-10 hero text, z-50 navbar) intercepts
-    // pointer events before they reach the canvas itself, so listen on the
-    // canvas's positioned parent instead — it shares the exact same bounding
-    // box (canvas is `absolute inset-0` relative to it) and isn't obscured.
-    const canvas = canvasRef.current;
-    const hitArea = canvas?.parentElement ?? null;
-    const setHover = (v: boolean) => () => { hoveringRef.current = v; };
-    const onEnter = setHover(true);
-    const onLeave = setHover(false);
-    hitArea?.addEventListener("pointerenter", onEnter);
-    hitArea?.addEventListener("pointerleave", onLeave);
+    const root = document.documentElement;
+    const onEnter = () => { hoveringRef.current = true; };
+    const onLeave = () => { hoveringRef.current = false; };
+    const onClick = () => {
+      const app = appRef.current;
+      if (!app) return;
+      app.tubes?.setColors?.(randomColors(3));
+      app.tubes?.setLightsColors?.(randomColors(4));
+    };
+    root.addEventListener("pointerenter", onEnter);
+    root.addEventListener("pointerleave", onLeave);
+    window.addEventListener("click", onClick);
 
     return () => {
       destroyed = true;
       clearTimeout(timer);
-      hitArea?.removeEventListener("pointerenter", onEnter);
-      hitArea?.removeEventListener("pointerleave", onLeave);
+      root.removeEventListener("pointerenter", onEnter);
+      root.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("click", onClick);
       appRef.current?.dispose?.();
     };
-  }, []);
-
-  const handleClick = useCallback(() => {
-    const app = appRef.current;
-    if (!app) return;
-    app.tubes?.setColors?.(randomColors(3));
-    app.tubes?.setLightsColors?.(randomColors(4));
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      onClick={handleClick}
       style={{
-        position: "absolute",
+        position: "fixed",
         inset: 0,
         width: "100%",
         height: "100%",
-        zIndex: 0,
-        cursor: "pointer",
+        // screen blend: the dark #000028 clear-colour vanishes over dark
+        // backgrounds; only the bright tubes remain visible above every section.
+        mixBlendMode: "screen",
+        // z-index: 1 sits just above normal-flow section backgrounds but below
+        // positioned content (hero text z-10, navbar z-50), so the tubes feel
+        // like they're part of the background, not floating on top of content.
+        zIndex: 1,
+        pointerEvents: "none",
+        // Start transparent; fade in once the WebGL lib has initialised so the
+        // canvas never flashes a blank frame on first load.
+        opacity: 0,
+        transition: "opacity 0.8s ease",
       }}
     />
   );

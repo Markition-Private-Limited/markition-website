@@ -188,10 +188,11 @@ export default function Home() {
       className="min-h-screen bg-[#000028] text-white"
       style={{ fontFamily: "var(--font-inter, Inter, sans-serif)" }}
     >
-      {/* ══ Hero section — canvas lives here ═══════════════════════════ */}
+      {/* Three.js tubes cursor — fixed full-viewport, covers all sections */}
+      <TubesCursor />
+
+      {/* ══ Hero section ════════════════════════════════════════════════ */}
       <div className="relative bg-[#000028]">
-        {/* Three.js tubes cursor — absolute, z-0, first section only */}
-        <TubesCursor />
 
         {/* ── Sticky navbar wrapper ─────────────────────────────────────── */}
       <div className="sticky top-0 z-50 px-3 sm:px-5 pt-3 sm:pt-4">
