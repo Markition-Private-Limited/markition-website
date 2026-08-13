@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import TubesCursor from "@/components/TubesCursor";
+import AIServicesSection from "@/components/AIServicesSection";
 
 const NAV_LINKS = [
   { label: "About" },
@@ -416,6 +417,9 @@ export default function Home() {
           style={{ background: "rgba(217, 217, 217, 0.4)" }}
         />
       </div>
+
+      {/* ── AI Services section ───────────────────────────────────────── */}
+      <AIServicesSection />
     </div>
   );
 }
