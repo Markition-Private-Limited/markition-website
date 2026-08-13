@@ -197,7 +197,7 @@ export default function Home() {
 
         {/* Floating translucent navbar */}
         <nav
-          className="max-w-[1200px] mx-auto flex items-center justify-between px-4 sm:px-5 py-2.5 rounded-xl border border-white/[0.08] gap-4"
+          className="max-w-[1200px] mx-auto flex items-center justify-between px-4 sm:px-5 py-3.5 rounded-none border border-white/[0.08] gap-4"
           style={navGlassStyle}
         >
           {/* Logo */}
@@ -359,7 +359,7 @@ export default function Home() {
 
       {/* ── Logo ticker band ──────────────────────────────────────────── */}
       <div
-        className="overflow-hidden py-8 sm:py-10"
+        className="relative overflow-hidden py-8 sm:py-10"
         style={{ background: "#0137D7" }}
       >
         <div className="ticker-track flex items-center w-max">
@@ -378,6 +378,22 @@ export default function Home() {
             </div>
           ))}
         </div>
+
+        {/* Edge fade overlays */}
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 z-10"
+          style={{
+            background:
+              "linear-gradient(to right, #0137D7 0%, rgba(1,55,215,0) 100%)",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-32 z-10"
+          style={{
+            background:
+              "linear-gradient(to left, #0137D7 0%, rgba(1,55,215,0) 100%)",
+          }}
+        />
       </div>
 
       {/* ── Trust footer ─────────────────────────────────────────────── */}
