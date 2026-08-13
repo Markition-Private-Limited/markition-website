@@ -84,37 +84,49 @@ export default function TubesCursor() {
     root.addEventListener("pointerleave", onLeave);
     window.addEventListener("click", onClick);
 
-    // Scroll-based movement: the library binds its own "pointermove" listener
-    // directly on document.body (confirmed by reading its minified source) and
-    // reads clientX/clientY straight off the event — it does NOT listen for
-    // "mousemove", so a synthetic mousemove event is silently ignored. Track
-    // the real pointer position ourselves via "pointermove", then on scroll
-    // dispatch a genuine PointerEvent("pointermove") on document.body so the
-    // library actually picks it up and the tubes drift even on trackpad
-    // scrolling with the cursor held still.
+    // Scroll-based movement: the library listens for "pointermove" on
+    // document.body (confirmed in minified source). Hook into Lenis's scroll
+    // callback (velocity-driven, already smoothed) so the tube drift matches
+    // the smooth scroll feel. Falls back to native scroll if Lenis isn't ready.
     const lastPointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    let lastScrollY = window.scrollY;
 
     const onPointerMove = (e: PointerEvent) => {
       lastPointer.x = e.clientX;
       lastPointer.y = e.clientY;
     };
 
-    const onScroll = () => {
-      const delta = window.scrollY - lastScrollY;
-      lastScrollY = window.scrollY;
+    const nudgeTubes = (velocity: number) => {
       document.body.dispatchEvent(
         new PointerEvent("pointermove", {
           clientX: lastPointer.x,
-          clientY: lastPointer.y + delta * 0.35,
+          clientY: lastPointer.y + velocity * 120,
           bubbles: true,
           cancelable: true,
         })
       );
     };
 
+    // Attach to Lenis once it's initialised by LenisProvider (it's set on
+    // window.__lenis synchronously in the same React paint, so it's available
+    // by the time this effect runs on the next tick).
+    type LenisInstance = { on: (e: string, cb: (s: { velocity: number }) => void) => void; off: (e: string, cb: unknown) => void };
+    const lenis = (window as Window & { __lenis?: LenisInstance }).__lenis;
+    const onLenisScroll = (s: { velocity: number }) => nudgeTubes(s.velocity);
+
+    if (lenis) {
+      lenis.on("scroll", onLenisScroll);
+    } else {
+      // Lenis not ready — fall back to native scroll delta
+      let lastScrollY = window.scrollY;
+      const onScroll = () => {
+        const delta = window.scrollY - lastScrollY;
+        lastScrollY = window.scrollY;
+        nudgeTubes(delta * 0.003);
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+    }
+
     window.addEventListener("pointermove", onPointerMove);
-    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       destroyed = true;
@@ -122,7 +134,8 @@ export default function TubesCursor() {
       root.removeEventListener("pointerleave", onLeave);
       window.removeEventListener("click", onClick);
       window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("scroll", onScroll);
+      const l = (window as Window & { __lenis?: LenisInstance }).__lenis;
+      l?.off("scroll", onLenisScroll);
       appRef.current?.dispose?.();
       appRef.current = null;
     };

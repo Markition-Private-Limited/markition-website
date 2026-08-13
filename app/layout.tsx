@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import LenisProvider from "@/components/LenisProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,7 +28,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${inter.variable} ${jakarta.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#000028]">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#000028]">
+        <LenisProvider>{children}</LenisProvider>
+      </body>
     </html>
   );
 }
