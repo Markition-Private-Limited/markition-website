@@ -1,5 +1,9 @@
 @import "tailwindcss";
-
+html {
+  overflow-y: scroll;
+  -ms-overflow-style: none;   /* IE and Edge */
+  scrollbar-width: none;      /* Firefox */
+}
 :root {
   --background: #000028;
   --foreground: #ffffff;

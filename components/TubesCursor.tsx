@@ -15,14 +15,17 @@ export default function TubesCursor() {
 
   useEffect(() => {
     let destroyed = false;
-    const timer = setTimeout(async () => {
-      if (!canvasRef.current || destroyed) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    (async () => {
       try {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const mod = await import("threejs-components/build/cursors/tubes1.min.js");
+        if (destroyed) return;
         const TubesCursorLib = mod.default ?? mod;
-        const app = TubesCursorLib(canvasRef.current, {
+        const app = TubesCursorLib(canvas, {
           tubes: {
             colors: ["#5e72e4", "#8965e0", "#f5365c"],
             lights: {
@@ -34,11 +37,23 @@ export default function TubesCursor() {
           noise: 0,
           bloom: { threshold: 0.2, strength: 0.8, radius: 0.4 },
         });
-  // test
-        app.three.renderer.setClearColor("#000028", 1);
-        // Cap pixel ratio at 1× — retina renders 4× the pixels for no visible
-        // gain on a full-viewport WebGL canvas, and it's the main cause of lag.
-        app.three.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1));
+
+        if (destroyed) {
+          app.dispose?.();
+          return;
+        }
+
+        // app.three.renderer.setClearColor("#000028", 1);
+
+        // The library hardcodes minPixelRatio/maxPixelRatio to 2 on init, and
+        // re-clamps to that range on every internal resize event — so a plain
+        // setPixelRatio() call gets silently overwritten the next time the
+        // canvas resizes. Overriding these two properties (then calling
+        // resize()) is the only way the low pixel ratio actually sticks,
+        // which is what was causing the lag to keep "coming back".
+        app.three.minPixelRatio = 0.75;
+        app.three.maxPixelRatio = 0.75;
+        app.three.resize();
 
         const originalOnBeforeRender = app.three.onBeforeRender;
         app.three.onBeforeRender = (e: unknown) => {
@@ -50,13 +65,11 @@ export default function TubesCursor() {
         };
 
         appRef.current = app;
-
-        // Fade in only after the library is ready so there's no flash on first load.
-        if (canvasRef.current) canvasRef.current.style.opacity = "1";
+        canvas.style.opacity = "1";
       } catch (e) {
         console.error("TubesCursor init failed:", e);
       }
-    }, 100);
+    })();
 
     const root = document.documentElement;
     const onEnter = () => { hoveringRef.current = true; };
@@ -71,13 +84,47 @@ export default function TubesCursor() {
     root.addEventListener("pointerleave", onLeave);
     window.addEventListener("click", onClick);
 
+    // Scroll-based movement: the library binds its own "pointermove" listener
+    // directly on document.body (confirmed by reading its minified source) and
+    // reads clientX/clientY straight off the event — it does NOT listen for
+    // "mousemove", so a synthetic mousemove event is silently ignored. Track
+    // the real pointer position ourselves via "pointermove", then on scroll
+    // dispatch a genuine PointerEvent("pointermove") on document.body so the
+    // library actually picks it up and the tubes drift even on trackpad
+    // scrolling with the cursor held still.
+    const lastPointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    let lastScrollY = window.scrollY;
+
+    const onPointerMove = (e: PointerEvent) => {
+      lastPointer.x = e.clientX;
+      lastPointer.y = e.clientY;
+    };
+
+    const onScroll = () => {
+      const delta = window.scrollY - lastScrollY;
+      lastScrollY = window.scrollY;
+      document.body.dispatchEvent(
+        new PointerEvent("pointermove", {
+          clientX: lastPointer.x,
+          clientY: lastPointer.y + delta * 0.35,
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+    };
+
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     return () => {
       destroyed = true;
-      clearTimeout(timer);
       root.removeEventListener("pointerenter", onEnter);
       root.removeEventListener("pointerleave", onLeave);
       window.removeEventListener("click", onClick);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("scroll", onScroll);
       appRef.current?.dispose?.();
+      appRef.current = null;
     };
   }, []);
 
@@ -89,16 +136,10 @@ export default function TubesCursor() {
         inset: 0,
         width: "100%",
         height: "100%",
-        // screen blend: the dark #000028 clear-colour vanishes over dark
-        // backgrounds; only the bright tubes remain visible above every section.
         mixBlendMode: "screen",
-        // z-index: 1 sits just above normal-flow section backgrounds but below
-        // positioned content (hero text z-10, navbar z-50), so the tubes feel
-        // like they're part of the background, not floating on top of content.
-        zIndex: 1,
+        zIndex: 2,
         pointerEvents: "none",
-        // Start transparent; fade in once the WebGL lib has initialised so the
-        // canvas never flashes a blank frame on first load.
+        willChange: "transform",
         opacity: 0,
         transition: "opacity 0.8s ease",
       }}

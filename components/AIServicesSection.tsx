@@ -198,7 +198,7 @@ export default function AIServicesSection() {
   }
 
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6" style={{ background: "#000028" }}>
+    <section className="py-16 sm:py-24 px-4 sm:px-6" style={{ background: "#030A28" }}>
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-10 lg:gap-14 items-start">
 
         {/* ── Left column — list (unchanged) ──────────────────────────── */}
