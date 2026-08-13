@@ -34,7 +34,7 @@ export default function TubesCursor() {
           noise: 0,
           bloom: { threshold: 0.2, strength: 0.8, radius: 0.4 },
         });
-
+  // test
         app.three.renderer.setClearColor("#000028", 1);
         // Cap pixel ratio at 1× — retina renders 4× the pixels for no visible
         // gain on a full-viewport WebGL canvas, and it's the main cause of lag.
