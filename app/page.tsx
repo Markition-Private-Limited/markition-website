@@ -169,9 +169,6 @@ export default function Home() {
       className="min-h-screen bg-[#000028] text-white"
       style={{ fontFamily: "var(--font-inter, Inter, sans-serif)" }}
     >
-      {/* Three.js tubes cursor — fixed full-viewport */}
-      <TubesCursor />
-
       {/* ══ Hero section ════════════════════════════════════════════════ */}
       <div
         className="relative bg-[#000028]"
@@ -180,6 +177,8 @@ export default function Home() {
             "radial-gradient(ellipse 900px 450px at 50% -60px, rgba(1,55,215,0.18) 0%, transparent 70%)",
         }}
       >
+        {/* Three.js tubes cursor — scoped to hero section, scrolls away with it */}
+        <TubesCursor />
 
         {/* ── Sticky navbar ─────────────────────────────────────────────── */}
         <div className="sticky top-0 z-50 px-3 sm:px-5 pt-3 sm:pt-4">
@@ -353,9 +352,11 @@ export default function Home() {
       {/* ── end hero section wrapper ── */}
 
       {/* ── Logo ticker band ──────────────────────────────────────────── */}
+      {/* z-index above the fixed tube cursor canvas (z-index: 2) with an
+          opaque background so the cursor effect never shows through it. */}
       <div
-        className="relative overflow-hidden py-6 sm:py-7"
-        style={{ background: "#0137D7" }}
+        className="relative z-10 overflow-hidden py-6 sm:py-7"
+        style={{ background: "#0137D7", isolation: "isolate" }}
       >
         <div className="ticker-track flex items-center w-max">
           {tickerItems.map((logo, i) => (

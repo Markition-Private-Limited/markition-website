@@ -29,13 +29,12 @@ export default function TubesCursor() {
           tubes: {
             colors: ["#5e72e4", "#8965e0", "#f5365c"],
             lights: {
-              intensity: 80,
+              intensity: 200,
               colors: ["#21d4fd", "#b721ff", "#f4d03f", "#11cdef"],
             },
           },
           lerp: 0.3,
           noise: 0,
-          bloom: { threshold: 0.2, strength: 0.8, radius: 0.4 },
         });
 
         if (destroyed) {
@@ -43,16 +42,16 @@ export default function TubesCursor() {
           return;
         }
 
-        // app.three.renderer.setClearColor("#000028", 1);
+        app.three.renderer.setClearColor(0x000000, 0);
 
         // The library hardcodes minPixelRatio/maxPixelRatio to 2 on init, and
         // re-clamps to that range on every internal resize event — so a plain
         // setPixelRatio() call gets silently overwritten the next time the
         // canvas resizes. Overriding these two properties (then calling
-        // resize()) is the only way the low pixel ratio actually sticks,
-        // which is what was causing the lag to keep "coming back".
-        app.three.minPixelRatio = 0.75;
-        app.three.maxPixelRatio = 0.75;
+        // resize()) is the only way the correct pixel ratio actually sticks.
+        const dpr = Math.min(window.devicePixelRatio, 2);
+        app.three.minPixelRatio = dpr;
+        app.three.maxPixelRatio = dpr;
         app.three.resize();
 
         const originalOnBeforeRender = app.three.onBeforeRender;
@@ -145,12 +144,13 @@ export default function TubesCursor() {
     <canvas
       ref={canvasRef}
       style={{
-        position: "fixed",
-        inset: 0,
+        position: "absolute",
+        top: 0,
+        left: 0,
         width: "100%",
-        height: "100%",
+        height: "100vh",
         mixBlendMode: "screen",
-        zIndex: 2,
+        zIndex: 1,
         pointerEvents: "none",
         willChange: "transform",
         opacity: 0,
