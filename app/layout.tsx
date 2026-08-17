@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
@@ -22,13 +22,19 @@ export const metadata: Metadata = {
     "Your AI Powered Growth Team Ready To Run Your Business. Finally growth that accelerates every part of your business forward.",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jakarta.variable} h-full antialiased`}
+      className={`${inter.variable} ${jakarta.variable} h-full w-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#000028]" suppressHydrationWarning>
+      <body className="min-h-full w-full flex flex-col bg-[#000028]" suppressHydrationWarning>
         <LenisProvider>{children}</LenisProvider>
       </body>
     </html>

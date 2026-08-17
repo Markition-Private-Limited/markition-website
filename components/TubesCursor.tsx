@@ -7,6 +7,16 @@ const randomColors = (count: number) =>
     "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0")
   );
 
+/** Returns true if the touch/pointer coordinate falls inside the canvas rect. */
+function isInsideCanvas(rect: DOMRect, clientX: number, clientY: number) {
+  return (
+    clientX >= rect.left &&
+    clientX <= rect.right &&
+    clientY >= rect.top &&
+    clientY <= rect.bottom
+  );
+}
+
 export default function TubesCursor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -62,17 +72,22 @@ export default function TubesCursor() {
       }
     }, 100);
 
-    const onClick = () => {
+    // ── Desktop click — randomise colors ────────────────────────────────
+    const onClick = (e: MouseEvent) => {
       const app = appRef.current;
       if (!app) return;
+      const rect = canvas.getBoundingClientRect();
+      // Only react when the click is within the hero canvas area
+      if (!isInsideCanvas(rect, e.clientX, e.clientY)) return;
       app.tubes?.setColors?.(randomColors(3));
       app.tubes?.setLightsColors?.(randomColors(4));
     };
 
+    // ── Desktop guard — clamp Y so tubes don't chase cursor below canvas ─
     // The library listens for pointermove on document.body (bubble phase).
     // This window bubble listener fires AFTER body handlers, so it can dispatch
     // a correcting event that overwrites the library's cursor Y before the next
-    // rAF render — preventing tubes from chasing the cursor below the canvas.
+    // rAF render.
     const guardMove = (e: PointerEvent) => {
       if (!appRef.current) return;
       const rect = canvas.getBoundingClientRect();
@@ -88,14 +103,92 @@ export default function TubesCursor() {
       );
     };
 
+    // ── Mobile touch — forward touch position as pointermove to the library ─
+    // The tubes library only listens to pointermove on document.body. On
+    // mobile there's no pointer movement without a physical pointing device,
+    // so we synthesise pointermove events from touch coordinates. We only
+    // do this while the touch stays within the hero canvas bounds so the
+    // effect is strictly scoped to the first section.
+    const onTouchMove = (e: TouchEvent) => {
+      if (!appRef.current) return;
+      const rect = canvas.getBoundingClientRect();
+      if (rect.bottom <= 0) return; // hero scrolled out of view
+
+      const touch = e.touches[0];
+      if (!touch) return;
+
+      // Clamp Y so tubes never escape the hero section downward
+      const clientX = touch.clientX;
+      const clientY = Math.min(touch.clientY, rect.bottom);
+
+      // Only forward if the original touch started inside the hero
+      if (!isInsideCanvas(rect, touch.clientX, touch.clientY) && touch.clientY > rect.bottom) return;
+
+      document.body.dispatchEvent(
+        new PointerEvent("pointermove", {
+          clientX,
+          clientY,
+          bubbles: false,
+        })
+      );
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (!appRef.current) return;
+      const rect = canvas.getBoundingClientRect();
+      if (rect.bottom <= 0) return;
+
+      const touch = e.touches[0];
+      if (!touch) return;
+
+      // Only react to taps inside the hero section
+      if (!isInsideCanvas(rect, touch.clientX, touch.clientY)) return;
+
+      const clientX = touch.clientX;
+      const clientY = touch.clientY;
+
+      // Drive the tubes to the tap position immediately
+      document.body.dispatchEvent(
+        new PointerEvent("pointermove", {
+          clientX,
+          clientY,
+          bubbles: false,
+        })
+      );
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      const app = appRef.current;
+      if (!app) return;
+      const rect = canvas.getBoundingClientRect();
+      if (rect.bottom <= 0) return;
+
+      // changedTouches holds the touch that just lifted
+      const touch = e.changedTouches[0];
+      if (!touch) return;
+
+      // Only randomise colors when tap ended inside the hero
+      if (!isInsideCanvas(rect, touch.clientX, touch.clientY)) return;
+
+      app.tubes?.setColors?.(randomColors(3));
+      app.tubes?.setLightsColors?.(randomColors(4));
+    };
+
     window.addEventListener("click", onClick);
     window.addEventListener("pointermove", guardMove);
+    // Use passive: true — we never call preventDefault on these
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
 
     return () => {
       destroyed = true;
       clearTimeout(initTimer);
       window.removeEventListener("click", onClick);
       window.removeEventListener("pointermove", guardMove);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
       appRef.current?.dispose?.();
       appRef.current = null;
     };

@@ -166,7 +166,7 @@ export default function Home() {
 
   return (
     <div
-      className="min-h-screen bg-[#000028] text-white"
+      className="min-h-screen w-full bg-[#000028] text-white"
       style={{ fontFamily: "var(--font-inter, Inter, sans-serif)" }}
     >
       {/* ══ Hero section ════════════════════════════════════════════════ */}
@@ -177,7 +177,8 @@ export default function Home() {
             "radial-gradient(ellipse 900px 450px at 50% -60px, rgba(1,55,215,0.18) 0%, transparent 70%)",
         }}
       >
-        {/* Three.js tubes cursor — scoped to hero section, scrolls away with it */}
+        {/* Three.js tubes cursor — scoped to hero section, scrolls away with it.
+            z-index 1 keeps it above the background but below text (z-10). */}
         <TubesCursor />
 
         {/* ── Sticky navbar ─────────────────────────────────────────────── */}
@@ -281,11 +282,11 @@ export default function Home() {
         <div className="relative z-10 px-4 sm:px-6 pt-4 sm:pt-6">
 
           {/* Centered hero block */}
-          <div className="text-center max-w-3xl mx-auto pt-16 sm:pt-24 pb-12 sm:pb-20 px-4">
+          <div className="text-center max-w-3xl mx-auto pt-10 sm:pt-16 lg:pt-24 pb-8 sm:pb-14 lg:pb-20 px-2 sm:px-4">
 
-            {/* Primary heading */}
+            {/* Primary heading — smaller on mobile so it fits without overflow */}
             <h1
-              className="hero-heading text-[38px] sm:text-[52px] lg:text-[60px] font-bold leading-[1.13] text-white mb-6"
+              className="hero-heading text-[28px] xs:text-[32px] sm:text-[42px] md:text-[52px] lg:text-[60px] font-bold leading-[1.15] text-white mb-4 sm:mb-6"
               style={{
                 fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)",
                 letterSpacing: "-0.025em",
@@ -295,24 +296,24 @@ export default function Home() {
             </h1>
 
             {/* Subtitle */}
-            <p className="hero-subtitle text-white/65 text-[14px] sm:text-[16px] leading-[1.75] mb-9 max-w-[500px] mx-auto">
+            <p className="hero-subtitle text-white/65 text-[13px] sm:text-[15px] lg:text-[16px] leading-[1.7] mb-7 sm:mb-9 max-w-[460px] mx-auto">
               Finally growth that accelerates every part of your business
               forward. Your AI powered growth team brings more clients, improves
               operations, boosts revenue and keeps your business moving.
             </p>
 
-            {/* CTA buttons */}
-            <div className="hero-cta flex flex-wrap items-center justify-center gap-3">
+            {/* CTA buttons — stacked on very small screens, side-by-side from sm */}
+            <div className="hero-cta flex flex-col xs:flex-row items-center justify-center gap-3">
               <a
                 href="#"
-                className="text-white text-sm font-semibold px-7 py-3 rounded-[6px] flex items-center gap-2 transition-opacity duration-200 hover:opacity-90"
+                className="w-full xs:w-auto text-white text-[13px] sm:text-sm font-semibold px-6 py-2.5 sm:py-3 rounded-[6px] flex items-center justify-center gap-2 transition-opacity duration-200 hover:opacity-90"
                 style={{ background: "#0137D7" }}
               >
                 Book A Free Audit <span aria-hidden="true">→</span>
               </a>
               <a
                 href="#"
-                className="border border-white/25 hover:border-white/55 text-white text-sm font-medium px-7 py-3 rounded-[6px] flex items-center gap-2 transition-colors duration-200"
+                className="w-full xs:w-auto border border-white/25 hover:border-white/55 text-white text-[13px] sm:text-sm font-medium px-6 py-2.5 sm:py-3 rounded-[6px] flex items-center justify-center gap-2 transition-colors duration-200"
               >
                 View Portfolio <span aria-hidden="true">→</span>
               </a>
@@ -320,18 +321,18 @@ export default function Home() {
           </div>
 
           {/* ── Stats row ─────────────────────────────────────────────── */}
-          <div className="hero-stats max-w-3xl mx-auto grid grid-cols-3 pb-10">
+          <div className="hero-stats max-w-3xl mx-auto grid grid-cols-3 pb-8 sm:pb-10">
             {STATS.map((stat, i) => (
               <div
                 key={stat.value}
-                className={`flex flex-col items-center justify-center py-7 px-4 text-center ${
+                className={`flex flex-col items-center justify-center py-5 sm:py-7 px-2 sm:px-4 text-center ${
                   i < STATS.length - 1
                     ? "border-r border-white/[0.1]"
                     : ""
                 }`}
               >
                 <span
-                  className="text-4xl sm:text-5xl font-bold mb-2 leading-none"
+                  className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-1.5 sm:mb-2 leading-none"
                   style={{
                     color: "#FAAE10",
                     fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)",
@@ -339,7 +340,7 @@ export default function Home() {
                 >
                   <AnimatedNumber value={stat.value} suffix={stat.suffix} />
                 </span>
-                <span className="text-[11px] sm:text-xs text-white/55 leading-snug">
+                <span className="text-[10px] sm:text-[11px] lg:text-xs text-white/55 leading-snug">
                   {stat.line1}
                   <br />
                   {stat.line2}
@@ -355,20 +356,20 @@ export default function Home() {
       {/* z-index above the fixed tube cursor canvas (z-index: 2) with an
           opaque background so the cursor effect never shows through it. */}
       <div
-        className="relative z-10 overflow-hidden py-6 sm:py-7"
+        className="relative z-10 overflow-hidden py-5 sm:py-6 lg:py-7"
         style={{ background: "#0137D7", isolation: "isolate" }}
       >
         <div className="ticker-track flex items-center w-max">
           {tickerItems.map((logo, i) => (
             <div
               key={i}
-              className="flex items-center px-12 sm:px-16 select-none flex-shrink-0"
+              className="flex items-center px-8 sm:px-12 lg:px-16 select-none flex-shrink-0"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={logo.src}
                 alt={logo.alt}
-                className="h-6 sm:h-7 w-auto object-contain brightness-0 invert"
+                className="h-5 sm:h-6 lg:h-7 w-auto object-contain brightness-0 invert"
                 draggable={false}
               />
             </div>
@@ -377,13 +378,13 @@ export default function Home() {
 
         {/* Edge fade overlays */}
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 z-10"
+          className="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-20 lg:w-32 z-10"
           style={{
             background: "linear-gradient(to right, #0137D7 0%, rgba(1,55,215,0) 100%)",
           }}
         />
         <div
-          className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-32 z-10"
+          className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-20 lg:w-32 z-10"
           style={{
             background: "linear-gradient(to left, #0137D7 0%, rgba(1,55,215,0) 100%)",
           }}
@@ -391,14 +392,19 @@ export default function Home() {
       </div>
 
       {/* ── Trust line ───────────────────────────────────────────────── */}
-      <ScrollReveal threshold={0.5} className="flex items-center gap-5 py-5 px-6 sm:px-12 max-w-4xl mx-auto">
-        <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.55)" }} />
-        <div className="flex items-center gap-2.5 text-white text-[13px] tracking-[0.2em] uppercase whitespace-nowrap">
-          <span>Join the 200+ companies trusting</span>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/markition-logo.svg" alt="Markition" className="h-[22px] w-auto brightness-0 invert" />
+      <ScrollReveal threshold={0.5} className="py-5 px-6 sm:px-12 max-w-4xl mx-auto">
+        {/* Mobile: stacked centre-aligned. sm+: single horizontal row with lines */}
+        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
+          <div className="hidden sm:block flex-1 h-px" style={{ background: "rgba(255,255,255,0.55)" }} />
+          <div className="flex flex-col xs:flex-row items-center gap-1.5 xs:gap-2.5 text-white text-[11px] xs:text-[12px] sm:text-[13px] tracking-[0.18em] uppercase text-center">
+            <span className="whitespace-nowrap">Join the 200+ companies trusting</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/markition-logo.svg" alt="Markition" className="h-[18px] xs:h-[20px] sm:h-[22px] w-auto brightness-0 invert" />
+          </div>
+          <div className="hidden sm:block flex-1 h-px" style={{ background: "rgba(255,255,255,0.55)" }} />
+          {/* Mobile-only full-width line beneath */}
+          <div className="block sm:hidden w-full h-px" style={{ background: "rgba(255,255,255,0.25)" }} />
         </div>
-        <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.55)" }} />
       </ScrollReveal>
 
       {/* ── AI Services section ───────────────────────────────────────── */}

@@ -199,16 +199,16 @@ export default function AIServicesSection() {
   }
 
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6" style={{ background: "#000028" }}>
-      <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-10 lg:gap-14 items-start">
+    <section className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6" style={{ background: "#000028" }}>
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-8 sm:gap-10 lg:gap-14 items-start">
 
         {/* ── Left column — list ───────────────────────────────────────── */}
         <div style={{ fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)", position: "relative", zIndex: 0, overflow: "hidden" }}>
 
           <ScrollReveal delay={80} threshold={0.2}>
             <h2
-              className="font-bold leading-tight mb-4"
-              style={{ fontSize: "38px", letterSpacing: "-0.02em" }}
+              className="font-bold leading-tight mb-3 sm:mb-4 text-[26px] sm:text-[32px] lg:text-[38px]"
+              style={{ letterSpacing: "-0.02em" }}
             >
               Put AI To Work Across<br />
               Your <span style={{ color: "#0040FF" }}>Business</span>
@@ -216,7 +216,7 @@ export default function AIServicesSection() {
           </ScrollReveal>
 
           <ScrollReveal delay={160} threshold={0.2}>
-            <p className="text-[14px] text-white/70 leading-relaxed mb-8 max-w-sm">
+            <p className="text-[13px] sm:text-[14px] text-white/70 leading-relaxed mb-6 sm:mb-8 max-w-sm">
               Autonomous systems, conversational agents, and intelligent workflows
               engineered for enterprise scale and measurable business impact.
             </p>
@@ -227,7 +227,7 @@ export default function AIServicesSection() {
               <button
                 key={s.id}
                 onClick={() => setActive(i)}
-                className="relative flex items-center gap-4 text-left px-4 py-4 overflow-hidden border-b border-white/[0.08] w-full"
+                className="relative flex items-center gap-3 sm:gap-4 text-left px-3 sm:px-4 py-3 sm:py-4 overflow-hidden border-b border-white/[0.08] w-full"
               >
                 {/* Animated gradient background — mounts fresh on each activation */}
                 {active === i && (
@@ -242,20 +242,18 @@ export default function AIServicesSection() {
                 )}
 
                 <span
-                  className="relative text-xs font-bold tabular-nums w-6 flex-shrink-0 transition-colors duration-300"
+                  className="relative font-bold tabular-nums w-6 flex-shrink-0 transition-colors duration-300 text-[20px] sm:text-[24px] lg:text-[28px]"
                   style={{
                     color: active === i ? "#ffffff" : "rgba(255,255,255,0.32)",
-                    fontSize: "28px",
                   }}
                 >
                   {s.number}
                 </span>
 
                 <span
-                  className="relative text-sm font-medium transition-colors duration-300 ml-4"
+                  className="relative font-medium transition-colors duration-300 ml-2 sm:ml-4 text-[20px] sm:text-[24px] lg:text-[28px]"
                   style={{
                     color: active === i ? "#ffffff" : "rgba(255,255,255,0.32)",
-                    fontSize: "28px",
                   }}
                 >
                   {s.label}
