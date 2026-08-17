@@ -11,14 +11,17 @@ export default function TubesCursor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const appRef = useRef<any>(null);
-  const hoveringRef = useRef(false);
 
   useEffect(() => {
     let destroyed = false;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    (async () => {
+    // Delay init so the canvas has its final layout dimensions before the
+    // library reads them — prevents the "Computed radius is NaN" race on
+    // first paint and ensures cursor tracking starts correctly.
+    const initTimer = setTimeout(async () => {
+      if (destroyed || !canvasRef.current) return;
       try {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -44,97 +47,55 @@ export default function TubesCursor() {
 
         app.three.renderer.setClearColor(0x000000, 0);
 
-        // The library hardcodes minPixelRatio/maxPixelRatio to 2 on init, and
-        // re-clamps to that range on every internal resize event — so a plain
-        // setPixelRatio() call gets silently overwritten the next time the
-        // canvas resizes. Overriding these two properties (then calling
-        // resize()) is the only way the correct pixel ratio actually sticks.
+        // The library hardcodes minPixelRatio/maxPixelRatio to 2 on init and
+        // re-clamps on every resize — overriding these is the only way to make
+        // the ratio stick.
         const dpr = Math.min(window.devicePixelRatio, 2);
         app.three.minPixelRatio = dpr;
         app.three.maxPixelRatio = dpr;
         app.three.resize();
-
-        const originalOnBeforeRender = app.three.onBeforeRender;
-        app.three.onBeforeRender = (e: unknown) => {
-          if (hoveringRef.current) {
-            originalOnBeforeRender(e);
-          } else {
-            app.tubes.update(e);
-          }
-        };
 
         appRef.current = app;
         canvas.style.opacity = "1";
       } catch (e) {
         console.error("TubesCursor init failed:", e);
       }
-    })();
+    }, 100);
 
-    const root = document.documentElement;
-    const onEnter = () => { hoveringRef.current = true; };
-    const onLeave = () => { hoveringRef.current = false; };
     const onClick = () => {
       const app = appRef.current;
       if (!app) return;
       app.tubes?.setColors?.(randomColors(3));
       app.tubes?.setLightsColors?.(randomColors(4));
     };
-    root.addEventListener("pointerenter", onEnter);
-    root.addEventListener("pointerleave", onLeave);
-    window.addEventListener("click", onClick);
 
-    // Scroll-based movement: the library listens for "pointermove" on
-    // document.body (confirmed in minified source). Hook into Lenis's scroll
-    // callback (velocity-driven, already smoothed) so the tube drift matches
-    // the smooth scroll feel. Falls back to native scroll if Lenis isn't ready.
-    const lastPointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-
-    const onPointerMove = (e: PointerEvent) => {
-      lastPointer.x = e.clientX;
-      lastPointer.y = e.clientY;
-    };
-
-    const nudgeTubes = (velocity: number) => {
+    // The library listens for pointermove on document.body (bubble phase).
+    // This window bubble listener fires AFTER body handlers, so it can dispatch
+    // a correcting event that overwrites the library's cursor Y before the next
+    // rAF render — preventing tubes from chasing the cursor below the canvas.
+    const guardMove = (e: PointerEvent) => {
+      if (!appRef.current) return;
+      const rect = canvas.getBoundingClientRect();
+      if (rect.bottom <= 0) return; // canvas fully above viewport
+      const clampedY = Math.min(e.clientY, rect.bottom);
+      if (clampedY >= e.clientY) return; // cursor already within canvas bounds
       document.body.dispatchEvent(
         new PointerEvent("pointermove", {
-          clientX: lastPointer.x,
-          clientY: lastPointer.y + velocity * 120,
-          bubbles: true,
-          cancelable: true,
+          clientX: e.clientX,
+          clientY: clampedY,
+          bubbles: false, // stay on body only — no re-entry into this guard
         })
       );
     };
 
-    // Attach to Lenis once it's initialised by LenisProvider (it's set on
-    // window.__lenis synchronously in the same React paint, so it's available
-    // by the time this effect runs on the next tick).
-    type LenisInstance = { on: (e: string, cb: (s: { velocity: number }) => void) => void; off: (e: string, cb: unknown) => void };
-    const lenis = (window as Window & { __lenis?: LenisInstance }).__lenis;
-    const onLenisScroll = (s: { velocity: number }) => nudgeTubes(s.velocity);
-
-    if (lenis) {
-      lenis.on("scroll", onLenisScroll);
-    } else {
-      // Lenis not ready — fall back to native scroll delta
-      let lastScrollY = window.scrollY;
-      const onScroll = () => {
-        const delta = window.scrollY - lastScrollY;
-        lastScrollY = window.scrollY;
-        nudgeTubes(delta * 0.003);
-      };
-      window.addEventListener("scroll", onScroll, { passive: true });
-    }
-
-    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("click", onClick);
+    window.addEventListener("pointermove", guardMove);
 
     return () => {
       destroyed = true;
-      root.removeEventListener("pointerenter", onEnter);
-      root.removeEventListener("pointerleave", onLeave);
+      clearTimeout(initTimer);
       window.removeEventListener("click", onClick);
-      window.removeEventListener("pointermove", onPointerMove);
-      const l = (window as Window & { __lenis?: LenisInstance }).__lenis;
-      l?.off("scroll", onLenisScroll);
+      window.removeEventListener("pointermove", guardMove);
       appRef.current?.dispose?.();
       appRef.current = null;
     };
