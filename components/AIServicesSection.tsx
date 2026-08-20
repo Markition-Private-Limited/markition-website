@@ -1,768 +1,560 @@
 "use client";
 
 import { useState } from "react";
-import ScrollReveal from "@/components/ScrollReveal";
 
-interface Service {
-  id: string;
-  number: string;
-  label: string;
-  icon: string;
-  iconSrc?: string;
-  description: string;
-  features: [string, string, string, string];
-  cta: string;
-}
+/* ─── Service definitions ─────────────────────────────────────────────── */
+const SERVICES = [
+  { id: "voice",    label: "VOICE CALLS",          color: "#2f6df6" },
+  { id: "whatsapp", label: "WHATSAPP",              color: "#18d879" },
+  { id: "agent",    label: "AI AGENT",              color: "#9562ff" },
+  { id: "workflow", label: "WORKFLOW AUTOMATION",   color: "#ff9d32" },
+  { id: "crm",      label: "CRM AUTOMATION",        color: "#ff4d79" },
+  { id: "chatbot",  label: "AI CHATBOT",            color: "#21c7d8" },
+] as const;
 
-const SERVICES: Service[] = [
-  {
-    id: "ai-agents",
-    number: "01",
-    label: "AI Agents",
-    icon: "🤖",
-    iconSrc: "/ai-agent.svg",
-    description:
-      "Custom multi-agent workflows engineered to research leads, synthesise operational reports, triage incoming tickets, and automate cross-platform decisions with high precision.",
-    features: [
-      "Multi-step decision logic trees",
-      "API & Database tool integrations",
-      "Self-correcting error handling",
-      "Human-in-the-loop review guardrails",
-    ],
-    cta: "Deploy AI Agents",
-  },
-  {
-    id: "ai-chatbots",
-    number: "02",
-    label: "AI Chatbots",
-    icon: "💬",
-    description:
-      "Trained using custom RAG (Retrieval-Augmented Generation) pipelines to accurately answer complex customer queries, schedule appointments, and process instant sales transactions.",
-    features: [
-      "RAG Vector database search",
-      "Multi-lingual natural dialogue",
-      "Live human agent handoff",
-      "Omnichannel deployment (Web, WhatsApp, Slack)",
-    ],
-    cta: "Deploy AI Chatbots",
-  },
-  {
-    id: "workflow-automation",
-    number: "03",
-    label: "Workflow Automation",
-    icon: "⚡",
-    description:
-      "Seamlessly link your marketing CRM, payment gateways, ERPs, and customer support channels with high-throughput serverless event pipelines.",
-    features: [
-      "Custom webhook triggers",
-      "Sub-second data synchronization",
-      "Audit logs & retry queues",
-      "Zero-latency database updates",
-    ],
-    cta: "Automate Workflows",
-  },
-  {
-    id: "voice-ai",
-    number: "04",
-    label: "Voice AI",
-    icon: "🎙️",
-    description:
-      "Human-like AI voice agents that handle inbound calls, qualify prospects, book appointments, and follow up with leads — freeing your team for high-value conversations.",
-    features: [
-      "Real-time speech recognition",
-      "Dynamic conversation scripting",
-      "Calendar & CRM integration",
-      "Sentiment analysis & routing",
-    ],
-    cta: "Deploy Voice AI",
-  },
-  {
-    id: "crm-automation",
-    number: "05",
-    label: "CRM Automation",
-    icon: "📊",
-    description:
-      "Intelligent CRM workflows that score leads, automate follow-ups, update records in real time, and surface actionable insights so your team closes deals faster.",
-    features: [
-      "AI-powered lead scoring",
-      "Automated follow-up sequences",
-      "Real-time record enrichment",
-      "Pipeline stage triggers",
-    ],
-    cta: "Automate Your CRM",
-  },
-];
+type ServiceId = (typeof SERVICES)[number]["id"];
 
-// Inline SVGs replacing lucide-react icons from source repo
-function IconActivity({ className }: { className?: string }) {
+/* ─── SVG Icons ───────────────────────────────────────────────────────── */
+function IconPhone({ color }: { color?: string }) {
   return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke={color ?? "currentColor"} strokeWidth="2" aria-hidden="true">
+      <path d="M22 16.9v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.9z"/>
+    </svg>
+  );
+}
+function IconWhatsApp({ color }: { color?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke={color ?? "currentColor"} strokeWidth="2" aria-hidden="true">
+      <path d="M21 11.5a8.4 8.4 0 0 1-12.5 7.3L4 20l1.2-4.2A8.4 8.4 0 1 1 21 11.5z"/>
+    </svg>
+  );
+}
+function IconSpark({ color }: { color?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke={color ?? "currentColor"} strokeWidth="2" aria-hidden="true">
+      <path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/>
+    </svg>
+  );
+}
+function IconWorkflow({ color }: { color?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke={color ?? "currentColor"} strokeWidth="2" aria-hidden="true">
+      <circle cx="6" cy="6" r="3"/><circle cx="18" cy="12" r="3"/><circle cx="6" cy="18" r="3"/>
+      <path d="M9 7.5 15 10.5M9 16.5l6-3"/>
+    </svg>
+  );
+}
+function IconCRM({ color }: { color?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke={color ?? "currentColor"} strokeWidth="2" aria-hidden="true">
+      <circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.5"/>
+      <path d="M3 20c.5-3.2 2.4-5 6-5s5.5 1.8 6 5M15 15c3-.1 5 1.5 5.5 4"/>
+    </svg>
+  );
+}
+function IconBot({ color }: { color?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke={color ?? "currentColor"} strokeWidth="2" aria-hidden="true">
+      <rect x="4" y="6" width="16" height="12" rx="3"/>
+      <path d="M8 12h.01M16 12h.01M9 16h6M12 3v3"/>
     </svg>
   );
 }
 
-function IconZap({ className }: { className?: string }) {
+function TabIcon({ id, color }: { id: ServiceId; color?: string }) {
+  if (id === "voice")    return <IconPhone color={color} />;
+  if (id === "whatsapp") return <IconWhatsApp color={color} />;
+  if (id === "agent")    return <IconSpark color={color} />;
+  if (id === "workflow") return <IconWorkflow color={color} />;
+  if (id === "crm")      return <IconCRM color={color} />;
+  return <IconBot color={color} />;
+}
+
+/* ─── Demo: Voice Calls ───────────────────────────────────────────────── */
+const VOICE_BARS = [68,42,95,55,80,38,72,90,47,63,85,52,78,35,91,60,44,88,57,73,40,96,51,67,83,48,76,33,87,62,70];
+const VOICE_DELAYS = [-0.42,-0.55,-0.79,-0.23,-0.61,-0.18,-0.87,-0.34,-0.70,-0.12,-0.56,-0.45,-0.91,-0.28,-0.65,-0.38,-0.82,-0.19,-0.73,-0.47,-0.60,-0.15,-0.84,-0.31,-0.68,-0.53,-0.76,-0.22,-0.89,-0.41,-0.66];
+
+function DemoVoice() {
+  const [keys] = useState(() => ["1","2","3","4","5","6","7","8","9","*","0","#"]);
+
   return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-    </svg>
+    <div style={{ display: "grid", gap: 18, gridTemplateColumns: "1fr 310px" }} className="ais-two">
+      {/* Active call card */}
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, overflow: "hidden", padding: 24 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 15 }}>
+            <div style={{ width: 58, height: 58, borderRadius: "50%", display: "grid", placeItems: "center", background: "#2f6df6", boxShadow: "0 0 28px rgba(47,109,246,.3)" }}>
+              <IconPhone color="white" />
+            </div>
+            <div>
+              <div style={{ fontSize: 20, fontWeight: 750 }}>Active call</div>
+              <div style={{ color: "#93a2ba", fontSize: 13, marginTop: 2 }}>+1 (212) 555-0119 · New York</div>
+              <div style={{ color: "#93a2ba", fontSize: 13, marginTop: 7 }}>02:14 · recording</div>
+            </div>
+          </div>
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 6, border: "1px solid rgba(255,255,255,.1)", borderRadius: 999, padding: "6px 9px", fontSize: 10, fontWeight: 800, color: "#b7c4d9", background: "rgba(255,255,255,.03)" }}>HD</span>
+        </div>
+
+        {/* Waveform */}
+        <div style={{ height: 90, display: "flex", alignItems: "center", justifyContent: "center", gap: 4, margin: "8px 0" }}>
+          {VOICE_BARS.map((h, i) => (
+            <span key={i} suppressHydrationWarning style={{
+              width: "9px", borderRadius: "8px",
+              background: "linear-gradient(to top,#2461dd,#6ca0ff)",
+              height: h + "px",
+              display: "block",
+              animation: `ais-wave 1.05s ease-in-out ${VOICE_DELAYS[i]}s infinite alternate`,
+              // @ts-expect-error css var
+              "--h": h + "px",
+            } as React.CSSProperties} />
+          ))}
+        </div>
+
+        {/* Controls */}
+        <div style={{ display: "flex", justifyContent: "center", gap: 26, paddingTop: 15, borderTop: "1px solid rgba(150,180,220,.22)" }}>
+          {[
+            <svg key="mic" viewBox="0 0 24 24" width="21" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M5 5a9.9 9.9 0 0 0 0 14M19 5a9.9 9.9 0 0 1 0 14"/></svg>,
+            <svg key="grid" viewBox="0 0 24 24" width="21" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="7" cy="7" r="1"/><circle cx="12" cy="7" r="1"/><circle cx="17" cy="7" r="1"/><circle cx="7" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="17" cy="12" r="1"/></svg>,
+          ].map((icon, i) => (
+            <div key={i} style={{ width: 62, height: 62, borderRadius: 17, border: "1px solid rgba(255,255,255,.08)", background: "#18233a", color: "#dce5f5", display: "grid", placeItems: "center" }}>{icon}</div>
+          ))}
+          <div style={{ width: 74, height: 74, borderRadius: "50%", background: "#f2384d", boxShadow: "0 0 25px rgba(242,56,77,.3)", display: "grid", placeItems: "center" }}>
+            <svg viewBox="0 0 24 24" width="21" fill="none" stroke="white" strokeWidth="2.5"><path d="M6.6 10.8c3.4-1.7 7.4-1.7 10.8 0l1.3 3.5-3.3 1.2-1.6-2.4a10 10 0 0 0-4.2 0L8 15.5l-3.3-1.2z"/></svg>
+          </div>
+          {[
+            <span key="pause" style={{ fontSize: 16 }}>Ⅱ</span>,
+            <span key="more" style={{ fontSize: 16 }}>•••</span>,
+          ].map((icon, i) => (
+            <div key={i} style={{ width: 62, height: 62, borderRadius: 17, border: "1px solid rgba(255,255,255,.08)", background: "#18233a", color: "#dce5f5", display: "grid", placeItems: "center" }}>{icon}</div>
+          ))}
+        </div>
+      </div>
+
+      {/* Keypad */}
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 20, display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, alignContent: "center" }}>
+        {keys.map((k) => (
+          <button key={k} style={{ height: 58, border: 0, borderRadius: 14, background: "#293547", color: "#fff", fontSize: 18, fontWeight: 700, cursor: "pointer", transition: ".2s" }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#35445a"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#293547"; (e.currentTarget as HTMLElement).style.transform = ""; }}>
+            {k}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
-function IconSend({ className }: { className?: string }) {
+/* ─── Demo: WhatsApp ──────────────────────────────────────────────────── */
+function DemoWhatsApp() {
   return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <line x1="22" y1="2" x2="11" y2="13" />
-      <polygon points="22 2 15 22 11 13 2 9 22 2" />
-    </svg>
+    <div style={{ display: "grid", gap: 18, gridTemplateColumns: "1fr 1fr" }} className="ais-wa">
+      {/* Incoming call */}
+      <div style={{ border: "1px solid rgba(24,216,121,.32)", background: "linear-gradient(145deg,rgba(11,45,48,.72),rgba(12,27,45,.8))", borderRadius: 21, padding: 14, minHeight: "auto" }}>
+        <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800 }}>INCOMING WHATSAPP CALL</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 15, marginTop: 18 }}>
+          <div style={{ width: 58, height: 58, borderRadius: "50%", background: "#16d878", display: "grid", placeItems: "center", boxShadow: "0 0 30px rgba(24,216,121,.2)" }}>
+            <svg viewBox="0 0 24 24" width="28" fill="none" stroke="white" strokeWidth="2"><path d="M21 11.5a8.4 8.4 0 0 1-12.5 7.3L4 20l1.2-4.2A8.4 8.4 0 1 1 21 11.5z"/></svg>
+          </div>
+          <div>
+            <div style={{ fontSize: 20, fontWeight: 750 }}>Sarah · Brightline</div>
+            <div style={{ color: "#93a2ba", fontSize: 13 }}>WhatsApp call · incoming</div>
+          </div>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 30 }}>
+          <button style={{ border: 0, borderRadius: 12, padding: 15, color: "#fff", fontWeight: 750, cursor: "pointer", background: "#ff3158" }}>Decline</button>
+          <button style={{ border: 0, borderRadius: 12, padding: 15, color: "#fff", fontWeight: 750, cursor: "pointer", background: "#12c978" }}>Accept</button>
+        </div>
+      </div>
+      {/* Conversation */}
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#1b2336", borderRadius: 21, padding: 14, minHeight: "auto" }}>
+        <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800, marginBottom: 4 }}>CONVERSATION</div>
+        {[
+          { out: false, text: "Hi! I got your demo email — interesting. We use a CRM right now." },
+          { out: true,  text: "Awesome. Want to hop on a quick WhatsApp call to walk through it?" },
+          { out: false, text: "Yeah, let's do it." },
+          { out: true,  text: "Calling now." },
+        ].map((m, i) => (
+          <div key={i} style={{ maxWidth: "80%", padding: "11px 14px", borderRadius: 16, margin: "12px 0", fontSize: 13, lineHeight: 1.4, background: m.out ? "#17ce78" : "#343b50", marginLeft: m.out ? "auto" : 0 }}>{m.text}</div>
+        ))}
+        <div style={{ display: "flex", gap: 4, padding: "10px 14px", width: "max-content", background: "#343b50", borderRadius: 16 }}>
+          {[0, 150, 300].map(d => (
+            <span key={d} style={{ width: 5, height: 5, background: "#a8b4c7", borderRadius: "50%", display: "block", animation: `ais-typing .9s ${d}ms infinite` }} />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
-interface ChatMessage {
-  sender: "bot" | "user";
-  text: string;
+/* ─── Demo: AI Agent ──────────────────────────────────────────────────── */
+function DemoAgent() {
+  return (
+    <div style={{ display: "grid", gap: 18, gridTemplateColumns: "280px 1fr" }} className="ais-agent">
+      {/* Sidebar */}
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 14, minHeight: "auto" }}>
+        <div style={{ width: 62, height: 62, borderRadius: "50%", display: "grid", placeItems: "center", background: "#8750f7", boxShadow: "0 0 35px rgba(135,80,247,.38)", animation: "ais-orb 2.2s infinite" }}>
+          <IconSpark color="white" />
+        </div>
+        <div style={{ fontSize: 20, fontWeight: 750, marginTop: 15 }}>Nova</div>
+        <div style={{ color: "#93a2ba", fontSize: 13 }}>AI agent · always-on</div>
+        <div style={{ marginTop: 30, display: "grid", gap: 15 }}>
+          {[["Campaign", "Q2 Outreach"], ["Dialed today", "147"], ["Qualified", "23"]].map(([k, v], i) => (
+            <div key={i} style={{ display: "flex", justifyContent: "space-between", fontSize: 13 }}>
+              <span style={{ color: "#93a2ba" }}>{k}</span>
+              <b style={i === 2 ? { color: "#19db80" } : {}}>{v}</b>
+            </div>
+          ))}
+        </div>
+        <div style={{ height: 7, background: "#202c43", borderRadius: 9, marginTop: 6, overflow: "hidden" }}>
+          <div style={{ height: "100%", width: "74%", background: "#8a57f8", borderRadius: 9, animation: "ais-load 2s ease-in-out infinite alternate" }} />
+        </div>
+      </div>
+      {/* Transcript */}
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 14, minHeight: "auto" }}>
+        <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800, marginBottom: 8 }}>LIVE TRANSCRIPT</div>
+        {[
+          { right: false, text: "Hi Sarah, this is Nova from the team. Got a minute?" },
+          { right: true,  text: "Sure, what is it about?" },
+          { right: false, text: "Are you currently using an automated follow-up system?" },
+          { right: true,  text: "We don't — that's a gap." },
+        ].map((m, i) => (
+          <div key={i} style={{ padding: "12px 15px", borderRadius: 15, background: m.right ? "#2b3b47" : "#29284a", width: "max-content", maxWidth: "78%", marginLeft: m.right ? "auto" : 0, margin: "14px 0", fontSize: 13 }}>{m.text}</div>
+        ))}
+        <div style={{ padding: "12px 15px", borderRadius: 15, background: "#29284a", width: "max-content", maxWidth: "78%", margin: "14px 0", fontSize: 13 }}>
+          Got it. Let me hand you to a specialist.
+          <span style={{ display: "inline-block", width: 2, height: 14, background: "#a477ff", verticalAlign: "-2px", animation: "ais-blink .8s infinite" }} />
+        </div>
+      </div>
+    </div>
+  );
 }
 
-const INITIAL_CHAT_MESSAGES: ChatMessage[] = [
-  {
-    sender: "bot",
-    text: "Hello! I am Markition Growth Assistant. How can I assist with your AI & marketing strategy today?",
-  },
-  {
-    sender: "user",
-    text: "Can you show me how AI agents automate lead qualification?",
-  },
-];
+/* ─── Demo: Workflow Automation ───────────────────────────────────────── */
+function DemoWorkflow() {
+  return (
+    <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 25, minHeight: 350 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div>
+          <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800 }}>WORKFLOW AUTOMATION</div>
+          <div style={{ fontSize: 20, fontWeight: 750, marginTop: 6 }}>Lead follow-up workflow</div>
+        </div>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 6, border: "1px solid rgba(255,255,255,.1)", borderRadius: 999, padding: "6px 9px", fontSize: 10, fontWeight: 800, color: "#ffb260", background: "rgba(255,255,255,.03)" }}>RUNNING</span>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0, minHeight: 180 }} className="ais-flow">
+        {[
+          { icon: "↯", title: "New Lead",    desc: "Website form submitted" },
+          { icon: "✦", title: "AI Qualifies", desc: "Intent, fit and priority scored" },
+          { icon: "→", title: "Follow-up",   desc: "CRM updated + message sent" },
+        ].map((node, i) => (
+          <>
+            <div key={`n${i}`} style={{ width: 190, minHeight: 105, border: "1px solid rgba(91,142,241,.3)", borderRadius: 18, background: "#111e35", padding: 17, position: "relative", boxShadow: "0 10px 35px rgba(0,0,0,.18)", animation: `ais-node-float 3s ${i === 1 ? "-1s" : i === 2 ? "-2s" : "0s"} ease-in-out infinite` }}>
+              <div style={{ width: 34, height: 34, borderRadius: 10, display: "grid", placeItems: "center", background: "rgba(255,157,50,.12)", color: "#ff9d32", marginBottom: 10, fontSize: 18 }}>{node.icon}</div>
+              <div style={{ fontSize: 14, fontWeight: 750, margin: "0 0 5px" }}>{node.title}</div>
+              <div style={{ fontSize: 11, color: "#8393ac", margin: 0, lineHeight: 1.45 }}>{node.desc}</div>
+            </div>
+            {i < 2 && (
+              <div key={`c${i}`} style={{ width: 62, height: 2, background: "linear-gradient(90deg,#426dd4,#ff9d32)", position: "relative", overflow: "hidden", flexShrink: 0 }}>
+                <span style={{ position: "absolute", width: 16, height: 16, borderRadius: "50%", background: "#fff", top: -7, left: -18, boxShadow: "0 0 15px #ff9d32", animation: "ais-flow 1.5s linear infinite" }} />
+              </div>
+            )}
+          </>
+        ))}
+      </div>
+    </div>
+  );
+}
 
+/* ─── Demo: CRM Automation ────────────────────────────────────────────── */
+function DemoCRM() {
+  return (
+    <div style={{ display: "grid", gap: 18, gridTemplateColumns: "280px 1fr" }} className="ais-crm">
+      {/* Lead card */}
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 14, minHeight: "auto" }}>
+        <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800 }}>NEW LEAD</div>
+        <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 15 }}>
+          <div style={{ width: 48, height: 48, borderRadius: "50%", background: "linear-gradient(135deg,#3175ff,#6f92ff)", display: "grid", placeItems: "center", fontWeight: 800 }}>JD</div>
+          <div>
+            <div style={{ fontSize: 17, fontWeight: 750 }}>Jordan Davis</div>
+            <div style={{ color: "#93a2ba", fontSize: 13 }}>jordan@brightline.com</div>
+          </div>
+        </div>
+        <div style={{ marginTop: 25, display: "grid", gap: 12 }}>
+          {[
+            ["Lead score", "92 / 100", "#19db80"],
+            ["Source",     "Website",  null],
+            ["Owner",      "Sales Team", null],
+            ["Next action","Call today", null],
+          ].map(([k, v, c], i) => (
+            <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "12px 0", borderBottom: "1px solid rgba(255,255,255,.06)", fontSize: 12 }}>
+              <span style={{ color: "#93a2ba" }}>{k}</span>
+              <b style={c ? { color: c as string } : {}}>{v}</b>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Pipeline */}
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 14, minHeight: "auto" }}>
+        <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800 }}>CRM AUTOMATION</div>
+        <div style={{ fontSize: 20, fontWeight: 750, marginTop: 6, marginBottom: 18 }}>Lead lifecycle</div>
+        <div style={{ display: "grid", gap: 13 }}>
+          {[
+            ["Lead captured",        "Website → CRM"],
+            ["Lead scored",          "AI qualification"],
+            ["Sales assigned",       "Owner selected"],
+            ["Follow-up scheduled",  "Next touchpoint"],
+          ].map(([title, sub], i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "36px 1fr auto", gap: 12, alignItems: "center", padding: 13, border: "1px solid rgba(91,142,241,.18)", borderRadius: 14, background: "#111d33", animation: `ais-step-in 4.5s ${i * 0.7}s infinite` }}>
+              <div style={{ width: 30, height: 30, borderRadius: "50%", display: "grid", placeItems: "center", background: "#1c3156", color: "#76a2ff", fontSize: 11, fontWeight: 800 }}>{i + 1}</div>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: 13 }}>{title}</div>
+                <div style={{ color: "#8393ac", fontSize: 11 }}>{sub}</div>
+              </div>
+              <span style={{ fontSize: 10, padding: "5px 8px", borderRadius: 999, background: "rgba(24,216,121,.08)", color: "#1bdb80" }}>{i < 3 ? "Done" : "Ready"}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Demo: AI Chatbot ────────────────────────────────────────────────── */
+function DemoChatbot() {
+  return (
+    <div style={{ display: "grid", gap: 18, gridTemplateColumns: "300px 1fr" }} className="ais-bot">
+      {/* Profile */}
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 14, minHeight: "auto" }}>
+        <div style={{ width: 68, height: 68, borderRadius: 20, background: "linear-gradient(135deg,#21c7d8,#3378ff)", display: "grid", placeItems: "center", boxShadow: "0 0 35px rgba(33,199,216,.25)" }}>
+          <IconBot color="white" />
+        </div>
+        <div style={{ fontSize: 20, fontWeight: 750, marginTop: 16 }}>AI Assistant</div>
+        <div style={{ color: "#93a2ba", fontSize: 13 }}>Website Chat · 24/7</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 7, fontSize: 11, color: "#19d980", marginTop: 10 }}>
+          <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#19d980", boxShadow: "0 0 10px #19d980", display: "block" }} />
+          Online and responding
+        </div>
+        <div style={{ marginTop: 30 }}>
+          <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800, marginBottom: 12 }}>CAPABILITIES</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+            {["Answer questions", "Qualify leads", "Book meetings", "Human handoff"].map(cap => (
+              <span key={cap} style={{ display: "inline-flex", alignItems: "center", border: "1px solid rgba(255,255,255,.1)", borderRadius: 999, padding: "6px 9px", fontSize: 10, fontWeight: 800, color: "#b7c4d9", background: "rgba(255,255,255,.03)" }}>{cap}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* Chat */}
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#121d31", borderRadius: 21, padding: 14, minWidth: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <div style={{ paddingBottom: 13, borderBottom: "1px solid rgba(150,180,220,.22)", fontWeight: 750 }}>
+          Website conversation <span style={{ float: "right", color: "#93a2ba", fontSize: 13 }}>Live</span>
+        </div>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+          {[
+            { me: true,  text: "Hi, I'm interested in your pricing." },
+            { me: false, text: "Absolutely. I can help with that. What type of business are you running?" },
+            { me: true,  text: "We're a growing healthcare company." },
+            { me: false, text: "Perfect. I can recommend the right setup and connect you with our team." },
+          ].map((m, i) => (
+            <div key={i} style={{ padding: "10px 13px", borderRadius: 15, background: m.me ? "#2671ff" : "#2a3549", maxWidth: "88%", width: "fit-content", fontSize: 12, margin: "6px 0", marginLeft: "auto", marginRight: m.me ? 0 : "auto", wordBreak: "break-word", animation: "ais-msg .5s ease" }}>{m.text}</div>
+          ))}
+          <div style={{ marginTop: 10, padding: "11px 13px", borderRadius: 12, background: "rgba(33,199,216,.08)", border: "1px solid rgba(33,199,216,.2)", color: "#75e5ed", fontSize: 11 }}>
+            ✓ Lead qualified · Sales handoff ready
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Main component ──────────────────────────────────────────────────── */
 export default function AIServicesSection() {
-  const [active, setActive] = useState(0);
-  const svc = SERVICES[active];
+  const [activeId, setActiveId] = useState<ServiceId>("voice");
+  const active = SERVICES.find(s => s.id === activeId)!;
 
-  // Chatbot demo state (sourced from AICapabilities.tsx in external repo)
-  const [chatMessages, setChatMessages] = useState<ChatMessage[]>(INITIAL_CHAT_MESSAGES);
-  const [chatInput, setChatInput] = useState("");
-  const [isBotTyping, setIsBotTyping] = useState(false);
-
-  function handleSendMessage(e: React.FormEvent) {
-    e.preventDefault();
-    if (!chatInput.trim()) return;
-
-    const userText = chatInput;
-    setChatMessages((prev) => [...prev, { sender: "user", text: userText }]);
-    setChatInput("");
-    setIsBotTyping(true);
-
-    setTimeout(() => {
-      setIsBotTyping(false);
-      setChatMessages((prev) => [
-        ...prev,
-        {
-          sender: "bot",
-          text: `I analyzed your query regarding "${userText}". Markition AI Agents connect directly to your CRM, evaluate lead intent signals, and assign a conversion score in under 300ms!`,
-        },
-      ]);
-    }, 1200);
+  // Animate state transitions
+  const [key, setKey] = useState(0);
+  function switchTab(id: ServiceId) {
+    setActiveId(id);
+    setKey(k => k + 1);
   }
 
   return (
-    <section className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6" style={{ background: "#000028" }}>
-      <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-8 sm:gap-10 lg:gap-14 items-start">
+    <>
+      {/* Scoped styles for animations that need CSS vars / complex keyframes */}
+      <style>{`
+        .ais-two   { grid-template-columns: 1fr 310px; }
+        .ais-wa    { grid-template-columns: 1fr 1fr; }
+        .ais-agent { grid-template-columns: 280px 1fr; }
+        .ais-crm   { grid-template-columns: 280px 1fr; }
+        .ais-bot   { grid-template-columns: 300px 1fr; }
+        @media(max-width:860px){
+          .ais-two, .ais-wa, .ais-agent, .ais-crm, .ais-bot { grid-template-columns: 1fr !important; }
+          .ais-flow { flex-direction: column !important; }
+          .ais-connector { width: 2px !important; height: 35px !important; }
+        }
+        .ais-state-in { animation: ais-state-in .45s ease; }
+        @keyframes ais-wave { to { height: calc(var(--h) * .55); } }
+      `}</style>
 
-        {/* ── Left column — list ───────────────────────────────────────── */}
-        <div style={{ fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)", position: "relative", zIndex: 0, overflow: "hidden" }}>
+      <section
+        style={{
+          position: "relative",
+          minHeight: "auto",
+          padding: "30px 20% 40px",
+          overflow: "hidden",
+          background:
+            "radial-gradient(circle at 7% 35%, rgba(36,88,184,.38), transparent 32%), " +
+            "radial-gradient(circle at 96% 78%, rgba(0,170,90,.18), transparent 28%), " +
+            "radial-gradient(circle at 52% 105%, rgba(115,55,190,.18), transparent 30%), " +
+            "#000028",
+          fontFamily: "var(--font-inter, Inter, sans-serif)",
+        }}
+      >
+        {/* Ambient floating circles */}
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" }}>
+          {[
+            { w: 92,  l: "32%", t: "8%",  d: 0  },
+            { w: 62,  l: "43%", t: "28%", d: -3 },
+            { w: 120, r: "8%",  b: "4%",  d: -5 },
+            { w: 46,  l: "3%",  t: "15%", d: -1 },
+          ].map((c, i) => (
+            <span key={i} style={{
+              position: "absolute",
+              width: c.w, height: c.w,
+              borderRadius: "50%",
+              border: "1px solid rgba(77,145,255,.18)",
+              filter: "blur(.2px)",
+              animation: `ais-float 9s ${c.d}s ease-in-out infinite`,
+              left: (c as any).l, top: (c as any).t,
+              right: (c as any).r, bottom: (c as any).b,
+            }} />
+          ))}
+        </div>
 
-          <ScrollReveal delay={80} threshold={0.2}>
-            <h2
-              className="font-bold leading-tight mb-3 sm:mb-4 text-[26px] sm:text-[32px] lg:text-[38px]"
-              style={{ letterSpacing: "-0.02em" }}
-            >
-              Put AI To Work Across<br />
-              Your <span style={{ color: "#0040FF" }}>Business</span>
-            </h2>
-          </ScrollReveal>
+        {/* Eyebrow */}
+        <div style={{ textAlign: "center", textTransform: "uppercase", letterSpacing: 4, fontSize: 12, fontWeight: 700, color: "#4385ff", marginBottom: 20 }}>
+        
+        </div>
 
-          <ScrollReveal delay={160} threshold={0.2}>
-            <p className="text-[13px] sm:text-[14px] text-white/70 leading-relaxed mb-6 sm:mb-8 max-w-sm">
-              Autonomous systems, conversational agents, and intelligent workflows
-              engineered for enterprise scale and measurable business impact.
-            </p>
-          </ScrollReveal>
+        {/* Heading */}
+        <h2 style={{ margin: "0 auto", textAlign: "center", maxWidth: 700, fontSize: "clamp(24px,3.5vw,40px)", lineHeight: 1.08, letterSpacing: "-1.5px", fontWeight: 700, fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", color: "#f7f9ff" }}>
+          Put AI To Work{" "}
+          <span style={{ background: "linear-gradient(90deg,#2f78ff,#12d783,#8b6cff)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+            Across Your Business
+          </span>
+        </h2>
 
-          <div className="flex flex-col">
-            {SERVICES.map((s, i) => (
+        {/* Subtitle */}
+        <p style={{ margin: "12px auto 24px", textAlign: "center", maxWidth: 520, color: "#9aa8bf", fontSize: 13, lineHeight: 1.6 }}>
+          One platform for conversations, intelligent automation, customer relationships and AI-powered engagement.
+        </p>
+
+        {/* Tab bar */}
+        <div style={{
+          position: "relative", zIndex: 5,
+          display: "flex", justifyContent: "center", alignItems: "center", gap: 2,
+          maxWidth: 900, margin: "0 auto 16px",
+          padding: 4,
+          border: "1px solid rgba(150,180,220,.22)",
+          borderRadius: 999,
+          background: "rgba(10,18,34,.84)",
+          backdropFilter: "blur(16px)",
+          boxShadow: "0 12px 50px rgba(0,0,0,.24)",
+          overflow: "hidden",
+        }}>
+          {SERVICES.map(s => {
+            const isActive = s.id === activeId;
+            return (
               <button
                 key={s.id}
-                onClick={() => setActive(i)}
-                className="relative flex items-center gap-3 sm:gap-4 text-left px-3 sm:px-4 py-3 sm:py-4 overflow-hidden border-b border-white/[0.08] w-full"
+                onClick={() => switchTab(s.id)}
+                style={{
+                  position: "relative", flex: "1 1 0",
+                  border: 0,
+                  background: isActive ? s.color : "transparent",
+                  color: isActive ? "#fff" : "#8fa0bb",
+                  padding: "8px 6px",
+                  borderRadius: 999,
+                  cursor: "pointer",
+                  fontSize: 11, fontWeight: 750, letterSpacing: ".1px",
+                  transition: ".3s ease",
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: 5,
+                  whiteSpace: "nowrap",
+                  boxShadow: isActive ? `0 4px 18px ${s.color}55` : "none",
+                }}
+                onMouseEnter={e => { if (!isActive) { (e.currentTarget as HTMLElement).style.color = "#fff"; (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,.055)"; } }}
+                onMouseLeave={e => { if (!isActive) { (e.currentTarget as HTMLElement).style.color = "#8fa0bb"; (e.currentTarget as HTMLElement).style.background = "transparent"; } }}
               >
-                {/* Animated gradient background — mounts fresh on each activation */}
-                {active === i && (
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0"
-                    style={{
-                      background: "linear-gradient(to top, rgba(255,255,255,0.04) 0%, transparent 75%)",
-                      animation: "tab-bg-in 0.25s ease forwards",
-                    }}
-                  />
-                )}
-
-                <span
-                  className="relative font-bold tabular-nums w-6 flex-shrink-0 transition-colors duration-300 text-[20px] sm:text-[24px] lg:text-[28px]"
-                  style={{
-                    color: active === i ? "#ffffff" : "rgba(255,255,255,0.32)",
-                  }}
-                >
-                  {s.number}
-                </span>
-
-                <span
-                  className="relative font-medium transition-colors duration-300 ml-2 sm:ml-4 text-[20px] sm:text-[24px] lg:text-[28px]"
-                  style={{
-                    color: active === i ? "#ffffff" : "rgba(255,255,255,0.32)",
-                  }}
-                >
-                  {s.label}
-                </span>
-
-                {/* Full-width glow line — expands from centre on activation */}
-                {active === i && (
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
-                    style={{
-                      background: "rgba(255,255,255,0.7)",
-                      boxShadow: "0 0 10px 3px rgba(255,255,255,0.3)",
-                      animation: "tab-glow-expand 0.35s ease forwards",
-                    }}
-                  />
-                )}
+                <TabIcon id={s.id} color={isActive ? "white" : "currentColor"} />
+                {s.label}
               </button>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
-        {/* ── Right column — service detail card ──────────────────────── */}
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <div
-            className="rounded-2xl overflow-hidden"
-            style={{
-              background: "rgba(3, 7, 30, 0.88)",
-              border: "1px solid rgba(80, 120, 255, 0.22)",
-              backdropFilter: "blur(18px)",
-              WebkitBackdropFilter: "blur(18px)",
-              position: "relative",
-            }}
-          >
+        {/* Demo window */}
+        <div style={{
+          position: "relative", zIndex: 2,
+          maxWidth: 900, minHeight: "auto",
+          margin: "0 auto",
+          border: `1px solid ${active.color}55`,
+          borderRadius: 20,
+          background: "linear-gradient(135deg,rgba(13,24,47,.92),rgba(8,17,32,.92))",
+          boxShadow: "0 35px 100px rgba(0,0,0,.38), inset 0 1px rgba(255,255,255,.035)",
+          overflow: "hidden",
+          transition: "border-color .45s ease",
+        }}>
+          {/* Glow behind window */}
+          <div style={{
+            position: "absolute", bottom: -110, left: "12%", right: "12%", height: 160,
+            background: active.color, opacity: .11, filter: "blur(65px)", pointerEvents: "none",
+            transition: ".5s",
+          }} />
 
-          {/* Neon tube decorative background */}
-          <svg
-            aria-hidden="true"
-            overflow="hidden"
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              height: "65%",
-              pointerEvents: "none",
-              zIndex: 0,
-            }}
-            viewBox="0 0 600 380"
-            preserveAspectRatio="xMidYMid slice"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <filter id="neon-glow-a" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="7" result="b1"/>
-                <feGaussianBlur stdDeviation="2.5" result="b2"/>
-                <feMerge>
-                  <feMergeNode in="b1"/>
-                  <feMergeNode in="b2"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-              <filter id="neon-glow-b" x="-40%" y="-40%" width="180%" height="180%">
-                <feGaussianBlur stdDeviation="3.5" result="b"/>
-                <feMerge>
-                  <feMergeNode in="b"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-              <linearGradient id="tg1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#7C3AED" stopOpacity="0"/>
-                <stop offset="25%" stopColor="#8B5CF6" stopOpacity="0.9"/>
-                <stop offset="70%" stopColor="#A855F7" stopOpacity="0.7"/>
-                <stop offset="100%" stopColor="#EC4899" stopOpacity="0.25"/>
-              </linearGradient>
-              <linearGradient id="tg2" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#1D4ED8" stopOpacity="0"/>
-                <stop offset="35%" stopColor="#3B82F6" stopOpacity="0.85"/>
-                <stop offset="75%" stopColor="#7C3AED" stopOpacity="0.55"/>
-                <stop offset="100%" stopColor="#A855F7" stopOpacity="0.15"/>
-              </linearGradient>
-              <linearGradient id="tg3" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#EC4899" stopOpacity="0"/>
-                <stop offset="45%" stopColor="#DB2777" stopOpacity="0.75"/>
-                <stop offset="100%" stopColor="#7C3AED" stopOpacity="0.2"/>
-              </linearGradient>
-            </defs>
-
-            {/* Purple tubes — kept well above the bottom edge (max y ≈ 330) */}
-            <path d="M -40,330 C 60,278 170,238 285,202 C 390,168 490,152 630,138" stroke="url(#tg1)" strokeWidth="3" fill="none" filter="url(#neon-glow-a)" opacity="0.88"/>
-            <path d="M -70,308 C 45,260 160,222 275,188 C 385,156 495,142 640,130" stroke="#A855F7" strokeWidth="1.5" fill="none" filter="url(#neon-glow-b)" opacity="0.52"/>
-
-            {/* Blue tubes */}
-            <path d="M 10,345 C 120,298 230,260 355,224 C 460,192 555,176 660,162" stroke="url(#tg2)" strokeWidth="2.5" fill="none" filter="url(#neon-glow-a)" opacity="0.82"/>
-            <path d="M -25,318 C 95,272 210,236 325,202 C 425,172 525,158 655,145" stroke="#60A5FA" strokeWidth="1" fill="none" filter="url(#neon-glow-b)" opacity="0.42"/>
-
-            {/* Pink accent tube */}
-            <path d="M -90,338 C 20,312 130,288 245,258 C 355,228 455,212 580,200" stroke="url(#tg3)" strokeWidth="2" fill="none" filter="url(#neon-glow-a)" opacity="0.72"/>
-
-            {/* Ultra-thin accent traces */}
-            <path d="M 40,352 C 150,314 260,278 380,244 C 480,212 575,196 675,182" stroke="#C084FC" strokeWidth="0.8" fill="none" opacity="0.32"/>
-            <path d="M -50,325 C 65,285 180,250 300,218 C 400,188 500,174 630,162" stroke="#818CF8" strokeWidth="0.8" fill="none" opacity="0.28"/>
-          </svg>
-
-          {/* Card header */}
-          <div className="px-5 sm:px-7 pt-5 sm:pt-6 pb-4" style={{ position: "relative", zIndex: 1 }}>
-            <div className="flex items-center gap-3 mb-3">
-              {svc.iconSrc ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={svc.iconSrc} alt="" aria-hidden="true" className="w-8 h-8 flex-shrink-0" />
-              ) : (
-                <span className="text-2xl leading-none">{svc.icon}</span>
-              )}
-              <h3
-                className="text-base sm:text-lg font-semibold text-white"
-                style={{ fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)" }}
-              >
-                {svc.label}
-              </h3>
-            </div>
-            <p className="text-sm text-white/75 leading-relaxed">{svc.description}</p>
-          </div>
-
-          {/* Features 2×2 grid */}
-          <div className="px-5 sm:px-7 pb-4 grid grid-cols-2 gap-2" style={{ position: "relative", zIndex: 1 }}>
-            {svc.features.map((feature) => (
-              <div
-                key={feature}
-                className="group flex items-center gap-2.5 px-3 py-3 rounded-lg border border-white/[0.12] cursor-default transition-all duration-200 hover:border-white/30 hover:bg-white/[0.04]"
-              >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="flex-shrink-0" aria-hidden="true">
-                  <circle cx="8" cy="8" r="8" fill="#FAAE10" />
-                  <path d="M5 8.5L7 10.5L11 6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <span className="text-[11.5px] text-white leading-snug">{feature}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* ── Interactive demo panel ── */}
-          <div
-            className="mx-5 sm:mx-7 rounded-xl overflow-hidden"
-            style={{
-              background: "rgba(0, 4, 28, 0.75)",
-              border: "1px solid rgba(255,255,255,0.07)",
-              position: "relative",
-              zIndex: 1,
-            }}
-          >
-            <div className="p-3 sm:p-4 flex flex-col gap-2.5" style={{ minHeight: "210px" }}>
-
-              {/* Chrome bar */}
-              <div
-                className="flex items-center justify-between pb-3 mb-1"
-                style={{ borderBottom: "1px solid rgba(51,65,85,0.8)" }}
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(239,68,68,0.8)" }} />
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(245,158,11,0.8)" }} />
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(16,185,129,0.8)" }} />
-                  <span className="ml-2 font-mono text-[10px]" style={{ color: "rgba(100,116,139,1)" }}>
-                    markition-ai-engine://v2.4/{svc.id}
-                  </span>
-                </div>
-                <span
-                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono"
-                  style={{ background: "rgba(6,78,59,0.4)", color: "#34d399", border: "1px solid rgba(6,78,59,0.8)" }}
-                >
-                  <IconActivity className="animate-pulse" />
-                  LIVE ENGINE
-                </span>
-              </div>
-
-              {/* DEMO 01: AI AGENTS — timeline */}
-              {svc.id === "ai-agents" && (
-                <div className="space-y-2">
-                  {/* Agent Goal row */}
-                  <div
-                    className="flex items-start gap-3 p-3 rounded-xl"
-                    style={{ background: "rgba(15,25,70,0.55)", border: "1px solid rgba(80,130,255,0.18)" }}
-                  >
-                    <div
-                      className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                      style={{ background: "rgba(30,60,180,0.4)", border: "1px solid rgba(80,130,255,0.35)" }}
-                    >
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-[9px] font-bold tracking-widest uppercase mb-0.5" style={{ color: "#60a5fa" }}>Agent Goal</div>
-                      <div className="text-[11px] leading-snug" style={{ color: "rgba(203,213,225,0.9)" }}>
-                        Analyze inbound enterprise lead &amp; formulate personalized response strategy
-                      </div>
-                    </div>
-                    <div className="flex-shrink-0 text-right ml-2 pt-0.5">
-                      <div className="text-[9px] mb-1" style={{ color: "rgba(100,116,139,1)" }}>Status</div>
-                      <div className="flex items-center gap-1 text-[11px] font-semibold" style={{ color: "#34d399" }}>
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 animate-pulse" />
-                        In Progress
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Steps */}
-                  {([
-                    { step: "Step 1", title: "RAG Knowledge Base Query",                  desc: "Searching relevant information from knowledge base",   status: "completed",  time: "12ms"  },
-                    { step: "Step 2", title: "CRM Lead Intent Scoring (Gemini 1.5 Pro)",   desc: "Analyzing lead intent and scoring potential",           status: "completed",  time: "842ms" },
-                    { step: "Step 3", title: "Auto-Schedule Executive Consultation Call",   desc: "Scheduling and confirming consultation call",           status: "processing", time: "1.2s"  },
-                    { step: "Step 4", title: "Generate Personalized Strategy & Response",   desc: "Crafting tailored response and next steps",            status: "pending",    time: null    },
-                  ] as const).map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-start gap-3 p-2.5 rounded-xl"
-                      style={{ background: "rgba(10,18,50,0.5)", border: "1px solid rgba(51,65,85,0.5)" }}
-                    >
-                      {/* Step icon */}
-                      <div
-                        className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                        style={{
-                          background: item.status === "processing" ? "rgba(8,51,68,0.7)" : "rgba(20,30,70,0.5)",
-                          border: `1px solid ${item.status === "completed" ? "rgba(52,211,153,0.35)" : item.status === "processing" ? "rgba(34,211,238,0.4)" : "rgba(51,65,85,0.5)"}`,
-                        }}
-                      >
-                        {item.status === "completed" && (
-                          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                            <circle cx="8" cy="8" r="8" fill="rgba(52,211,153,0.25)"/>
-                            <path d="M4.5 8.5L6.5 10.5L11.5 5.5" stroke="#34d399" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                        )}
-                        {item.status === "processing" && (
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true" className="animate-spin" style={{ animationDuration: "1.4s" }}>
-                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" strokeOpacity="0.4"/>
-                            <path d="M12 2v4" stroke="#22d3ee"/>
-                          </svg>
-                        )}
-                        {item.status === "pending" && (
-                          <span className="w-3 h-3 rounded-full border border-slate-500/60 flex-shrink-0" />
-                        )}
-                      </div>
-
-                      {/* Step text */}
-                      <div className="flex-1 min-w-0">
-                        <div className="text-[9px] font-bold tracking-widest uppercase mb-0.5" style={{ color: "rgba(100,116,139,1)" }}>{item.step}</div>
-                        <div className="text-[11px] font-medium leading-snug" style={{ color: item.status === "pending" ? "rgba(100,116,139,0.8)" : "#e2e8f0" }}>{item.title}</div>
-                        <div className="text-[10px] mt-0.5" style={{ color: "rgba(100,116,139,0.7)" }}>{item.desc}</div>
-                      </div>
-
-                      {/* Status badge */}
-                      <div className="flex-shrink-0 text-right ml-1 pt-0.5">
-                        {item.status === "completed" && (
-                          <>
-                            <div className="flex items-center gap-1 justify-end text-[11px] font-semibold" style={{ color: "#34d399" }}>
-                              Completed
-                            </div>
-                            <div className="flex items-center gap-1 justify-end mt-0.5 text-[10px]" style={{ color: "rgba(100,116,139,1)" }}>
-                              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                              {item.time}
-                            </div>
-                          </>
-                        )}
-                        {item.status === "processing" && (
-                          <>
-                            <div className="flex items-center gap-1 justify-end text-[11px] font-semibold" style={{ color: "#22d3ee" }}>
-                              Processing...
-                            </div>
-                            <div className="flex items-center gap-1 justify-end mt-0.5 text-[10px]" style={{ color: "rgba(100,116,139,1)" }}>
-                              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                              {item.time}
-                            </div>
-                          </>
-                        )}
-                        {item.status === "pending" && (
-                          <div className="text-[11px]" style={{ color: "rgba(100,116,139,0.7)" }}>Pending</div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* DEMO 02: AI CHATBOTS — interactive live chat */}
-              {svc.id === "ai-chatbots" && (
-                <div className="flex flex-col justify-between flex-1 gap-3">
-                  <div
-                    className="space-y-2 overflow-y-auto pr-1"
-                    style={{ maxHeight: "180px" }}
-                  >
-                    {chatMessages.map((msg, idx) => (
-                      <div
-                        key={idx}
-                        className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
-                      >
-                        <div
-                          className="max-w-[80%] p-2.5 rounded-xl text-xs leading-relaxed"
-                          style={
-                            msg.sender === "user"
-                              ? {
-                                  background: "#2563eb",
-                                  color: "#ffffff",
-                                  borderBottomRightRadius: "2px",
-                                }
-                              : {
-                                  background: "rgba(15,23,42,1)",
-                                  color: "#e2e8f0",
-                                  border: "1px solid rgba(51,65,85,0.8)",
-                                  borderBottomLeftRadius: "2px",
-                                }
-                          }
-                        >
-                          {msg.text}
-                        </div>
-                      </div>
-                    ))}
-                    {isBotTyping && (
-                      <div
-                        className="flex items-center gap-1 text-xs p-2"
-                        style={{ color: "#94a3b8" }}
-                      >
-                        <span style={{ color: "#60a5fa" }}>🤖</span>
-                        <span>Markition Bot is typing...</span>
-                      </div>
-                    )}
-                  </div>
-
-                  <form
-                    onSubmit={handleSendMessage}
-                    className="flex gap-2 pt-2"
-                    style={{ borderTop: "1px solid rgba(51,65,85,0.8)" }}
-                  >
-                    <input
-                      type="text"
-                      value={chatInput}
-                      onChange={(e) => setChatInput(e.target.value)}
-                      placeholder="Try typing a question to the live bot..."
-                      className="flex-1 px-3 py-2 text-xs text-white rounded-lg focus:outline-none"
-                      style={{
-                        background: "rgba(15,23,42,1)",
-                        border: "1px solid rgba(51,65,85,0.8)",
-                      }}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(51,65,85,0.8)")}
-                    />
-                    <button
-                      type="submit"
-                      className="px-3 py-2 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition-colors"
-                      style={{ background: "#2563eb" }}
-                      onMouseEnter={(e) => (e.currentTarget.style.background = "#3b82f6")}
-                      onMouseLeave={(e) => (e.currentTarget.style.background = "#2563eb")}
-                    >
-                      <IconSend />
-                    </button>
-                  </form>
-                </div>
-              )}
-
-              {/* DEMO 03: WORKFLOW AUTOMATION — pipeline graph */}
-              {svc.id === "workflow-automation" && (
-                <div className="space-y-3">
-                  <div className="text-xs mb-1" style={{ color: "#94a3b8" }}>
-                    Event Trigger: Inbound Lead Webhook Received
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-2 text-center">
-                    <div
-                      className="p-2.5 rounded-xl text-xs"
-                      style={{
-                        background: "rgba(15,23,42,1)",
-                        border: "1px solid rgba(51,65,85,0.8)",
-                      }}
-                    >
-                      <div className="text-[10px]" style={{ color: "#94a3b8" }}>INBOUND WEBHOOK</div>
-                      <div className="font-bold mt-1" style={{ color: "#ffffff" }}>Form Submit</div>
-                    </div>
-                    <div
-                      className="p-2.5 rounded-xl text-xs"
-                      style={{
-                        background: "rgba(23,37,84,0.6)",
-                        border: "1px solid rgba(59,130,246,0.4)",
-                      }}
-                    >
-                      <div className="text-[10px]" style={{ color: "#60a5fa" }}>AI NODE</div>
-                      <div className="font-bold mt-1" style={{ color: "#93c5fd" }}>Parse JSON &amp; Intent</div>
-                    </div>
-                    <div
-                      className="p-2.5 rounded-xl text-xs"
-                      style={{
-                        background: "rgba(15,23,42,1)",
-                        border: "1px solid rgba(51,65,85,0.8)",
-                      }}
-                    >
-                      <div className="text-[10px]" style={{ color: "#94a3b8" }}>SYNC PIPELINE</div>
-                      <div className="font-bold mt-1" style={{ color: "#22d3ee" }}>HubSpot &amp; Slack</div>
-                    </div>
-                  </div>
-
-                  <div
-                    className="p-3 rounded-lg font-mono text-[11px]"
-                    style={{
-                      background: "rgba(15,23,42,0.6)",
-                      border: "1px solid rgba(51,65,85,0.8)",
-                      color: "#cbd5e1",
-                    }}
-                  >
-                    <div>{"{"}</div>
-                    <div className="pl-4" style={{ color: "#22d3ee" }}>&quot;status&quot;: &quot;success&quot;,</div>
-                    <div className="pl-4" style={{ color: "#34d399" }}>&quot;latency_ms&quot;: 142,</div>
-                    <div className="pl-4" style={{ color: "#fbbf24" }}>
-                      &quot;actions_triggered&quot;: [&quot;slack_notify&quot;, &quot;crm_deal_create&quot;]
-                    </div>
-                    <div>{"}"}</div>
-                  </div>
-                </div>
-              )}
-
-              {/* DEMO 04: VOICE AI — waveform */}
-              {svc.id === "voice-ai" && (
-                <div className="space-y-4 text-center py-2">
-                  <div
-                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono"
-                    style={{
-                      background: "rgba(8,51,68,0.8)",
-                      color: "#22d3ee",
-                      border: "1px solid rgba(21,94,117,0.8)",
-                    }}
-                  >
-                    🎙️{" "}
-                    <span className="animate-pulse">
-                      Voice Synthesis Active (Latency: 380ms)
-                    </span>
-                  </div>
-
-                  {/* Animated waveform bars */}
-                  <div className="flex items-center justify-center gap-1" style={{ height: "56px" }}>
-                    {[40, 75, 30, 90, 60, 100, 45, 80, 50, 95, 35, 70, 85, 40].map((height, idx) => (
-                      <div
-                        key={idx}
-                        className="w-1.5 rounded-full animate-pulse"
-                        style={{
-                          height: `${height}%`,
-                          background: "linear-gradient(to top, #2563eb, #22d3ee)",
-                          animationDelay: `${idx * 80}ms`,
-                        }}
-                      />
-                    ))}
-                  </div>
-
-                  <div
-                    className="p-3 rounded-xl text-xs"
-                    style={{
-                      background: "rgba(15,23,42,0.8)",
-                      border: "1px solid rgba(51,65,85,0.8)",
-                      color: "#cbd5e1",
-                    }}
-                  >
-                    &ldquo;Hello, this is Markition Voice AI calling regarding your recent growth audit request.
-                    May I confirm a time for our lead strategy call tomorrow?&rdquo;
-                  </div>
-                </div>
-              )}
-
-              {/* DEMO 05: CRM AUTOMATION — lead scoring matrix */}
-              {svc.id === "crm-automation" && (
-                <div className="space-y-2.5">
-                  <div className="text-xs font-bold mb-1" style={{ color: "#cbd5e1" }}>
-                    Real-Time Lead Scoring Matrix
-                  </div>
-
-                  {[
-                    { name: "Enterprise SaaS Buyer", company: "Apex Global",      score: "98/100", status: "Hot Deal",     color: "#34d399" },
-                    { name: "Fintech Director",       company: "Sterling Capital", score: "91/100", status: "High Intent",  color: "#22d3ee" },
-                    { name: "E-commerce Founder",     company: "Vertex Stores",   score: "84/100", status: "Nurture Loop", color: "#60a5fa" },
-                  ].map((lead, idx) => (
-                    <div
-                      key={idx}
-                      className="p-3 rounded-xl flex items-center justify-between text-xs"
-                      style={{
-                        background: "rgba(15,23,42,1)",
-                        border: "1px solid rgba(51,65,85,0.8)",
-                      }}
-                    >
-                      <div>
-                        <div className="font-bold" style={{ color: "#ffffff" }}>{lead.name}</div>
-                        <div className="text-[11px]" style={{ color: "#64748b" }}>{lead.company}</div>
-                      </div>
-                      <div className="text-right">
-                        <div className="font-mono font-bold" style={{ color: lead.color }}>{lead.score}</div>
-                        <div className="text-[10px]" style={{ color: "#64748b" }}>{lead.status}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
+          {/* Window chrome */}
+          <div style={{
+            height: 48, padding: "0 18px",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            borderBottom: "1px solid rgba(150,180,220,.22)",
+            position: "relative",
+          }}>
+            {/* Dots */}
+            <div style={{ position: "absolute", left: 30, display: "flex", gap: 10 }}>
+              <span style={{ width: 13, height: 13, borderRadius: "50%", background: "#c84c68", display: "block" }} />
+              <span style={{ width: 13, height: 13, borderRadius: "50%", background: "#c89c16", display: "block" }} />
+              <span style={{ width: 13, height: 13, borderRadius: "50%", background: "#12a77a", display: "block" }} />
             </div>
 
-            {/* CTA button — left-aligned */}
-            <div className="px-3 sm:px-4 pb-3 sm:pb-4 pt-1" style={{ position: "relative", zIndex: 1 }}>
-              <button
-                className="inline-flex items-center gap-2 text-sm font-semibold py-2.5 px-6 rounded-lg text-white transition-opacity hover:opacity-90 active:opacity-80"
-                style={{ background: "#0137D7" }}
-              >
-                {svc.cta} →
-              </button>
+            {/* Mode label */}
+            <div style={{ display: "flex", alignItems: "center", gap: 9, color: active.color, fontWeight: 800, letterSpacing: "1.6px", fontSize: 14 }}>
+              <TabIcon id={activeId} color={active.color} />
+              {active.label} MODE
+            </div>
+
+            {/* LIVE badge */}
+            <div style={{
+              position: "absolute", right: 28,
+              border: "1px solid rgba(24,216,121,.25)", borderRadius: 999,
+              padding: "5px 10px", color: "#16d878",
+              background: "rgba(24,216,121,.06)",
+              fontSize: 11, fontWeight: 800,
+              display: "flex", alignItems: "center", gap: 6,
+            }}>
+              <span style={{ width: 7, height: 7, background: "#16d878", borderRadius: "50%", boxShadow: "0 0 10px #16d878", animation: "ais-pulse-dot 1.4s infinite", display: "block" }} />
+              LIVE
             </div>
           </div>
 
-          </div>{/* end glassmorphism card */}
+          {/* Content */}
+          <div key={key} style={{ padding: 14, position: "relative" }} className="ais-state-in">
+            {activeId === "voice"    && <DemoVoice />}
+            {activeId === "whatsapp" && <DemoWhatsApp />}
+            {activeId === "agent"    && <DemoAgent />}
+            {activeId === "workflow" && <DemoWorkflow />}
+            {activeId === "crm"      && <DemoCRM />}
+            {activeId === "chatbot"  && <DemoChatbot />}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
