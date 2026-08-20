@@ -9,7 +9,7 @@ const SERVICES = [
   { id: "agent",    label: "AI AGENT",              color: "#9562ff" },
   { id: "workflow", label: "WORKFLOW AUTOMATION",   color: "#ff9d32" },
   { id: "crm",      label: "CRM AUTOMATION",        color: "#ff4d79" },
-  { id: "chatbot",  label: "AI CHATBOT",            color: "#21c7d8" },
+  { id: "chatbot",  label: "AI CHATBOT",            color: "#155dfc" },
 ] as const;
 
 type ServiceId = (typeof SERVICES)[number]["id"];
@@ -80,7 +80,7 @@ function DemoVoice() {
   return (
     <div style={{ display: "grid", gap: 18, gridTemplateColumns: "1fr 310px" }} className="ais-two">
       {/* Active call card */}
-      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, overflow: "hidden", padding: 24 }}>
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, overflow: "hidden", padding: 24 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 15 }}>
             <div style={{ width: 58, height: 58, borderRadius: "50%", display: "grid", placeItems: "center", background: "#2f6df6", boxShadow: "0 0 28px rgba(47,109,246,.3)" }}>
@@ -116,7 +116,7 @@ function DemoVoice() {
             <svg key="mic" viewBox="0 0 24 24" width="21" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M5 5a9.9 9.9 0 0 0 0 14M19 5a9.9 9.9 0 0 1 0 14"/></svg>,
             <svg key="grid" viewBox="0 0 24 24" width="21" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="7" cy="7" r="1"/><circle cx="12" cy="7" r="1"/><circle cx="17" cy="7" r="1"/><circle cx="7" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="17" cy="12" r="1"/></svg>,
           ].map((icon, i) => (
-            <div key={i} style={{ width: 62, height: 62, borderRadius: 17, border: "1px solid rgba(255,255,255,.08)", background: "#18233a", color: "#dce5f5", display: "grid", placeItems: "center" }}>{icon}</div>
+            <div key={i} style={{ width: 62, height: 62, borderRadius: 8, border: "1px solid rgba(255,255,255,.08)", background: "#030A28", color: "#dce5f5", display: "grid", placeItems: "center" }}>{icon}</div>
           ))}
           <div style={{ width: 74, height: 74, borderRadius: "50%", background: "#f2384d", boxShadow: "0 0 25px rgba(242,56,77,.3)", display: "grid", placeItems: "center" }}>
             <svg viewBox="0 0 24 24" width="21" fill="none" stroke="white" strokeWidth="2.5"><path d="M6.6 10.8c3.4-1.7 7.4-1.7 10.8 0l1.3 3.5-3.3 1.2-1.6-2.4a10 10 0 0 0-4.2 0L8 15.5l-3.3-1.2z"/></svg>
@@ -125,15 +125,15 @@ function DemoVoice() {
             <span key="pause" style={{ fontSize: 16 }}>Ⅱ</span>,
             <span key="more" style={{ fontSize: 16 }}>•••</span>,
           ].map((icon, i) => (
-            <div key={i} style={{ width: 62, height: 62, borderRadius: 17, border: "1px solid rgba(255,255,255,.08)", background: "#18233a", color: "#dce5f5", display: "grid", placeItems: "center" }}>{icon}</div>
+            <div key={i} style={{ width: 62, height: 62, borderRadius: 8, border: "1px solid rgba(255,255,255,.08)", background: "#030A28", color: "#dce5f5", display: "grid", placeItems: "center" }}>{icon}</div>
           ))}
         </div>
       </div>
 
       {/* Keypad */}
-      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 20, display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, alignContent: "center" }}>
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 20, display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, alignContent: "center" }}>
         {keys.map((k) => (
-          <button key={k} style={{ height: 58, border: 0, borderRadius: 14, background: "#293547", color: "#fff", fontSize: 18, fontWeight: 700, cursor: "pointer", transition: ".2s" }}
+          <button key={k} style={{ height: 58, border: 0, borderRadius: 7, background: "#030A28", color: "#fff", fontSize: 18, fontWeight: 700, cursor: "pointer", transition: ".2s" }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#35445a"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#293547"; (e.currentTarget as HTMLElement).style.transform = ""; }}>
             {k}
@@ -149,7 +149,7 @@ function DemoWhatsApp() {
   return (
     <div style={{ display: "grid", gap: 18, gridTemplateColumns: "1fr 1fr" }} className="ais-wa">
       {/* Incoming call */}
-      <div style={{ border: "1px solid rgba(24,216,121,.32)", background: "linear-gradient(145deg,rgba(11,45,48,.72),rgba(12,27,45,.8))", borderRadius: 21, padding: 14, minHeight: "auto" }}>
+      <div style={{ border: "1px solid rgba(24,216,121,.32)", background: "linear-gradient(145deg,rgba(11,45,48,.72),rgba(12,27,45,.8))", borderRadius: 10, padding: 14, minHeight: "auto" }}>
         <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800 }}>INCOMING WHATSAPP CALL</div>
         <div style={{ display: "flex", alignItems: "center", gap: 15, marginTop: 18 }}>
           <div style={{ width: 58, height: 58, borderRadius: "50%", background: "#16d878", display: "grid", placeItems: "center", boxShadow: "0 0 30px rgba(24,216,121,.2)" }}>
@@ -161,12 +161,12 @@ function DemoWhatsApp() {
           </div>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 30 }}>
-          <button style={{ border: 0, borderRadius: 12, padding: 15, color: "#fff", fontWeight: 750, cursor: "pointer", background: "#ff3158" }}>Decline</button>
-          <button style={{ border: 0, borderRadius: 12, padding: 15, color: "#fff", fontWeight: 750, cursor: "pointer", background: "#12c978" }}>Accept</button>
+          <button style={{ border: 0, borderRadius: 6, padding: 15, color: "#fff", fontWeight: 750, cursor: "pointer", background: "#ff3158" }}>Decline</button>
+          <button style={{ border: 0, borderRadius: 6, padding: 15, color: "#fff", fontWeight: 750, cursor: "pointer", background: "#12c978" }}>Accept</button>
         </div>
       </div>
       {/* Conversation */}
-      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#1b2336", borderRadius: 21, padding: 14, minHeight: "auto" }}>
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 14, minHeight: "auto" }}>
         <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800, marginBottom: 4 }}>CONVERSATION</div>
         {[
           { out: false, text: "Hi! I got your demo email — interesting. We use a CRM right now." },
@@ -174,7 +174,7 @@ function DemoWhatsApp() {
           { out: false, text: "Yeah, let's do it." },
           { out: true,  text: "Calling now." },
         ].map((m, i) => (
-          <div key={i} style={{ maxWidth: "80%", padding: "11px 14px", borderRadius: 16, margin: "12px 0", fontSize: 13, lineHeight: 1.4, background: m.out ? "#17ce78" : "#343b50", marginLeft: m.out ? "auto" : 0 }}>{m.text}</div>
+          <div key={i} style={{ maxWidth: "80%", padding: "11px 14px", borderRadius: 8, margin: "12px 0", fontSize: 13, lineHeight: 1.4, background: m.out ? "#17ce78" : "#343b50", marginLeft: m.out ? "auto" : 0 }}>{m.text}</div>
         ))}
         <div style={{ display: "flex", gap: 4, padding: "10px 14px", width: "max-content", background: "#343b50", borderRadius: 16 }}>
           {[0, 150, 300].map(d => (
@@ -191,7 +191,7 @@ function DemoAgent() {
   return (
     <div style={{ display: "grid", gap: 18, gridTemplateColumns: "280px 1fr" }} className="ais-agent">
       {/* Sidebar */}
-      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 14, minHeight: "auto" }}>
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 14, minHeight: "auto" }}>
         <div style={{ width: 62, height: 62, borderRadius: "50%", display: "grid", placeItems: "center", background: "#8750f7", boxShadow: "0 0 35px rgba(135,80,247,.38)", animation: "ais-orb 2.2s infinite" }}>
           <IconSpark color="white" />
         </div>
@@ -210,7 +210,7 @@ function DemoAgent() {
         </div>
       </div>
       {/* Transcript */}
-      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 14, minHeight: "auto" }}>
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 14, minHeight: "auto" }}>
         <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800, marginBottom: 8 }}>LIVE TRANSCRIPT</div>
         {[
           { right: false, text: "Hi Sarah, this is Nova from the team. Got a minute?" },
@@ -218,9 +218,9 @@ function DemoAgent() {
           { right: false, text: "Are you currently using an automated follow-up system?" },
           { right: true,  text: "We don't — that's a gap." },
         ].map((m, i) => (
-          <div key={i} style={{ padding: "12px 15px", borderRadius: 15, background: m.right ? "#2b3b47" : "#29284a", width: "max-content", maxWidth: "78%", marginLeft: m.right ? "auto" : 0, margin: "14px 0", fontSize: 13 }}>{m.text}</div>
+          <div key={i} style={{ padding: "12px 15px", borderRadius: 7, background: m.right ? "#2b3b47" : "#29284a", width: "max-content", maxWidth: "78%", marginLeft: m.right ? "auto" : 0, margin: "14px 0", fontSize: 13 }}>{m.text}</div>
         ))}
-        <div style={{ padding: "12px 15px", borderRadius: 15, background: "#29284a", width: "max-content", maxWidth: "78%", margin: "14px 0", fontSize: 13 }}>
+        <div style={{ padding: "12px 15px", borderRadius: 7, background: "#030A28", width: "max-content", maxWidth: "78%", margin: "14px 0", fontSize: 13 }}>
           Got it. Let me hand you to a specialist.
           <span style={{ display: "inline-block", width: 2, height: 14, background: "#a477ff", verticalAlign: "-2px", animation: "ais-blink .8s infinite" }} />
         </div>
@@ -232,7 +232,7 @@ function DemoAgent() {
 /* ─── Demo: Workflow Automation ───────────────────────────────────────── */
 function DemoWorkflow() {
   return (
-    <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 25, minHeight: 350 }}>
+    <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 25, minHeight: 350 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div>
           <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800 }}>WORKFLOW AUTOMATION</div>
@@ -247,7 +247,7 @@ function DemoWorkflow() {
           { icon: "→", title: "Follow-up",   desc: "CRM updated + message sent" },
         ].map((node, i) => (
           <>
-            <div key={`n${i}`} style={{ width: 190, minHeight: 105, border: "1px solid rgba(91,142,241,.3)", borderRadius: 18, background: "#111e35", padding: 17, position: "relative", boxShadow: "0 10px 35px rgba(0,0,0,.18)", animation: `ais-node-float 3s ${i === 1 ? "-1s" : i === 2 ? "-2s" : "0s"} ease-in-out infinite` }}>
+            <div key={`n${i}`} style={{ width: 190, minHeight: 105, border: "1px solid rgba(91,142,241,.3)", borderRadius: 8, background: "#030A28", padding: 17, position: "relative", boxShadow: "0 10px 35px rgba(0,0,0,.18)", animation: `ais-node-float 3s ${i === 1 ? "-1s" : i === 2 ? "-2s" : "0s"} ease-in-out infinite` }}>
               <div style={{ width: 34, height: 34, borderRadius: 10, display: "grid", placeItems: "center", background: "rgba(255,157,50,.12)", color: "#ff9d32", marginBottom: 10, fontSize: 18 }}>{node.icon}</div>
               <div style={{ fontSize: 14, fontWeight: 750, margin: "0 0 5px" }}>{node.title}</div>
               <div style={{ fontSize: 11, color: "#8393ac", margin: 0, lineHeight: 1.45 }}>{node.desc}</div>
@@ -269,10 +269,10 @@ function DemoCRM() {
   return (
     <div style={{ display: "grid", gap: 18, gridTemplateColumns: "280px 1fr" }} className="ais-crm">
       {/* Lead card */}
-      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 14, minHeight: "auto" }}>
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 14, minHeight: "auto" }}>
         <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800 }}>NEW LEAD</div>
         <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 15 }}>
-          <div style={{ width: 48, height: 48, borderRadius: "50%", background: "linear-gradient(135deg,#3175ff,#6f92ff)", display: "grid", placeItems: "center", fontWeight: 800 }}>JD</div>
+          <div style={{ width: 48, height: 48, borderRadius: "50%", background: "#155dfc", display: "grid", placeItems: "center", fontWeight: 800 }}>JD</div>
           <div>
             <div style={{ fontSize: 17, fontWeight: 750 }}>Jordan Davis</div>
             <div style={{ color: "#93a2ba", fontSize: 13 }}>jordan@brightline.com</div>
@@ -293,7 +293,7 @@ function DemoCRM() {
         </div>
       </div>
       {/* Pipeline */}
-      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 14, minHeight: "auto" }}>
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 14, minHeight: "auto" }}>
         <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800 }}>CRM AUTOMATION</div>
         <div style={{ fontSize: 20, fontWeight: 750, marginTop: 6, marginBottom: 18 }}>Lead lifecycle</div>
         <div style={{ display: "grid", gap: 13 }}>
@@ -303,7 +303,7 @@ function DemoCRM() {
             ["Sales assigned",       "Owner selected"],
             ["Follow-up scheduled",  "Next touchpoint"],
           ].map(([title, sub], i) => (
-            <div key={i} style={{ display: "grid", gridTemplateColumns: "36px 1fr auto", gap: 12, alignItems: "center", padding: 13, border: "1px solid rgba(91,142,241,.18)", borderRadius: 14, background: "#111d33", animation: `ais-step-in 4.5s ${i * 0.7}s infinite` }}>
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "36px 1fr auto", gap: 12, alignItems: "center", padding: 13, border: "1px solid rgba(91,142,241,.18)", borderRadius: 7, background: "#030A28", animation: `ais-step-in 4.5s ${i * 0.7}s infinite` }}>
               <div style={{ width: 30, height: 30, borderRadius: "50%", display: "grid", placeItems: "center", background: "#1c3156", color: "#76a2ff", fontSize: 11, fontWeight: 800 }}>{i + 1}</div>
               <div>
                 <div style={{ fontWeight: 700, fontSize: 13 }}>{title}</div>
@@ -323,8 +323,8 @@ function DemoChatbot() {
   return (
     <div style={{ display: "grid", gap: 18, gridTemplateColumns: "300px 1fr" }} className="ais-bot">
       {/* Profile */}
-      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "rgba(17,29,52,.78)", borderRadius: 21, padding: 14, minHeight: "auto" }}>
-        <div style={{ width: 68, height: 68, borderRadius: 20, background: "linear-gradient(135deg,#21c7d8,#3378ff)", display: "grid", placeItems: "center", boxShadow: "0 0 35px rgba(33,199,216,.25)" }}>
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 14, minHeight: "auto" }}>
+        <div style={{ width: 68, height: 68, borderRadius: 10, background: "#155dfc", display: "grid", placeItems: "center", boxShadow: "0 0 35px rgba(21,93,252,.25)" }}>
           <IconBot color="white" />
         </div>
         <div style={{ fontSize: 20, fontWeight: 750, marginTop: 16 }}>AI Assistant</div>
@@ -343,7 +343,7 @@ function DemoChatbot() {
         </div>
       </div>
       {/* Chat */}
-      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#121d31", borderRadius: 21, padding: 14, minWidth: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 14, minWidth: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
         <div style={{ paddingBottom: 13, borderBottom: "1px solid rgba(150,180,220,.22)", fontWeight: 750 }}>
           Website conversation <span style={{ float: "right", color: "#93a2ba", fontSize: 13 }}>Live</span>
         </div>
@@ -354,9 +354,9 @@ function DemoChatbot() {
             { me: true,  text: "We're a growing healthcare company." },
             { me: false, text: "Perfect. I can recommend the right setup and connect you with our team." },
           ].map((m, i) => (
-            <div key={i} style={{ padding: "10px 13px", borderRadius: 15, background: m.me ? "#2671ff" : "#2a3549", maxWidth: "88%", width: "fit-content", fontSize: 12, margin: "6px 0", marginLeft: "auto", marginRight: m.me ? 0 : "auto", wordBreak: "break-word", animation: "ais-msg .5s ease" }}>{m.text}</div>
+            <div key={i} style={{ padding: "10px 13px", borderRadius: 7, background: m.me ? "#2671ff" : "#2a3549", maxWidth: "88%", width: "fit-content", fontSize: 12, margin: "6px 0", marginLeft: "auto", marginRight: m.me ? 0 : "auto", wordBreak: "break-word", animation: "ais-msg .5s ease" }}>{m.text}</div>
           ))}
-          <div style={{ marginTop: 10, padding: "11px 13px", borderRadius: 12, background: "rgba(33,199,216,.08)", border: "1px solid rgba(33,199,216,.2)", color: "#75e5ed", fontSize: 11 }}>
+          <div style={{ marginTop: 10, padding: "11px 13px", borderRadius: 6, background: "rgba(21,93,252,.08)", border: "1px solid rgba(21,93,252,.2)", color: "#7aaaff", fontSize: 11 }}>
             ✓ Lead qualified · Sales handoff ready
           </div>
         </div>
@@ -455,8 +455,8 @@ export default function AIServicesSection() {
           maxWidth: 900, margin: "0 auto 16px",
           padding: 4,
           border: "1px solid rgba(150,180,220,.22)",
-          borderRadius: 999,
-          background: "rgba(10,18,34,.84)",
+          borderRadius: 10,
+          background: "#030A28",
           backdropFilter: "blur(16px)",
           boxShadow: "0 12px 50px rgba(0,0,0,.24)",
           overflow: "hidden",
@@ -473,7 +473,7 @@ export default function AIServicesSection() {
                   background: isActive ? s.color : "transparent",
                   color: isActive ? "#fff" : "#8fa0bb",
                   padding: "8px 6px",
-                  borderRadius: 999,
+                  borderRadius: 7,
                   cursor: "pointer",
                   fontSize: 11, fontWeight: 750, letterSpacing: ".1px",
                   transition: ".3s ease",
@@ -497,8 +497,8 @@ export default function AIServicesSection() {
           maxWidth: 900, minHeight: "auto",
           margin: "0 auto",
           border: `1px solid ${active.color}55`,
-          borderRadius: 20,
-          background: "linear-gradient(135deg,rgba(13,24,47,.92),rgba(8,17,32,.92))",
+          borderRadius: 10,
+          background: "#030A28",
           boxShadow: "0 35px 100px rgba(0,0,0,.38), inset 0 1px rgba(255,255,255,.035)",
           overflow: "hidden",
           transition: "border-color .45s ease",
