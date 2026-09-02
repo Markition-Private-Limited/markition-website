@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import TubesCursor from "@/components/TubesCursor";
 import AIServicesSection from "@/components/AIServicesSection";
+import ServicesSection from "@/components/ServicesSection";
+import AwardsSlider from "@/components/AwardsSlider";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const NAV_LINKS = [
@@ -357,7 +359,7 @@ export default function Home() {
           opaque background so the cursor effect never shows through it. */}
       <div
         className="relative z-10 overflow-hidden py-5 sm:py-6 lg:py-7"
-        style={{ background: "#0137D7", isolation: "isolate" }}
+        style={{ background: "#020129", borderTop: "1px solid #334155", borderBottom: "1px solid #334155", boxShadow: "0 -1px 8px rgba(51,65,85,0.6), 0 1px 8px rgba(51,65,85,0.6)", isolation: "isolate" }}
       >
         <div className="ticker-track flex items-center w-max">
           {tickerItems.map((logo, i) => (
@@ -369,7 +371,8 @@ export default function Home() {
               <img
                 src={logo.src}
                 alt={logo.alt}
-                className="h-5 sm:h-6 lg:h-7 w-auto object-contain brightness-0 invert"
+                className="h-5 sm:h-6 lg:h-7 w-auto object-contain"
+                style={{ opacity: 1, filter: "brightness(0) invert(1)" }}
                 draggable={false}
               />
             </div>
@@ -380,13 +383,13 @@ export default function Home() {
         <div
           className="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-20 lg:w-32 z-10"
           style={{
-            background: "linear-gradient(to right, #0137D7 0%, rgba(1,55,215,0) 100%)",
+            background: "linear-gradient(to right, #020129 0%, rgba(2,1,41,0) 100%)",
           }}
         />
         <div
           className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-20 lg:w-32 z-10"
           style={{
-            background: "linear-gradient(to left, #0137D7 0%, rgba(1,55,215,0) 100%)",
+            background: "linear-gradient(to left, #020129 0%, rgba(2,1,41,0) 100%)",
           }}
         />
       </div>
@@ -409,6 +412,12 @@ export default function Home() {
 
       {/* ── AI Services section ───────────────────────────────────────── */}
       <AIServicesSection />
+
+      {/* ── Services / Digital Growth section ────────────────────────── */}
+      <ServicesSection />
+
+      {/* ── Awards slider ────────────────────────────────────────────── */}
+      <AwardsSlider />
 
       {/* ── Footer ───────────────────────────────────────────────────── */}
       <footer

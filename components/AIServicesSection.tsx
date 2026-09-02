@@ -78,9 +78,9 @@ function DemoVoice() {
   const [keys] = useState(() => ["1","2","3","4","5","6","7","8","9","*","0","#"]);
 
   return (
-    <div style={{ display: "grid", gap: 18, gridTemplateColumns: "1fr 310px" }} className="ais-two">
+    <div style={{ display: "grid", gap: 12, gridTemplateColumns: "1fr 260px" }} className="ais-two">
       {/* Active call card */}
-      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, overflow: "hidden", padding: 24 }}>
+      <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, overflow: "hidden", padding: 16 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 15 }}>
             <div style={{ width: 58, height: 58, borderRadius: "50%", display: "grid", placeItems: "center", background: "#2f6df6", boxShadow: "0 0 28px rgba(47,109,246,.3)" }}>
@@ -96,11 +96,11 @@ function DemoVoice() {
         </div>
 
         {/* Waveform */}
-        <div style={{ height: 90, display: "flex", alignItems: "center", justifyContent: "center", gap: 4, margin: "8px 0" }}>
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 4, margin: "16px 0 16px", height: 90, padding: "0 2px" }}>
           {VOICE_BARS.map((h, i) => (
             <span key={i} suppressHydrationWarning style={{
-              width: "9px", borderRadius: "8px",
-              background: "linear-gradient(to top,#2461dd,#6ca0ff)",
+              flex: "1 1 0", borderRadius: "8px 8px 6px 6px",
+              background: "#3578ff",
               height: h + "px",
               display: "block",
               animation: `ais-wave 1.05s ease-in-out ${VOICE_DELAYS[i]}s infinite alternate`,
@@ -111,21 +111,21 @@ function DemoVoice() {
         </div>
 
         {/* Controls */}
-        <div style={{ display: "flex", justifyContent: "center", gap: 26, paddingTop: 15, borderTop: "1px solid rgba(150,180,220,.22)" }}>
+        <div style={{ display: "flex", justifyContent: "center", gap: 20, paddingTop: 12, borderTop: "1px solid rgba(150,180,220,.1)" }}>
           {[
-            <svg key="mic" viewBox="0 0 24 24" width="21" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M5 5a9.9 9.9 0 0 0 0 14M19 5a9.9 9.9 0 0 1 0 14"/></svg>,
-            <svg key="grid" viewBox="0 0 24 24" width="21" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="7" cy="7" r="1"/><circle cx="12" cy="7" r="1"/><circle cx="17" cy="7" r="1"/><circle cx="7" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="17" cy="12" r="1"/></svg>,
+            <svg key="mic" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M5 5a9.9 9.9 0 0 0 0 14M19 5a9.9 9.9 0 0 1 0 14"/></svg>,
+            <svg key="grid" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="7" cy="7" r="1"/><circle cx="12" cy="7" r="1"/><circle cx="17" cy="7" r="1"/><circle cx="7" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="17" cy="12" r="1"/></svg>,
           ].map((icon, i) => (
-            <div key={i} style={{ width: 62, height: 62, borderRadius: 8, border: "1px solid rgba(255,255,255,.08)", background: "#030A28", color: "#dce5f5", display: "grid", placeItems: "center" }}>{icon}</div>
+            <div key={i} style={{ width: 48, height: 48, borderRadius: 8, border: "1px solid rgba(255,255,255,.08)", background: "#030A28", color: "#dce5f5", display: "grid", placeItems: "center" }}>{icon}</div>
           ))}
-          <div style={{ width: 74, height: 74, borderRadius: "50%", background: "#f2384d", boxShadow: "0 0 25px rgba(242,56,77,.3)", display: "grid", placeItems: "center" }}>
-            <svg viewBox="0 0 24 24" width="21" fill="none" stroke="white" strokeWidth="2.5"><path d="M6.6 10.8c3.4-1.7 7.4-1.7 10.8 0l1.3 3.5-3.3 1.2-1.6-2.4a10 10 0 0 0-4.2 0L8 15.5l-3.3-1.2z"/></svg>
+          <div style={{ width: 52, height: 52, borderRadius: "50%", background: "#f2384d", boxShadow: "0 0 18px rgba(242,56,77,.35)", display: "grid", placeItems: "center" }}>
+            <svg viewBox="0 0 24 24" width="18" fill="none" stroke="white" strokeWidth="2.5"><path d="M6.6 10.8c3.4-1.7 7.4-1.7 10.8 0l1.3 3.5-3.3 1.2-1.6-2.4a10 10 0 0 0-4.2 0L8 15.5l-3.3-1.2z"/></svg>
           </div>
           {[
-            <span key="pause" style={{ fontSize: 16 }}>Ⅱ</span>,
-            <span key="more" style={{ fontSize: 16 }}>•••</span>,
+            <span key="pause" style={{ fontSize: 14 }}>Ⅱ</span>,
+            <span key="more" style={{ fontSize: 14 }}>•••</span>,
           ].map((icon, i) => (
-            <div key={i} style={{ width: 62, height: 62, borderRadius: 8, border: "1px solid rgba(255,255,255,.08)", background: "#030A28", color: "#dce5f5", display: "grid", placeItems: "center" }}>{icon}</div>
+            <div key={i} style={{ width: 48, height: 48, borderRadius: 8, border: "1px solid rgba(255,255,255,.08)", background: "#030A28", color: "#dce5f5", display: "grid", placeItems: "center" }}>{icon}</div>
           ))}
         </div>
       </div>
@@ -147,22 +147,22 @@ function DemoVoice() {
 /* ─── Demo: WhatsApp ──────────────────────────────────────────────────── */
 function DemoWhatsApp() {
   return (
-    <div style={{ display: "grid", gap: 18, gridTemplateColumns: "1fr 1fr" }} className="ais-wa">
+    <div style={{ display: "grid", gap: 12, gridTemplateColumns: "1fr 1fr" }} className="ais-wa">
       {/* Incoming call */}
-      <div style={{ border: "1px solid rgba(24,216,121,.32)", background: "linear-gradient(145deg,rgba(11,45,48,.72),rgba(12,27,45,.8))", borderRadius: 10, padding: 14, minHeight: "auto" }}>
+      <div style={{ border: "1px solid rgba(24,216,121,.32)", background: "#030A28", borderRadius: 10, padding: 14, minHeight: "auto" }}>
         <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800 }}>INCOMING WHATSAPP CALL</div>
-        <div style={{ display: "flex", alignItems: "center", gap: 15, marginTop: 18 }}>
-          <div style={{ width: 58, height: 58, borderRadius: "50%", background: "#16d878", display: "grid", placeItems: "center", boxShadow: "0 0 30px rgba(24,216,121,.2)" }}>
-            <svg viewBox="0 0 24 24" width="28" fill="none" stroke="white" strokeWidth="2"><path d="M21 11.5a8.4 8.4 0 0 1-12.5 7.3L4 20l1.2-4.2A8.4 8.4 0 1 1 21 11.5z"/></svg>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 14 }}>
+          <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#16d878", display: "grid", placeItems: "center", boxShadow: "0 0 20px rgba(24,216,121,.2)", flexShrink: 0 }}>
+            <svg viewBox="0 0 24 24" width="20" fill="none" stroke="white" strokeWidth="2"><path d="M21 11.5a8.4 8.4 0 0 1-12.5 7.3L4 20l1.2-4.2A8.4 8.4 0 1 1 21 11.5z"/></svg>
           </div>
           <div>
-            <div style={{ fontSize: 20, fontWeight: 750 }}>Sarah · Brightline</div>
-            <div style={{ color: "#93a2ba", fontSize: 13 }}>WhatsApp call · incoming</div>
+            <div style={{ fontSize: 15, fontWeight: 750 }}>Sarah · Brightline</div>
+            <div style={{ color: "#93a2ba", fontSize: 12 }}>WhatsApp call · incoming</div>
           </div>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 30 }}>
-          <button style={{ border: 0, borderRadius: 6, padding: 15, color: "#fff", fontWeight: 750, cursor: "pointer", background: "#ff3158" }}>Decline</button>
-          <button style={{ border: 0, borderRadius: 6, padding: 15, color: "#fff", fontWeight: 750, cursor: "pointer", background: "#12c978" }}>Accept</button>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 16 }}>
+          <button style={{ border: 0, borderRadius: 6, padding: "8px 0", fontSize: 12, color: "#fff", fontWeight: 700, cursor: "pointer", background: "#ff3158" }}>Decline</button>
+          <button style={{ border: 0, borderRadius: 6, padding: "8px 0", fontSize: 12, color: "#fff", fontWeight: 700, cursor: "pointer", background: "#12c978" }}>Accept</button>
         </div>
       </div>
       {/* Conversation */}
@@ -189,7 +189,7 @@ function DemoWhatsApp() {
 /* ─── Demo: AI Agent ──────────────────────────────────────────────────── */
 function DemoAgent() {
   return (
-    <div style={{ display: "grid", gap: 18, gridTemplateColumns: "280px 1fr" }} className="ais-agent">
+    <div style={{ display: "grid", gap: 12, gridTemplateColumns: "220px 1fr" }} className="ais-agent">
       {/* Sidebar */}
       <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 14, minHeight: "auto" }}>
         <div style={{ width: 62, height: 62, borderRadius: "50%", display: "grid", placeItems: "center", background: "#8750f7", boxShadow: "0 0 35px rgba(135,80,247,.38)", animation: "ais-orb 2.2s infinite" }}>
@@ -218,11 +218,11 @@ function DemoAgent() {
           { right: false, text: "Are you currently using an automated follow-up system?" },
           { right: true,  text: "We don't — that's a gap." },
         ].map((m, i) => (
-          <div key={i} style={{ padding: "12px 15px", borderRadius: 7, background: m.right ? "#2b3b47" : "#29284a", width: "max-content", maxWidth: "78%", marginLeft: m.right ? "auto" : 0, margin: "14px 0", fontSize: 13 }}>{m.text}</div>
+          <div key={i} style={{ padding: "10px 13px", borderRadius: 7, background: m.right ? "#1e2d3d" : "#29284a", width: "fit-content", maxWidth: "78%", marginTop: 10, marginBottom: 0, marginLeft: m.right ? "auto" : 0, marginRight: m.right ? 0 : "auto", fontSize: 12, lineHeight: 1.5 }}>{m.text}</div>
         ))}
-        <div style={{ padding: "12px 15px", borderRadius: 7, background: "#030A28", width: "max-content", maxWidth: "78%", margin: "14px 0", fontSize: 13 }}>
+        <div style={{ padding: "10px 13px", borderRadius: 7, background: "#29284a", width: "fit-content", maxWidth: "78%", marginTop: 10, fontSize: 12, lineHeight: 1.5 }}>
           Got it. Let me hand you to a specialist.
-          <span style={{ display: "inline-block", width: 2, height: 14, background: "#a477ff", verticalAlign: "-2px", animation: "ais-blink .8s infinite" }} />
+          <span style={{ display: "inline-block", width: 2, height: 13, background: "#a477ff", verticalAlign: "-2px", animation: "ais-blink .8s infinite" }} />
         </div>
       </div>
     </div>
@@ -232,7 +232,7 @@ function DemoAgent() {
 /* ─── Demo: Workflow Automation ───────────────────────────────────────── */
 function DemoWorkflow() {
   return (
-    <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 25, minHeight: 350 }}>
+    <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 16, minHeight: 260 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div>
           <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800 }}>WORKFLOW AUTOMATION</div>
@@ -267,25 +267,25 @@ function DemoWorkflow() {
 /* ─── Demo: CRM Automation ────────────────────────────────────────────── */
 function DemoCRM() {
   return (
-    <div style={{ display: "grid", gap: 18, gridTemplateColumns: "280px 1fr" }} className="ais-crm">
+    <div style={{ display: "grid", gap: 12, gridTemplateColumns: "260px 1fr" }} className="ais-crm">
       {/* Lead card */}
       <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 14, minHeight: "auto" }}>
         <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800 }}>NEW LEAD</div>
-        <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 15 }}>
-          <div style={{ width: 48, height: 48, borderRadius: "50%", background: "#155dfc", display: "grid", placeItems: "center", fontWeight: 800 }}>JD</div>
+        <div style={{ display: "flex", gap: 10, alignItems: "center", marginTop: 10 }}>
+          <div style={{ width: 40, height: 40, borderRadius: "50%", background: "#155dfc", display: "grid", placeItems: "center", fontWeight: 800, fontSize: 13, flexShrink: 0 }}>JD</div>
           <div>
-            <div style={{ fontSize: 17, fontWeight: 750 }}>Jordan Davis</div>
-            <div style={{ color: "#93a2ba", fontSize: 13 }}>jordan@brightline.com</div>
+            <div style={{ fontSize: 15, fontWeight: 750 }}>Jordan Davis</div>
+            <div style={{ color: "#93a2ba", fontSize: 12 }}>jordan@brightline.com</div>
           </div>
         </div>
-        <div style={{ marginTop: 25, display: "grid", gap: 12 }}>
+        <div style={{ marginTop: 10, display: "grid", gap: 0 }}>
           {[
             ["Lead score", "92 / 100", "#19db80"],
             ["Source",     "Website",  null],
             ["Owner",      "Sales Team", null],
             ["Next action","Call today", null],
           ].map(([k, v, c], i) => (
-            <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "12px 0", borderBottom: "1px solid rgba(255,255,255,.06)", fontSize: 12 }}>
+            <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "7px 0", borderBottom: "1px solid rgba(255,255,255,.06)", fontSize: 12 }}>
               <span style={{ color: "#93a2ba" }}>{k}</span>
               <b style={c ? { color: c as string } : {}}>{v}</b>
             </div>
@@ -295,21 +295,21 @@ function DemoCRM() {
       {/* Pipeline */}
       <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 14, minHeight: "auto" }}>
         <div style={{ fontSize: 11, color: "#8291aa", textTransform: "uppercase", letterSpacing: "1.1px", fontWeight: 800 }}>CRM AUTOMATION</div>
-        <div style={{ fontSize: 20, fontWeight: 750, marginTop: 6, marginBottom: 18 }}>Lead lifecycle</div>
-        <div style={{ display: "grid", gap: 13 }}>
+        <div style={{ fontSize: 16, fontWeight: 750, marginTop: 4, marginBottom: 10 }}>Lead lifecycle</div>
+        <div style={{ display: "grid", gap: 7 }}>
           {[
             ["Lead captured",        "Website → CRM"],
             ["Lead scored",          "AI qualification"],
             ["Sales assigned",       "Owner selected"],
             ["Follow-up scheduled",  "Next touchpoint"],
           ].map(([title, sub], i) => (
-            <div key={i} style={{ display: "grid", gridTemplateColumns: "36px 1fr auto", gap: 12, alignItems: "center", padding: 13, border: "1px solid rgba(91,142,241,.18)", borderRadius: 7, background: "#030A28", animation: `ais-step-in 4.5s ${i * 0.7}s infinite` }}>
-              <div style={{ width: 30, height: 30, borderRadius: "50%", display: "grid", placeItems: "center", background: "#1c3156", color: "#76a2ff", fontSize: 11, fontWeight: 800 }}>{i + 1}</div>
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "30px 1fr auto", gap: 10, alignItems: "center", padding: "8px 10px", border: "1px solid rgba(91,142,241,.18)", borderRadius: 7, background: "#030A28", animation: `ais-step-in 4.5s ${i * 0.7}s infinite` }}>
+              <div style={{ width: 26, height: 26, borderRadius: "50%", display: "grid", placeItems: "center", background: "#1c3156", color: "#76a2ff", fontSize: 10, fontWeight: 800 }}>{i + 1}</div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: 13 }}>{title}</div>
-                <div style={{ color: "#8393ac", fontSize: 11 }}>{sub}</div>
+                <div style={{ fontWeight: 700, fontSize: 12 }}>{title}</div>
+                <div style={{ color: "#8393ac", fontSize: 10 }}>{sub}</div>
               </div>
-              <span style={{ fontSize: 10, padding: "5px 8px", borderRadius: 999, background: "rgba(24,216,121,.08)", color: "#1bdb80" }}>{i < 3 ? "Done" : "Ready"}</span>
+              <span style={{ fontSize: 9, padding: "4px 7px", borderRadius: 999, background: "rgba(24,216,121,.08)", color: "#1bdb80" }}>{i < 3 ? "Done" : "Ready"}</span>
             </div>
           ))}
         </div>
@@ -321,7 +321,7 @@ function DemoCRM() {
 /* ─── Demo: AI Chatbot ────────────────────────────────────────────────── */
 function DemoChatbot() {
   return (
-    <div style={{ display: "grid", gap: 18, gridTemplateColumns: "300px 1fr" }} className="ais-bot">
+    <div style={{ display: "grid", gap: 12, gridTemplateColumns: "240px 1fr" }} className="ais-bot">
       {/* Profile */}
       <div style={{ border: "1px solid rgba(100,143,210,.22)", background: "#030A28", borderRadius: 10, padding: 14, minHeight: "auto" }}>
         <div style={{ width: 68, height: 68, borderRadius: 10, background: "#155dfc", display: "grid", placeItems: "center", boxShadow: "0 0 35px rgba(21,93,252,.25)" }}>
@@ -354,7 +354,7 @@ function DemoChatbot() {
             { me: true,  text: "We're a growing healthcare company." },
             { me: false, text: "Perfect. I can recommend the right setup and connect you with our team." },
           ].map((m, i) => (
-            <div key={i} style={{ padding: "10px 13px", borderRadius: 7, background: m.me ? "#2671ff" : "#2a3549", maxWidth: "88%", width: "fit-content", fontSize: 12, margin: "6px 0", marginLeft: "auto", marginRight: m.me ? 0 : "auto", wordBreak: "break-word", animation: "ais-msg .5s ease" }}>{m.text}</div>
+            <div key={i} style={{ padding: "10px 13px", borderRadius: 7, background: m.me ? "#2671ff" : "#2a3549", maxWidth: "80%", width: "fit-content", fontSize: 12, marginTop: 8, marginBottom: 0, marginLeft: m.me ? "auto" : 0, marginRight: m.me ? 0 : "auto", wordBreak: "break-word", lineHeight: 1.5, animation: "ais-msg .5s ease" }}>{m.text}</div>
           ))}
           <div style={{ marginTop: 10, padding: "11px 13px", borderRadius: 6, background: "rgba(21,93,252,.08)", border: "1px solid rgba(21,93,252,.2)", color: "#7aaaff", fontSize: 11 }}>
             ✓ Lead qualified · Sales handoff ready
@@ -381,12 +381,12 @@ export default function AIServicesSection() {
     <>
       {/* Scoped styles for animations that need CSS vars / complex keyframes */}
       <style>{`
-        .ais-two   { grid-template-columns: 1fr 310px; }
+        .ais-two   { grid-template-columns: 1fr 260px; }
         .ais-wa    { grid-template-columns: 1fr 1fr; }
-        .ais-agent { grid-template-columns: 280px 1fr; }
-        .ais-crm   { grid-template-columns: 280px 1fr; }
-        .ais-bot   { grid-template-columns: 300px 1fr; }
-        @media(max-width:860px){
+        .ais-agent { grid-template-columns: 220px 1fr; }
+        .ais-crm   { grid-template-columns: 260px 1fr; }
+        .ais-bot   { grid-template-columns: 240px 1fr; }
+        @media(max-width:760px){
           .ais-two, .ais-wa, .ais-agent, .ais-crm, .ais-bot { grid-template-columns: 1fr !important; }
           .ais-flow { flex-direction: column !important; }
           .ais-connector { width: 2px !important; height: 35px !important; }
@@ -399,13 +399,9 @@ export default function AIServicesSection() {
         style={{
           position: "relative",
           minHeight: "auto",
-          padding: "30px 20% 40px",
+          padding: "28px 20px 36px",
           overflow: "hidden",
-          background:
-            "radial-gradient(circle at 7% 35%, rgba(36,88,184,.38), transparent 32%), " +
-            "radial-gradient(circle at 96% 78%, rgba(0,170,90,.18), transparent 28%), " +
-            "radial-gradient(circle at 52% 105%, rgba(115,55,190,.18), transparent 30%), " +
-            "#000028",
+          background: "#000028",
           fontFamily: "var(--font-inter, Inter, sans-serif)",
         }}
       >
@@ -430,13 +426,16 @@ export default function AIServicesSection() {
           ))}
         </div>
 
+        {/* Inner content constrained to navbar width */}
+        <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%" }}>
+
         {/* Eyebrow */}
         <div style={{ textAlign: "center", textTransform: "uppercase", letterSpacing: 4, fontSize: 12, fontWeight: 700, color: "#4385ff", marginBottom: 20 }}>
-        
+
         </div>
 
         {/* Heading */}
-        <h2 style={{ margin: "0 auto", textAlign: "center", maxWidth: 700, fontSize: "clamp(24px,3.5vw,40px)", lineHeight: 1.08, letterSpacing: "-1.5px", fontWeight: 700, fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", color: "#f7f9ff" }}>
+        <h2 style={{ margin: "0 auto", textAlign: "center", maxWidth: 560, fontSize: "clamp(20px,2.8vw,32px)", lineHeight: 1.1, letterSpacing: "-1px", fontWeight: 700, fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", color: "#f7f9ff" }}>
           Put AI To Work{" "}
           <span style={{ background: "linear-gradient(90deg,#2f78ff,#12d783,#8b6cff)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             Across Your Business
@@ -444,7 +443,7 @@ export default function AIServicesSection() {
         </h2>
 
         {/* Subtitle */}
-        <p style={{ margin: "12px auto 24px", textAlign: "center", maxWidth: 520, color: "#9aa8bf", fontSize: 13, lineHeight: 1.6 }}>
+        <p style={{ margin: "8px auto 18px", textAlign: "center", maxWidth: 440, color: "#9aa8bf", fontSize: 12, lineHeight: 1.6 }}>
           One platform for conversations, intelligent automation, customer relationships and AI-powered engagement.
         </p>
 
@@ -452,7 +451,7 @@ export default function AIServicesSection() {
         <div style={{
           position: "relative", zIndex: 5,
           display: "flex", justifyContent: "center", alignItems: "center", gap: 2,
-          maxWidth: 900, margin: "0 auto 16px",
+          maxWidth: 860, margin: "0 auto 12px",
           padding: 4,
           border: "1px solid rgba(150,180,220,.22)",
           borderRadius: 10,
@@ -494,7 +493,7 @@ export default function AIServicesSection() {
         {/* Demo window */}
         <div style={{
           position: "relative", zIndex: 2,
-          maxWidth: 900, minHeight: "auto",
+          maxWidth: 1200, minHeight: "auto",
           margin: "0 auto",
           border: `1px solid ${active.color}55`,
           borderRadius: 10,
@@ -512,7 +511,7 @@ export default function AIServicesSection() {
 
           {/* Window chrome */}
           <div style={{
-            height: 48, padding: "0 18px",
+            height: 40, padding: "0 16px",
             display: "flex", alignItems: "center", justifyContent: "center",
             borderBottom: "1px solid rgba(150,180,220,.22)",
             position: "relative",
@@ -545,7 +544,7 @@ export default function AIServicesSection() {
           </div>
 
           {/* Content */}
-          <div key={key} style={{ padding: 14, position: "relative" }} className="ais-state-in">
+          <div key={key} style={{ padding: 10, position: "relative" }} className="ais-state-in">
             {activeId === "voice"    && <DemoVoice />}
             {activeId === "whatsapp" && <DemoWhatsApp />}
             {activeId === "agent"    && <DemoAgent />}
@@ -554,6 +553,7 @@ export default function AIServicesSection() {
             {activeId === "chatbot"  && <DemoChatbot />}
           </div>
         </div>
+        </div>{/* end inner content wrapper */}
       </section>
     </>
   );
