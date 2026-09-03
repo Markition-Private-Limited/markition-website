@@ -33,6 +33,7 @@ export default function Home() {
       <Ticker />
       <TrustLine />
       <AIServicesSection />
+      <PortfolioSection />
       <TestimonialsSection />
       <Footer />
     </div>
