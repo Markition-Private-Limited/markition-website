@@ -5,6 +5,8 @@ import Stats from "@/components/hero/Stats";
 import Ticker from "@/components/ticker/Ticker";
 import TrustLine from "@/components/trust/TrustLine";
 import AIServicesSection from "@/components/services/AIServicesSection";
+import PortfolioSection from "@/components/PortfolioSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/footer/Footer";
 
 export default function Home() {
@@ -31,6 +33,7 @@ export default function Home() {
       <Ticker />
       <TrustLine />
       <AIServicesSection />
+      <TestimonialsSection />
       <Footer />
     </div>
   );
