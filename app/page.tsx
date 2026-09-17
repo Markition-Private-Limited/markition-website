@@ -5,9 +5,12 @@ import Stats from "@/components/hero/Stats";
 import Ticker from "@/components/ticker/Ticker";
 import TrustLine from "@/components/trust/TrustLine";
 import AIServicesSection from "@/components/services/AIServicesSection";
+import ServicesSection from "@/components/ServicesSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import OurWorkSection from "@/components/OurWorkSection";
+import FAQSection from "@/components/FAQSection";
+import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/footer/Footer";
 
 export default function Home() {
@@ -19,6 +22,8 @@ export default function Home() {
       <header
         className="relative bg-[#000028]"
         style={{
+          height: "100vh",
+          overflow: "hidden",
           backgroundImage:
             "radial-gradient(ellipse 900px 450px at 50% -60px, rgba(1,55,215,0.18) 0%, transparent 70%)",
         }}
@@ -35,8 +40,11 @@ export default function Home() {
       <TrustLine />
       <AIServicesSection />
       <PortfolioSection />
+      <ServicesSection />
       <TestimonialsSection />
       <OurWorkSection />
+      <FAQSection />
+      <ContactSection />
       <Footer />
     </div>
   );

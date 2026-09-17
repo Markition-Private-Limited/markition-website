@@ -16,7 +16,10 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
     (window as Window & { __lenis?: Lenis }).__lenis = lenis;
 
     function raf(time: number) {
-      lenis.raf(time);
+      // Skip lenis scroll when the hero video scroll-lock is active
+      if (!(window as Window & { __scrollLocked?: boolean }).__scrollLocked) {
+        lenis.raf(time);
+      }
       requestAnimationFrame(raf);
     }
     const id = requestAnimationFrame(raf);
