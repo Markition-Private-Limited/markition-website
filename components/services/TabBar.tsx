@@ -41,12 +41,14 @@ export default function TabBar({ active, onSelect }: Props) {
             <button
               key={svc.id}
               onClick={() => onSelect(i)}
-              className="flex items-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl text-[11px] sm:text-xs font-semibold whitespace-nowrap transition-all duration-200 flex-shrink-0"
+              className={`svc-tab flex items-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl text-[11px] sm:text-xs font-semibold whitespace-nowrap flex-shrink-0 ${
+                isActive ? "svc-tab-active" : ""
+              }`}
               style={{
                 background: isActive
                   ? isWhatsApp
-                    ? "#1a4731"
-                    : "#1d40c0"
+                    ? "linear-gradient(135deg, #17402c 0%, #2fae72 100%)"
+                    : "linear-gradient(135deg, #1a3aa8 0%, #2f7bff 100%)"
                   : "transparent",
                 color: isActive
                   ? isWhatsApp
@@ -58,6 +60,11 @@ export default function TabBar({ active, onSelect }: Props) {
                     ? "1px solid rgba(74,222,128,0.35)"
                     : "1px solid rgba(99,130,255,0.35)"
                   : "1px solid transparent",
+                boxShadow: isActive
+                  ? isWhatsApp
+                    ? "0 4px 18px rgba(74,222,128,0.35), inset 0 1px 0 rgba(255,255,255,0.15)"
+                    : "0 4px 18px rgba(47,123,255,0.45), inset 0 1px 0 rgba(255,255,255,0.2)"
+                  : "none",
               }}
             >
               <TabIcon id={svc.id} />
@@ -66,6 +73,51 @@ export default function TabBar({ active, onSelect }: Props) {
           );
         })}
       </div>
+
+      <style>{`
+        .svc-tab {
+          position: relative;
+          overflow: hidden;
+          transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+                      background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .svc-tab:hover {
+          transform: translateY(-2px);
+          color: rgba(226,232,255,0.9) !important;
+          background: rgba(255,255,255,0.08);
+        }
+        .svc-tab:active {
+          transform: translateY(0) scale(0.95);
+        }
+        .svc-tab-active {
+          animation: svcTabPop 0.35s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .svc-tab-active:hover {
+          transform: translateY(-2px) scale(1.02);
+        }
+        .svc-tab-active::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -60%;
+          width: 40%;
+          height: 100%;
+          background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+          animation: svcTabShine 2.6s ease-in-out infinite;
+        }
+        @keyframes svcTabPop {
+          0%   { transform: scale(0.9); }
+          60%  { transform: scale(1.05); }
+          100% { transform: scale(1); }
+        }
+        @keyframes svcTabShine {
+          0%   { left: -60%; }
+          100% { left: 130%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .svc-tab-active, .svc-tab-active::after { animation: none; }
+        }
+      `}</style>
     </div>
   );
 }

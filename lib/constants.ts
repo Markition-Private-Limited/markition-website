@@ -3,9 +3,9 @@ import type { Service } from "./types";
 export const NAV_LINKS = [
   { label: "About" },
   { label: "Services", dropdown: true },
+  { label: "Solutions" },
   { label: "Industries", dropdown: true },
   { label: "Locations", dropdown: true },
-  { label: "Resources" },
   { label: "Case Studies" },
   { label: "Portfolio" },
   { label: "Contact" },

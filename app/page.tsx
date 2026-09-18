@@ -8,7 +8,10 @@ import AIServicesSection from "@/components/services/AIServicesSection";
 import ServicesSection from "@/components/ServicesSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import OurWorkSection from "@/components/OurWorkSection";
+import AwardsSlider from "@/components/AwardsSlider";
+import Technologies from "@/components/Technologies";
+import AuditSection from "@/components/AuditSection";
+import ScaleWithAISection from "@/components/ScaleWithAISection";
 import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/footer/Footer";
@@ -42,7 +45,10 @@ export default function Home() {
       <PortfolioSection />
       <ServicesSection />
       <TestimonialsSection />
-      <OurWorkSection />
+      <AwardsSlider />
+      <Technologies />
+      <AuditSection />
+      <ScaleWithAISection />
       <FAQSection />
       <ContactSection />
       <Footer />

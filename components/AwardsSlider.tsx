@@ -1,102 +1,104 @@
-"use client";
-
 const AWARDS = [
-  "/awards2/award-1.png",
-  "/awards2/award-2.png",
-  "/awards2/award-3.png",
-  "/awards2/award-4.png",
-  "/awards2/award-5.png",
-  "/awards2/award-6.png",
-  "/awards2/award-7.png",
-  "/awards2/award-8.png",
+  { src: "/awards/award-1.png", alt: "Award 1" },
+  { src: "/awards/award-2.png", alt: "Award 2" },
+  { src: "/awards/award-3.png", alt: "Award 3" },
+  { src: "/awards/award-4.png", alt: "Award 4" },
+  { src: "/awards/award-5.png", alt: "Award 5" },
+  { src: "/awards/award-6.png", alt: "Award 6" },
+  { src: "/awards/award-7.png", alt: "Award 7" },
+  { src: "/awards/award-8.png", alt: "Award 8" },
 ];
 
 export default function AwardsSlider() {
-  const items = [...AWARDS, ...AWARDS];
+  const doubled = [...AWARDS, ...AWARDS];
 
   return (
-    <div
+    <section
       style={{
-        width: "100%",
         background: "#020129",
-        borderTop: "1px solid #334155",
-        borderBottom: "1px solid #334155",
-        boxShadow: "0 -1px 8px rgba(51,65,85,0.6), 0 1px 8px rgba(51,65,85,0.6)",
+        borderTop: "1px solid rgba(255,255,255,0.05)",
+        borderBottom: "1px solid rgba(255,255,255,0.05)",
+        padding: "28px 0",
         overflow: "hidden",
-        padding: "2px 0",
-        position: "relative",
       }}
     >
-      {/* Left fade */}
-      <div style={{
-        position: "absolute", inset: 0, right: "auto", width: 80,
-        background: "linear-gradient(to right,#020129 0%,transparent 100%)",
-        zIndex: 10, pointerEvents: "none",
-      }} />
-      {/* Right fade */}
-      <div style={{
-        position: "absolute", inset: 0, left: "auto", width: 80,
-        background: "linear-gradient(to left,#020129 0%,transparent 100%)",
-        zIndex: 10, pointerEvents: "none",
-      }} />
-
-      <div
-        className="awards-track-new"
-        style={{ display: "flex", alignItems: "center", width: "max-content" }}
-      >
-        {items.map((src, i) => (
-          <div
-            key={i}
-            className="award-item-new"
-            style={{
-              width: 180, height: 160, flex: "0 0 180px",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              margin: "0 5px", cursor: "pointer",
-              transition: "transform .35s cubic-bezier(.2,.8,.2,1), filter .35s ease",
-            }}
-            onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.transform = "translateY(-8px) scale(1.04)"}
-            onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.transform = ""}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={src}
-              alt={`Award ${(i % AWARDS.length) + 1}`}
-              draggable={false}
+      <div className="awards-slider" style={{ width: "100%", overflow: "hidden" }}>
+        <div
+          className="awards-track"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            width: "max-content",
+          }}
+        >
+          {doubled.map((award, i) => (
+            <div
+              key={i}
+              className="award-item"
+              aria-hidden={i >= AWARDS.length ? true : undefined}
               style={{
-                width: "100%", height: "100%",
-                objectFit: "contain",
-                display: "block",
-                userSelect: "none",
-              } as React.CSSProperties}
-            />
-          </div>
-        ))}
+                width: 130,
+                height: 120,
+                flex: "0 0 130px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "0 10px",
+                cursor: "pointer",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={award.src}
+                alt={award.alt}
+                draggable={false}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                  display: "block",
+                  userSelect: "none",
+                }}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <style>{`
-        .awards-track-new {
-          animation: awardsSlide2 34s linear infinite;
+        .awards-track {
+          animation: awardsSlider 34s linear infinite;
           will-change: transform;
         }
-        .awards-track-new:hover {
+        .awards-slider:hover .awards-track {
           animation-play-state: paused;
         }
-        @keyframes awardsSlide2 {
+        .award-item {
+          transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1);
+        }
+        .award-item:hover {
+          transform: translateY(-8px) scale(1.04);
+        }
+        @keyframes awardsSlider {
           0%   { transform: translate3d(0, 0, 0); }
           100% { transform: translate3d(-50%, 0, 0); }
         }
         @media (max-width: 1200px) {
-          .awards-track-new { animation-duration: 30s; }
-          .award-item-new { width: 155px !important; height: 130px !important; flex-basis: 155px !important; }
+          .award-item { width: 110px !important; height: 100px !important; flex-basis: 110px !important; margin: 0 8px !important; }
+          .awards-track { animation-duration: 30s; }
         }
         @media (max-width: 768px) {
-          .awards-track-new { animation-duration: 25s; }
-          .award-item-new { width: 130px !important; height: 110px !important; flex-basis: 130px !important; }
+          .award-item { width: 90px !important; height: 82px !important; flex-basis: 90px !important; margin: 0 6px !important; }
+          .awards-track { animation-duration: 25s; }
+        }
+        @media (max-width: 480px) {
+          .award-item { width: 80px !important; height: 72px !important; flex-basis: 80px !important; }
+          .awards-track { animation-duration: 23s; }
         }
         @media (prefers-reduced-motion: reduce) {
-          .awards-track-new { animation: none; }
+          .awards-track { animation: none; }
         }
       `}</style>
-    </div>
+    </section>
   );
 }
