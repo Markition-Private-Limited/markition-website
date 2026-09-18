@@ -1,153 +1,259 @@
 "use client";
 
+import { useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 
-export interface CaseStudy {
-  projectName: string;
-  tags: string[];
-  heading: string;
-  description: string;
-  bullets: string[];
-  imageSrc: string;
-  imageBgSrc: string;
-  imageAlt: string;
+const CATEGORIES = [
+  "All Projects",
+  "AI Solutions",
+  "Web Platforms",
+  "Mobile Apps",
+  "Digital Marketing",
+  "Brand Experiences",
+];
+
+const IMAGES = [
+  { src: "/assets/portofolio-v2/portoflio-image.png", alt: "Portfolio project 1" },
+  { src: "/assets/portofolio-v2/portfolio-image-2.png", alt: "Portfolio project 2" },
+  { src: "/assets/portofolio-v2/portfolio-image-3.png", alt: "Portfolio project 3" },
+  { src: "/assets/portofolio-v2/portfolio-image-4.png", alt: "Portfolio project 4" },
+  { src: "/assets/portofolio-v2/portfolio-image-5.png", alt: "Portfolio project 5" },
+];
+
+/* Distribute images across N columns, duplicated for seamless loop */
+function buildColumn(images: typeof IMAGES, offset: number, count = 4) {
+  const picks = [];
+  for (let i = 0; i < count; i++) {
+    picks.push(images[(i + offset) % images.length]);
+  }
+  return [...picks, ...picks]; /* duplicate for infinite scroll */
 }
 
-function PortfolioCaseStudyCard({ study }: { study: CaseStudy }) {
+const COL_A = buildColumn(IMAGES, 0);
+const COL_B = buildColumn(IMAGES, 2);
+const COL_C = buildColumn(IMAGES, 4);
+
+function GridIcon() {
   return (
-    <div
-      className="w-full rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-[5fr_7fr]"
-      style={{
-        background: "#080F2E",
-        border: "1px solid #334155",
-        boxShadow: "0 0 40px 6px rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.5)",
-      }}
-    >
-      {/* ── Left — project details ────────────────────────────────── */}
-      <div className="flex flex-col justify-center px-8 sm:px-10 lg:px-12 py-10 sm:py-12 lg:py-14">
-        {/* Project name */}
-        <p
-          className="font-bold text-white text-[22px] sm:text-[26px] mb-1"
-          style={{ fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)" }}
-        >
-          {study.projectName}
-        </p>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor" />
+      <rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" />
+      <rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" />
+      <rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" />
+    </svg>
+  );
+}
 
-        {/* Tags */}
-        <p
-          className="text-[13px] sm:text-[14px] italic mb-6"
-          style={{ color: "#22C5F5" }}
-        >
-          {study.tags.join(" · ")}
-        </p>
-
-        {/* Divider */}
-        <div
-          className="mb-6 w-full"
-          style={{ height: "1px", background: "rgba(255,255,255,0.12)" }}
-        />
-
-        {/* Heading */}
-        <h3
-          className="font-bold text-white text-[16px] sm:text-[18px] leading-snug mb-4"
-          style={{ fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)" }}
-        >
-          {study.heading}
-        </h3>
-
-        {/* Description */}
-        <p className="text-white/70 text-[13px] sm:text-[14px] leading-relaxed mb-8">
-          {study.description}
-        </p>
-
-        {/* Bullets */}
-        <ul className="space-y-2">
-          {study.bullets.map((bullet, i) => (
-            <li key={i} className="flex items-start gap-2.5 text-white/85 text-[13px] sm:text-[14px]">
-              <span className="mt-[5px] w-1.5 h-1.5 rounded-full flex-shrink-0 bg-white/60" />
-              {bullet}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* ── Right — image panel ───────────────────────────────────── */}
+function CarouselColumn({
+  items,
+  reverse = false,
+  duration = 28,
+}: {
+  items: typeof COL_A;
+  reverse?: boolean;
+  duration?: number;
+}) {
+  return (
+    <div className="flex flex-col gap-3 overflow-hidden">
       <div
-        className="relative flex items-center justify-center overflow-hidden min-h-[280px] sm:min-h-[340px] lg:min-h-0"
         style={{
-          backgroundImage: `url(${study.imageBgSrc})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          display: "flex",
+          flexDirection: "column",
+          gap: "12px",
+          animation: `portfolio-scroll-${reverse ? "down" : "up"} ${duration}s linear infinite`,
+          willChange: "transform",
         }}
       >
-        {/* Slight left-edge fade for visual blending on desktop */}
-        <div
-          className="absolute inset-0 hidden lg:block pointer-events-none"
-          style={{
-            background: "linear-gradient(to right, #080F2E 0%, transparent 22%)",
-          }}
-        />
-
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={study.imageSrc}
-          alt={study.imageAlt}
-          className="relative z-10 w-[88%] sm:w-[78%] lg:w-[90%] max-w-[520px] object-contain select-none"
-          draggable={false}
-        />
+        {items.map((img, i) => (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <div
+            key={i}
+            className="rounded-xl overflow-hidden flex-shrink-0"
+            style={{
+              border: "1px solid rgba(255,255,255,0.07)",
+              background: "#0D1535",
+            }}
+          >
+            <img
+              src={img.src}
+              alt={img.alt}
+              draggable={false}
+              className="w-full object-cover select-none block"
+              style={{ aspectRatio: "4/3" }}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-const CASE_STUDIES: CaseStudy[] = [
-  {
-    projectName: "Genix Drive",
-    tags: ["Digital Growth", "Mobile App"],
-    heading: "Turning a New Mobility App Into a Scalable Digital Growth Engine",
-    description:
-      "We helped Genix Drive build a complete digital growth strategy focused on increasing app awareness, driving downloads, activating users, and creating a clear path toward long-term customer growth.",
-    bullets: ["Awareness → Downloads → Activation → Paid Conversion"],
-    imageSrc: "/assets/portfolio/app_ss.png",
-    imageBgSrc: "/assets/portfolio/app_bg.png",
-    imageAlt: "Genix Drive mobile app screens showing rider and driver views",
-  },
-];
-
 export default function PortfolioSection() {
+  const [activeCategory, setActiveCategory] = useState("All Projects");
+
+  const BG = "#010424";
+
   return (
     <section
-      className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6"
+      className="py-16 sm:py-20 lg:py-28 px-4 sm:px-6"
       style={{ background: "#000028" }}
     >
-      <div className="max-w-[1200px] mx-auto">
-        {/* Section heading */}
-        <ScrollReveal threshold={0.2}>
-          <div className="text-center mb-10 sm:mb-14">
-            <h2
-              className="font-bold text-[28px] sm:text-[36px] lg:text-[44px] mb-4"
-              style={{
-                fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)",
-                letterSpacing: "-0.02em",
-                color: "#ffffff",
-              }}
-            >
-              Real Businesses. Real{" "}
-              <span style={{ color: "#22C5F5" }}>Digital Growth.</span>
-            </h2>
-            <p className="text-white/60 text-[14px] sm:text-[16px] leading-relaxed max-w-[600px] mx-auto">
-              See how we combine technology, marketing, and creative strategy to solve real business challenges and drive measurable results.
-            </p>
-          </div>
-        </ScrollReveal>
+      {/* Keyframes injected via style tag */}
+      <style>{`
+        @keyframes portfolio-scroll-up {
+          from { transform: translateY(0); }
+          to   { transform: translateY(-50%); }
+        }
+        @keyframes portfolio-scroll-down {
+          from { transform: translateY(-50%); }
+          to   { transform: translateY(0); }
+        }
+      `}</style>
 
-        {/* Cards */}
-        <div className="flex flex-col gap-8 sm:gap-10">
-          {CASE_STUDIES.map((study, i) => (
-            <ScrollReveal key={i} delay={i * 80} threshold={0.15}>
-              <PortfolioCaseStudyCard study={study} />
-            </ScrollReveal>
-          ))}
+      {/* Card wrapper */}
+      <div
+        className="max-w-[1200px] mx-auto relative overflow-hidden rounded-2xl"
+        style={{
+          background: BG,
+          boxShadow: "0px 33.75px 67.5px -16.2px #2B7FFF26",
+          backdropFilter: "blur(32.4px)",
+          WebkitBackdropFilter: "blur(32.4px)",
+          padding: "clamp(28px, 5vw, 60px)",
+        }}
+      >
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 items-stretch">
+
+          {/* ── Left panel ────────────────────────────────────────── */}
+          <ScrollReveal threshold={0.2} className="w-full lg:w-[320px] lg:flex-shrink-0">
+            <div className="flex flex-col">
+
+              {/* Heading */}
+              <h2
+                className="font-bold text-[34px] sm:text-[42px] lg:text-[48px] leading-[1.1] mb-4"
+                style={{
+                  fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)",
+                  letterSpacing: "-0.02em",
+                  color: "#ffffff",
+                }}
+              >
+                Our Work{" "}
+                <br />
+                Speaks{" "}
+                <span style={{ color: "#22C5F5" }}>For Itself</span>
+              </h2>
+
+              {/* Description */}
+              <p
+                className="text-[14px] sm:text-[15px] leading-relaxed mb-7"
+                style={{ color: "rgba(255,255,255,0.55)" }}
+              >
+                Explore our latest projects, AI solutions, and digital
+                experiences built to create real business impact.
+              </p>
+
+              {/* CTA Button */}
+              <button
+                className="flex items-center gap-2.5 self-start px-5 py-3 rounded-full text-[13px] font-semibold mb-8 transition-all hover:brightness-110 active:scale-95"
+                style={{
+                  fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)",
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  color: "#ffffff",
+                }}
+              >
+                <GridIcon />
+                See All Projects
+              </button>
+
+              {/* Category cards */}
+              <div className="flex flex-col gap-2.5">
+                {CATEGORIES.map((cat) => {
+                  const isActive = cat === activeCategory;
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => setActiveCategory(cat)}
+                      className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-[13px] font-semibold transition-all"
+                      style={{
+                        fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)",
+                        color: isActive ? "#ffffff" : "rgba(255,255,255,0.45)",
+                        background: isActive
+                          ? "linear-gradient(135deg, rgba(43,127,255,0.22) 0%, rgba(43,127,255,0.04) 100%)"
+                          : "transparent",
+                        border: isActive
+                          ? "1px solid rgba(43,127,255,0.35)"
+                          : "1px solid transparent",
+                        backdropFilter: isActive ? "blur(32.4px)" : "none",
+                        WebkitBackdropFilter: isActive ? "blur(32.4px)" : "none",
+                        boxShadow: isActive
+                          ? "0px 33.75px 67.5px -16.2px #2B7FFF26"
+                          : "none",
+                      }}
+                    >
+                      {/* Dot indicator */}
+                      <span
+                        className="flex-shrink-0 rounded-full transition-all"
+                        style={{
+                          width: "7px",
+                          height: "7px",
+                          background: isActive ? "#22C5F5" : "rgba(255,255,255,0.25)",
+                        }}
+                      />
+                      {cat}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* ── Right panel — infinite vertical carousel ───────────── */}
+          <div
+            className="flex-1 min-w-0 relative"
+            style={{ minHeight: "560px", overflow: "hidden" }}
+          >
+            {/* Gradient shadows — top & bottom */}
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 z-20"
+              style={{
+                height: "120px",
+                background: `linear-gradient(to bottom, ${BG} 0%, transparent 100%)`,
+              }}
+            />
+            <div
+              className="pointer-events-none absolute inset-x-0 bottom-0 z-20"
+              style={{
+                height: "120px",
+                background: `linear-gradient(to top, ${BG} 0%, transparent 100%)`,
+              }}
+            />
+            {/* Gradient shadows — left & right */}
+            <div
+              className="pointer-events-none absolute inset-y-0 left-0 z-20"
+              style={{
+                width: "40px",
+                background: `linear-gradient(to right, ${BG} 0%, transparent 100%)`,
+              }}
+            />
+            <div
+              className="pointer-events-none absolute inset-y-0 right-0 z-20"
+              style={{
+                width: "40px",
+                background: `linear-gradient(to left, ${BG} 0%, transparent 100%)`,
+              }}
+            />
+
+            {/* 3 scrolling columns */}
+            <div
+              className="grid absolute inset-0"
+              style={{ gridTemplateColumns: "repeat(3, 1fr)", gap: "12px" }}
+            >
+              <CarouselColumn items={COL_A} duration={26} />
+              <CarouselColumn items={COL_B} reverse duration={32} />
+              <CarouselColumn items={COL_C} duration={22} />
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
