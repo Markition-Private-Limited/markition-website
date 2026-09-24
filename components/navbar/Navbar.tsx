@@ -146,12 +146,23 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const [industriesOpen, setIndustriesOpen] = useState(false);
   const [activeService, setActiveService] = useState("Tech Solution");
+  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const INDUSTRIES = [
+    { label: "Dental", href: "/industries/dental", icon: "🦷", desc: "Google Ads, SEO & lead gen for dental practices" },
+    { label: "Healthcare", href: "/industries/healthcare", icon: "🏥", desc: "Digital marketing for clinics & health providers" },
+    { label: "Real Estate", href: "/industries/real-estate", icon: "🏠", desc: "Lead generation for agents & property developers" },
+    { label: "Legal", href: "/industries/legal", icon: "⚖️", desc: "Client acquisition for law firms & attorneys" },
+  ];
 
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
-      if (e.key === "Escape") { setServicesOpen(false); setSolutionsOpen(false); }
+      if (e.key === "Escape") { setServicesOpen(false); setSolutionsOpen(false); setIndustriesOpen(false); }
     }
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
@@ -176,8 +187,22 @@ export default function Navbar() {
         {/* Desktop nav links */}
         <div className="hidden lg:flex items-center gap-1 xl:gap-1.5 text-[13px] text-white font-normal flex-1 justify-center">
           {NAV_LINKS.map((link) => {
-            const isServices  = link.label === "Services";
-            const isSolutions = link.label === "Solutions";
+            const isServices   = link.label === "Services";
+            const isSolutions  = link.label === "Solutions";
+            const isIndustries = link.label === "Industries";
+            if (isIndustries) return (
+              <button
+                key={link.label}
+                onClick={() => { setIndustriesOpen((v) => !v); setServicesOpen(false); setSolutionsOpen(false); }}
+                className="hover:text-white/95 transition-colors duration-150 flex items-center gap-1 whitespace-nowrap px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05] text-[13px] font-normal"
+                style={{ background: "none", border: "none", cursor: "pointer", color: industriesOpen ? "#ffffff" : "inherit" }}
+              >
+                {link.label}
+                <span style={{ display: "inline-flex", transition: "transform 0.2s", transform: industriesOpen ? "rotate(180deg)" : "rotate(0deg)" }}>
+                  <ChevronDown />
+                </span>
+              </button>
+            );
             if (isServices) return (
               <button
                 key={link.label}
@@ -453,6 +478,46 @@ export default function Navbar() {
         </div>
       )}
 
+      {/* ── Industries dropdown ── */}
+      {industriesOpen && (
+        <div
+          style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 40, background: "rgba(0,0,20,0.55)", backdropFilter: "blur(2px)" }}
+          onClick={() => setIndustriesOpen(false)}
+        >
+          <div
+            style={{ position: "absolute", top: 80, left: "50%", transform: "translateX(-50%)", width: "min(640px, 96vw)", background: "linear-gradient(145deg, #060e2e 0%, #0a1540 100%)", border: "1px solid rgba(100,130,255,0.18)", borderRadius: 18, boxShadow: "0 24px 80px rgba(0,0,40,0.7)", padding: "28px 28px 24px", animation: "megaFadeIn 0.22s ease" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+              <div>
+                <p style={{ margin: "0 0 3px", fontSize: 11, fontWeight: 700, letterSpacing: "0.13em", color: "#4B8EFF", textTransform: "uppercase", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>INDUSTRY-SPECIFIC MARKETING</p>
+                <p style={{ margin: 0, fontSize: 22, fontWeight: 800, color: "#ffffff", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>Choose Your Industry</p>
+              </div>
+              <button onClick={() => setIndustriesOpen(false)} style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>✕</button>
+            </div>
+            <div style={{ height: 1, background: "rgba(255,255,255,0.07)", marginBottom: 20 }} />
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              {INDUSTRIES.map((ind) => (
+                <a
+                  key={ind.label}
+                  href={ind.href}
+                  onClick={() => setIndustriesOpen(false)}
+                  style={{ display: "flex", alignItems: "flex-start", gap: 14, padding: "14px 16px", borderRadius: 12, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)", textDecoration: "none", transition: "background 0.15s, border-color 0.15s, transform 0.15s" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(75,142,255,0.12)"; e.currentTarget.style.borderColor = "rgba(75,142,255,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"; e.currentTarget.style.transform = "translateY(0)"; }}
+                >
+                  <span style={{ fontSize: 28, lineHeight: 1, flexShrink: 0 }}>{ind.icon}</span>
+                  <div>
+                    <p style={{ margin: "0 0 4px", fontSize: 15, fontWeight: 700, color: "#ffffff", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>{ind.label}</p>
+                    <p style={{ margin: 0, fontSize: 12, color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", lineHeight: 1.5 }}>{ind.desc}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       <style>{`
         @keyframes megaFadeIn {
           from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
@@ -471,32 +536,135 @@ export default function Navbar() {
       <div
         className="lg:hidden overflow-hidden"
         style={{
-          maxHeight: mobileOpen ? "480px" : "0px",
+          maxHeight: mobileOpen ? "800px" : "0px",
           opacity: mobileOpen ? 1 : 0,
           transform: mobileOpen ? "translateY(0)" : "translateY(-6px)",
-          transition: "max-height 0.32s cubic-bezier(0.4,0,0.2,1), opacity 0.22s ease, transform 0.22s ease",
+          transition: "max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.22s ease, transform 0.22s ease",
         }}
       >
         <div className="w-full mt-1.5 border border-white/[0.08] overflow-hidden" style={navGlassStyle}>
-          {NAV_LINKS.map((link, i) => (
-            <a
-              key={link.label}
-              href="#"
-              onClick={() => setMobileOpen(false)}
-              className={`flex items-center justify-between px-5 py-3.5 text-[13.5px] text-white/75 hover:text-white hover:bg-white/[0.05] transition-colors duration-150 ${
-                i < NAV_LINKS.length - 1 ? "border-b border-white/[0.05]" : ""
-              }`}
-            >
-              <span>{link.label}</span>
-              {"dropdown" in link && link.dropdown ? (
-                <ChevronDown />
-              ) : (
+          {NAV_LINKS.map((link, i) => {
+            const isLast = i === NAV_LINKS.length - 1;
+            const borderClass = !isLast ? "border-b border-white/[0.05]" : "";
+
+            if (link.label === "Industries") return (
+              <div key={link.label} className={borderClass}>
+                <button
+                  onClick={() => setMobileIndustriesOpen((v) => !v)}
+                  className="w-full flex items-center justify-between px-5 py-3.5 text-[13.5px] text-white/75 hover:text-white hover:bg-white/[0.05] transition-colors duration-150"
+                >
+                  <span>Industries</span>
+                  <span style={{ display: "inline-flex", transition: "transform 0.2s", transform: mobileIndustriesOpen ? "rotate(180deg)" : "rotate(0deg)" }}>
+                    <ChevronDown />
+                  </span>
+                </button>
+                <div style={{ maxHeight: mobileIndustriesOpen ? "320px" : "0px", overflow: "hidden", transition: "max-height 0.28s cubic-bezier(0.4,0,0.2,1)" }}>
+                  <div className="px-4 pb-3 grid grid-cols-2 gap-2">
+                    {INDUSTRIES.map((ind) => (
+                      <a
+                        key={ind.label}
+                        href={ind.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="flex flex-col gap-1 p-3 rounded-xl border border-white/[0.07] bg-white/[0.04] hover:bg-blue-500/10 hover:border-blue-400/30 transition-colors duration-150"
+                      >
+                        <span className="text-xl">{ind.icon}</span>
+                        <span className="text-[13px] font-bold text-white">{ind.label}</span>
+                        <span className="text-[11px] text-white/50 leading-snug">{ind.desc}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+
+            if (link.label === "Services") {
+              const SERVICE_CARDS = [
+                { icon: "code",      label: "Tech Solution",       desc: "Web, mobile & SaaS platforms built to scale" },
+                { icon: "bolt",      label: "Digital Marketing",   desc: "Google Ads, SEO & social campaigns" },
+                { icon: "building",  label: "Enterprise Solution",  desc: "ERP, CRM & operational systems" },
+                { icon: "robot",     label: "AI Solutions",        desc: "Agents, chatbots & workflow automation" },
+                { icon: "chart",     label: "Industry Solutions",  desc: "Fintech, healthcare, retail & more" },
+              ];
+              return (
+                <div key={link.label} className={borderClass}>
+                  <button
+                    onClick={() => setMobileServicesOpen((v) => !v)}
+                    className="w-full flex items-center justify-between px-5 py-3.5 text-[13.5px] text-white/75 hover:text-white hover:bg-white/[0.05] transition-colors duration-150"
+                  >
+                    <span>Services</span>
+                    <span style={{ display: "inline-flex", transition: "transform 0.2s", transform: mobileServicesOpen ? "rotate(180deg)" : "rotate(0deg)" }}>
+                      <ChevronDown />
+                    </span>
+                  </button>
+                  <div style={{ maxHeight: mobileServicesOpen ? "480px" : "0px", overflow: "hidden", transition: "max-height 0.3s cubic-bezier(0.4,0,0.2,1)" }}>
+                    <div className="px-4 pb-3 grid grid-cols-2 gap-2">
+                      {SERVICE_CARDS.map((svc) => (
+                        <a
+                          key={svc.label}
+                          href="#"
+                          onClick={() => setMobileOpen(false)}
+                          className="flex flex-col gap-2 p-3 rounded-xl border border-white/[0.07] bg-white/[0.04] hover:bg-blue-500/10 hover:border-blue-400/30 transition-colors duration-150"
+                        >
+                          <div style={{ width: 32, height: 32, borderRadius: 8, background: "rgba(75,142,255,0.15)", border: "1px solid rgba(75,142,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", color: "#4B8EFF" }}>
+                            <ServiceIcon type={svc.icon} />
+                          </div>
+                          <span className="text-[12.5px] font-bold text-white leading-snug">{svc.label}</span>
+                          <span className="text-[11px] text-white/50 leading-snug">{svc.desc}</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            if (link.label === "Solutions") return (
+              <div key={link.label} className={borderClass}>
+                <button
+                  onClick={() => setMobileSolutionsOpen((v) => !v)}
+                  className="w-full flex items-center justify-between px-5 py-3.5 text-[13.5px] text-white/75 hover:text-white hover:bg-white/[0.05] transition-colors duration-150"
+                >
+                  <span>Solutions</span>
+                  <span style={{ display: "inline-flex", transition: "transform 0.2s", transform: mobileSolutionsOpen ? "rotate(180deg)" : "rotate(0deg)" }}>
+                    <ChevronDown />
+                  </span>
+                </button>
+                <div style={{ maxHeight: mobileSolutionsOpen ? "440px" : "0px", overflow: "hidden", transition: "max-height 0.3s cubic-bezier(0.4,0,0.2,1)" }}>
+                  <div className="px-4 pb-3 grid grid-cols-2 gap-2">
+                    {SOLUTIONS_MENU.map((sol) => (
+                      <a
+                        key={sol.heading}
+                        href="#"
+                        onClick={() => setMobileOpen(false)}
+                        className="flex flex-col gap-2 p-3 rounded-xl border border-white/[0.07] bg-white/[0.04] hover:bg-blue-500/10 hover:border-blue-400/30 transition-colors duration-150 overflow-hidden relative"
+                      >
+                        <div style={{ height: 3, borderRadius: 99, background: sol.accentBar, marginBottom: 2 }} />
+                        <div style={{ width: 32, height: 32, borderRadius: 8, background: sol.gradient, display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.9)", flexShrink: 0 }}>
+                          <ServiceIcon type={sol.icon} />
+                        </div>
+                        <span className="text-[12.5px] font-bold text-white leading-snug">{sol.heading}</span>
+                        <span className="text-[11px] text-white/50 leading-snug line-clamp-2">{sol.description}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+
+            return (
+              <a
+                key={link.label}
+                href="#"
+                onClick={() => setMobileOpen(false)}
+                className={`flex items-center justify-between px-5 py-3.5 text-[13.5px] text-white/75 hover:text-white hover:bg-white/[0.05] transition-colors duration-150 ${borderClass}`}
+              >
+                <span>{link.label}</span>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="opacity-30">
                   <path d="M4 7h6M7 4l3 3-3 3" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              )}
-            </a>
-          ))}
+              </a>
+            );
+          })}
           <div className="p-4 border-t border-white/[0.05]">
             <a
               href="#"
