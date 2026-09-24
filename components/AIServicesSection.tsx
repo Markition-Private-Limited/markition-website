@@ -104,7 +104,6 @@ function DemoVoice() {
               height: h + "px",
               display: "block",
               animation: `ais-wave 1.05s ease-in-out ${VOICE_DELAYS[i]}s infinite alternate`,
-              // @ts-expect-error css var
               "--h": h + "px",
             } as React.CSSProperties} />
           ))}
