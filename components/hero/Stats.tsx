@@ -43,11 +43,11 @@ function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
 
 export default function Stats() {
   return (
-    <div className="hero-stats max-w-3xl mx-auto grid grid-cols-3 pb-8 sm:pb-10">
+    <div className="hero-stats max-w-3xl mx-auto grid grid-cols-3 pb-4 sm:pb-6">
       {STATS.map((stat, i) => (
         <div
           key={stat.value}
-          className={`flex flex-col items-center justify-center py-5 sm:py-7 px-2 sm:px-4 text-center ${
+          className={`flex flex-col items-center justify-center py-3 sm:py-4 px-2 sm:px-4 text-center ${
             i < STATS.length - 1 ? "border-r border-white/[0.1]" : ""
           }`}
         >

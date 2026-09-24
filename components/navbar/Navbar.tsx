@@ -187,9 +187,9 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className="sticky top-0 z-50 px-4 sm:px-6 pt-3 sm:pt-4" ref={dropdownRef}>
+    <div className="sticky top-0 z-50 px-4 sm:px-6 pt-2 sm:pt-3" ref={dropdownRef}>
       <nav
-        className="w-full flex items-center justify-between px-5 sm:px-8 py-4 sm:py-5 rounded-xl border border-white/[0.08] gap-4"
+        className="w-full flex items-center justify-between px-5 sm:px-8 py-3 sm:py-4 rounded-xl border border-white/[0.08] gap-4"
         style={navGlassStyle}
       >
         {/* Logo */}
