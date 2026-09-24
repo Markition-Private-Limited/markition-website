@@ -2,6 +2,15 @@
    Does NOT redefine :root vars, @theme tokens, or body/html — shared with
    the main site and must not be overridden here. */
 
+/* A couple of components (Process, Stats) reference --font-instrument-serif,
+   a differently-named variable that was never actually set anywhere in the
+   original site (only --font-instrument was). Alias it here so those
+   sections pick up the loaded Instrument Serif font too, instead of
+   silently falling back to Georgia/serif. */
+#media-root {
+  --font-instrument-serif: var(--font-instrument);
+}
+
 @keyframes media-ticker-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
