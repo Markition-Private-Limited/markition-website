@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { NAV_LINKS } from "@/lib/constants";
 import { ChevronDown, HamburgerIcon } from "@/lib/icons";
 
@@ -89,6 +90,8 @@ const SOLUTIONS_MENU = [
     icon: "megaphone",
     description: "Google Ads, SEO, social media management & paid campaigns that turn traffic into measurable growth.",
     linkText: "Explore Media",
+    href: "/media",
+    newTab: true,
   },
   {
     heading: "Technologies",
@@ -97,6 +100,8 @@ const SOLUTIONS_MENU = [
     icon: "code",
     description: "Custom software, web apps, mobile platforms & SaaS products engineered for scale and peak performance.",
     linkText: "Explore Technologies",
+    href: "/tech",
+    newTab: true,
   },
   {
     heading: "Design Lab",
@@ -105,6 +110,8 @@ const SOLUTIONS_MENU = [
     icon: "pen",
     description: "Brand identity, UI/UX design, motion graphics & print — creative work that makes your brand impossible to ignore.",
     linkText: "Explore Design Lab",
+    href: "/design-lab",
+    newTab: true,
   },
   {
     heading: "SPHENO AI",
@@ -143,6 +150,17 @@ function ServiceIcon({ type }: { type: string }) {
 }
 
 export default function Navbar() {
+  const router = useRouter();
+
+  function openSolution(sol: (typeof SOLUTIONS_MENU)[number]) {
+    if (!sol.href) return;
+    if ("newTab" in sol && sol.newTab) {
+      window.open(sol.href, "_blank", "noopener,noreferrer");
+    } else {
+      router.push(sol.href);
+    }
+  }
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
@@ -435,7 +453,8 @@ export default function Navbar() {
 
                   {/* Heading */}
                   <p
-                    style={{ margin: "0 0 14px", fontSize: 15, fontWeight: 800, color: "#ffffff", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", letterSpacing: "-0.2px", textAlign: "center", transition: "color 0.18s, transform 0.18s", cursor: "default", transformOrigin: "center" }}
+                    style={{ margin: "0 0 14px", fontSize: 15, fontWeight: 800, color: "#ffffff", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", letterSpacing: "-0.2px", textAlign: "center", transition: "color 0.18s, transform 0.18s", cursor: sol.href ? "pointer" : "default", transformOrigin: "center" }}
+                    onClick={() => { setSolutionsOpen(false); openSolution(sol); }}
                     onMouseEnter={e => { e.currentTarget.style.color = "#4B8EFF"; e.currentTarget.style.transform = "scale(1.06)"; }}
                     onMouseLeave={e => { e.currentTarget.style.color = "#ffffff"; e.currentTarget.style.transform = "scale(1)"; }}
                   >
@@ -446,6 +465,7 @@ export default function Navbar() {
                   <div
                     className="sol-img"
                     style={{ height: 128, borderRadius: 12, background: sol.gradient, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "transform 0.25s cubic-bezier(0.34,1.56,0.64,1), filter 0.25s ease, box-shadow 0.25s ease", cursor: "pointer", overflow: "hidden", position: "relative", boxShadow: "0 6px 20px rgba(0,0,0,0.25)" }}
+                    onClick={() => { setSolutionsOpen(false); openSolution(sol); }}
                     onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.05)"; e.currentTarget.style.filter = "brightness(1.18) saturate(1.25)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.4)"; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.filter = "none"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.25)"; }}
                   >
@@ -462,7 +482,9 @@ export default function Navbar() {
                       {sol.description}
                     </p>
                     <a
-                      href="#"
+                      href={sol.href ?? "#"}
+                      target={"newTab" in sol && sol.newTab ? "_blank" : undefined}
+                      rel={"newTab" in sol && sol.newTab ? "noopener noreferrer" : undefined}
                       onClick={() => setSolutionsOpen(false)}
                       style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12.5, fontWeight: 700, color: "#4B8EFF", textDecoration: "none", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", transition: "gap 0.15s, color 0.15s" }}
                       onMouseEnter={e => { e.currentTarget.style.color = "#80AEFF"; (e.currentTarget as HTMLAnchorElement).style.gap = "10px"; }}
@@ -634,8 +656,10 @@ export default function Navbar() {
                     {SOLUTIONS_MENU.map((sol) => (
                       <a
                         key={sol.heading}
-                        href="#"
-                        onClick={() => setMobileOpen(false)}
+                        href={sol.href ?? "#"}
+                        target={"newTab" in sol && sol.newTab ? "_blank" : undefined}
+                        rel={"newTab" in sol && sol.newTab ? "noopener noreferrer" : undefined}
+                        onClick={() => { setMobileOpen(false); setMobileSolutionsOpen(false); }}
                         className="flex flex-col gap-2 p-3 rounded-xl border border-white/[0.07] bg-white/[0.04] hover:bg-blue-500/10 hover:border-blue-400/30 transition-colors duration-150 overflow-hidden relative"
                       >
                         <div style={{ height: 3, borderRadius: 99, background: sol.accentBar, marginBottom: 2 }} />

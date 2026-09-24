@@ -1,0 +1,35 @@
+/* Scoped styles for the Design Lab inner pages.
+   Intentionally does NOT redefine :root vars, @theme tokens, or body/html —
+   those are shared with the main site and must not be overridden here. */
+
+/* ── Ticker marquee ── */
+@keyframes dl-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.dl-ticker-track {
+  animation: dl-marquee 28s linear infinite;
+  will-change: transform;
+}
+.dl-ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Process section left-panel step transition ── */
+@keyframes dl-stepLeftIn {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.dl-step-left-in {
+  animation: dl-stepLeftIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Hero text fade-in ── */
+@keyframes dl-heroFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.dl-hero-fade {
+  opacity: 0;
+  animation: dl-heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}

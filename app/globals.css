@@ -38,8 +38,15 @@ html {
 @keyframes ctaShimmerSweep { 0%{transform:translateX(-160%) skewX(-20deg)} 55%,100%{transform:translateX(260%) skewX(-20deg)} }
 
 body {
+  /* overflow-x: clip (not hidden) on purpose — hidden pairs with an
+     unset overflow-y by computing it to "auto" per spec, turning body
+     into its own scroll container, which silently breaks
+     position:sticky for anything inside it (it sticks to body's
+     scrollport, not the real viewport). clip has no such pairing rule
+     and doesn't create a scroll container, so it's overflow-safe
+     without breaking sticky descendants. */
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter, Inter, sans-serif);

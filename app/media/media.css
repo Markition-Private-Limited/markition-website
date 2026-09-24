@@ -1,0 +1,63 @@
+/* Scoped styles for the Media inner pages.
+   Does NOT redefine :root vars, @theme tokens, or body/html — shared with
+   the main site and must not be overridden here. */
+
+@keyframes media-ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.media-ticker-track {
+  animation: media-ticker-scroll 28s linear infinite;
+  will-change: transform;
+}
+
+.media-ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* Uniform inter-section gap on desktop — see markition-media's original
+   globals.css for the rationale (kept intact, class names renamed). */
+.media-gap-spacer {
+  height: 0;
+}
+
+@media (min-width: 768px) {
+  .media-gap {
+    padding-top: 0 !important;
+    padding-bottom: 80px !important;
+  }
+  .media-gap-spacer {
+    height: 80px;
+  }
+}
+
+/* ── Hero pre-hide (GSAP animates these in on load) ── */
+#media-root [data-hero-anim] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+#media-root [data-showcase-anim] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+/* ── Global mobile fixes (media pages only) ── */
+@media (max-width: 767px) {
+  #media-root section {
+    max-width: 100vw;
+    overflow-x: clip;
+  }
+
+  #media-root [data-hero] h1 {
+    letter-spacing: clamp(-2px, -0.4vw, -1px) !important;
+  }
+
+  #media-root .media-work-scroll-viewport {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #media-root #faq-section {
+    padding-top: 64px !important;
+  }
+}

@@ -20,6 +20,13 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
       if (!(window as Window & { __scrollLocked?: boolean }).__scrollLocked) {
         lenis.raf(time);
       }
+      // Broadcast target (unsmoothed) scroll so scroll-linked sections can
+      // respond instantly rather than waiting for lerp to catch up.
+      document.dispatchEvent(
+        new CustomEvent("lenis-target-scroll", {
+          detail: { targetScroll: (lenis as unknown as { targetScroll: number }).targetScroll },
+        })
+      );
       requestAnimationFrame(raf);
     }
     const id = requestAnimationFrame(raf);
