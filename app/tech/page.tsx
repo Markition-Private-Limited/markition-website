@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar/Navbar";
+import TechContactOverlay from "./_components/TechContactOverlay";
 
 export const metadata = {
   title: "Custom Software Development Company | Markition Tech",
@@ -27,6 +28,7 @@ export default function TechPage() {
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none" }}
         allowFullScreen
       />
+      <TechContactOverlay />
     </div>
   );
 }

@@ -2,9 +2,14 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { NAV_LINKS } from "@/lib/constants";
 import { ChevronDown, HamburgerIcon } from "@/lib/icons";
+
+function scrollToContact() {
+  const el = document.getElementById("contact");
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+}
 
 const navGlassStyle: React.CSSProperties = {
   background: "rgba(8, 16, 52, 0.85)",
@@ -149,8 +154,24 @@ function ServiceIcon({ type }: { type: string }) {
   );
 }
 
+const PAGE_LOGOS: Record<string, { src: string; width: number; height: number }> = {
+  "/media":      { src: "/media_white.png",       width: 140, height: 32 },
+  "/design-lab": { src: "/design_lab_white.png",  width: 140, height: 32 },
+  "/tech":       { src: "/logo_tech.png", width: 140, height: 32 },
+};
+
 export default function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
+
+  function handleContactClick(e: React.MouseEvent) {
+    e.preventDefault();
+    if (document.getElementById("contact")) {
+      scrollToContact();
+    } else {
+      router.push("/#contact");
+    }
+  }
 
   function openSolution(sol: (typeof SOLUTIONS_MENU)[number]) {
     if (!sol.href) return;
@@ -193,14 +214,28 @@ export default function Navbar() {
         style={navGlassStyle}
       >
         {/* Logo */}
-        <Image
-          src="/markition-logo.svg"
-          alt="Markition"
-          width={120}
-          height={28}
-          priority
-          className="h-[26px] sm:h-[28px] w-auto flex-shrink-0"
-        />
+        {(() => {
+          const pageLogo = PAGE_LOGOS[pathname] ?? PAGE_LOGOS[Object.keys(PAGE_LOGOS).find(k => pathname.startsWith(k)) ?? ""];
+          return pageLogo ? (
+            <Image
+              src={pageLogo.src}
+              alt="Markition"
+              width={pageLogo.width}
+              height={pageLogo.height}
+              priority
+              className="h-[26px] sm:h-[30px] w-auto flex-shrink-0"
+            />
+          ) : (
+            <Image
+              src="/markition-logo.svg"
+              alt="Markition"
+              width={120}
+              height={28}
+              priority
+              className="h-[26px] sm:h-[28px] w-auto flex-shrink-0"
+            />
+          );
+        })()}
 
         {/* Desktop nav links */}
         <div className="hidden lg:flex items-center gap-1 xl:gap-1.5 text-[13px] text-white font-normal flex-1 justify-center">
@@ -247,6 +282,16 @@ export default function Navbar() {
                 </span>
               </button>
             );
+            if (link.label === "Contact") return (
+              <a
+                key={link.label}
+                href="#contact"
+                onClick={handleContactClick}
+                className="hover:text-white/95 transition-colors duration-150 flex items-center gap-1 whitespace-nowrap px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05]"
+              >
+                {link.label}
+              </a>
+            );
             return (
               <a
                 key={link.label}
@@ -263,7 +308,8 @@ export default function Navbar() {
         {/* Right side */}
         <div className="flex items-center gap-2.5 flex-shrink-0">
           <a
-            href="#"
+            href="#contact"
+            onClick={handleContactClick}
             className="bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white text-[12.5px] font-medium px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-[5px] flex items-center gap-1.5 transition-colors duration-150 whitespace-nowrap"
           >
             <span className="hidden sm:inline">Book Free Consultation</span>
@@ -679,6 +725,19 @@ export default function Navbar() {
               </div>
             );
 
+            if (link.label === "Contact") return (
+              <a
+                key={link.label}
+                href="#contact"
+                onClick={(e) => { setMobileOpen(false); handleContactClick(e); }}
+                className={`flex items-center justify-between px-5 py-3.5 text-[13.5px] text-white/75 hover:text-white hover:bg-white/[0.05] transition-colors duration-150 ${borderClass}`}
+              >
+                <span>{link.label}</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="opacity-30">
+                  <path d="M4 7h6M7 4l3 3-3 3" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            );
             return (
               <a
                 key={link.label}
@@ -695,8 +754,8 @@ export default function Navbar() {
           })}
           <div className="p-4 border-t border-white/[0.05]">
             <a
-              href="#"
-              onClick={() => setMobileOpen(false)}
+              href="#contact"
+              onClick={(e) => { setMobileOpen(false); handleContactClick(e); }}
               className="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white text-[13.5px] font-medium px-5 py-2.5 rounded-[5px] transition-colors duration-150"
             >
               Book Free Consultation →

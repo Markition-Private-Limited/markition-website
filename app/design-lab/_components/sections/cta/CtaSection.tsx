@@ -1,10 +1,37 @@
-import Link from "next/link";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 
 const BLUE = "#1236E8";
 
 export function CtaSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setVisible(true);
+        obs.disconnect();
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
+
   return (
-    <section data-navbar-theme="light" className="bg-white px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+    <section
+      ref={sectionRef}
+      data-navbar-theme="light"
+      className="bg-white px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(32px)",
+        transition: "opacity 0.7s ease, transform 0.7s ease",
+      }}
+    >
       <div className="mx-auto max-w-7xl">
         <div className="lg:relative lg:overflow-hidden lg:rounded-[28px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -15,32 +42,39 @@ export function CtaSection() {
           />
 
           <div className="mt-8 text-center lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:flex lg:w-[46%] lg:flex-col lg:items-start lg:justify-center lg:px-6 lg:pt-10 xl:px-10">
-            <div className="lg:w-full lg:max-w-[300px]">
-            <h2
-              className="font-extrabold"
+            <div
+              className="lg:w-full lg:max-w-[300px]"
               style={{
-                fontSize: "clamp(22px, 1.9vw, 28px)",
-                lineHeight: 1.2,
-                letterSpacing: "-0.5px",
-                color: "#0d0d17",
-                fontFamily: "var(--font-jakarta, sans-serif)",
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0)" : "translateY(20px)",
+                transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s",
               }}
             >
-              Have An <span style={{ color: BLUE }}>Idea</span>? Let&apos;s
-              <br />
-              Make It <span style={{ color: BLUE }}>Remarkable</span>.
-            </h2>
-            <p className="mt-3 line-clamp-2 text-[13.5px] leading-relaxed text-[#0d0d17]">
-              From logos to app design, social media posts, and video, we turn your ideas into real experiences.
-            </p>
-            <Link
-              href="/design-lab/contact"
-              className="mt-5 inline-flex items-center gap-2 self-center rounded-lg px-5 py-2.5 text-[13px] font-semibold text-white transition-transform hover:-translate-y-0.5"
-              style={{ background: BLUE }}
-            >
-              Book a Free Consultation
-              <span aria-hidden="true">→</span>
-            </Link>
+              <h2
+                className="font-extrabold"
+                style={{
+                  fontSize: "clamp(22px, 1.9vw, 28px)",
+                  lineHeight: 1.2,
+                  letterSpacing: "-0.5px",
+                  color: "#0d0d17",
+                  fontFamily: "var(--font-jakarta, sans-serif)",
+                }}
+              >
+                Have An <span style={{ color: BLUE }}>Idea</span>? Let&apos;s
+                <br />
+                Make It <span style={{ color: BLUE }}>Remarkable</span>.
+              </h2>
+              <p className="mt-3 line-clamp-2 text-[13.5px] leading-relaxed text-[#0d0d17]">
+                From logos to app design, social media posts, and video, we turn your ideas into real experiences.
+              </p>
+              <button
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                className="mt-5 inline-flex items-center gap-2 self-center rounded-lg px-5 py-2.5 text-[13px] font-semibold text-white transition-transform hover:-translate-y-0.5"
+                style={{ background: BLUE }}
+              >
+                Book a Free Consultation
+                <span aria-hidden="true">→</span>
+              </button>
             </div>
           </div>
         </div>

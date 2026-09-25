@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
+
+function scrollTo(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+}
 
 const ALL_IMAGES = [
   "/design-lab/assets/hero/3ac0d2c9715554614b1ec0e32e74cd606253df1a.png",
@@ -174,8 +177,8 @@ export function HeroSection() {
           className="mt-10 flex flex-wrap gap-3 dl-hero-fade"
           style={{ animationDelay: "240ms" }}
         >
-          <Link
-            href="/design-lab/contact"
+          <button
+            onClick={() => scrollTo("contact")}
             className="group relative inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-[15px] font-semibold overflow-hidden"
             style={{ background: "#1236E8", border: "2px solid #1236E8" }}
           >
@@ -189,10 +192,10 @@ export function HeroSection() {
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
-          </Link>
+          </button>
 
-          <Link
-            href="/design-lab#features"
+          <button
+            onClick={() => scrollTo("work")}
             className="group relative inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-[15px] font-semibold overflow-hidden border-2 border-gray-300 text-gray-800"
           >
             <span
@@ -205,7 +208,7 @@ export function HeroSection() {
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
-          </Link>
+          </button>
         </div>
 
         <div

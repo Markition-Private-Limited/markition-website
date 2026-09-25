@@ -63,7 +63,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section style={{ background: "#000028", padding: "100px 0 110px" }}>
+    <section id="contact" style={{ background: "#000028", padding: "100px 0 110px" }}>
       <style>{`
         @media (max-width: 767px) {
           .contact-grid { grid-template-columns: 1fr !important; gap: 44px 0 !important; padding: 0 20px !important; }

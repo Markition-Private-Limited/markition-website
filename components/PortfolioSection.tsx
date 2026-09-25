@@ -95,6 +95,7 @@ export default function PortfolioSection() {
 
   return (
     <section
+      id="portfolio"
       className="py-16 sm:py-20 lg:py-28 px-4 sm:px-6"
       style={{ background: "#000028" }}
     >

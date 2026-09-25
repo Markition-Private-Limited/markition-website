@@ -3,8 +3,21 @@ html {
   width: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
-  -ms-overflow-style: none;   /* IE and Edge */
-  scrollbar-width: none;      /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 140, 255, 0.35) transparent;
+}
+html::-webkit-scrollbar {
+  width: 6px;
+}
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+html::-webkit-scrollbar-thumb {
+  background: rgba(100, 140, 255, 0.35);
+  border-radius: 99px;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 140, 255, 0.6);
 }
 :root {
   --background: #000028;

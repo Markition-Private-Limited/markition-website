@@ -181,6 +181,7 @@ export function WorkSection() {
 
   return (
     <section
+      id="work"
       ref={sectionRef}
       data-navbar-theme="light"
       className="bg-white py-20 sm:py-28 lg:py-32"
