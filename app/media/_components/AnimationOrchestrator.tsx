@@ -8,7 +8,7 @@ export default function AnimationOrchestrator() {
       // ─── Hero animations ──────────────────────────────────────────────────────
       const heroEls = gsap.utils.toArray<HTMLElement>("[data-hero-anim]");
       if (heroEls.length) {
-        gsap.set(heroEls, { y: 56 });
+        gsap.set(heroEls, { opacity: 0, y: 56 });
         gsap.to(heroEls, {
           opacity: 1,
           y: 0,
@@ -22,7 +22,7 @@ export default function AnimationOrchestrator() {
 
       const showcaseEl = document.querySelector<HTMLElement>("[data-showcase-anim]");
       if (showcaseEl) {
-        gsap.set(showcaseEl, { y: 90, scale: 0.96 });
+        gsap.set(showcaseEl, { opacity: 0, y: 90, scale: 0.96 });
         gsap.to(showcaseEl, {
           opacity: 1,
           y: 0,

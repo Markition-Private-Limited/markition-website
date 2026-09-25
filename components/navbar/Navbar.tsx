@@ -91,6 +91,7 @@ const SOLUTIONS_MENU = [
     description: "Google Ads, SEO, social media management & paid campaigns that turn traffic into measurable growth.",
     linkText: "Explore Media",
     href: "/media",
+    newTab: true,
   },
   {
     heading: "Technologies",
@@ -100,6 +101,7 @@ const SOLUTIONS_MENU = [
     description: "Custom software, web apps, mobile platforms & SaaS products engineered for scale and peak performance.",
     linkText: "Explore Technologies",
     href: "/tech",
+    newTab: true,
   },
   {
     heading: "Design Lab",

@@ -10,9 +10,11 @@ const SCALE_MAX = 1;
 export default function HeroShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
   const scaleElRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef(0);
 
   useEffect(() => {
+    // Skip scroll-scale animation on mobile — avoids scroll-lock deadlock
+    if (window.innerWidth < 640) return;
+
     const el = sectionRef.current;
     const scaleEl = scaleElRef.current;
     if (!el || !scaleEl) return;
@@ -20,14 +22,11 @@ export default function HeroShowcase() {
     let rafId = 0;
 
     function applyScale() {
-      // Recomputed fresh every call — avoids desync if content above this
-      // section shifts height after mount (e.g. late-loading images).
       const sectionTop = el!.getBoundingClientRect().top + window.scrollY;
       const total = el!.offsetHeight - window.innerHeight;
       if (total <= 0) return;
       const scrolled = Math.max(0, Math.min(total, window.scrollY - sectionTop));
       const progress = scrolled / total;
-      progressRef.current = progress;
       scaleEl!.style.transform = `scale(${SCALE_MIN + progress * (SCALE_MAX - SCALE_MIN)})`;
     }
 
@@ -47,37 +46,28 @@ export default function HeroShowcase() {
     };
   }, []);
 
-  // Mobile scroll lock — e.preventDefault in touchmove already kills momentum,
-  // so no scrollTo snap is needed (that was the visible flicker source)
-  useEffect(() => {
-    if (window.innerWidth >= 640) return;
-
-    function onTouchMove(e: TouchEvent) {
-      if (progressRef.current >= 0.99) return;
-      const el = sectionRef.current;
-      if (!el) return;
-      const top = el.getBoundingClientRect().top;
-      // Only lock while section is in sticky zone
-      if (top > 0 || top < -(el.offsetHeight - window.innerHeight)) return;
-      e.preventDefault();
-    }
-
-    window.addEventListener("touchmove", onTouchMove, { passive: false });
-    return () => window.removeEventListener("touchmove", onTouchMove);
-  }, []);
-
   return (
     <section
       ref={sectionRef}
       data-showcase
-      className="relative w-full"
-      style={{ height: `${STEPS * VH_PER_STEP}vh`, marginTop: "-120px" }}
+      className="relative w-full showcase-section"
+      style={{ marginTop: "-120px", isolation: "isolate", zIndex: 0 }}
     >
+      <style>{`
+        .showcase-section { height: ${STEPS * VH_PER_STEP}vh; }
+        .showcase-inner   { position: sticky; top: 0; height: 100vh; padding-top: clamp(56px, 8vh, 100px); }
+        .showcase-scale-el { will-change: transform; }
+        @media (max-width: 639px) {
+          .showcase-section { height: auto; margin-top: 24px !important; }
+          .showcase-inner   { position: static; height: auto; padding-top: 0; padding-bottom: 40px; }
+          .showcase-scale-el { transform: scale(1) !important; }
+        }
+      `}</style>
+
       <div
-        className="sticky top-0 flex items-start justify-center overflow-hidden"
-        style={{ height: "100vh", paddingTop: "clamp(56px, 8vh, 100px)" }}
+        className="showcase-inner flex items-start justify-center overflow-hidden"
       >
-        {/* Ambient glow — isolated layer so blur doesn't repaint the video */}
+        {/* Ambient glow */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 mx-auto w-full max-w-[1100px] px-6 sm:px-10"
@@ -91,7 +81,7 @@ export default function HeroShowcase() {
 
         <div
           ref={scaleElRef}
-          className="relative z-10 w-full max-w-[1100px] mx-auto px-6 sm:px-10"
+          className="showcase-scale-el relative z-10 w-full max-w-[1100px] mx-auto px-6 sm:px-10"
           style={{
             transform: `scale(${SCALE_MIN})`,
             transformOrigin: "center center",
