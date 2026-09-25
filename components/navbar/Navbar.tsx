@@ -13,7 +13,7 @@ const navGlassStyle: React.CSSProperties = {
   boxShadow: "0 2px 24px rgba(0,0,0,0.28), inset 0 1px 0 rgba(100,150,255,0.06)",
 };
 
-type ServiceItem = { icon: string; name: string; description: string };
+type ServiceItem = { icon: string; name: string; description: string; href?: string };
 
 type ServiceContent = { title: string; items: ServiceItem[] };
 
@@ -23,12 +23,12 @@ const SERVICES_MENU = {
     "Tech Solution": {
       title: "Tech Solutions We Offer",
       items: [
-        { icon: "code",     name: "Software Development",    description: "Custom web, mobile & SaaS platforms built to scale." },
-        { icon: "building", name: "Enterprise Solution",     description: "ERP, CRM & operational systems for large enterprises." },
-        { icon: "mobile",   name: "Mobile App Engineering",  description: "Cross-platform iOS & Android apps with native performance." },
-        { icon: "cloud",    name: "SaaS Platforms",          description: "Multi-tenant SaaS products from MVP to full launch." },
-        { icon: "chart",    name: "Web Apps & Portals",      description: "Performant, SEO-optimised web applications & portals." },
-        { icon: "cart",     name: "Commerce & Marketplaces", description: "E-commerce stores, B2B portals & marketplace platforms." },
+        { icon: "code",     name: "Software Development",    description: "Custom web, mobile & SaaS platforms built to scale.",        href: "/tech#services" },
+        { icon: "building", name: "Enterprise Solution",     description: "ERP, CRM & operational systems for large enterprises.",        href: "/tech#solutions" },
+        { icon: "mobile",   name: "Mobile App Engineering",  description: "Cross-platform iOS & Android apps with native performance.",   href: "/tech#services" },
+        { icon: "cloud",    name: "SaaS Platforms",          description: "Multi-tenant SaaS products from MVP to full launch.",          href: "/tech#services" },
+        { icon: "chart",    name: "Web Apps & Portals",      description: "Performant, SEO-optimised web applications & portals.",        href: "/tech#services" },
+        { icon: "cart",     name: "Commerce & Marketplaces", description: "E-commerce stores, B2B portals & marketplace platforms.",      href: "/tech#services" },
       ],
     },
     "Digital Marketing": {
@@ -91,7 +91,6 @@ const SOLUTIONS_MENU = [
     description: "Google Ads, SEO, social media management & paid campaigns that turn traffic into measurable growth.",
     linkText: "Explore Media",
     href: "/media",
-    newTab: true,
   },
   {
     heading: "Technologies",
@@ -101,7 +100,6 @@ const SOLUTIONS_MENU = [
     description: "Custom software, web apps, mobile platforms & SaaS products engineered for scale and peak performance.",
     linkText: "Explore Technologies",
     href: "/tech",
-    newTab: true,
   },
   {
     heading: "Design Lab",
@@ -348,7 +346,7 @@ export default function Navbar() {
                   {(SERVICES_MENU.content[activeService]?.items ?? []).map((item) => (
                     <a
                       key={item.name}
-                      href="#"
+                      href={item.href ?? "#"}
                       onClick={() => setServicesOpen(false)}
                       className="svc-card-item"
                       style={{
@@ -601,11 +599,11 @@ export default function Navbar() {
 
             if (link.label === "Services") {
               const SERVICE_CARDS = [
-                { icon: "code",      label: "Tech Solution",       desc: "Web, mobile & SaaS platforms built to scale" },
-                { icon: "bolt",      label: "Digital Marketing",   desc: "Google Ads, SEO & social campaigns" },
-                { icon: "building",  label: "Enterprise Solution",  desc: "ERP, CRM & operational systems" },
-                { icon: "robot",     label: "AI Solutions",        desc: "Agents, chatbots & workflow automation" },
-                { icon: "chart",     label: "Industry Solutions",  desc: "Fintech, healthcare, retail & more" },
+                { icon: "code",      label: "Tech Solution",       desc: "Web, mobile & SaaS platforms built to scale",  href: "/tech" },
+                { icon: "bolt",      label: "Digital Marketing",   desc: "Google Ads, SEO & social campaigns",            href: "#" },
+                { icon: "building",  label: "Enterprise Solution",  desc: "ERP, CRM & operational systems",               href: "/tech#solutions" },
+                { icon: "robot",     label: "AI Solutions",        desc: "Agents, chatbots & workflow automation",        href: "#" },
+                { icon: "chart",     label: "Industry Solutions",  desc: "Fintech, healthcare, retail & more",            href: "#" },
               ];
               return (
                 <div key={link.label} className={borderClass}>
@@ -623,7 +621,7 @@ export default function Navbar() {
                       {SERVICE_CARDS.map((svc) => (
                         <a
                           key={svc.label}
-                          href="#"
+                          href={svc.href}
                           onClick={() => setMobileOpen(false)}
                           className="flex flex-col gap-2 p-3 rounded-xl border border-white/[0.07] bg-white/[0.04] hover:bg-blue-500/10 hover:border-blue-400/30 transition-colors duration-150"
                         >
