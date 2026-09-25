@@ -38,8 +38,8 @@ function Strip({
       aria-hidden="true"
       style={{
         position: "absolute",
-        left: "-8%",
-        width: "116%",
+        left: "-10vw",
+        width: "120vw",
         top,
         transform: `rotate(${rotate}deg)`,
         zIndex,
@@ -85,11 +85,12 @@ function Strip({
 
 export default function ScaleWithAISection() {
   return (
-    <section style={{ background: "#000028", padding: "120px 24px 100px", position: "relative" }}>
+    <section style={{ background: "#000028", padding: "120px 24px 100px", position: "relative", overflow: "hidden" }}>
+      {/* Tilted sliding strips — positioned relative to the full-width section */}
+      <Strip background="#1A3BFF" textColor="#0B1740" rotate={2.2} top={34} zIndex={3} duration="32s" />
+      <Strip background="#22C5F5" textColor="#0B1740" rotate={-2.6} top={10} zIndex={4} duration="28s" />
+
       <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative" }}>
-        {/* Tilted sliding strips peeking above the card */}
-        <Strip background="#1A3BFF" textColor="#0B1740" rotate={2.2} top={-34} zIndex={3} duration="32s" />
-        <Strip background="#22C5F5" textColor="#0B1740" rotate={-2.6} top={-62} zIndex={4} duration="28s" />
 
         {/* Dark navy card */}
         <div

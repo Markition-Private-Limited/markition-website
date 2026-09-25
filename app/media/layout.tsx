@@ -1,5 +1,5 @@
 import { Familjen_Grotesk, Instrument_Serif } from "next/font/google";
-import Navbar from "./_components/layout/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 import AnimationOrchestrator from "./_components/AnimationOrchestrator";
 import "./media.css";
 

@@ -1,13 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const BUDGET_MIN = 0;
 const BUDGET_MAX = 10000;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const NAME_RE  = /^[a-zA-Z\s'\-]{2,100}$/;
+
+function validate(name: string, email: string, message: string, captcha: string | null) {
+  const errs: Record<string, string> = {};
+  if (!name.trim())               errs.name    = "Name is required.";
+  else if (!NAME_RE.test(name))   errs.name    = "Only letters, spaces, hyphens and apostrophes. (2–100 chars)";
+  if (!email.trim())              errs.email   = "Email is required.";
+  else if (!EMAIL_RE.test(email)) errs.email   = "Enter a valid email address.";
+  if (!message.trim())            errs.message = "Message is required.";
+  else if (message.trim().length < 10)  errs.message = "Message must be at least 10 characters.";
+  else if (message.trim().length > 2000) errs.message = "Message must be under 2000 characters.";
+  if (!captcha)                   errs.captcha = "Please complete the reCAPTCHA.";
+  return errs;
+}
 
 export default function ContactSection() {
   const [budgetMin, setBudgetMin] = useState(1000);
   const [budgetMax, setBudgetMax] = useState(5000);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [service, setService] = useState("");
+  const [message, setMessage] = useState("");
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const minPct = ((budgetMin - BUDGET_MIN) / (BUDGET_MAX - BUDGET_MIN)) * 100;
   const maxPct = ((budgetMax - BUDGET_MIN) / (BUDGET_MAX - BUDGET_MIN)) * 100;
@@ -17,6 +41,25 @@ export default function ContactSection() {
   }
   function handleMax(e: React.ChangeEvent<HTMLInputElement>) {
     setBudgetMax(Math.max(Number(e.target.value), budgetMin + 500));
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const errs = validate(name, email, message, captchaToken);
+    if (Object.keys(errs).length) { setErrors(errs); return; }
+    setErrors({});
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, service, budgetMin, budgetMax, message, source: "Home Page", recaptchaToken: captchaToken }),
+      });
+      if (res.ok) { setStatus("success"); }
+      else { setStatus("error"); }
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -163,13 +206,13 @@ export default function ContactSection() {
 
         {/* ── RIGHT COLUMN – Form ── */}
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit}
           style={{ display: "flex", flexDirection: "column", gap: 22, paddingLeft: 24 }}
         >
           {/* Full Name + Email */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }}>
-            <FormField label="Full Name" placeholder="Type here" type="text" />
-            <FormField label="Email" placeholder="Type here" type="email" />
+            <FormField label="Full Name" placeholder="Type here" type="text" value={name} onChange={setName} error={errors.name} />
+            <FormField label="Email" placeholder="Type here" type="email" value={email} onChange={setEmail} error={errors.email} />
           </div>
 
           {/* Why contacting */}
@@ -177,7 +220,8 @@ export default function ContactSection() {
             <label style={labelStyle}>Why Are You Contacting Us?</label>
             <div style={{ position: "relative" }}>
               <select
-                defaultValue=""
+                value={service}
+                onChange={(e) => setService(e.target.value)}
                 style={{
                   width: "100%",
                   background: "transparent",
@@ -283,10 +327,13 @@ export default function ContactSection() {
 
           {/* Message */}
           <div>
-            <label style={labelStyle}>Your Message</label>
+            <label style={labelStyle}>Your Message <span style={{color:"#8aa4c8",fontWeight:400}}>({message.length}/2000)</span></label>
             <textarea
               placeholder="Type here"
               rows={3}
+              maxLength={2000}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               style={{
                 width: "100%",
                 background: "transparent",
@@ -303,29 +350,55 @@ export default function ContactSection() {
             />
           </div>
 
+          {errors.message && <p style={{ color: "#ff6b6b", fontSize: 12, marginTop: -10 }}>{errors.message}</p>}
+
+          {/* reCAPTCHA */}
+          <div>
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr"
+              theme="dark"
+              onChange={(token) => { setCaptchaToken(token); setErrors(e => ({ ...e, captcha: "" })); }}
+              onExpired={() => setCaptchaToken(null)}
+            />
+            {errors.captcha && <p style={{ color: "#ff6b6b", fontSize: 12, marginTop: 6 }}>{errors.captcha}</p>}
+          </div>
+
           {/* Submit */}
           <div>
-            <button
-              type="submit"
-              style={{
-                background: "transparent",
-                border: "1.5px solid rgba(255,255,255,0.28)",
-                borderRadius: 50,
-                padding: "11px 26px",
-                color: "#f0f6ff",
-                fontSize: 12.5,
-                fontWeight: 600,
-                cursor: "pointer",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 10,
-                letterSpacing: "0.02em",
-                fontFamily: "inherit",
-              }}
-            >
-              <span style={{ color: "#00d4ff", fontSize: 11 }}>✦</span>
-              Let&apos;s Build Something Great
-            </button>
+            {status === "success" ? (
+              <p style={{ color: "#00d4ff", fontSize: 13, fontWeight: 600 }}>
+                ✦ Message sent! We&apos;ll be in touch soon.
+              </p>
+            ) : status === "error" ? (
+              <p style={{ color: "#ff6b6b", fontSize: 13 }}>
+                Something went wrong. Please try again or email us directly.
+              </p>
+            ) : (
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                style={{
+                  background: "transparent",
+                  border: "1.5px solid rgba(255,255,255,0.28)",
+                  borderRadius: 50,
+                  padding: "11px 26px",
+                  color: "#f0f6ff",
+                  fontSize: 12.5,
+                  fontWeight: 600,
+                  cursor: status === "sending" ? "not-allowed" : "pointer",
+                  opacity: status === "sending" ? 0.6 : 1,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 10,
+                  letterSpacing: "0.02em",
+                  fontFamily: "inherit",
+                }}
+              >
+                <span style={{ color: "#00d4ff", fontSize: 11 }}>✦</span>
+                {status === "sending" ? "Sending…" : "Let's Build Something Great"}
+              </button>
+            )}
           </div>
         </form>
       </div>
@@ -393,13 +466,10 @@ const labelStyle: React.CSSProperties = {
 };
 
 function FormField({
-  label,
-  placeholder,
-  type,
+  label, placeholder, type, value, onChange, error,
 }: {
-  label: string;
-  placeholder: string;
-  type: string;
+  label: string; placeholder: string; type: string;
+  value: string; onChange: (v: string) => void; error?: string;
 }) {
   return (
     <div>
@@ -407,11 +477,15 @@ function FormField({
       <input
         type={type}
         placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        maxLength={type === "email" ? 254 : 100}
+        required
         style={{
           width: "100%",
           background: "transparent",
           border: "none",
-          borderBottom: "1px solid rgba(255,255,255,0.15)",
+          borderBottom: `1px solid ${error ? "#ff6b6b" : "rgba(255,255,255,0.15)"}`,
           color: "#f0f6ff",
           fontSize: 13,
           padding: "7px 0",
@@ -420,6 +494,7 @@ function FormField({
           fontFamily: "inherit",
         }}
       />
+      {error && <p style={{ color: "#ff6b6b", fontSize: 11, marginTop: 4 }}>{error}</p>}
     </div>
   );
 }
