@@ -2,10 +2,21 @@
 
 export default function AuditSection() {
   return (
-    <section style={{ background: "#000028", padding: "60px 24px 70px" }}>
+    <section style={{ background: "#000028", padding: "60px 16px 70px" }}>
+      <style>{`
+        @media (max-width: 767px) {
+          .audit-outer { padding: 20px !important; }
+          .audit-inner { padding: 24px 20px !important; }
+          .audit-grid  { grid-template-columns: 1fr !important; gap: 28px !important; }
+          .audit-photo-frame { padding: 16px !important; }
+          .audit-photo-box { height: 220px !important; }
+          .audit-right { padding: 0 !important; }
+        }
+      `}</style>
 
       {/* ── 1st layer: outer dark navy container ── */}
       <div
+        className="audit-outer"
         style={{
           maxWidth: 1200,
           margin: "0 auto",
@@ -17,6 +28,7 @@ export default function AuditSection() {
       >
         {/* ── 2nd layer: white inner card ── */}
         <div
+          className="audit-inner"
           style={{
             background: "#ffffff",
             borderRadius: 16,
@@ -29,6 +41,7 @@ export default function AuditSection() {
 
           {/* ── Two-column layout ── */}
           <div
+            className="audit-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "0.82fr 1fr",
@@ -40,6 +53,7 @@ export default function AuditSection() {
           >
             {/* ── LEFT: palatinate blue photo frame ── */}
             <div
+              className="audit-photo-frame"
               style={{
                 background: "#1D47D4",
                 borderRadius: 14,
@@ -49,6 +63,7 @@ export default function AuditSection() {
             >
               {/* Photo — cropped with name overlay inside the cut */}
               <div
+                className="audit-photo-box"
                 style={{
                   height: 285,
                   overflow: "hidden",
@@ -109,7 +124,7 @@ export default function AuditSection() {
             </div>
 
             {/* ── RIGHT: text + button ── */}
-            <div style={{ padding: "8px 0 8px 12px", position: "relative" }}>
+            <div className="audit-right" style={{ padding: "8px 0 8px 12px", position: "relative" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 aria-hidden="true"

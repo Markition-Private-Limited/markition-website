@@ -64,7 +64,16 @@ export default function ContactSection() {
 
   return (
     <section style={{ background: "#000028", padding: "100px 0 110px" }}>
+      <style>{`
+        @media (max-width: 767px) {
+          .contact-grid { grid-template-columns: 1fr !important; gap: 44px 0 !important; padding: 0 20px !important; }
+          .contact-form { padding-left: 0 !important; }
+          .contact-name-email { grid-template-columns: 1fr !important; gap: 22px !important; }
+          .contact-phone-card { display: none !important; }
+        }
+      `}</style>
       <div
+        className="contact-grid"
         style={{
           maxWidth: 1200,
           margin: "0 auto",
@@ -109,6 +118,7 @@ export default function ContactSection() {
 
           {/* ── Phone card ── */}
           <div
+            className="contact-phone-card"
             style={{
               display: "flex",
               borderRadius: 20,
@@ -207,10 +217,11 @@ export default function ContactSection() {
         {/* ── RIGHT COLUMN – Form ── */}
         <form
           onSubmit={handleSubmit}
+          className="contact-form"
           style={{ display: "flex", flexDirection: "column", gap: 22, paddingLeft: 24 }}
         >
           {/* Full Name + Email */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }}>
+          <div className="contact-name-email" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }}>
             <FormField label="Full Name" placeholder="Type here" type="text" value={name} onChange={setName} error={errors.name} />
             <FormField label="Email" placeholder="Type here" type="email" value={email} onChange={setEmail} error={errors.email} />
           </div>
