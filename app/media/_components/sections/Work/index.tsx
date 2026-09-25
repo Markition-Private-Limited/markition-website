@@ -378,9 +378,9 @@ export default function Work() {
                 letterSpacing: "-0.04em",
               }}
             >
-              Digital Marketing Built
+              Digital Marketing Services
               <br />
-              Around Your Business
+              Built Around You
             </h2>
           </div>
 

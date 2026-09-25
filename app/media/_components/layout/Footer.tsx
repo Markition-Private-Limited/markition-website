@@ -46,7 +46,7 @@ export default function Footer() {
               style={{ height: 28, width: "auto", marginBottom: 20 }}
             />
             <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.75, color: "#8aa4c8", maxWidth: 260 }}>
-              Our expertise, as well as our passion for web design,
+              Our expertise, combined with proven results in digital marketing,
               sets us apart from other agencies.
             </p>
           </div>

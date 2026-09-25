@@ -4,32 +4,32 @@ import { useState, useEffect, useRef } from "react";
 
 const FAQS = [
   {
-    q: "What is included in your branding services?",
-    a: "Our branding services include logo design, brand identity systems, typography, colour palettes, brand guidelines, and all the core assets you need to show up consistently across digital and print.",
+    q: "What's included in your digital marketing services?",
+    a: "Our digital marketing services include SEO, paid ads, social media management, content marketing, email automation, and conversion optimization — everything you need to turn visibility into real, measurable business growth.",
   },
   {
-    q: "What is the difference between branding and rebranding?",
-    a: "Branding is building your visual identity from scratch. Rebranding is evolving or replacing an existing identity — whether that means a full overhaul or a strategic refresh to better match where your business is today.",
+    q: "What's the difference between SEO and paid ads?",
+    a: "SEO builds long-term organic visibility that keeps paying off well after the campaign ends. Paid ads deliver immediate traffic and leads right away — most growing businesses see the strongest results running both strategies together.",
   },
   {
-    q: "Can you design our website as part of the branding project?",
-    a: "Yes. We can scope a website design — or a full design-and-build — as an add-on to your branding project so your digital presence launches alongside your new identity.",
+    q: "Can you run our paid ads and SEO together?",
+    a: "Yes. Running SEO and paid ads together is one of the most effective strategies we offer — SEO builds long-term rankings while ads bring in leads right now.",
   },
   {
-    q: "Can you apply the identity to a digital product?",
-    a: "Absolutely. We extend brand identities into UI systems, component libraries, and product design so your app or SaaS product feels as polished as your marketing.",
+    q: "Do you manage social media accounts too?",
+    a: "Absolutely. We handle content creation, posting schedules, community management, and paid social campaigns — so your social presence stays active without ever taking up your time.",
   },
   {
-    q: "Do you provide logo design without a complete rebrand?",
-    a: "Yes. We offer standalone logo design for businesses that need a strong mark without a full identity overhaul. We'll make sure it's versatile enough to grow with you.",
+    q: "Can you build a one-off landing page or campaign?",
+    a: "Yes. We build standalone landing pages and single campaigns for businesses that need fast results without a retainer. We'll make sure it's built to convert from day one.",
   },
   {
-    q: "Do you work with startups?",
-    a: "Definitely. We love working with early-stage companies. We can build a brand system that looks established from day one and scales as your team and product grows.",
+    q: "Do you work with startups and small businesses?",
+    a: "Definitely. We love working with early-stage companies. We build marketing systems that punch above your size from day one and scale as your budget and team grow.",
   },
   {
-    q: "How long does a branding project take?",
-    a: "Most branding projects take 4–8 weeks depending on scope. A logo-only project can move faster; a full identity system with guidelines and collateral typically runs the full range.",
+    q: "How long until we see results from digital marketing?",
+    a: "Paid ads can start driving qualified leads within days of launch. SEO takes longer — most clients see meaningful ranking movement within 3–4 months, with compounding growth after that.",
   },
 ];
 

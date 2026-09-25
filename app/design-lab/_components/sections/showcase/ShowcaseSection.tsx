@@ -15,8 +15,8 @@ const CARDS: Card[] = [
   { type: "image", src: "/design-lab/assets/projects/showcase-saas.png",     alt: "SaaS Dashboard UI" },
   {
     type: "text",
-    title: "Motion & 2D/3D Design",
-    body: "Motion is the heartbeat of modern digital communication. We craft cinematic 3D product renders, kinetic logo reveals, explainer animations, UI micro-interactions, and spatial visual assets that command attention and elevate brand prestige.",
+    title: "Video Editing & Motion Design",
+    body: "Motion brings your brand to life. We create 2D and 3D animation, kinetic logo reveals, explainer videos, and social media reels that grab attention and keep people watching until the very end.",
   },
   { type: "image", src: "/design-lab/assets/projects/showcase-branding.png", alt: "Creative Direction" },
 ];
@@ -195,13 +195,12 @@ export function ShowcaseSection() {
               fontFamily:    "var(--font-jakarta, sans-serif)",
             }}
           >
-            One Creative Studio.{" "}
+            Your Full-Service{" "}
             <span style={{ color: BLUE }}>
-              Every
+              Branding &amp;
               <br className="hidden sm:block" />
-              {" "}Visual Touchpoint
+              {" "}Design Agency
             </span>
-            .
           </h2>
 
           <p
@@ -214,9 +213,8 @@ export function ShowcaseSection() {
               transition: "opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s",
             }}
           >
-            From foundational brand architecture to high-density SaaS interfaces
-            and cinematic motion graphics, we provide end-to-end creative
-            excellence under one unified roof.
+            From logos and branding to app design, social media posts, and motion
+            graphics, we handle every visual piece your growing brand needs.
           </p>
 
           <a

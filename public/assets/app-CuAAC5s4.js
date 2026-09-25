@@ -23116,7 +23116,7 @@ const fI = "/assets/portfolio-BOpCpxWN.png",
         id: "web-dev",
         number: "01",
         title: "Web Development",
-        shortDescription: "Blazing-fast, responsive websites and web applications built with modern frameworks.",
+        shortDescription: "Fast, modern websites built on React and Next.js, engineered for speed, SEO, and conversion.",
         longDescription: "We craft production-grade web applications using React, Next.js, and Vue — optimized for performance, SEO, and scalability. From landing pages to complex SaaS platforms, every pixel is intentional. Our engineering team follows best practices for accessibility, progressive enhancement, and server-side rendering to deliver experiences that load in milliseconds.",
         icon: "Globe",
         url: "/web-development",
@@ -23214,7 +23214,7 @@ const fI = "/assets/portfolio-BOpCpxWN.png",
         id: "ai-automation",
         number: "03",
         title: "AI Automation & Integration",
-        shortDescription: "Custom AI chatbots, workflow automation, LLM integration, and AI agents built for modern business scale.",
+        shortDescription: "Custom CRM dashboards that organize your leads, track every deal, and close sales faster.",
         longDescription: "We design and engineer custom AI automation and integration solutions that streamline operations, eliminate manual bottlenecks, and elevate customer experiences. From WhatsApp business automation and enterprise AI chatbots to full-scale LLM integrations (OpenAI/Claude) and autonomous workflow agents, we seamlessly connect cutting-edge AI capabilities directly into your existing technology stack.",
         icon: "Bot",
         url: "/ai-automation",
@@ -23252,7 +23252,7 @@ const fI = "/assets/portfolio-BOpCpxWN.png",
         id: "custom-software",
         number: "04",
         title: "Custom Software",
-        shortDescription: "Tailored software solutions that solve your unique business challenges at scale.",
+        shortDescription: "Tailored software and API integrations built to solve problems off-the-shelf tools simply can’t.",
         longDescription: "When off-the-shelf tools fall short, we engineer bespoke systems. From internal dashboards to enterprise platforms, we architect solutions that grow alongside your organization. Our approach prioritizes clean architecture, comprehensive documentation, and modular design that makes future iterations seamless.",
         icon: "Cpu",
         url: "/custom-software-development",
@@ -23813,28 +23813,28 @@ const Om = [{
     }],
     G6 = [{
         id: "faq-1",
-        question: "Are these fixed prices?",
-        answer: "No. These are starting prices. Your final quote depends on the scope, features, integrations, design complexity, and timeline of your project."
+        question: "Do you build custom CRM systems?",
+        answer: "Yes — we build CRM dashboards tailored to your sales process, not a generic template. You get exactly the fields, stages, and reports your team actually uses."
     }, {
         id: "faq-2",
-        question: "Can you build something outside these services?",
-        answer: "Yes. If your project doesn't fit neatly into one category, tell us what you're trying to build and we'll scope a custom solution."
+        question: "Can you build an ERP system for our business?",
+        answer: "Yes. We build ERP software that connects your inventory, operations, and finance, so your whole business runs from one system instead of five disconnected tools."
     }, {
         id: "faq-3",
-        question: "How do you price a project?",
-        answer: "We look at the required functionality, design complexity, integrations, technical requirements, content, and timeline before preparing a custom quote."
+        question: "Do you build on WordPress or Shopify?",
+        answer: "Both. WordPress is great for content-heavy sites you’ll update often; Shopify is built for stores that need to sell. We’ll recommend whichever fits your business."
     }, {
         id: "faq-4",
-        question: "Do you offer monthly subscriptions?",
-        answer: "Our core work is project-based. Ongoing maintenance, support, or retainers can be discussed separately when required."
+        question: "Why React and Next.js instead of other frameworks?",
+        answer: "React and Next.js give us speed, strong SEO, and room to scale — ideal for custom websites, dashboards, and software that need to grow with your business."
     }, {
         id: "faq-5",
-        question: "Do I own the source code?",
-        answer: "Yes, 100%. You own all the code, designs, and assets we create for you. We provide full access to the repository from day one and complete handoff documentation at project completion."
+        question: "How long does a software project take?",
+        answer: "A custom website typically takes 4–6 weeks. CRM and ERP systems run longer, usually 2–4 months, depending on how many features you need."
     }, {
         id: "faq-6",
-        question: "How long does a typical project take?",
-        answer: "A standard Web Development project or landing page typically takes 2–4 weeks, while custom 3D websites or complex software platforms take 4–8 weeks depending on scope."
+        question: "Do you offer ongoing support after launch?",
+        answer: "Yes — every project includes post-launch support, so bugs get fixed fast and your software keeps working as your business changes."
     }];
 
 function AI() {
@@ -25147,7 +25147,7 @@ function KI() {
                 md:text-[16px]
                 md:leading-7
               `,
-                            children: "Markition Tech designs and builds custom software, CRM, ERP, web platforms, mobile applications, and integrations. We build technology around your processes and goals - not generic workflows."
+                            children: "We build custom websites, CRM dashboards, and ERP systems on React, Next.js, WordPress, and Shopify — engineered for speed, growth, and scale."
                         }), g.jsx(vt, {
                             to: "/about",
                             className: `
@@ -25960,7 +25960,7 @@ function iL() {
                     })]
                 }), g.jsx("p", {
                     className: "mt-6 max-w-[320px] text-sm leading-6 text-[#737780] sm:max-w-md md:mt-8 md:text-base",
-                    children: "Markition Tech designs and develops custom software, business systems, web platforms, mobile applications, and integrations around the way your business actually works - helping you automate operations, connect your systems, and scale with confidence."
+                    children: "We don’t hand you a website and disappear. Every CRM, ERP, or custom platform we build is engineered to grow with your business for years, not months."
                 }), g.jsxs("div", {
                     className: "pointer-events-auto mt-7 flex w-full max-w-[320px] flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center sm:gap-5",
                     children: [g.jsxs(vt, {
@@ -30739,6 +30739,7 @@ function s6() {
     };
     return g.jsx("section", {
         className: "px-4 py-20 md:py-28  text-gray-900",
+        style:{display:"none"},
         children: g.jsxs("div", {
             className: "mx-auto max-w-7xl",
             children: [g.jsxs("div", {
@@ -32285,7 +32286,7 @@ function m6() {
                         children: "What We Do"
                     }), g.jsx("h2", {
                         className: "max-w-2xl text-[36px] font-black leading-[0.95] tracking-[-2px] text-brand-dark sm:text-[44px] md:text-[52px] lg:text-[56px]",
-                        children: "Services built for growth"
+                        children: "Software Built Around Your Business"
                     })]
                 }), g.jsxs(vt, {
                     to: "/services",

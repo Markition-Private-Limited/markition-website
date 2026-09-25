@@ -10,10 +10,11 @@ import { ToolsSection } from "./_components/sections/tools/ToolsSection";
 import { WhySection } from "./_components/sections/why/WhySection";
 import { TestimonialsSection } from "./_components/sections/testimonials/TestimonialsSection";
 import { CtaSection } from "./_components/sections/cta/CtaSection";
+import { FaqSection } from "./_components/sections/faq/FaqSection";
 
 export const metadata: Metadata = {
-  title: "Design Lab | Markition",
-  description: "Markition DesignLab — where brands get designed, refined, and amplified.",
+  title: "UI/UX & Branding Design Agency | Markition DesignLab",
+  description: "Markition DesignLab is a full-service UI/UX design agency offering branding, web & app design, social media post design, video editing, and motion graphics.",
 };
 
 export default function DesignLabPage() {
@@ -29,6 +30,7 @@ export default function DesignLabPage() {
       <ToolsSection />
       <WhySection />
       <TestimonialsSection />
+      <FaqSection />
       <CtaSection />
     </>
   );

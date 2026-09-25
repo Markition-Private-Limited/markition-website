@@ -37,7 +37,7 @@ export default function Evolve() {
             letterSpacing: "-0.03em",
           }}
         >
-          When Digital Marketing Needs To Evolve
+          When Digital Marketing Agencies Must Evolve
         </h2>
 
         {/* Cards */}

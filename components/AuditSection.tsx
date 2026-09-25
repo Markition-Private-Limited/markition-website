@@ -176,10 +176,7 @@ export default function AuditSection() {
                   fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)",
                 }}
               >
-                AI is reshaping the way businesses operate and grow. We&apos;re here to
-                turn that potential into real world impact — building smarter systems
-                that automate better, engage customers, improve efficiency, and create
-                measurable business growth.
+                AI is transforming how modern businesses operate and grow, and Markition is here leading that shift — building smarter systems that automate work, engage customers, improve efficiency, and turn digital transformation into real, measurable business growth.
               </p>
 
               <button

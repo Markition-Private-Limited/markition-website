@@ -9,27 +9,27 @@ const FAQS = [
   },
   {
     q: "Do you work with startups and small businesses?",
-    a: "Yes — we work with businesses of all sizes, from early-stage startups to established enterprises. We tailor our strategies to match your stage, goals, and budget.",
+    a: "Yes. Whether you're a startup finding your footing or an established business ready to scale, our growth agency builds solutions sized to fit where you are today — and where you're headed.",
   },
   {
     q: "How do you start a new project?",
-    a: "We begin with a discovery call to understand your goals, audience, and challenges. From there we put together a tailored strategy and project plan before any work begins.",
+    a: "It starts with a free audit call. We learn about your business, map out what's working and what isn't, then build a plan tailored to your goals before any work begins.",
   },
   {
     q: "How long does a project usually take?",
-    a: "Timelines vary by scope. A website typically takes 4–8 weeks, while ongoing marketing campaigns are structured in monthly sprints. We'll give you a clear timeline upfront.",
+    a: "It depends on scope — a marketing campaign can launch in weeks, while a full software build or AI system typically takes a few months. We'll give you a clear timeline upfront.",
   },
   {
     q: "Can you manage our social media accounts?",
-    a: "Absolutely. We offer full social media management including content creation, scheduling, community engagement, and monthly performance reporting.",
+    a: "Yes, our digital marketing team handles everything from content creation to posting schedules and community management, so your social presence stays active and consistent without taking up your time.",
   },
   {
     q: "Do you provide customized solutions?",
-    a: "Every engagement is custom-built. We don't use one-size-fits-all templates — your strategy, design, and deliverables are created specifically for your business.",
+    a: "Always. Every business is different, so we don't hand you a template — we build marketing, software, design, and AI solutions shaped around your specific goals and challenges.",
   },
   {
     q: "How much do your services cost?",
-    a: "Pricing depends on the scope and services required. Use the contact form below to share your goals and budget, and we'll put together a transparent proposal.",
+    a: "Pricing depends on your goals, scope, and which services you need. Book a free audit and we'll walk you through options that fit your budget, with no pressure and no hidden fees.",
   },
 ];
 

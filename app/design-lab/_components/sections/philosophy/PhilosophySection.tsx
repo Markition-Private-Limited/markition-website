@@ -51,15 +51,15 @@ function InteractiveText({
 const CARDS = [
   {
     title: "Strategic Foundation",
-    body: "Every aesthetic decision stems from deep research, user behavior patterns, and commercially aligned brand positioning.",
+    body: "Every design decision starts with real research — your audience, your market, and what actually sells.",
   },
   {
     title: "Mathematical Precision",
-    body: "Rigorous atomic design systems, tokenized spacing scales, and WCAG AAA accessibility across all responsive viewports.",
+    body: "Clean design systems, consistent spacing, and full accessibility — built right the first time, every time.",
   },
   {
     title: "Built To Scale",
-    body: "Developer-ready handoff specs with clean React component hierarchy, JSON token exports, and zero engineering guesswork.",
+    body: "Developer-ready files, clean handoff, and zero guesswork — your team builds exactly what we designed together.",
   },
 ];
 
@@ -103,22 +103,21 @@ export function PhilosophySection() {
         <div>
           <Reveal variant="left" duration={900}>
             <h2 className="text-4xl xl:text-5xl font-extrabold leading-[1.1] tracking-tight text-white">
-              Where Creative Thinking Meets
-              <br />
-              <span style={{ color: CYAN }}>Purposeful Design</span>
+              A Design Agency{" "}
+              <span style={{ color: CYAN }}>Built On Purpose</span>
             </h2>
           </Reveal>
 
           <Reveal variant="up" delay={120} duration={900}>
             <InteractiveText
-              text="Great design is more than looking good. It should communicate clearly, create emotion, improve experiences, and move people toward action."
+              text="Great design is more than looking good — it should communicate clearly, build trust, and move real people to take action."
               className="mt-8 text-[17px] leading-relaxed text-white/60"
             />
           </Reveal>
 
           <Reveal variant="up" delay={240} duration={900}>
             <InteractiveText
-              text="At Markition Design Lab, we combine creative direction, strategic thinking, visual storytelling, and user-centered design to create digital experiences and brand assets built for real business outcomes. We don't believe in generic templates or decorative vanity projects — every pixel is engineered for market advantage."
+              text="At Markition DesignLab, we bring together UI/UX design, branding, social media post design, and video editing to build visual identities and digital experiences that actually perform. We skip generic templates — every logo, post, and video is built to make your brand truly unforgettable."
               className="mt-5 text-[15px] leading-relaxed text-white/40"
             />
           </Reveal>

@@ -26,12 +26,12 @@ export function CtaSection() {
                 fontFamily: "var(--font-jakarta, sans-serif)",
               }}
             >
-              Have an <span style={{ color: BLUE }}>Idea</span>? Let&apos;s
+              Have An <span style={{ color: BLUE }}>Idea</span>? Let&apos;s
               <br />
               Make It <span style={{ color: BLUE }}>Remarkable</span>.
             </h2>
             <p className="mt-3 line-clamp-2 text-[13.5px] leading-relaxed text-[#0d0d17]">
-              From brand identity to websites, product interfaces, and creative content, we turn ideas into impactful experiences.
+              From logos to app design, social media posts, and video, we turn your ideas into real experiences.
             </p>
             <Link
               href="/design-lab/contact"

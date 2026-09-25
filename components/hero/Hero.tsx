@@ -9,13 +9,11 @@ export default function Hero() {
             letterSpacing: "-0.025em",
           }}
         >
-          Your AI Powered <span style={{ color: "#20D9FF" }}>Growth Team</span> Ready To Run Your Business
+          Markition — Your AI-Powered <span style={{ color: "#20D9FF" }}>Growth Agency</span> For Marketing, Tech &amp; Design
         </h1>
 
         <p className="hero-subtitle text-white text-[13px] sm:text-[15px] lg:text-[16px] leading-[1.7] mb-5 sm:mb-6 max-w-[600px] mx-auto">
-          Finally growth that accelerates every part of your business
-          forward. Your AI powered growth team brings more clients, improves
-          operations, boosts revenue and keeps your business moving.
+          Together, we&apos;re the growth agency that blends AI, marketing, technology, and design into one team — so you get more clients, smarter operations, and real, lasting revenue growth.
         </p>
 
         <div className="hero-cta flex flex-col xs:flex-row items-center justify-center gap-3">

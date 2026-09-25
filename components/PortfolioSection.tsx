@@ -136,10 +136,10 @@ export default function PortfolioSection() {
                   color: "#ffffff",
                 }}
               >
-                Our Work{" "}
+                Results That{" "}
                 <br />
-                Speaks{" "}
-                <span style={{ color: "#22C5F5" }}>For Itself</span>
+                Speak{" "}
+                <span style={{ color: "#22C5F5" }}>For Themselves</span>
               </h2>
 
               {/* Description */}
@@ -147,8 +147,7 @@ export default function PortfolioSection() {
                 className="text-[14px] sm:text-[15px] leading-relaxed mb-7"
                 style={{ color: "rgba(255,255,255,0.55)" }}
               >
-                Explore our latest projects, AI solutions, and digital
-                experiences built to create real business impact.
+                Explore real projects across AI, marketing, and design — proof of the growth we deliver daily.
               </p>
 
               {/* CTA Button */}

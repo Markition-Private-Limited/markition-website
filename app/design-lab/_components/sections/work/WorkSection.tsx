@@ -212,7 +212,7 @@ export function WorkSection() {
               fontFamily:    "var(--font-jakarta, sans-serif)",
             }}
           >
-            Selected Work Designed{" "}
+            UI/UX, Branding &amp;{" "}
             <span
               style={{
                 color:          BLUE,
@@ -221,9 +221,8 @@ export function WorkSection() {
                 textUnderlineOffset: "6px",
               }}
             >
-              To Dominate
+              Motion Design Work
             </span>
-            .
           </h2>
 
           <p
@@ -236,8 +235,8 @@ export function WorkSection() {
               transition: "opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s",
             }}
           >
-            A curated selection of branding, UI/UX, motion, and product design
-            projects that move businesses forward.
+            A hand-picked look at branding, UI/UX, motion, and social work that
+            moved real businesses forward.
           </p>
         </div>
 

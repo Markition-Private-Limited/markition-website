@@ -6,22 +6,22 @@ const INDUSTRIES = [
   {
     name: "Roofing",
     description:
-      "We align positioning, audience, messaging, and creative direction before design.",
+      "Local SEO and paid ads that keep your calendar full.",
   },
   {
     name: "Dental",
     description:
-      "We align positioning, audience, messaging, and creative direction before design.",
+      "Google Ads and SEO campaigns that fill your dental chairs.",
   },
   {
     name: "Aesthetician",
     description:
-      "We align positioning, audience, messaging, and creative direction before design.",
+      "Social and paid campaigns that book you more consultations weekly.",
   },
   {
     name: "Hair Transplant",
     description:
-      "We align positioning, audience, messaging, and creative direction before design.",
+      "Lead generation campaigns built to fill your full consultation calendar.",
   },
 ];
 

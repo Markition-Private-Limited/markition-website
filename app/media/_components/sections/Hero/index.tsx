@@ -62,8 +62,8 @@ export default function Hero() {
               textTransform: "capitalize",
             }}
           >
-            Digital Marketing That<br />Turns Attention Into<br />
-            <span style={{ color: "#00D4FF" }}>Measurable Growth</span>
+            Markition Media — A Full-Service<br />Digital Marketing Agency<br />
+            <span style={{ color: "#00D4FF" }}>For Growth</span>
           </h1>
 
           <div className="max-w-[420px] flex flex-col items-start pb-1">

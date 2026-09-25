@@ -7,7 +7,7 @@ import { NAV_LINKS } from "@/lib/constants";
 import { ChevronDown, HamburgerIcon } from "@/lib/icons";
 
 const navGlassStyle: React.CSSProperties = {
-  background: "rgba(8, 16, 52, 0.5)",
+  background: "rgba(8, 16, 52, 0.85)",
   backdropFilter: "blur(20px) saturate(1.8)",
   WebkitBackdropFilter: "blur(20px) saturate(1.8)",
   boxShadow: "0 2px 24px rgba(0,0,0,0.28), inset 0 1px 0 rgba(100,150,255,0.06)",
@@ -349,6 +349,8 @@ export default function Navbar() {
                     <a
                       key={item.name}
                       href={item.href ?? "#"}
+                      target={item.href ? "_blank" : undefined}
+                      rel={item.href ? "noopener noreferrer" : undefined}
                       onClick={() => setServicesOpen(false)}
                       className="svc-card-item"
                       style={{
@@ -624,6 +626,8 @@ export default function Navbar() {
                         <a
                           key={svc.label}
                           href={svc.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           onClick={() => setMobileOpen(false)}
                           className="flex flex-col gap-2 p-3 rounded-xl border border-white/[0.07] bg-white/[0.04] hover:bg-blue-500/10 hover:border-blue-400/30 transition-colors duration-150"
                         >

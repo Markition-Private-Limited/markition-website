@@ -116,7 +116,7 @@ export default function ScaleWithAISection() {
               fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)",
             }}
           >
-            Ready To Scale Your{" "}
+            Ready To Grow Your{" "}
             <span style={{ color: "#22C5F5" }}>Business With AI?</span>
           </h2>
 
@@ -130,9 +130,7 @@ export default function ScaleWithAISection() {
               fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)",
             }}
           >
-            Transform your workflow, automate complex operations, and unlock new growth
-            opportunities with powerful AI-driven solutions designed to help modern
-            businesses work smarter, scale faster, and achieve measurable results.
+            Transform your workflow, automate complex operations, and unlock new growth opportunities with powerful AI-driven solutions built to help your business work smarter, grow faster, and see real results.
           </p>
 
           <div

@@ -1,12 +1,16 @@
 const ITEMS = [
-  "Graphics Design",
-  "SEO",
-  "Digital Marketing",
   "UI/UX Design",
-  "Custom Branding",
-  "Motion Design",
-  "Brand Strategy",
-  "Web Development",
+  "Web Design",
+  "App Design",
+  "Social Media Post Design",
+  "Branding",
+  "Flyers & Stickers Design",
+  "Logo Design",
+  "Ad Creative Design",
+  "2D/3D Animation",
+  "Video Editing",
+  "Social Media Reels",
+  "Content Production",
 ];
 
 function StarIcon() {

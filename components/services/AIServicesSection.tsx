@@ -23,15 +23,14 @@ export default function AIServicesSection() {
                 fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)",
               }}
             >
-              Put AI To Work Across<br />
-              Your <span style={{ color: "#20D9FF" }}>Business</span>
+              Put Intelligent AI To Work{" "}
+              <span style={{ color: "#20D9FF" }}>For You</span>
             </h2>
           </ScrollReveal>
 
           <ScrollReveal delay={160} threshold={0.2}>
             <p className="text-[13px] sm:text-[14px] text-white/70 leading-relaxed max-w-lg mx-auto">
-              Autonomous systems, conversational agents, and intelligent workflows
-              engineered for enterprise scale and measurable business impact.
+              From AI chatbots to workflow automation, Markition builds intelligent systems engineered to grow your business.
             </p>
           </ScrollReveal>
         </div>

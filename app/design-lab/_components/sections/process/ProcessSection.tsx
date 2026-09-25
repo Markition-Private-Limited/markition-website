@@ -166,27 +166,27 @@ const STEPS = [
   {
     num: "01",
     title: "Discover Stage",
-    body: "We immerse ourselves in your business objectives, target demographics, competitive landscape, and historical telemetry to uncover core differentiators and user pain points.",
+    body: "We start by learning your business, your audience, and your competitors — so we understand what makes your brand different before we design.",
   },
   {
     num: "02",
     title: "Define Stage",
-    body: "We translate strategic insights into structural clarity. We establish user journey maps, information hierarchies, wireframe foundations, and visual design moodboards.",
+    body: "We turn those insights into a clear plan. That means user journeys, wireframes, and mood boards that guide every decision.",
   },
   {
     num: "03",
     title: "Design Stage",
-    body: "High-fidelity UI systems, motion language, component libraries, and brand expression crafted to perfection across every breakpoint and interaction state.",
+    body: "This is where it all comes together — UI, motion, branding, and every visual detail, polished until it feels effortless.",
   },
   {
     num: "04",
     title: "Develop Stage",
-    body: "Developer-ready handoff with annotated specs, responsive tokens, and clean component documentation — so your team builds exactly what was designed.",
+    body: "We hand everything off clean, with clear files — so your team builds exactly what we designed, no guesswork, ever.",
   },
   {
     num: "05",
     title: "Deliver Stage",
-    body: "Launch review, QA pass, performance audit, and post-delivery support — ensuring every detail ships pixel-perfect and every metric improves.",
+    body: "Before launch, we review everything — quality, performance, and polish — then stay close after, making sure results keep improving.",
   },
 ];
 

@@ -347,7 +347,7 @@ export default function Process() {
               textTransform: "capitalize",
             }}
           >
-            How we build<br />your growth system
+            How Our Marketing<br />Agency Builds Growth
           </h2>
         </div>
 

@@ -154,11 +154,10 @@ export function HeroSection() {
           style={{ animationDelay: "0ms" }}
         >
           <span className="text-5xl xl:text-6xl">
-            Design That Makes<br />
-            Your{" "}
-            <span style={{ color: "#1236E8" }}>Brand Impossible</span>
+            Markition DesignLab: Branding,{" "}
+            <span style={{ color: "#1236E8" }}>UI/UX &amp; Motion</span>
             <br />
-            To Ignore.
+            Design Agency
           </span>
         </h1>
 
@@ -166,9 +165,9 @@ export function HeroSection() {
           className="mt-6 text-[17px] leading-relaxed text-gray-500 max-w-[480px] dl-hero-fade"
           style={{ animationDelay: "120ms" }}
         >
-          We create bold brand identities, intuitive digital experiences,
-          high-converting visuals, and motion-led designs that help businesses
-          stand out, connect with their audience, and grow with confidence.
+          We design logos, brands, apps, and social media posts — then bring it
+          all to life with video editing and animation that help your business
+          truly grow.
         </p>
 
         <div

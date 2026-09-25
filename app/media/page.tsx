@@ -16,8 +16,8 @@ import Contact from "./_components/sections/Contact";
 import Footer from "./_components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Markition Media",
-  description: "Markition Media — Digital Creative Agency",
+  title: "Full-Service Digital Marketing Agency | Markition Media",
+  description: "Markition Media is a full-service digital marketing agency offering SEO, paid ads, social media marketing, and content marketing built to turn traffic into measurable growth.",
 };
 
 export default function MediaHomePage() {

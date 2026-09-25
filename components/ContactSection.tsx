@@ -111,9 +111,7 @@ export default function ContactSection() {
               maxWidth: 340,
             }}
           >
-            Share your vision with us and our team will create intelligent
-            AI solutions tailored to your goals — helping you streamline
-            operations, unlock new opportunities, and scale faster.
+            Share your vision with us, and Markition&apos;s growth team will design AI, marketing, and software solutions tailored to your goals — helping you streamline operations and scale faster.
           </p>
 
           {/* ── Phone card ── */}

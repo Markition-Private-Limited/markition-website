@@ -9,48 +9,48 @@ const CYAN = "#20D9FF";
 const INDUSTRIES = [
   {
     name: "Tech",
-    sub: "Seeking design services for Tech?",
-    body: "Our design agency specializes in high-quality design for the modern tech industry.",
+    sub: "Need design that feels technical?",
+    body: "We build clean, functional UI/UX that makes complex tech feel actually simple.",
   },
   {
     name: "Startups",
-    sub: "Seeking design services for your Startup?",
-    body: "Our design agency specializes in high-quality design for Startups.",
+    sub: "Launching a brand from scratch?",
+    body: "We build identities that look established from day one, not day zero.",
   },
   {
     name: "B2B",
-    sub: "Seeking design services for a B2B?",
-    body: "Our design agency specializes in high-quality design for the B2B design.",
+    sub: "Selling directly to other businesses?",
+    body: "We design decks and visuals that make complex offers easy to trust.",
   },
   {
     name: "VC Firms",
-    sub: "Seeking design services for your VC Firm?",
-    body: "Our design agency specializes in high-quality design for VCs firms.",
+    sub: "Need a brand investors remember?",
+    body: "We craft polished decks and identities that make funds truly stand out.",
   },
   {
     name: "Agencies",
-    sub: "Seeking design services for your Agency?",
-    body: "Our design agency specializes in high-quality design for Agencies.",
+    sub: "Need extra creative firepower fast?",
+    body: "We work white-label, so your agency delivers design under your own name.",
   },
   {
     name: "Fintech",
-    sub: "Seeking design services for your Fintech?",
-    body: "Our design agency specializes in high-quality design for Fintech.",
+    sub: "Building trust in a Fintech?",
+    body: "We design interfaces that make money feel simple, secure, and truly trustworthy.",
   },
   {
     name: "SaaS",
-    sub: "Seeking design services for your SaaS brand?",
-    body: "Our design agency specializes in high-quality design for SaaS.",
+    sub: "Scaling a SaaS product fast?",
+    body: "We build dashboard UI that scales as fast as your product does.",
   },
   {
     name: "E-commerce",
-    sub: "Seeking design services for your E-Commerce?",
-    body: "Our design agency specializes in high-quality design for the E-Commerce.",
+    sub: "Need visuals that actually sell?",
+    body: "We design product visuals and creative that turn browsers into paying customers.",
   },
   {
     name: "Blockchain & AI",
-    sub: "Seeking design services for your Blockchain & AI?",
-    body: "Our design agency specializes in high-quality design for Blockchain.",
+    sub: "Building something ahead of tomorrow?",
+    body: "We design bold brands that make new technology feel approachable and trustworthy.",
   },
 ];
 

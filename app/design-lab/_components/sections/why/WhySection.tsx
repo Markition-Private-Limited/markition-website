@@ -11,25 +11,25 @@ const CARDS = [
   {
     num:       "01",
     title:     "Strategy Before Design",
-    body:      "We start with your goals, audience, and business needs—then create design that has a clear purpose.",
+    body:      "Every project starts with your goals and audience — not a template — so the design has real purpose.",
     highlight: false,
   },
   {
     num:       "02",
     title:     "Creativity That Drives Growth",
-    body:      "Every visual decision is shaped by your brand, positioning, audience, and the outcomes you want to achieve.",
+    body:      "Every color, font, and layout is shaped by your brand, your audience, and the results you want.",
     highlight: false,
   },
   {
     num:       "03",
-    title:     "Design Built for Execution",
-    body:      "Our designers collaborate with developers and marketers to create experiences that are beautiful, functional, and ready to launch.",
+    title:     "Design Built For Execution",
+    body:      "Our designers work closely with developers and marketers, so every file is polished, functional, and ready to launch.",
     highlight: false,
   },
   {
     num:       "04",
     title:     "Consistency Across Every Touchpoint",
-    body:      "From websites and apps to social media and campaigns, we create a cohesive visual experience across your entire brand.",
+    body:      "From your logo, website, social posts, and video, every piece feels like it came from the same brand.",
     highlight: true,
   },
 ];

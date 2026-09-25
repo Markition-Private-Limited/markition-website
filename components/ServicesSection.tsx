@@ -121,16 +121,14 @@ export default function ServicesSection() {
             fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)",
             color: "#f0f6ff",
           }}>
-            Built To Drive Measurable{" "}
+            Everything You Need For{" "}
             <span style={{ color: "#00d4ff" }}>Digital Growth</span>
           </h2>
           <p style={{
             margin: "0 auto", maxWidth: 580, color: "#64809e",
             fontSize: 14, lineHeight: 1.78,
           }}>
-            Our integrated digital marketing, SEO, web development, software development,
-            and AI automation solutions are designed to strengthen your online presence,
-            generate qualified leads, and turn digital investments into measurable business growth.
+            From marketing and software to design and AI, Markition builds every piece your business needs to grow — strengthening your online presence, bringing in qualified leads, and turning investment into real results.
           </p>
         </div>
 

@@ -77,7 +77,7 @@ export default function Technologies() {
           }}
         >
           Technologies{" "}
-          <span style={{ color: "#22C5F5" }}>we use</span>
+          <span style={{ color: "#22C5F5" }}>We Use</span>
         </h2>
 
         {/* Pill tab bar */}
