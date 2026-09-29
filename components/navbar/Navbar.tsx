@@ -125,6 +125,8 @@ const SOLUTIONS_MENU = [
     icon: "robot",
     description: "AI agents, chatbots, voice AI & workflow automation that make your business operate intelligently.",
     linkText: "Explore SPHENO AI",
+    href: "/spheno",
+    newTab: true,
   },
 ];
 

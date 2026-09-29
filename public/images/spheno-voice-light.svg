@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="100%" height="100%">
+  <defs>
+    <!-- Light Studio Background -->
+    <linearGradient id="voiceLightBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="50%" stop-color="#F8FAFC" />
+      <stop offset="100%" stop-color="#EEF2F6" />
+    </linearGradient>
+
+    <!-- 3D Face Shading Gradients matching User's Uploaded Avatar -->
+    <radialGradient id="faceShadingLight" cx="50%" cy="36%" r="58%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="28%" stop-color="#CFE0FC" />
+      <stop offset="55%" stop-color="#7B9FF0" />
+      <stop offset="78%" stop-color="#3D64CC" />
+      <stop offset="94%" stop-color="#1E3994" />
+      <stop offset="100%" stop-color="#102268" />
+    </radialGradient>
+
+    <linearGradient id="neckShadingLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3D64CC" />
+      <stop offset="35%" stop-color="#2342A6" />
+      <stop offset="75%" stop-color="#142B75" />
+      <stop offset="100%" stop-color="#0B1A4D" />
+    </linearGradient>
+
+    <radialGradient id="irisGradLight" cx="45%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="35%" stop-color="#00D2FE" />
+      <stop offset="70%" stop-color="#0055FF" />
+      <stop offset="100%" stop-color="#081444" />
+    </radialGradient>
+
+    <!-- Clean Light Drop Shadows -->
+    <filter id="voiceCardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#0F172A" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- Light Studio Canvas -->
+  <rect width="800" height="520" rx="20" fill="url(#voiceLightBg)" stroke="#CBD5E1" stroke-width="1.5" />
+
+  <!-- Soft Azure Studio Halo behind Avatar -->
+  <circle cx="400" cy="270" r="210" fill="#00D2FE" opacity="0.12" />
+  <circle cx="400" cy="260" r="140" fill="#0066FF" opacity="0.08" />
+
+  <!-- Holographic Concentric Sound Wave Rings -->
+  <g opacity="0.4">
+    <ellipse cx="400" cy="275" rx="250" ry="180" fill="none" stroke="#0284C7" stroke-width="1.2" stroke-dasharray="6,8" />
+    <ellipse cx="400" cy="275" rx="210" ry="150" fill="none" stroke="#2563EB" stroke-width="1" stroke-dasharray="4,6" />
+  </g>
+
+  <!-- ========================================================= -->
+  <!-- EXACT 3D CYBERNETIC AI BOT AVATAR (HUMANOID SCULPTED HEAD)-->
+  <!-- Matching User's Uploaded Avatar Image with Precision      -->
+  <!-- ========================================================= -->
+  <g id="avatarBust" transform="translate(400, 280)">
+    
+    <!-- Shoulders & Upper Chest Base -->
+    <path d="M -175 240 C -155 145 -85 125 -52 95 L 52 95 C 85 125 155 145 175 240 Z" fill="url(#neckShadingLight)" />
+
+    <!-- Delicate Fiber Strands on Shoulders (White/Cyan Lines) -->
+    <g stroke="#E0EDFF" stroke-width="0.8" opacity="0.75">
+      <path d="M -155 240 C -135 165 -80 145 -42 105" fill="none" />
+      <path d="M -130 240 C -110 175 -70 150 -32 110" fill="none" />
+      <path d="M -105 240 C -85 185 -55 155 -22 115" fill="none" />
+      <path d="M -80 240 C -60 195 -35 160 -12 120" fill="none" />
+      <path d="M 155 240 C 135 165 80 145 42 105" fill="none" />
+      <path d="M 130 240 C 110 175 70 150 32 110" fill="none" />
+      <path d="M 105 240 C 85 185 55 155 22 115" fill="none" />
+      <path d="M 80 240 C 60 195 35 160 12 120" fill="none" />
+    </g>
+
+    <!-- Neck Structure -->
+    <path d="M -48 30 C -47 65 -50 100 -52 115 L 52 115 C 50 100 47 65 48 30 Z" fill="url(#neckShadingLight)" />
+    
+    <!-- Neck Synthetic Fiber Strands (Topographic Contours) -->
+    <g stroke="#BAE6FD" stroke-width="0.75" opacity="0.85">
+      <path d="M -40 35 C -37 65 -38 95 -40 115" fill="none" />
+      <path d="M -28 40 C -26 68 -26 95 -28 115" fill="none" />
+      <path d="M -16 45 C -14 70 -14 95 -16 115" fill="none" />
+      <path d="M 0 45 L 0 115" fill="none" />
+      <path d="M 16 45 C 14 70 14 95 16 115" fill="none" />
+      <path d="M 28 40 C 26 68 26 95 28 115" fill="none" />
+      <path d="M 40 35 C 37 65 38 95 40 115" fill="none" />
+    </g>
+
+    <!-- Head & Skull Base Silhouette (Exact Proportions of User Image) -->
+    <path d="M 0 -185 
+             C 82 -185 104 -132 104 -62 
+             C 104 8 74 58 48 84 
+             C 32 99 18 106 0 107 
+             C -18 106 -32 99 -48 84 
+             C -74 58 -104 8 -104 -62 
+             C -104 -132 -82 -185 0 -185 Z" 
+          fill="url(#faceShadingLight)" 
+          stroke="#0284C7" 
+          stroke-width="1" 
+          stroke-opacity="0.3" />
+
+    <!-- Topographic Neural Lines across Cranium & Forehead (Signature from Image) -->
+    <g stroke="#FFFFFF" stroke-width="0.7" opacity="0.45" fill="none">
+      <path d="M -60 -170 C -30 -180 30 -180 60 -170" />
+      <path d="M -72 -155 C -35 -170 35 -170 72 -155" />
+      <path d="M -82 -140 C -40 -158 40 -158 82 -140" />
+      <path d="M -90 -125 C -45 -145 45 -145 90 -125" />
+      <path d="M -96 -110 C -48 -130 48 -130 96 -110" />
+      <path d="M -100 -95 C -50 -115 50 -115 100 -95" />
+      <path d="M -102 -80 C -52 -100 52 -100 102 -80" />
+    </g>
+
+    <!-- Ears (Realistic Sculpted Ear Cartilage) -->
+    <g transform="translate(94, -60)">
+      <path d="M 0 -25 C 18 -15 18 35 0 55 C -5 50 -5 -20 0 -25 Z" fill="#2542A6" />
+      <path d="M 4 -15 C 12 -8 12 25 2 40" fill="none" stroke="#93C5FD" stroke-width="0.8" opacity="0.6" />
+    </g>
+    <g transform="translate(-94, -60) scale(-1, 1)">
+      <path d="M 0 -25 C 18 -15 18 35 0 55 C -5 50 -5 -20 0 -25 Z" fill="#2542A6" />
+      <path d="M 4 -15 C 12 -8 12 25 2 40" fill="none" stroke="#93C5FD" stroke-width="0.8" opacity="0.6" />
+    </g>
+
+    <!-- Left Eyebrow & Orbit -->
+    <g transform="translate(-40, -44)">
+      <!-- Eyebrow with Realistic Arch -->
+      <path d="M -22 -14 C -10 -22 14 -20 25 -14" fill="none" stroke="#172554" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M -20 -13 C -10 -20 12 -19 23 -13" fill="none" stroke="#BFDBFE" stroke-width="0.8" opacity="0.7" />
+      <!-- Sclera -->
+      <path d="M -24 -2 C -12 -11 12 -11 24 -2 C 12 8 -12 8 -24 -2 Z" fill="#FFFFFF" />
+      <!-- Iris -->
+      <circle cx="0" cy="-2" r="10" fill="url(#irisGradLight)" />
+      <!-- Pupil -->
+      <circle cx="0" cy="-2" r="4.5" fill="#0A0F29" />
+      <!-- Specular Highlight -->
+      <circle cx="-2.5" cy="-4.5" r="2.2" fill="#FFFFFF" />
+      <circle cx="3" cy="2" r="1" fill="#FFFFFF" />
+      <!-- Upper Eyelid Rim -->
+      <path d="M -24 -2 C -12 -11 12 -11 24 -2" fill="none" stroke="#0F172A" stroke-width="1.8" />
+    </g>
+
+    <!-- Right Eyebrow & Orbit -->
+    <g transform="translate(40, -44)">
+      <!-- Eyebrow -->
+      <path d="M -25 -14 C -14 -20 10 -22 22 -14" fill="none" stroke="#172554" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M -23 -13 C -12 -19 10 -20 20 -13" fill="none" stroke="#BFDBFE" stroke-width="0.8" opacity="0.7" />
+      <!-- Sclera -->
+      <path d="M -24 -2 C -12 -11 12 -11 24 -2 C 12 8 -12 8 -24 -2 Z" fill="#FFFFFF" />
+      <!-- Iris -->
+      <circle cx="0" cy="-2" r="10" fill="url(#irisGradLight)" />
+      <!-- Pupil -->
+      <circle cx="0" cy="-2" r="4.5" fill="#0A0F29" />
+      <!-- Specular Highlight -->
+      <circle cx="-2.5" cy="-4.5" r="2.2" fill="#FFFFFF" />
+      <circle cx="3" cy="2" r="1" fill="#FFFFFF" />
+      <!-- Upper Eyelid Rim -->
+      <path d="M -24 -2 C -12 -11 12 -11 24 -2" fill="none" stroke="#0F172A" stroke-width="1.8" />
+    </g>
+
+    <!-- Slender Sculpted Nose -->
+    <path d="M 0 -40 L -4 10 L 0 16 L 4 10 Z" fill="#93C5FD" opacity="0.5" />
+    <circle cx="0" cy="14" r="3.5" fill="#FFFFFF" opacity="0.8" />
+    <path d="M -8 16 C -4 18 4 18 8 16" fill="none" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round" />
+
+    <!-- Sculpted Lips (Natural Form from Image) -->
+    <g transform="translate(0, 48)">
+      <path d="M -18 0 C -10 -4 0 -2 0 -2 C 0 -2 10 -4 18 0 C 10 4 0 5 0 5 C 0 5 -10 4 -18 0 Z" fill="#3B5998" />
+      <path d="M -15 3 C -7 10 7 10 15 3 C 7 5 -7 5 -15 3 Z" fill="#6889E8" />
+      <line x1="-16" y1="1" x2="16" y2="1" stroke="#101C4E" stroke-width="1.2" />
+      <!-- Highlight -->
+      <ellipse cx="0" cy="6" rx="6" ry="2" fill="#E0EDFF" opacity="0.7" />
+    </g>
+
+    <!-- Chin Specular -->
+    <circle cx="0" cy="80" r="7" fill="#E0EDFF" opacity="0.4" />
+  </g>
+
+  <!-- ========================================================= -->
+  <!-- FLOATING LIGHT THEME PROMPT BADGES (MATCHING IMAGE 1 & 2) -->
+  <!-- ========================================================= -->
+  
+  <!-- Top Right: "What is Spheno Voice AI?" (Light theme badge) -->
+  <g transform="translate(510, 42)" filter="url(#voiceCardShadow)">
+    <rect width="240" height="48" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" />
+    <!-- User Icon -->
+    <circle cx="24" cy="24" r="14" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1" />
+    <circle cx="24" cy="20" r="5" fill="#2563EB" />
+    <path d="M 15 30 C 15 25 33 25 33 30 Z" fill="#2563EB" />
+    
+    <text x="50" y="29" fill="#0F172A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="600">
+      What is Spheno Voice AI?
+    </text>
+  </g>
+
+  <!-- Top Left: Spheno Voice Agent Dialogue Badge -->
+  <g transform="translate(48, 52)" filter="url(#voiceCardShadow)">
+    <rect width="260" height="66" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.2" />
+    <g transform="translate(18, 16)">
+      <circle cx="5" cy="5" r="4" fill="#0284C7" />
+      <text x="16" y="9" fill="#0369A1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700">SPHENO VOICE AGENT</text>
+      <text x="180" y="9" fill="#059669" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700">380ms</text>
+      
+      <text x="0" y="32" fill="#1E293B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500">
+        &quot;I can book Dr. Bennett for you at 3:15 PM.&quot;
+      </text>
+    </g>
+  </g>
+
+  <!-- Bottom Frequency Waveform Stream -->
+  <g transform="translate(225, 466)" filter="url(#voiceCardShadow)">
+    <rect x="-20" y="-12" width="410" height="42" rx="21" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" />
+    
+    <!-- Audio Waveform Bars in Light Theme (Cyan & Royal Sapphire) -->
+    <g transform="translate(25, 9)">
+      <rect x="0" y="-5" width="3" height="10" rx="1.5" fill="#2563EB" />
+      <rect x="8" y="-9" width="3" height="18" rx="1.5" fill="#0284C7" />
+      <rect x="16" y="-15" width="3" height="30" rx="1.5" fill="#00D2FE" />
+      <rect x="24" y="-10" width="3" height="20" rx="1.5" fill="#38BDF8" />
+      <rect x="32" y="-5" width="3" height="10" rx="1.5" fill="#2563EB" />
+      <rect x="40" y="-13" width="3" height="26" rx="1.5" fill="#0284C7" />
+      <rect x="48" y="-19" width="3" height="38" rx="1.5" fill="#00D2FE" />
+      <rect x="56" y="-11" width="3" height="22" rx="1.5" fill="#38BDF8" />
+      <rect x="64" y="-6" width="3" height="12" rx="1.5" fill="#2563EB" />
+      <rect x="72" y="-14" width="3" height="28" rx="1.5" fill="#0284C7" />
+      <rect x="80" y="-20" width="3" height="40" rx="1.5" fill="#00D2FE" />
+      <rect x="88" y="-12" width="3" height="24" rx="1.5" fill="#38BDF8" />
+      <rect x="96" y="-6" width="3" height="12" rx="1.5" fill="#2563EB" />
+      <rect x="104" y="-15" width="3" height="30" rx="1.5" fill="#0284C7" />
+      <rect x="112" y="-22" width="3" height="44" rx="1.5" fill="#00D2FE" />
+      <rect x="120" y="-13" width="3" height="26" rx="1.5" fill="#38BDF8" />
+      <rect x="128" y="-7" width="3" height="14" rx="1.5" fill="#2563EB" />
+      <rect x="136" y="-14" width="3" height="28" rx="1.5" fill="#0284C7" />
+      <rect x="144" y="-18" width="3" height="36" rx="1.5" fill="#00D2FE" />
+      <rect x="152" y="-10" width="3" height="20" rx="1.5" fill="#38BDF8" />
+      <rect x="160" y="-6" width="3" height="12" rx="1.5" fill="#2563EB" />
+      <rect x="168" y="-15" width="3" height="30" rx="1.5" fill="#0284C7" />
+      <rect x="176" y="-20" width="3" height="40" rx="1.5" fill="#00D2FE" />
+      <rect x="184" y="-12" width="3" height="24" rx="1.5" fill="#38BDF8" />
+      <rect x="192" y="-6" width="3" height="12" rx="1.5" fill="#2563EB" />
+      <rect x="200" y="-14" width="3" height="28" rx="1.5" fill="#0284C7" />
+      <rect x="208" y="-19" width="3" height="38" rx="1.5" fill="#00D2FE" />
+      <rect x="216" y="-11" width="3" height="22" rx="1.5" fill="#38BDF8" />
+      <rect x="224" y="-6" width="3" height="12" rx="1.5" fill="#2563EB" />
+      <rect x="232" y="-13" width="3" height="26" rx="1.5" fill="#0284C7" />
+      <rect x="240" y="-18" width="3" height="36" rx="1.5" fill="#00D2FE" />
+      <rect x="248" y="-10" width="3" height="20" rx="1.5" fill="#38BDF8" />
+    </g>
+
+    <!-- Live indicator -->
+    <text x="315" y="13" fill="#0284C7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">LIVE AUDIO</text>
+  </g>
+
+</svg>

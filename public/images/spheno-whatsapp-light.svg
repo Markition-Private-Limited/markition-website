@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="100%" height="100%">
+  <defs>
+    <!-- Background Canvas -->
+    <linearGradient id="waLightBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC" />
+      <stop offset="50%" stop-color="#F1F5F9" />
+      <stop offset="100%" stop-color="#E2E8F0" />
+    </linearGradient>
+
+    <!-- White Card Surface -->
+    <linearGradient id="waCardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F8FAFC" />
+    </linearGradient>
+
+    <!-- Drop Shadow -->
+    <filter id="waShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0F172A" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- Canvas Base -->
+  <rect width="800" height="520" rx="20" fill="url(#waLightBg)" stroke="#CBD5E1" stroke-width="1.5" />
+
+  <!-- Main Container Card -->
+  <g transform="translate(60, 35)">
+    <rect width="680" height="450" rx="18" fill="url(#waCardGrad)" stroke="#E2E8F0" stroke-width="1.5" filter="url(#waShadow)" />
+
+    <!-- Chat App Shell (Authentic Clean WhatsApp Style) -->
+    <g transform="translate(30, 25)">
+      
+      <!-- Shell Background -->
+      <rect width="620" height="400" rx="14" fill="#F0F2F5" stroke="#CBD5E1" stroke-width="1" />
+
+      <!-- WhatsApp Header Bar -->
+      <path d="M 0 14 C 0 6.27 6.27 0 14 0 L 606 0 C 613.73 0 620 6.27 620 14 L 620 54 L 0 54 Z" fill="#008069" />
+      
+      <!-- Avatar & Account Title -->
+      <g transform="translate(20, 10)">
+        <!-- Green Avatar circle with Bot Icon -->
+        <circle cx="17" cy="17" r="17" fill="#FFFFFF" />
+        <circle cx="17" cy="14" r="7" fill="#008069" />
+        <path d="M 7 28 C 7 22 27 22 27 28 Z" fill="#008069" />
+
+        <text x="44" y="16" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700">
+          Spheno Concierge
+        </text>
+        <!-- Official WhatsApp Green Verified Checkmark -->
+        <circle cx="168" cy="12" r="6" fill="#25D366" />
+        <path d="M 165 12 L 167 14 L 171 10" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
+
+        <text x="44" y="30" fill="#E8F5E9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">
+          Official WhatsApp Business Automation
+        </text>
+      </g>
+
+      <!-- Date Badge -->
+      <g transform="translate(270, 70)">
+        <rect width="80" height="22" rx="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="0.8" />
+        <text x="40" y="15" fill="#54656F" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" text-anchor="middle">
+          TODAY
+        </text>
+      </g>
+
+      <!-- Message 1: Incoming Automated Proactive Re-engagement -->
+      <g transform="translate(25, 105)">
+        <rect width="400" height="68" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="0.8" />
+        <text x="14" y="22" fill="#111B21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="500">
+          Hi Sarah! We noticed you started an inquiry on our site.
+        </text>
+        <text x="14" y="42" fill="#111B21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="500">
+          Dr. Bennett has an open emergency slot tomorrow at 3:15 PM.
+        </text>
+        <text x="360" y="60" fill="#667781" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10">
+          10:42 AM
+        </text>
+      </g>
+
+      <!-- Interactive Quick Action Chips (Tap to Book) -->
+      <g transform="translate(30, 184)">
+        <rect width="180" height="32" rx="16" fill="#E7FCE8" stroke="#25D366" stroke-width="1.2" />
+        <text x="90" y="20" fill="#008069" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+          ✓ Confirm 3:15 PM Slot
+        </text>
+
+        <g transform="translate(195, 0)">
+          <rect width="150" height="32" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+          <text x="75" y="20" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="600" text-anchor="middle">
+            Request Callback
+          </text>
+        </g>
+      </g>
+
+      <!-- Message 2: Customer Tap Reply (Outgoing Bubble, Green tinted) -->
+      <g transform="translate(360, 230)">
+        <rect width="235" height="38" rx="10" fill="#D9FDD3" stroke="#B4E3AB" stroke-width="0.8" />
+        <text x="14" y="23" fill="#111B21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="600">
+          Confirm 3:15 PM Slot
+        </text>
+        <text x="195" y="25" fill="#53BDEB" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10">
+          ✓✓
+        </text>
+      </g>
+
+      <!-- Message 3: Automated Confirmation & Calendar Link -->
+      <g transform="translate(25, 282)">
+        <rect width="440" height="54" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="0.8" />
+        <text x="14" y="22" fill="#111B21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="600">
+          Locked in! 🎉 Your calendar invite and SMS directions
+        </text>
+        <text x="14" y="40" fill="#008069" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+          have been dispatched. Dr. Bennett is ready for you tomorrow.
+        </text>
+        <text x="400" y="46" fill="#667781" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10">
+          10:43 AM
+        </text>
+      </g>
+
+      <!-- Bottom WhatsApp Input Bar -->
+      <g transform="translate(0, 350)">
+        <rect width="620" height="50" fill="#F0F2F5" />
+        <g transform="translate(20, 8)">
+          <rect width="530" height="34" rx="17" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+          <text x="18" y="22" fill="#8696A0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">
+            Type a message...
+          </text>
+        </g>
+        <!-- Green Send Voice/Action Button -->
+        <g transform="translate(565, 8)">
+          <circle cx="17" cy="17" r="17" fill="#008069" />
+          <circle cx="17" cy="17" r="6" fill="#FFFFFF" />
+        </g>
+      </g>
+
+    </g>
+
+  </g>
+</svg>

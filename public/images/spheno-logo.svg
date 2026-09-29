@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200" fill="none" className="w-full h-auto">
+  <defs>
+    <!-- Cyan to Royal Blue to Violet for AI Gradient -->
+    <linearGradient id="sphenoAiGradNew" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4F75FF" />
+      <stop offset="25%" stop-color="#5B86FD" />
+      <stop offset="50%" stop-color="#7B92FA" />
+      <stop offset="75%" stop-color="#8E85F8" />
+      <stop offset="100%" stop-color="#A594FD" />
+    </linearGradient>
+
+    <!-- Glowing Cyan-Blue Light Bar across E -->
+    <linearGradient id="sphenoEBarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="40%" stop-color="#3B82F6" />
+      <stop offset="70%" stop-color="#60A5FA" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+
+    <!-- Subtle Specular Sheen for E Bar -->
+    <linearGradient id="sphenoEBarSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#60A5FA" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0.9" />
+    </linearGradient>
+  </defs>
+
+  <!-- ======================================================== -->
+  <!-- 1. "S"                                                   -->
+  <!-- Modern Geometric Rounded Super-ellipse with Horizontal Cut -->
+  <!-- ======================================================== -->
+  <!-- Top Arch & Left Curve of S -->
+  <path
+    d="M 142 62 C 142 48 128 36 102 36 L 68 36 C 46 36 28 50 28 72 L 28 82 C 28 104 46 116 70 120 L 102 126 C 120 130 128 138 128 150 L 128 154 C 128 168 116 176 96 176 L 56 176 C 36 176 24 164 24 148 L 24 142 L 48 142 L 48 148 C 48 155 54 158 64 158 L 96 158 C 104 158 108 154 108 148 L 108 144 C 108 136 102 130 84 126 L 52 120 C 30 114 16 102 16 82 L 16 72 C 16 42 40 24 72 24 L 100 24 C 132 24 154 42 154 70 L 154 76 L 130 76 Z"
+    fill="currentColor"
+  />
+
+  <!-- High-Precision Solid SVG Glyphs for SPHENO.AI -->
+  <g fill="currentColor">
+    <!-- S Solid Geometric Vector -->
+    <path d="M 65 30 L 120 30 C 146 30 162 44 162 70 L 162 76 L 136 76 L 136 70 C 136 56 128 48 114 48 L 68 48 C 52 48 44 56 44 68 L 44 76 C 44 88 52 96 74 100 L 116 108 C 148 114 164 128 164 152 L 164 160 C 164 186 146 200 118 200 L 60 200 C 32 200 16 186 16 160 L 16 150 L 42 150 L 42 160 C 42 174 50 182 66 182 L 114 182 C 130 182 138 174 138 160 L 138 152 C 138 140 130 132 108 128 L 66 120 C 34 114 18 100 18 76 L 18 68 C 18 42 36 30 65 30 Z" />
+
+    <!-- P Geometric Vector -->
+    <!-- Outer Stem & Loop -->
+    <path d="M 188 30 L 254 30 C 286 30 306 48 306 78 C 306 108 286 126 254 126 L 214 126 L 214 200 L 188 200 L 188 30 Z M 214 48 L 214 108 L 252 108 C 272 108 282 98 282 78 C 282 58 272 48 252 48 L 214 48 Z" />
+
+    <!-- H Geometric Vector with Crosshair Detail -->
+    <!-- Left Stalk -->
+    <path d="M 330 30 L 356 30 L 356 200 L 330 200 Z" />
+    <!-- Right Stalk -->
+    <path d="M 416 30 L 442 30 L 442 200 L 416 200 Z" />
+    <!-- Crossbar -->
+    <path d="M 356 102 L 416 102 L 416 126 L 356 126 Z" />
+  </g>
+
+  <!-- Cyan Crosshair / Plus Accent at H Left Stalk Intersection -->
+  <g transform="translate(343, 114)">
+    <line x1="-5" y1="0" x2="5" y2="0" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" />
+    <line x1="0" y1="-5" x2="0" y2="5" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" />
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- 4. "E" with Glowing Cyan-Blue Cyber Bar                   -->
+  <!-- ======================================================== -->
+  <g fill="currentColor">
+    <!-- Back Spine & Top / Bottom Arms -->
+    <path d="M 466 30 L 560 30 L 560 48 L 492 48 L 492 182 L 562 182 L 562 200 L 466 200 Z" />
+  </g>
+
+  <!-- Glowing Middle Horizontal Bar of "E" (Gradient Cyan/Electric Blue) -->
+  <rect x="492" y="102" width="70" height="24" rx="2" fill="url(#sphenoEBarGrad)" />
+  <rect x="492" y="102" width="70" height="24" rx="2" fill="url(#sphenoEBarSheen)" opacity="0.6" />
+  <!-- Crisp top edge glint -->
+  <line x1="492" y1="103" x2="562" y2="103" stroke="#A5F3FC" stroke-width="1.5" />
+
+  <!-- ======================================================== -->
+  <!-- 5. "N"                                                   -->
+  <!-- ======================================================== -->
+  <g fill="currentColor">
+    <path d="M 586 30 L 612 30 L 670 152 L 670 30 L 696 30 L 696 200 L 670 200 L 612 78 L 612 200 L 586 200 Z" />
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- 6. "O" (Geometric Pill / Squircle)                       -->
+  <!-- ======================================================== -->
+  <g fill="currentColor">
+    <path d="M 760 30 L 798 30 C 830 30 848 48 848 78 L 848 152 C 848 182 830 200 798 200 L 760 200 C 728 200 710 182 710 152 L 710 78 C 710 48 728 30 760 30 Z M 762 48 C 742 48 736 58 736 78 L 736 152 C 736 172 742 182 762 182 L 796 182 C 816 182 822 172 822 152 L 822 78 C 822 58 816 48 796 48 Z" />
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- 7. "." (Dot - Solid Circular / Squircle Period)          -->
+  <!-- ======================================================== -->
+  <circle cx="875" cy="188" r="12" fill="currentColor" />
+
+  <!-- ======================================================== -->
+  <!-- 8. "AI" (Vibrant Sapphire / Violet Gradient)             -->
+  <!-- ======================================================== -->
+  <g fill="url(#sphenoAiGradNew)">
+    <!-- Letter "A" -->
+    <path d="M 945 30 L 972 30 L 1022 200 L 994 200 L 980 150 L 936 150 L 922 200 L 895 200 Z M 942 130 L 974 130 L 958 70 Z" />
+
+    <!-- Letter "I" -->
+    <path d="M 1040 30 L 1066 30 L 1066 200 L 1040 200 Z" />
+  </g>
+</svg>

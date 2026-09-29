@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="100%" height="100%">
+  <defs>
+    <!-- Light Studio Background -->
+    <linearGradient id="crmLightBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC" />
+      <stop offset="50%" stop-color="#F1F5F9" />
+      <stop offset="100%" stop-color="#E2E8F0" />
+    </linearGradient>
+
+    <!-- White Card Surface -->
+    <linearGradient id="whiteCardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F8FAFC" />
+    </linearGradient>
+
+    <!-- Soft Drop Shadows -->
+    <filter id="crmShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0F172A" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- Base Canvas -->
+  <rect width="800" height="520" rx="20" fill="url(#crmLightBg)" stroke="#CBD5E1" stroke-width="1.5" />
+
+  <!-- Main Dashboard White Card Container -->
+  <g transform="translate(40, 35)">
+    <rect width="720" height="450" rx="18" fill="url(#whiteCardGrad)" stroke="#E2E8F0" stroke-width="1.5" filter="url(#crmShadow)" />
+
+    <!-- Top Dashboard Header Bar -->
+    <g transform="translate(28, 24)">
+      <!-- Eyebrow Tag -->
+      <rect width="120" height="22" rx="11" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1" />
+      <text x="60" y="15" fill="#0018C5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">
+        SPHENO CRM
+      </text>
+
+      <text x="135" y="16" fill="#0F172A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800">
+        Unified Revenue &amp; Pipeline Intelligence
+      </text>
+
+      <g transform="translate(560, 0)">
+        <circle cx="6" cy="6" r="4" fill="#10B981" />
+        <text x="16" y="10" fill="#059669" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700">
+          LIVE SYNC
+        </text>
+      </g>
+    </g>
+
+    <!-- 3 KPI Cards Row -->
+    <g transform="translate(28, 64)">
+      <!-- KPI Card 1: Pipeline Value -->
+      <g transform="translate(0, 0)">
+        <rect width="210" height="88" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.2" />
+        <text x="16" y="24" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">
+          TOTAL PIPELINE VALUE
+        </text>
+        <text x="16" y="56" fill="#0F172A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="800">
+          $482,500
+        </text>
+        <g transform="translate(16, 64)">
+          <rect width="64" height="16" rx="8" fill="#ECFDF5" />
+          <text x="32" y="12" fill="#059669" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" text-anchor="middle">
+            +28.4%
+          </text>
+        </g>
+      </g>
+
+      <!-- KPI Card 2: AI Conversations -->
+      <g transform="translate(226, 0)">
+        <rect width="210" height="88" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.2" />
+        <text x="16" y="24" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">
+          AI MANAGED CONVERSATIONS
+        </text>
+        <text x="16" y="56" fill="#0018C5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="800">
+          1,420
+        </text>
+        <g transform="translate(16, 64)">
+          <rect width="84" height="16" rx="8" fill="#EFF6FF" />
+          <text x="42" y="12" fill="#0066FF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" text-anchor="middle">
+            100% Attribution
+          </text>
+        </g>
+      </g>
+
+      <!-- KPI Card 3: Autonomous Booking Rate -->
+      <g transform="translate(452, 0)">
+        <rect width="210" height="88" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.2" />
+        <text x="16" y="24" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">
+          AUTONOMOUS BOOKING RATE
+        </text>
+        <text x="16" y="56" fill="#0F172A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="800">
+          42.8%
+        </text>
+        <g transform="translate(16, 64)">
+          <rect width="70" height="16" rx="8" fill="#F0FDF4" />
+          <text x="35" y="12" fill="#16A34A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" text-anchor="middle">
+            Zero Latency
+          </text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Main Content Area: Multi-Touch Attribution Sync + Live Leads Table -->
+    <g transform="translate(28, 172)">
+      
+      <!-- Left: Channel Distribution Bars -->
+      <g transform="translate(0, 0)">
+        <rect width="260" height="235" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.2" />
+        <text x="18" y="28" fill="#0F172A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">
+          Multi-Touch Attribution
+        </text>
+
+        <!-- Channel 1: Voice Telephony -->
+        <g transform="translate(18, 50)">
+          <div style="display:flex;">
+            <text x="0" y="12" fill="#334155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">Spheno Voice</text>
+            <text x="220" y="12" fill="#0018C5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" text-anchor="end">48%</text>
+          </div>
+          <rect x="0" y="18" width="224" height="8" rx="4" fill="#E2E8F0" />
+          <rect x="0" y="18" width="108" height="8" rx="4" fill="#0018C5" />
+        </g>
+
+        <!-- Channel 2: Spheno Chat -->
+        <g transform="translate(18, 105)">
+          <text x="0" y="12" fill="#334155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">Spheno Chat</text>
+          <text x="220" y="12" fill="#0284C7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" text-anchor="end">32%</text>
+          <rect x="0" y="18" width="224" height="8" rx="4" fill="#E2E8F0" />
+          <rect x="0" y="18" width="72" height="8" rx="4" fill="#0284C7" />
+        </g>
+
+        <!-- Channel 3: Spheno WhatsApp -->
+        <g transform="translate(18, 160)">
+          <text x="0" y="12" fill="#334155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">Spheno WhatsApp</text>
+          <text x="220" y="12" fill="#10B981" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" text-anchor="end">20%</text>
+          <rect x="0" y="18" width="224" height="8" rx="4" fill="#E2E8F0" />
+          <rect x="0" y="18" width="45" height="8" rx="4" fill="#10B981" />
+        </g>
+      </g>
+
+      <!-- Right: Real-Time Lead Scoring Feed -->
+      <g transform="translate(276, 0)">
+        <rect width="388" height="235" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.2" />
+        
+        <text x="20" y="28" fill="#0F172A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">
+          Autonomous Lead Score &amp; Pipeline Sync
+        </text>
+
+        <!-- Lead Row 1 -->
+        <g transform="translate(18, 45)">
+          <rect width="352" height="50" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1" />
+          <!-- Avatar Icon -->
+          <circle cx="25" cy="25" r="14" fill="#EFF6FF" />
+          <text x="25" y="29" fill="#0018C5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" text-anchor="middle">MV</text>
+          
+          <text x="48" y="21" fill="#0F172A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">Marcus Vance</text>
+          <text x="48" y="37" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">Emergency Implant · 3:15 PM</text>
+
+          <rect x="260" y="15" width="80" height="20" rx="10" fill="#ECFDF5" />
+          <text x="300" y="29" fill="#059669" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" text-anchor="middle">Score: 98 · Won</text>
+        </g>
+
+        <!-- Lead Row 2 -->
+        <g transform="translate(18, 105)">
+          <rect width="352" height="50" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1" />
+          <circle cx="25" cy="25" r="14" fill="#F0FDF4" />
+          <text x="25" y="29" fill="#16A34A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" text-anchor="middle">SJ</text>
+
+          <text x="48" y="21" fill="#0F172A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">Sarah Jenkins</text>
+          <text x="48" y="37" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">WhatsApp Re-engagement · Won</text>
+
+          <rect x="260" y="15" width="80" height="20" rx="10" fill="#EFF6FF" />
+          <text x="300" y="29" fill="#0066FF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" text-anchor="middle">Score: 92 · Sync</text>
+        </g>
+
+        <!-- Lead Row 3 -->
+        <g transform="translate(18, 165)">
+          <rect width="352" height="50" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1" />
+          <circle cx="25" cy="25" r="14" fill="#FEF3C7" />
+          <text x="25" y="29" fill="#D97706" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" text-anchor="middle">DC</text>
+
+          <text x="48" y="21" fill="#0F172A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">David Chen</text>
+          <text x="48" y="37" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">Voice Autonomous Inbound Call</text>
+
+          <rect x="260" y="15" width="80" height="20" rx="10" fill="#ECFDF5" />
+          <text x="300" y="29" fill="#059669" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" text-anchor="middle">Score: 95 · Booked</text>
+        </g>
+
+      </g>
+    </g>
+
+  </g>
+</svg>
