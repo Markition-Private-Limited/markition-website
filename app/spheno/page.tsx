@@ -1,5 +1,3 @@
-import Navbar from "@/components/navbar/Navbar";
-
 export const metadata = {
   title: "Spheno AI — Connected AI Business System | Markition",
   description: "Markition's central AI business system bringing together Spheno Chat, Spheno Voice, Spheno CRM, and Spheno WhatsApp AI to automate conversations, qualify leads, and book appointments.",
@@ -17,10 +15,6 @@ export const metadata = {
 export default function SphenoPage() {
   return (
     <div style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
-      {/* Navbar floats over the iframe — no background box */}
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 50 }}>
-        <Navbar />
-      </div>
       <iframe
         src="/spheno-embed"
         title="Spheno AI"
