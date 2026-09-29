@@ -43,7 +43,7 @@ function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
 
 export default function Stats() {
   return (
-    <div className="hero-stats max-w-3xl mx-auto grid grid-cols-3 pb-4 sm:pb-6">
+    <div className="hero-stats max-w-3xl mx-auto grid grid-cols-3 pb-6 sm:pb-8">
       {STATS.map((stat, i) => (
         <div
           key={stat.value}

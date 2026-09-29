@@ -33,7 +33,7 @@ export default function Hero() {
 
   return (
     <div className="relative z-10 px-4 sm:px-6 pt-3 sm:pt-4">
-      <div className="text-center max-w-3xl mx-auto pt-6 sm:pt-10 lg:pt-12 pb-4 sm:pb-8 lg:pb-8 px-2 sm:px-4">
+      <div className="text-center max-w-3xl mx-auto pt-2 sm:pt-4 lg:pt-6 pb-2 sm:pb-4 lg:pb-6 px-2 sm:px-4">
         <h1
           className="hero-heading text-[28px] xs:text-[32px] sm:text-[42px] md:text-[52px] lg:text-[56px] font-bold leading-[1.15] text-white mb-3 sm:mb-4"
           style={{

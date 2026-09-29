@@ -27,13 +27,15 @@ export default function Home() {
         style={{
           height: "100vh",
           overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
           backgroundImage:
             "radial-gradient(ellipse 900px 450px at 50% -60px, rgba(1,55,215,0.18) 0%, transparent 70%)",
         }}
       >
         <TubesCursor />
         <Navbar />
-        <main>
+        <main style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
           <Hero />
           <Stats />
         </main>
