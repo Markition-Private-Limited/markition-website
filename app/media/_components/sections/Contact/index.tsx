@@ -316,6 +316,7 @@ export default function Contact() {
                 step={100}
                 value={budgetMin}
                 onChange={handleMin}
+                onWheel={(e) => e.currentTarget.blur()}
                 style={{ zIndex: budgetMin > BUDGET_MAX - 1000 ? 5 : 3 }}
               />
               <input
@@ -326,6 +327,7 @@ export default function Contact() {
                 step={100}
                 value={budgetMax}
                 onChange={handleMax}
+                onWheel={(e) => e.currentTarget.blur()}
                 style={{ zIndex: 4 }}
               />
             </div>

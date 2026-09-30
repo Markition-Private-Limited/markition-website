@@ -1,23 +1,74 @@
 import Image from "next/image";
 
-export default function Footer() {
+const SOCIALS = {
+  media: {
+    instagram: "https://www.instagram.com/markitionmedia",
+    facebook:  "https://www.facebook.com/markitionmedia",
+  },
+  tech: {
+    instagram: "https://www.instagram.com/markitiontech",
+    facebook:  "https://www.facebook.com/markitiontechnologies",
+  },
+} as const;
+
+const COMMON = {
+  twitter:  "https://x.com/MarkitionPvt",
+  linkedin: "https://linkedin.com/company/markition/",
+  tiktok:   "https://www.tiktok.com/@markitionpvtltd",
+};
+
+export default function Footer({ variant = "media" }: { variant?: "media" | "tech" }) {
+  const { instagram, facebook } = SOCIALS[variant];
   return (
-    <footer>
+    <footer style={{ background: "#020a1c" }}>
+      <style>{`
+        .footer-grid {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 24px;
+          display: grid;
+          grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+          gap: 40px 48px;
+          align-items: start;
+        }
+        .footer-bottom-inner {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+        @media (max-width: 767px) {
+          .footer-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 36px 24px;
+            padding: 0 20px;
+          }
+          .footer-col-brand {
+            grid-column: 1 / -1;
+          }
+          .footer-bottom-inner {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+          }
+        }
+        @media (max-width: 479px) {
+          .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 28px;
+          }
+        }
+      `}</style>
+
       {/* ── Main body ── */}
-      <div style={{ background: "#000028", padding: "72px 0 56px" }}>
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            padding: "0 32px",
-            display: "grid",
-            gridTemplateColumns: "1.4fr 1fr 1fr 1.3fr",
-            gap: "40px 48px",
-            alignItems: "start",
-          }}
-        >
+      <div style={{ background: "#020a1c", padding: "64px 0 52px" }}>
+        <div className="footer-grid">
           {/* ── Col 1: Logo + about ── */}
-          <div>
+          <div className="footer-col-brand">
             <Image
               src="/markition-logo.svg"
               alt="Markition"
@@ -62,33 +113,24 @@ export default function Footer() {
               <ContactRow icon={<PhoneIcon />} text="+1 (713) 894-7727"    href="tel:+17138947727" />
               <ContactRow icon={<MailIcon />}  text="hey@markition.com"    href="mailto:hey@markition.com" />
             </div>
-            <div style={{ display: "flex", gap: 14, marginTop: 24 }}>
-              <SocialLink href="https://twitter.com"   label="Twitter"   icon={<TwitterIcon />}   />
-              <SocialLink href="https://facebook.com"  label="Facebook"  icon={<FacebookIcon />}  />
-              <SocialLink href="https://linkedin.com"  label="LinkedIn"  icon={<LinkedInIcon />}  />
-              <SocialLink href="https://instagram.com" label="Instagram" icon={<InstagramIcon />} />
+            <div style={{ display: "flex", gap: 14, marginTop: 24, flexWrap: "wrap" }}>
+              <SocialLink href={COMMON.twitter}   label="X / Twitter" icon={<TwitterIcon />}   />
+              <SocialLink href={facebook}          label="Facebook"    icon={<FacebookIcon />}  />
+              <SocialLink href={COMMON.linkedin}   label="LinkedIn"    icon={<LinkedInIcon />}  />
+              <SocialLink href={instagram}         label="Instagram"   icon={<InstagramIcon />} />
+              <SocialLink href={COMMON.tiktok}     label="TikTok"      icon={<TikTokIcon />}    />
             </div>
           </div>
         </div>
       </div>
 
       {/* ── Bottom bar ── */}
-      <div style={{ background: "#00061a", padding: "16px 32px" }}>
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: 12,
-          }}
-        >
+      <div style={{ background: "#010610", padding: "16px 24px" }}>
+        <div className="footer-bottom-inner">
           <span style={{ fontSize: 13, color: "rgba(255,255,255,0.45)" }}>
             © 2026 Markition. All rights reserved.
           </span>
-          <div style={{ display: "flex", gap: 32 }}>
+          <div style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center" }}>
             <a href="/terms"   style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", textDecoration: "none" }}>Terms of Use</a>
             <a href="/privacy" style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", textDecoration: "none" }}>Privacy Policy</a>
           </div>
@@ -201,6 +243,14 @@ function InstagramIcon() {
   return (
     <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+    </svg>
+  );
+}
+
+function TikTokIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z" />
     </svg>
   );
 }

@@ -41,6 +41,8 @@ export default function TubesCursor() {
         const app = TubesCursorLib(canvas, {
           tubes: {
             colors: ["#5e72e4", "#8965e0", "#f5365c"],
+            count: 12,
+            maxTubularSegments: 64,
             lights: {
               intensity: 200,
               colors: ["#21d4fd", "#b721ff", "#f4d03f", "#11cdef"],
@@ -67,6 +69,15 @@ export default function TubesCursor() {
 
         appRef.current = app;
         canvas.style.opacity = "1";
+
+        // Suppress the getSupportedExtensions crash on WebGL context loss
+        // (happens on HMR / tab visibility changes in some browsers)
+        canvas.addEventListener("webglcontextlost", (ev) => {
+          ev.preventDefault();
+          appRef.current?.dispose?.();
+          appRef.current = null;
+          canvas.style.opacity = "0";
+        }, { once: true });
       } catch (e) {
         console.error("TubesCursor init failed:", e);
       }
@@ -77,51 +88,74 @@ export default function TubesCursor() {
       const app = appRef.current;
       if (!app) return;
       const rect = canvas.getBoundingClientRect();
-      // Only react when the click is within the hero canvas area
       if (!isInsideCanvas(rect, e.clientX, e.clientY)) return;
       app.tubes?.setColors?.(randomColors(3));
       app.tubes?.setLightsColors?.(randomColors(4));
     };
 
-    // ── Desktop guard — clamp Y so tubes don't chase cursor below canvas ─
-    // The library listens for pointermove on document.body (bubble phase).
-    // This window bubble listener fires AFTER body handlers, so it can dispatch
-    // a correcting event that overwrites the library's cursor Y before the next
-    // rAF render.
-    const guardMove = (e: PointerEvent) => {
-      if (!appRef.current) return;
-      const rect = canvas.getBoundingClientRect();
-      if (rect.bottom <= 0) return; // canvas fully above viewport
-      const clampedY = Math.min(e.clientY, rect.bottom);
-      if (clampedY >= e.clientY) return; // cursor already within canvas bounds
-      document.body.dispatchEvent(
-        new PointerEvent("pointermove", {
-          clientX: e.clientX,
-          clientY: clampedY,
-          bubbles: false, // stay on body only — no re-entry into this guard
-        })
-      );
-    };
+    // ── Bounce-back fix ──────────────────────────────────────────────────
+    // The library (threejs-components) listens to "pointermove" and
+    // "pointerleave" on document.body (bubble phase). It switches the tubes
+    // to an idle orbit around the canvas center whenever the pointer is
+    // outside the canvas rect OR body fires "pointerleave" (cursor exits
+    // the window, hovers the auto-hide taskbar, etc.).
+    //
+    // Fix strategy: intercept BEFORE the library's body handler ever fires.
+    //
+    // 1. clampPointer — capture phase on document, so it runs before body's
+    //    bubble handlers. If the real coords are outside the canvas, we stop
+    //    the original event and dispatch a clamped event directly on body
+    //    (bubbles:false so it goes only to body, not back up). The library
+    //    then sees the cursor as being on the canvas edge, never "outside".
+    //
+    // 2. blockBodyLeave — capture phase on body, stops the library's own
+    //    "pointerleave" handler (bB) from setting hover=false, which is what
+    //    triggers the idle orbit when the cursor leaves the browser window.
+    //
+    // Together these ensure the library never enters the idle orbit after
+    // the cursor has been seen at least once.
 
-    // ── Mobile touch — forward touch position as pointermove to the library ─
-    // The tubes library only listens to pointermove on document.body. On
-    // mobile there's no pointer movement without a physical pointing device,
-    // so we synthesise pointermove events from touch coordinates. We only
-    // do this while the touch stays within the hero canvas bounds so the
-    // effect is strictly scoped to the first section.
-    const onTouchMove = (e: TouchEvent) => {
+    const clampPointer = (e: PointerEvent) => {
+      // Skip synthetic events we dispatched ourselves (isTrusted=false)
+      if (!e.isTrusted) return;
       if (!appRef.current) return;
       const rect = canvas.getBoundingClientRect();
       if (rect.bottom <= 0) return; // hero scrolled out of view
 
+      // If inside canvas, let the event pass through normally
+      if (isInsideCanvas(rect, e.clientX, e.clientY)) return;
+
+      // Outside canvas: block the real event from reaching body's listener
+      // and fire a clamped one directly on body instead.
+      e.stopPropagation();
+      document.body.dispatchEvent(
+        new PointerEvent("pointermove", {
+          clientX: Math.max(rect.left, Math.min(e.clientX, rect.right)),
+          clientY: Math.max(rect.top, Math.min(e.clientY, rect.bottom)),
+          bubbles: false,
+        })
+      );
+    };
+
+    const blockBodyLeave = (e: Event) => {
+      if (!appRef.current) return;
+      // Block the library's bB handler which sets hover=false and
+      // triggers the idle orbit bounce-back
+      e.stopImmediatePropagation();
+    };
+
+    // ── Mobile touch — forward touch position as pointermove to the library ─
+    const onTouchMove = (e: TouchEvent) => {
+      if (!appRef.current) return;
+      const rect = canvas.getBoundingClientRect();
+      if (rect.bottom <= 0) return;
+
       const touch = e.touches[0];
       if (!touch) return;
 
-      // Clamp Y so tubes never escape the hero section downward
       const clientX = touch.clientX;
       const clientY = Math.min(touch.clientY, rect.bottom);
 
-      // Only forward if the original touch started inside the hero
       if (!isInsideCanvas(rect, touch.clientX, touch.clientY) && touch.clientY > rect.bottom) return;
 
       document.body.dispatchEvent(
@@ -141,17 +175,12 @@ export default function TubesCursor() {
       const touch = e.touches[0];
       if (!touch) return;
 
-      // Only react to taps inside the hero section
       if (!isInsideCanvas(rect, touch.clientX, touch.clientY)) return;
 
-      const clientX = touch.clientX;
-      const clientY = touch.clientY;
-
-      // Drive the tubes to the tap position immediately
       document.body.dispatchEvent(
         new PointerEvent("pointermove", {
-          clientX,
-          clientY,
+          clientX: touch.clientX,
+          clientY: touch.clientY,
           bubbles: false,
         })
       );
@@ -163,11 +192,9 @@ export default function TubesCursor() {
       const rect = canvas.getBoundingClientRect();
       if (rect.bottom <= 0) return;
 
-      // changedTouches holds the touch that just lifted
       const touch = e.changedTouches[0];
       if (!touch) return;
 
-      // Only randomise colors when tap ended inside the hero
       if (!isInsideCanvas(rect, touch.clientX, touch.clientY)) return;
 
       app.tubes?.setColors?.(randomColors(3));
@@ -175,7 +202,9 @@ export default function TubesCursor() {
     };
 
     window.addEventListener("click", onClick);
-    window.addEventListener("pointermove", guardMove);
+    // Capture phase — fires before the library's body bubble-phase handlers
+    document.addEventListener("pointermove", clampPointer, true);
+    document.body.addEventListener("pointerleave", blockBodyLeave, true);
     // Use passive: true — we never call preventDefault on these
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
@@ -185,7 +214,8 @@ export default function TubesCursor() {
       destroyed = true;
       clearTimeout(initTimer);
       window.removeEventListener("click", onClick);
-      window.removeEventListener("pointermove", guardMove);
+      document.removeEventListener("pointermove", clampPointer, true);
+      document.body.removeEventListener("pointerleave", blockBodyLeave, true);
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchend", onTouchEnd);

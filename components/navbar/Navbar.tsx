@@ -156,6 +156,12 @@ function ServiceIcon({ type }: { type: string }) {
   );
 }
 
+const PAGE_SERVICE_LINKS: Record<string, string[]> = {
+  "/tech":       ["Tech Solution"],
+  "/media":      ["Digital Marketing"],
+  "/design-lab": ["Digital Marketing"],
+};
+
 const PAGE_LOGOS: Record<string, { src: string; width: number; height: number }> = {
   "/media":      { src: "/media_white.png",       width: 140, height: 32 },
   "/design-lab": { src: "/design_lab_white.png",  width: 140, height: 32 },
@@ -165,6 +171,18 @@ const PAGE_LOGOS: Record<string, { src: string; width: number; height: number }>
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
+
+  const pageServiceKey = Object.keys(PAGE_SERVICE_LINKS).find(k => pathname.startsWith(k));
+  const activeServiceLinks = pageServiceKey ? PAGE_SERVICE_LINKS[pageServiceKey] : SERVICES_MENU.mainLinks;
+
+
+  function openServicesMenu() {
+    setServicesOpen(v => !v);
+    setSolutionsOpen(false);
+    if (!activeServiceLinks.includes(activeService)) {
+      setActiveService(activeServiceLinks[0]);
+    }
+  }
 
   function handleContactClick(e: React.MouseEvent) {
     e.preventDefault();
@@ -261,7 +279,7 @@ export default function Navbar() {
             if (isServices) return (
               <button
                 key={link.label}
-                onClick={() => { setServicesOpen((v) => !v); setSolutionsOpen(false); }}
+                onClick={openServicesMenu}
                 className="hover:text-white/95 transition-colors duration-150 flex items-center gap-1 whitespace-nowrap px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05] text-[13px] font-normal"
                 style={{ background: "none", border: "none", cursor: "pointer", color: servicesOpen ? "#ffffff" : "inherit" }}
               >
@@ -359,7 +377,7 @@ export default function Navbar() {
 
               {/* ── Col 1: Big main nav tabs ── */}
               <div style={{ borderRight: "1px solid rgba(255,255,255,0.07)", paddingRight: 24 }}>
-                {SERVICES_MENU.mainLinks.map((label) => {
+                {activeServiceLinks.map((label) => {
                   const isActive = label === activeService;
                   return (
                     <button
@@ -650,13 +668,14 @@ export default function Navbar() {
             );
 
             if (link.label === "Services") {
-              const SERVICE_CARDS = [
+              const ALL_SERVICE_CARDS = [
                 { icon: "code",      label: "Tech Solution",       desc: "Web, mobile & SaaS platforms built to scale",  href: "/tech" },
                 { icon: "bolt",      label: "Digital Marketing",   desc: "Google Ads, SEO & social campaigns",            href: "#" },
                 { icon: "building",  label: "Enterprise Solution",  desc: "ERP, CRM & operational systems",               href: "/tech#solutions" },
                 { icon: "robot",     label: "AI Solutions",        desc: "Agents, chatbots & workflow automation",        href: "#" },
                 { icon: "chart",     label: "Industry Solutions",  desc: "Fintech, healthcare, retail & more",            href: "#" },
               ];
+              const SERVICE_CARDS = ALL_SERVICE_CARDS.filter(c => activeServiceLinks.includes(c.label));
               return (
                 <div key={link.label} className={borderClass}>
                   <button

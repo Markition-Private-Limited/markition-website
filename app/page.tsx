@@ -13,7 +13,6 @@ import Technologies from "@/components/Technologies";
 import AuditSection from "@/components/AuditSection";
 import ScaleWithAISection from "@/components/ScaleWithAISection";
 import FAQSection from "@/components/FAQSection";
-import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/footer/Footer";
 
 export default function Home() {
@@ -52,7 +51,6 @@ export default function Home() {
       <AuditSection />
       <ScaleWithAISection />
       <FAQSection />
-      <ContactSection />
       <Footer />
     </div>
   );

@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer>
+    <footer style={{ background: "#020a1c" }}>
       <style>{`
         @media (max-width: 767px) {
           .media-footer-main { padding: 48px 0 40px !important; }
@@ -9,11 +9,21 @@ export default function Footer() {
             gap: 36px 20px !important;
             padding: 0 20px !important;
           }
+          .media-footer-col-brand {
+            grid-column: 1 / -1 !important;
+          }
+          .media-footer-socials {
+            flex-wrap: wrap !important;
+          }
           .media-footer-bottom { padding: 14px 20px !important; }
           .media-footer-bottom-inner {
             flex-direction: column !important;
             align-items: flex-start !important;
             gap: 8px !important;
+          }
+          .media-footer-legal {
+            flex-wrap: wrap !important;
+            gap: 16px !important;
           }
         }
         @media (max-width: 479px) {
@@ -38,7 +48,7 @@ export default function Footer() {
           }}
         >
           {/* ── Col 1: Logo + about ── */}
-          <div>
+          <div className="media-footer-col-brand">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/media/markition-logo-white.webp"
@@ -83,7 +93,7 @@ export default function Footer() {
               <ContactRow icon={<PhoneIcon />} text="+1 (713) 894-7727"    href="tel:+17138947727" />
               <ContactRow icon={<MailIcon />}  text="hey@markition.com"    href="mailto:hey@markition.com" />
             </div>
-            <div style={{ display: "flex", gap: 14, marginTop: 24 }}>
+            <div className="media-footer-socials" style={{ display: "flex", gap: 14, marginTop: 24, flexWrap: "wrap" }}>
               <SocialLink href="https://twitter.com"   label="Twitter"   icon={<TwitterIcon />}   />
               <SocialLink href="https://facebook.com"  label="Facebook"  icon={<FacebookIcon />}  />
               <SocialLink href="https://linkedin.com"  label="LinkedIn"  icon={<LinkedInIcon />}  />
@@ -110,7 +120,7 @@ export default function Footer() {
           <span style={{ fontSize: 13, color: "rgba(255,255,255,0.45)" }}>
             © 2026 Markition. All rights reserved.
           </span>
-          <div style={{ display: "flex", gap: 32 }}>
+          <div className="media-footer-legal" style={{ display: "flex", gap: 32 }}>
             <a href="/terms"   style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", textDecoration: "none" }}>Terms of Use</a>
             <a href="/privacy" style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", textDecoration: "none" }}>Privacy Policy</a>
           </div>

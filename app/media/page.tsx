@@ -13,7 +13,7 @@ import Stats from "./_components/sections/Stats";
 import Portfolio from "./_components/sections/Portfolio";
 import FAQ from "./_components/sections/FAQ";
 import Contact from "./_components/sections/Contact";
-import Footer from "./_components/layout/Footer";
+import Footer from "@/components/footer/Footer";
 
 export const metadata: Metadata = {
   title: "Full-Service Digital Marketing Agency | Markition Media",
