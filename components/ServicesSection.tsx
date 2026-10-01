@@ -65,6 +65,15 @@ const SLOT_POS: Record<Slot, React.CSSProperties> = {
   center:   { left: "calc(50% - 44px)", top: 104  },
 };
 
+/* ─── Digital Marketing sub-item → image map ────────────────────────────── */
+const DIGITAL_IMAGES: Record<string, string> = {
+  "Google Ads":                              "/assets/services/digital-marketing/google-ads.webp",
+  "Social Media Marketing":                 "/assets/services/digital-marketing/social-media-marketing.webp",
+  "Search Engine Optimization (SEO)":       "/assets/services/digital-marketing/seo.webp",
+  "Generative Engine Optimization (GEO)":   "/assets/services/digital-marketing/geo.webp",
+  "Answer Engine Optimization (AEO)":       "/assets/services/digital-marketing/aeo.webp",
+};
+
 /* ─── Main component ─────────────────────────────────────────────────────── */
 export default function ServicesSection() {
   /* assignment: which service sits in which slot */
@@ -236,7 +245,7 @@ export default function ServicesSection() {
         >
           {/* LEFT: service list */}
           <div style={{
-            padding: "40px 24px 40px 72px",
+            padding: "40px 24px 40px 40px",
             display: "flex", flexDirection: "column", justifyContent: "center",
           }}>
             <h3 style={{
@@ -310,13 +319,18 @@ export default function ServicesSection() {
           }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/rectangle-52.png"
-              alt="Social Media Dashboard"
+              src={
+                activeService.id === "digital" && DIGITAL_IMAGES[activeService.items[activeItem]]
+                  ? DIGITAL_IMAGES[activeService.items[activeItem]]
+                  : "/rectangle-52.png"
+              }
+              alt={activeService.items[activeItem]}
               draggable={false}
               style={{
                 width: "calc(78% - 18px)", height: "auto", display: "block",
                 borderRadius: 10, boxShadow: "0 8px 40px rgba(0,0,60,0.5)",
                 position: "relative", zIndex: 1,
+                transition: "opacity 0.3s ease",
               }}
             />
           </div>

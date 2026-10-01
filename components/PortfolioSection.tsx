@@ -12,26 +12,49 @@ const CATEGORIES = [
   "Brand Experiences",
 ];
 
-const IMAGES = [
-  { src: "/assets/portofolio-v2/portoflio-image.png", alt: "Portfolio project 1" },
-  { src: "/assets/portofolio-v2/portfolio-image-2.png", alt: "Portfolio project 2" },
-  { src: "/assets/portofolio-v2/portfolio-image-3.png", alt: "Portfolio project 3" },
-  { src: "/assets/portofolio-v2/portfolio-image-4.png", alt: "Portfolio project 4" },
-  { src: "/assets/portofolio-v2/portfolio-image-5.png", alt: "Portfolio project 5" },
+const ALL_IMAGES = [
+  { src: "/assets/portofolio-v2/portfolio-image-1.jpg", alt: "Portfolio project 1" },
+  { src: "/assets/portofolio-v2/portfolio-image-2.jpg", alt: "Portfolio project 2" },
+  { src: "/assets/portofolio-v2/portfolio-image-3.jpg", alt: "Portfolio project 3" },
+  { src: "/assets/portofolio-v2/portfolio-image-4.jpg", alt: "Portfolio project 4" },
+  { src: "/assets/portofolio-v2/portfolio-image-5.jpg", alt: "Portfolio project 5" },
+  { src: "/assets/portofolio-v2/portfolio-image-6.jpg", alt: "Portfolio project 6" },
+  { src: "/assets/portofolio-v2/portfolio-image-7.png", alt: "Portfolio project 7" },
+  { src: "/assets/portofolio-v2/portfolio-image-8.jpg", alt: "Portfolio project 8" },
+  { src: "/assets/portofolio-v2/portfolio-image-9.jpg", alt: "Portfolio project 9" },
+  { src: "/assets/portofolio-v2/portfolio-image-10.jpg", alt: "Portfolio project 10" },
+  { src: "/assets/portofolio-v2/portfolio-image-11.jpg", alt: "Portfolio project 11" },
+  { src: "/assets/portofolio-v2/portfolio-image-12.jpg", alt: "Portfolio project 12" },
+  { src: "/assets/portofolio-v2/portfolio-image-13.jpg", alt: "Portfolio project 13" },
+  { src: "/assets/portofolio-v2/portfolio-image-14.png", alt: "Portfolio project 14" },
+  { src: "/assets/portofolio-v2/portfolio-image-15.jpg", alt: "Portfolio project 15" },
 ];
 
-/* Distribute images across N columns, duplicated for seamless loop */
-function buildColumn(images: typeof IMAGES, offset: number, count = 4) {
-  const picks = [];
-  for (let i = 0; i < count; i++) {
-    picks.push(images[(i + offset) % images.length]);
-  }
-  return [...picks, ...picks]; /* duplicate for infinite scroll */
+const MOBILE_IMAGES = [
+  { src: "/assets/portofolio-v2/mobile-app-images/mobile-app-image-1.jpg", alt: "Mobile app project 1" },
+  { src: "/assets/portofolio-v2/mobile-app-images/mobile-app-image-2.jpg", alt: "Mobile app project 2" },
+  { src: "/assets/portofolio-v2/mobile-app-images/mobile-app-image-3.jpg", alt: "Mobile app project 3" },
+  { src: "/assets/portofolio-v2/mobile-app-images/mobile-app-image-4.jpg", alt: "Mobile app project 4" },
+  { src: "/assets/portofolio-v2/mobile-app-images/mobile-app-image-5.png", alt: "Mobile app project 5" },
+];
+
+/* Split images across 3 columns with no overlap, duplicated for seamless loop */
+function buildColumns(images: typeof ALL_IMAGES) {
+  const third = Math.ceil(images.length / 3);
+  const a = images.slice(0, third);
+  const b = images.slice(third, third * 2);
+  const c = images.slice(third * 2);
+  const pad = (arr: typeof images) => (arr.length < 2 ? [...arr, ...arr, ...arr] : [...arr, ...arr]);
+  return [pad(a), pad(b), pad(c)];
 }
 
-const COL_A = buildColumn(IMAGES, 0);
-const COL_B = buildColumn(IMAGES, 2);
-const COL_C = buildColumn(IMAGES, 4);
+/* All 5 images in each column, shuffled differently per column */
+function buildMobileColumns(images: typeof MOBILE_IMAGES) {
+  const shuffle1 = [images[1], images[3], images[0], images[4], images[2]];
+  const shuffle2 = [images[4], images[0], images[2], images[1], images[3]];
+  const dup = (arr: typeof images) => [...arr, ...arr];
+  return [dup([...images]), dup(shuffle1), dup(shuffle2)];
+}
 
 function GridIcon() {
   return (
@@ -44,12 +67,14 @@ function GridIcon() {
   );
 }
 
+type ImageItem = { src: string; alt: string };
+
 function CarouselColumn({
   items,
   reverse = false,
   duration = 28,
 }: {
-  items: typeof COL_A;
+  items: ImageItem[];
   reverse?: boolean;
   duration?: number;
 }) {
@@ -92,6 +117,11 @@ export default function PortfolioSection() {
   const [activeCategory, setActiveCategory] = useState("All Projects");
 
   const BG = "#010424";
+
+  const [COL_A, COL_B, COL_C] =
+    activeCategory === "Mobile Apps"
+      ? buildMobileColumns(MOBILE_IMAGES)
+      : buildColumns(ALL_IMAGES);
 
   return (
     <section
@@ -225,21 +255,6 @@ export default function PortfolioSection() {
               style={{
                 height: "120px",
                 background: `linear-gradient(to top, ${BG} 0%, transparent 100%)`,
-              }}
-            />
-            {/* Gradient shadows — left & right */}
-            <div
-              className="pointer-events-none absolute inset-y-0 left-0 z-20"
-              style={{
-                width: "40px",
-                background: `linear-gradient(to right, ${BG} 0%, transparent 100%)`,
-              }}
-            />
-            <div
-              className="pointer-events-none absolute inset-y-0 right-0 z-20"
-              style={{
-                width: "40px",
-                background: `linear-gradient(to left, ${BG} 0%, transparent 100%)`,
               }}
             />
 
