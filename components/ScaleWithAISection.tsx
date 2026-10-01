@@ -143,6 +143,7 @@ export default function ScaleWithAISection() {
           >
             <button
               className="scale-btn-filled"
+              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
               style={{
                 display: "inline-flex",
                 alignItems: "center",

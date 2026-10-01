@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const BUDGET_MIN = 0;
@@ -32,6 +32,17 @@ export default function Contact() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  useEffect(() => {
+    function handlePrefill(e: Event) {
+      const industry = (e as CustomEvent<{ industry: string }>).detail?.industry;
+      if (industry) {
+        setMessage(`I'm interested in your ${industry} marketing services. Please get in touch.`);
+      }
+    }
+    window.addEventListener("prefill-contact", handlePrefill);
+    return () => window.removeEventListener("prefill-contact", handlePrefill);
+  }, []);
 
   const minPct = ((budgetMin - BUDGET_MIN) / (BUDGET_MAX - BUDGET_MIN)) * 100;
   const maxPct = ((budgetMax - BUDGET_MIN) / (BUDGET_MAX - BUDGET_MIN)) * 100;

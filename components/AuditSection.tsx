@@ -180,6 +180,7 @@ export default function AuditSection() {
               </p>
 
               <button
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                 style={{
                   position: "relative",
                   zIndex: 1,

@@ -25,13 +25,20 @@ const INDUSTRIES = [
   },
 ];
 
-function ProjectButton() {
+function ProjectButton({ industry }: { industry: string }) {
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
 
+  function handleClick(e: React.MouseEvent) {
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent("prefill-contact", { detail: { industry } }));
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  }
+
   return (
     <a
-      href="/media#contact"
+      href="#contact"
+      onClick={handleClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setPressed(false); }}
       onMouseDown={() => setPressed(true)}
@@ -190,7 +197,7 @@ export default function Industries() {
               {item.description}
             </p>
             <div style={{ marginTop: 8 }}>
-              <ProjectButton />
+              <ProjectButton industry={item.name} />
             </div>
           </div>
         ))}
