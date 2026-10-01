@@ -16,7 +16,7 @@ const jakarta = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-const SITE_URL = "https://markition.com";
+const SITE_URL = "https://markition-homepage-eta.vercel.app";
 const SITE_NAME = "Markition";
 const TITLE = "Markition — AI Powered Growth Team";
 const DESCRIPTION =
