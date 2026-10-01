@@ -134,7 +134,7 @@ export function PortfolioSection() {
                       href={project.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 rounded-full bg-[#f97316] px-3.5 py-2 text-xs font-bold text-white shadow-lg transition hover:bg-[#ea6c00] sm:px-4 sm:text-sm"
+                      className="flex items-center gap-1.5 rounded-full bg-[#062283] px-3.5 py-2 text-xs font-bold text-white shadow-lg transition hover:bg-[#0a2fa8] sm:px-4 sm:text-sm"
                     >
                       Visit Site
                       <ExternalLink size={13} />
@@ -153,7 +153,7 @@ export function PortfolioSection() {
               key={i}
               className={`rounded-full transition-all duration-300 ${
                 i === active
-                  ? "h-2 w-5 bg-[#f97316]"
+                  ? "h-2 w-5 bg-[#062283]"
                   : i < active
                     ? "h-2 w-2 bg-[#1d1d1f]/40"
                     : "h-2 w-2 bg-[#1d1d1f]/15"

@@ -58,10 +58,10 @@ export function WhySection() {
         <div className="mb-14 max-w-3xl">
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-[#062283]">WHY US</p>
           <h2 className="max-w-4xl text-[38px] font-semibold leading-[0.95] tracking-[-0.06em] text-black sm:text-5xl md:text-6xl">
-            Built Different, By Design
+            Software Built To Actually Last
           </h2>
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-black/60 sm:text-base">
-            We are not a generic dev shop. Here is what makes working with us different.
+            We don&apos;t hand you a website and disappear. Every CRM, ERP, or custom platform we build is engineered to grow with your business for years, not months.
           </p>
         </div>
 

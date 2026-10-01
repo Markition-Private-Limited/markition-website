@@ -31,7 +31,18 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
     }
     const id = requestAnimationFrame(raf);
 
+    // <html> is h-full, so Lenis' own observer never sees content growth (lazy
+    // images, fonts, sticky tracks) and its cached scroll limit goes stale.
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    const bodyObserver = new ResizeObserver(() => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => lenis.resize(), 100);
+    });
+    bodyObserver.observe(document.body);
+
     return () => {
+      bodyObserver.disconnect();
+      clearTimeout(resizeTimer);
       cancelAnimationFrame(id);
       lenis.destroy();
       delete (window as Window & { __lenis?: Lenis }).__lenis;

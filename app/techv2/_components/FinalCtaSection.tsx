@@ -11,10 +11,10 @@ export function FinalCtaSection() {
               <Image src="/markition-logo.svg" alt="Markition" width={130} height={26} className="opacity-90" />
             </div>
             <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-white leading-tight">
-              Ready to build your next big product?
+              Ready To Build Better Software?
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-sm md:text-base leading-relaxed text-white/45">
-              No fluff, no endless meetings — just great software, shipped fast. Let&apos;s get started.
+              Let&apos;s build a website, CRM, or ERP system that actually fits how your business works.
             </p>
             <div className="mt-8 flex justify-center items-center">
               <a

@@ -47,7 +47,7 @@ export function HeroSection() {
         {/* Content */}
         <div className="pointer-events-none relative z-20 flex min-h-[calc(100vh-230px)] md:min-h-[calc(100vh-80px)] flex-col items-center justify-center text-center lg:-mt-16">
           <p className="mb-4 text-[9px] uppercase tracking-[0.22em] text-[#666b74] sm:text-[10px] md:text-[12px] md:tracking-[0.25em]">
-            TECHNOLOGY / DIGITAL INFRASTRUCTURE
+            CUSTOM SOFTWARE DEVELOPMENT
           </p>
           <div className="leading-none">
             <h1 className="text-[36px] font-black text-[#20232d] sm:text-[44px] md:text-[52px] lg:text-[60px]">
@@ -55,7 +55,7 @@ export function HeroSection() {
             </h1>
             <div className="relative -mt-3 flex items-center justify-center sm:-mt-5 lg:-mt-8">
               <span className="text-[68px] font-black tracking-[-4px] text-[#20232d] sm:text-[76px] md:text-[105px] md:tracking-[-6px] lg:text-[140px] lg:tracking-[-8px]">
-                Technology
+                Software
               </span>
               <div className="absolute -right-5 top-1 flex h-7 w-7 items-center justify-center rounded-full bg-[#062283] text-white sm:-right-7 sm:h-8 sm:w-8 md:-right-8 md:h-9 md:w-9 lg:right-[-38px] lg:top-3 lg:h-10 lg:w-10">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
@@ -63,14 +63,14 @@ export function HeroSection() {
             </div>
             <div className="mt-1 flex items-center justify-center gap-2 sm:gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8 rotate-[-15deg] fill-current md:h-12 md:w-12"><path d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z"/></svg>
-              <h2 className="text-[34px] font-black text-[#20232d] sm:text-[42px] md:text-[52px] lg:text-[60px]">
-                Around Your Business.
-              </h2>
+              <p className="text-[34px] font-black text-[#20232d] sm:text-[42px] md:text-[52px] lg:text-[60px]">
+                That Scales.
+              </p>
             </div>
           </div>
 
           <p className="mt-6 max-w-[320px] text-sm leading-6 text-[#737780] sm:max-w-md md:mt-8 md:text-base">
-            We don&apos;t hand you a website and disappear. Every CRM, ERP, or custom platform we build is engineered to grow with your business for years, not months.
+            We build custom websites, CRM dashboards, and ERP systems on React, Next.js, WordPress, and Shopify — engineered for speed, growth, and scale.
           </p>
 
           <div className="pointer-events-auto mt-7 flex w-full max-w-[320px] flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center sm:gap-5">
