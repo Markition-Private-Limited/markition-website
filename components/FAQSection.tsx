@@ -66,10 +66,11 @@ export default function FAQSection() {
                 style={{
                   background: "#06102a",
                   borderRadius: 16,
-                  border: "1px solid rgba(255,255,255,0.07)",
+                  border: isOpen
+                    ? "1px solid rgba(0,120,255,0.25)"
+                    : "1px solid rgba(255,255,255,0.07)",
                   overflow: "hidden",
                   transition: "border-color 0.2s",
-                  ...(isOpen && { borderColor: "rgba(0,120,255,0.25)" }),
                 }}
               >
                 {/* Row */}

@@ -65,6 +65,14 @@ const SLOT_POS: Record<Slot, React.CSSProperties> = {
   center:   { left: "calc(50% - 44px)", top: 104  },
 };
 
+/* ─── Design Lab sub-item → image map ───────────────────────────────────── */
+const DESIGN_IMAGES: Record<string, string> = {
+  "Brand Identity & Logo Design":  "/assets/services/design-lab/brand-identity.webp",
+  "UI/UX Design":                  "/assets/services/design-lab/ui-ux-design.webp",
+  "Website & App Design":          "/assets/services/design-lab/website-app-design.webp",
+  "Marketing Collateral Design":   "/assets/services/design-lab/marketing-collateral.webp",
+};
+
 /* ─── Digital Marketing sub-item → image map ────────────────────────────── */
 const DIGITAL_IMAGES: Record<string, string> = {
   "Google Ads":                              "/assets/services/digital-marketing/google-ads.webp",
@@ -317,11 +325,20 @@ export default function ServicesSection() {
             display: "flex", alignItems: "center", justifyContent: "flex-end",
             padding: "20px 30px", background: "transparent",
           }}>
+            {/* Left fade overlay */}
+            <div style={{
+              position: "absolute", left: 0, top: 0,
+              width: "120px", height: "100%",
+              background: "linear-gradient(to right, #010424 0%, transparent 100%)",
+              zIndex: 2, pointerEvents: "none",
+            }} />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={
                 activeService.id === "digital" && DIGITAL_IMAGES[activeService.items[activeItem]]
                   ? DIGITAL_IMAGES[activeService.items[activeItem]]
+                  : activeService.id === "design" && DESIGN_IMAGES[activeService.items[activeItem]]
+                  ? DESIGN_IMAGES[activeService.items[activeItem]]
                   : "/rectangle-52.png"
               }
               alt={activeService.items[activeItem]}
