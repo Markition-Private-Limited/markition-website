@@ -2,18 +2,22 @@ const CARDS = [
   {
     statement: "Your audience is searching.",
     caveat: "But your brand isn't always there.",
+    image: "/media/evolve-1.jpg",
   },
   {
     statement: "Your campaigns are running.",
     caveat: "But performance isn't consistent.",
+    image: "/media/evolve-2.jpg",
   },
   {
     statement: "You're creating content.",
     caveat: "But it's not always creating action.",
+    image: "/media/evolve-3.jpg",
   },
   {
     statement: "You're getting traffic.",
     caveat: "But too much of it stops before conversion.",
+    image: "/media/evolve-4.jpg",
   },
 ];
 
@@ -49,13 +53,15 @@ export default function Evolve() {
               className="rounded-2xl overflow-hidden"
               style={{ background: "#ffffff" }}
             >
-              {/* Dark image placeholder */}
-              <div className="px-4 pt-4 sm:px-5 sm:pt-5">
-                <div
-                  className="w-full rounded-xl"
-                  style={{ background: "#0A1535", aspectRatio: "1 / 0.85" }}
-                />
-              </div>
+              {/* Image */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={card.image}
+                alt={card.statement}
+                draggable={false}
+                className="w-full"
+                style={{ aspectRatio: "1 / 0.85", objectFit: "cover", display: "block", borderRadius: "16px 16px 0 0" }}
+              />
 
               {/* Text */}
               <div className="px-4 py-4 sm:px-5 sm:py-5">

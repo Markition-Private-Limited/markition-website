@@ -4,66 +4,46 @@ import { useEffect, useRef, useState } from "react";
 
 const PROJECTS = [
   {
+    title: "Ania Aesthetics",
+    image: "/media/portfolio/ania-aesthetics.jpg",
+    description: "Built a full social media presence and content strategy for this laser hair removal clinic. High-conversion creatives drove a 3× increase in consultation bookings within 90 days.",
+  },
+  {
+    title: "Aromatic Expressions",
+    image: "/media/portfolio/aromatic-expressions.jpg",
+    description: "Developed product-led social content for this premium fragrance brand. Campaigns highlighting their impression-based positioning grew online sales 40% month-over-month.",
+  },
+  {
+    title: "CarEase",
+    image: "/media/portfolio/careaze.jpg",
+    description: "Launched geo-targeted paid social ads for CarEase's dent removal service across Karachi. Generated 200+ qualified leads in the first month at a cost-per-lead 35% below benchmark.",
+  },
+  {
+    title: "InRide",
+    image: "/media/portfolio/inride.jpg",
+    description: "Executed the digital launch strategy for InRide, a ride-hailing app entering the Saudi market. Social and paid campaigns drove 10,000+ downloads in the first two weeks post-launch.",
+  },
+  {
+    title: "Maryam Taseer",
+    image: "/media/portfolio/maryam-taseer.jpg",
+    description: "Built editorial content and social campaigns for this luxury fashion label. The Dastaan E Ishq collection launch generated record engagement and sold out within 48 hours.",
+  },
+  {
+    title: "TakeMe",
+    image: "/media/portfolio/takeme.jpg",
+    description: "Orchestrated the digital relaunch strategy for TakeMe's ride-hailing platform across Pakistan. Relaunch content and paid campaigns drove a surge in app downloads and press coverage overnight.",
+  },
+  {
     title: "SEO & Organic Growth",
     type: "matrix",
     eyebrow: "Optimization",
-    description: "We rebuilt their keyword architecture from the ground up, targeting high-intent queries. Organic sessions grew 3.4× in six months with zero paid spend.",
-  },
-  {
-    title: "Paid Media & Google Ads",
-    image: "/media/portfolio/pivot-health.png",
-    description: "Restructured a bloated ad account into tightly themed campaigns. Cut cost-per-lead by 41% while doubling monthly lead volume within the same budget.",
+    description: "Rebuilt keyword architecture from the ground up targeting high-intent queries. Organic sessions grew 3.4× in six months with zero paid spend.",
   },
   {
     title: "Social Media Marketing",
     type: "brand",
     brand: "misso",
     description: "Developed a full content calendar and community strategy across Instagram and LinkedIn. Grew engaged following from 4K to 28K in under a year.",
-  },
-  {
-    title: "Content & Conversion",
-    image: "/media/portfolio/meadowhawk.png",
-    description: "Rewrote landing pages using conversion-first copywriting and A/B tested layouts. Average page conversion rate lifted from 1.8% to 5.2% across all products.",
-  },
-  {
-    title: "Analytics & Reporting",
-    image: "/media/portfolio/pulsar-dashboard.png",
-    description: "Built a custom GA4 + Looker Studio dashboard that gave the client real-time visibility into every funnel stage — from first click to closed deal.",
-  },
-  {
-    title: "Conversion Landing Pages",
-    image: "/media/portfolio/nexus-ai.png",
-    description: "Designed and launched a suite of campaign-specific landing pages. Each page was optimised for a single CTA, reducing friction and increasing sign-ups by 67%.",
-  },
-  {
-    title: "Email Nurture Systems",
-    image: "/media/portfolio/income-per-week.png",
-    description: "Created a 9-step automated email sequence tied to behavioural triggers. Open rates averaged 48% and the sequence generated $120K in attributable revenue in Q1.",
-  },
-  {
-    title: "Brand Messaging Refresh",
-    image: "/media/portfolio/plastomics.png",
-    description: "Audited positioning across all touchpoints and rewrote the core messaging hierarchy. Sales team reported significantly shorter closing cycles after the rebrand.",
-  },
-  {
-    title: "Lead Funnel Strategy",
-    image: "/media/portfolio/health-9am.png",
-    description: "Mapped the full buyer journey and identified three major drop-off points. Plugging those gaps increased qualified leads by 2.1× within the first quarter.",
-  },
-  {
-    title: "Retention Campaigns",
-    image: "/media/portfolio/focus-stability.png",
-    description: "Launched a win-back and loyalty programme targeting lapsed customers. 30-day retention improved by 22% and average order value climbed 18% year-over-year.",
-  },
-  {
-    title: "Marketing Automation",
-    image: "/media/portfolio/lorica-encrypt.png",
-    description: "Integrated CRM with ad platforms and built automated lead scoring workflows. The team saved 14 hours per week on manual tasks while follow-up speed improved.",
-  },
-  {
-    title: "Performance Dashboards",
-    image: "/media/portfolio/pulsar-dashboard.png",
-    description: "Consolidated data from 6 separate tools into one live performance hub. Executives now get a single source of truth for CAC, LTV, and ROAS every morning.",
   },
 ];
 
@@ -287,7 +267,7 @@ export default function Work() {
           }
 
           .media-work-project-visual {
-            height: clamp(384px, 36vw, 552px);
+            height: clamp(260px, 24vw, 380px);
           }
 
           .media-work-project-card:first-child {
@@ -350,7 +330,7 @@ export default function Work() {
             }
 
             .media-work-project-visual {
-              height: clamp(330px, 88vw, 430px);
+              height: clamp(220px, 65vw, 300px);
             }
 
             .media-work-project-card:first-child {
@@ -369,18 +349,17 @@ export default function Work() {
         <div className="w-full">
           <div className="mx-auto max-w-[1240px] px-6 sm:px-8">
             <h2
-              className="mx-auto mb-8 max-w-[560px] text-center text-white sm:mb-10"
+              className="mx-auto mb-8 text-center text-white sm:mb-10"
               style={{
                 fontFamily: "var(--font-familjen, 'Familjen Grotesk', sans-serif)",
-                fontSize: "clamp(34px, 4vw, 58px)",
+                fontSize: "clamp(24px, 3.2vw, 52px)",
                 fontWeight: 400,
                 lineHeight: 0.9,
                 letterSpacing: "-0.04em",
+                whiteSpace: "nowrap",
               }}
             >
-              Digital Marketing Services
-              <br />
-              Built Around You
+              Digital Marketing Services Built Around You
             </h2>
           </div>
 

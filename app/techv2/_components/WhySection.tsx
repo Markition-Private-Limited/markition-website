@@ -26,7 +26,7 @@ const cards = [
     accent: "#20232D",
   },
   {
-    title: "WhatasApp-Friendly Communication",
+    title: "WhatsApp-Friendly Communication",
     desc: "No complex project tools or email chains. We keep you updated directly on WhatsApp in a language you are comfortable with.",
     bg: "white",
     text: "black",
@@ -53,15 +53,15 @@ const cards = [
 
 export function WhySection() {
   return (
-    <section className="overflow-hidden bg-transparent py-20 md:py-28" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
+    <section className="overflow-hidden bg-transparent py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-14 max-w-3xl">
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-[#062283]">WHY US</p>
           <h2 className="max-w-4xl text-[38px] font-semibold leading-[0.95] tracking-[-0.06em] text-black sm:text-5xl md:text-6xl">
-            Software Built To Actually Last
+            Built Different, By Design
           </h2>
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-black/60 sm:text-base">
-            We don&apos;t hand you a website and disappear. Every CRM, ERP, or custom platform we build is engineered to grow with your business for years, not months.
+            We are not a generic dev shop. Here is what makes working with us different.
           </p>
         </div>
 

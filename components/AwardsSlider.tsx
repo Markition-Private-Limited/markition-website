@@ -10,12 +10,12 @@ const AWARDS = [
 ];
 
 export default function AwardsSlider() {
-  const track = Array(4).fill(AWARDS).flat() as typeof AWARDS;
+  const doubled = [...AWARDS, ...AWARDS];
 
   return (
     <section
       style={{
-        background: "#020129",
+        background: "#blue",
         borderTop: "1px solid rgba(255,255,255,0.05)",
         borderBottom: "1px solid rgba(255,255,255,0.05)",
         padding: "28px 0",
@@ -31,7 +31,7 @@ export default function AwardsSlider() {
             width: "max-content",
           }}
         >
-          {track.map((award, i) => (
+          {doubled.map((award, i) => (
             <div
               key={i}
               className="award-item"
@@ -81,7 +81,7 @@ export default function AwardsSlider() {
         }
         @keyframes awardsSlider {
           0%   { transform: translate3d(0, 0, 0); }
-          100% { transform: translate3d(-25%, 0, 0); }
+          100% { transform: translate3d(-50%, 0, 0); }
         }
         @media (max-width: 1200px) {
           .award-item { width: 110px !important; height: 100px !important; flex-basis: 110px !important; margin: 0 8px !important; }
