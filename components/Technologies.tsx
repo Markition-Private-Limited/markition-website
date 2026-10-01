@@ -47,6 +47,34 @@ const TECH_CONTENT: Record<string, TechItem[]> = {
     { name: "Django",       src: "/frameworks-logo/django.png" },
     { name: "FastAPI",      src: "/frameworks-logo/fastapi.png" },
   ],
+  "AI DEPLOYMENT": [
+    { name: "AWS SageMaker",  src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" },
+    { name: "Azure ML",       src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg" },
+    { name: "Vertex AI",      src: "https://cdn.simpleicons.org/googlecloud/4285F4" },
+    { name: "NVIDIA",         src: "https://cdn.simpleicons.org/nvidia/76B900" },
+    { name: "Docker",         src: "https://cdn.simpleicons.org/docker/2496ED" },
+  ],
+  "CLOUDS": [
+    { name: "AWS",            src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" },
+    { name: "Google Cloud",   src: "https://cdn.simpleicons.org/googlecloud/4285F4" },
+    { name: "Azure",          src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg" },
+    { name: "DigitalOcean",   src: "https://cdn.simpleicons.org/digitalocean/0080FF" },
+    { name: "Cloudflare",     src: "https://cdn.simpleicons.org/cloudflare/F38020" },
+  ],
+  "DATA": [
+    { name: "PostgreSQL",     src: "https://cdn.simpleicons.org/postgresql/4169E1" },
+    { name: "MongoDB",        src: "https://cdn.simpleicons.org/mongodb/47A248" },
+    { name: "Redis",          src: "https://cdn.simpleicons.org/redis/FF4438" },
+    { name: "Supabase",       src: "https://cdn.simpleicons.org/supabase/3ECF8E" },
+    { name: "Snowflake",      src: "https://cdn.simpleicons.org/snowflake/29B5E8" },
+  ],
+  "DEVOPS": [
+    { name: "Docker",         src: "https://cdn.simpleicons.org/docker/2496ED" },
+    { name: "Kubernetes",     src: "https://cdn.simpleicons.org/kubernetes/326CE5" },
+    { name: "GitHub Actions", src: "https://cdn.simpleicons.org/githubactions/FFFFFF" },
+    { name: "Terraform",      src: "https://cdn.simpleicons.org/terraform/7B42BC" },
+    { name: "Grafana",        src: "https://cdn.simpleicons.org/grafana/F46800" },
+  ],
 };
 
 /* ─── Component ──────────────────────────────────────────────────────────── */
