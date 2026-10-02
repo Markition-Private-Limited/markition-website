@@ -62,7 +62,7 @@ export default function Hero() {
               textTransform: "capitalize",
             }}
           >
-            Markition Media — A Full-Service<br />Digital Marketing Agency<br />
+            Markition Media<br />A Full Service<br />Digital Marketing Agency<br />
             <span style={{ color: "#00D4FF" }}>For Growth</span>
           </h1>
 
