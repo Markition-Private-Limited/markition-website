@@ -8,7 +8,7 @@ export function Hero() {
       <div className="tp-hero-grid tp-section-shell">
         <div className="tp-hero-copy">
           <p className="tp-eyebrow">Technology / Digital Infrastructure</p>
-          <h1>We Build Technology Around Your Business</h1>
+          <h1 style={{ fontFamily: "var(--font-familjen, 'Familjen Grotesk', sans-serif)" }}>We Build Technology Around Your Business</h1>
           <p className="tp-hero-lede">
             Your business isn&apos;t built like everyone else&apos;s. Your technology shouldn&apos;t be either. Markition Tech designs and develops custom software, business systems, web platforms, mobile applications, and integrations around the way your business actually works — helping you automate operations, connect your systems, and scale with confidence.
           </p>

@@ -50,7 +50,7 @@ export function HeroSection() {
             CUSTOM SOFTWARE DEVELOPMENT
           </p>
           <div className="leading-none">
-            <h1 className="text-[36px] font-black text-[#20232d] sm:text-[44px] md:text-[52px] lg:text-[60px]">
+            <h1 className="text-[36px] font-black text-[#20232d] sm:text-[44px] md:text-[52px] lg:text-[60px]" style={{ fontFamily: "var(--font-familjen, 'Familjen Grotesk', sans-serif)" }}>
               We Build
             </h1>
             <div className="relative -mt-3 flex items-center justify-center sm:-mt-5 lg:-mt-8">
