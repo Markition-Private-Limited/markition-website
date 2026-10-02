@@ -108,7 +108,7 @@ export default function ScaleWithAISection() {
           <h2
             style={{
               margin: "0 0 20px",
-              fontSize: "clamp(28px, 3.4vw, 46px)",
+              fontSize: "clamp(28px, 3.6vw, 44px)",
               fontWeight: 800,
               lineHeight: 1.18,
               letterSpacing: "-0.6px",

@@ -434,7 +434,7 @@ export default function AIServicesSection() {
         </div>
 
         {/* Heading */}
-        <h2 style={{ margin: "0 auto", textAlign: "center", maxWidth: 560, fontSize: "clamp(20px,2.8vw,32px)", lineHeight: 1.1, letterSpacing: "-1px", fontWeight: 700, fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", color: "#f7f9ff" }}>
+        <h2 style={{ margin: "0 auto", textAlign: "center", maxWidth: 560, fontSize: "clamp(28px,3.6vw,44px)", lineHeight: 1.1, letterSpacing: "-1px", fontWeight: 700, fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", color: "#f7f9ff" }}>
           Put AI To Work{" "}
           <span style={{ background: "linear-gradient(90deg,#2f78ff,#12d783,#8b6cff)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             Across Your Business

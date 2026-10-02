@@ -148,7 +148,7 @@ export default function AuditSection() {
                   position: "relative",
                   zIndex: 1,
                   margin: "0 0 14px",
-                  fontSize: "clamp(25px, 2.5vw, 33px)",
+                  fontSize: "clamp(28px, 3.6vw, 44px)",
                   fontWeight: 800,
                   lineHeight: 1.22,
                   letterSpacing: "-0.5px",

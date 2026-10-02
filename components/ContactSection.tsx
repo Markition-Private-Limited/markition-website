@@ -89,7 +89,7 @@ export default function ContactSection() {
           <h2
             style={{
               margin: "0 0 18px",
-              fontSize: "clamp(30px,3.4vw,44px)",
+              fontSize: "clamp(28px,3.6vw,44px)",
               fontWeight: 800,
               lineHeight: 1.15,
               letterSpacing: "-1.2px",

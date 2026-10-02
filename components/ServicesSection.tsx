@@ -133,7 +133,7 @@ export default function ServicesSection() {
           </p>
           <h2 style={{
             margin: "0 auto 14px", maxWidth: 680,
-            fontSize: "clamp(28px,3.6vw,46px)", lineHeight: 1.12,
+            fontSize: "clamp(28px,3.6vw,44px)", lineHeight: 1.12,
             letterSpacing: "-1.4px", fontWeight: 800,
             fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)",
             color: "#f0f6ff",

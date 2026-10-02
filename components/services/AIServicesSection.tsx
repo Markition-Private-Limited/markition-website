@@ -17,7 +17,7 @@ export default function AIServicesSection() {
         <div className="text-center">
           <ScrollReveal delay={80} threshold={0.2}>
             <h2
-              className="font-bold leading-tight mb-3 sm:mb-4 text-[26px] sm:text-[32px] lg:text-[38px]"
+              className="font-bold leading-tight mb-3 sm:mb-4" style={{ fontSize: "clamp(28px,3.6vw,44px)" }}
               style={{
                 letterSpacing: "-0.02em",
                 fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)",

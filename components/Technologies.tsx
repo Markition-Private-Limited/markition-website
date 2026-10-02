@@ -97,7 +97,7 @@ export default function Technologies() {
           style={{
             fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)",
             fontWeight: 700,
-            fontSize: "clamp(32px, 5vw, 52px)",
+            fontSize: "clamp(28px, 3.6vw, 44px)",
             lineHeight: 1.1,
             letterSpacing: "-0.02em",
             color: "#ffffff",
