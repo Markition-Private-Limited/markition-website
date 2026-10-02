@@ -29,9 +29,9 @@ const GAP    = 14;
 const SLOT   = CARD_H + GAP;
 
 const COL_CONFIG = [
-  { speed: 0.38, initOffset: 0 },
-  { speed: 0.55, initOffset: -SLOT * 1.1 },
-  { speed: 0.46, initOffset: -SLOT * 0.55 },
+  { speed: 0.55, initOffset: 0 },
+  { speed: 0.80, initOffset: -SLOT * 1.1 },
+  { speed: 0.67, initOffset: -SLOT * 0.55 },
 ];
 
 interface ColProps {

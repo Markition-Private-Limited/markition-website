@@ -11,6 +11,11 @@ function scrollToContact() {
   if (el) el.scrollIntoView({ behavior: "smooth" });
 }
 
+function scrollToPortfolio() {
+  const el = document.getElementById("portfolio");
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+}
+
 const navGlassStyle: React.CSSProperties = {
   background: "rgba(8, 16, 52, 0.85)",
   backdropFilter: "blur(20px) saturate(1.8)",
@@ -193,6 +198,15 @@ export default function Navbar() {
     }
   }
 
+  function handlePortfolioClick(e: React.MouseEvent) {
+    e.preventDefault();
+    if (document.getElementById("portfolio")) {
+      scrollToPortfolio();
+    } else {
+      router.push("/#portfolio");
+    }
+  }
+
   function openSolution(sol: (typeof SOLUTIONS_MENU)[number]) {
     if (!sol.href) return;
     if ("newTab" in sol && sol.newTab) {
@@ -214,9 +228,9 @@ export default function Navbar() {
 
   const INDUSTRIES = [
     { label: "Dental", href: "/industries/dental", icon: "🦷", desc: "Google Ads, SEO & lead gen for dental practices" },
-    { label: "Healthcare", href: "/industries/healthcare", icon: "🏥", desc: "Digital marketing for clinics & health providers" },
-    { label: "Real Estate", href: "/industries/real-estate", icon: "🏠", desc: "Lead generation for agents & property developers" },
-    { label: "Legal", href: "/industries/legal", icon: "⚖️", desc: "Client acquisition for law firms & attorneys" },
+    { label: "Roofing", href: "/industries/roofing", icon: "🏠", desc: "Google Ads, SEO & lead gen for roofing contractors" },
+    { label: "Hair Restoration", href: "/industries/hair-restoration", icon: "💇", desc: "Patient lead generation for hair transplant & restoration clinics" },
+    { label: "Aesthetician Clinics", href: "/industries/aesthetician-clinics", icon: "✨", desc: "Client acquisition for med spas & aesthetic clinics" },
   ];
 
   useEffect(() => {
@@ -307,6 +321,16 @@ export default function Navbar() {
                 key={link.label}
                 href="#contact"
                 onClick={handleContactClick}
+                className="hover:text-white/95 transition-colors duration-150 flex items-center gap-1 whitespace-nowrap px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05]"
+              >
+                {link.label}
+              </a>
+            );
+            if (link.label === "Portfolio") return (
+              <a
+                key={link.label}
+                href="#portfolio"
+                onClick={handlePortfolioClick}
                 className="hover:text-white/95 transition-colors duration-150 flex items-center gap-1 whitespace-nowrap px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05]"
               >
                 {link.label}
@@ -751,6 +775,19 @@ export default function Navbar() {
                 key={link.label}
                 href="#contact"
                 onClick={(e) => { setMobileOpen(false); handleContactClick(e); }}
+                className={`flex items-center justify-between px-5 py-3.5 text-[13.5px] text-white/75 hover:text-white hover:bg-white/[0.05] transition-colors duration-150 ${borderClass}`}
+              >
+                <span>{link.label}</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="opacity-30">
+                  <path d="M4 7h6M7 4l3 3-3 3" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            );
+            if (link.label === "Portfolio") return (
+              <a
+                key={link.label}
+                href="#portfolio"
+                onClick={(e) => { setMobileOpen(false); handlePortfolioClick(e); }}
                 className={`flex items-center justify-between px-5 py-3.5 text-[13.5px] text-white/75 hover:text-white hover:bg-white/[0.05] transition-colors duration-150 ${borderClass}`}
               >
                 <span>{link.label}</span>

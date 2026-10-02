@@ -37,7 +37,7 @@ export default function Hero() {
         <h1
           className="hero-heading text-[28px] xs:text-[32px] sm:text-[42px] md:text-[52px] lg:text-[56px] font-bold leading-[1.18] text-white mb-3 sm:mb-4"
           style={{
-            fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)",
+            fontFamily: "var(--font-familjen, 'Familjen Grotesk', sans-serif)",
             letterSpacing: "-0.025em",
           }}
         >

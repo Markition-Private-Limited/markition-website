@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, Familjen_Grotesk } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
 
@@ -14,6 +14,13 @@ const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
+});
+
+const familjen = Familjen_Grotesk({
+  variable: "--font-familjen",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 const SITE_URL = "https://markition-homepage-eta.vercel.app";
@@ -98,7 +105,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jakarta.variable} h-full w-full antialiased`}
+      className={`${inter.variable} ${jakarta.variable} ${familjen.variable} h-full w-full antialiased`}
     >
       <head>
         <script

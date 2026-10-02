@@ -309,16 +309,28 @@ export default function TestimonialsSection() {
     <section style={{ background: "#000028", padding: "64px 0 80px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
         <ScrollReveal threshold={0.2}>
-          <h2 style={{
-            textAlign: "center",
-            fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)",
-            color: "#22C5F5",
-            fontSize: "clamp(28px,3.6vw,44px)",
-            fontWeight: 800, letterSpacing: "-0.02em",
-            margin: "0 0 40px",
-          }}>
-            Real Results
-          </h2>
+          <div style={{ textAlign: "center", marginBottom: 40 }}>
+            <h2 style={{
+              fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)",
+              fontSize: "clamp(28px,3.6vw,44px)",
+              fontWeight: 800, letterSpacing: "-0.02em",
+              margin: "0 0 12px",
+              color: "#ffffff",
+            }}>
+              Real Owners{" "}
+              <span style={{ color: "#22C5F5" }}>| Real Results</span>
+            </h2>
+            <p style={{
+              color: "rgba(255,255,255,0.55)",
+              fontSize: "clamp(13px,1.1vw,15px)",
+              lineHeight: 1.65,
+              maxWidth: 620,
+              margin: "0 auto",
+              fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)",
+            }}>
+              Before you decide to work with us, take a moment to see what our clients experienced, what changed for them, and how their businesses grew once our team stepped in.
+            </p>
+          </div>
         </ScrollReveal>
 
         <ScrollReveal delay={80} threshold={0.2}>

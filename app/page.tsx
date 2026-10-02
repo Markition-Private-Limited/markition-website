@@ -6,6 +6,7 @@ import Ticker from "@/components/ticker/Ticker";
 import TrustLine from "@/components/trust/TrustLine";
 import AIServicesSection from "@/components/services/AIServicesSection";
 import ServicesSection from "@/components/ServicesSection";
+import RealGrowthCarouselSection from "@/components/RealGrowthCarouselSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import AwardsSlider from "@/components/AwardsSlider";
@@ -44,8 +45,9 @@ export default function Home() {
       <Ticker />
       <TrustLine />
       <AIServicesSection />
-      <PortfolioSection />
       <ServicesSection />
+      <RealGrowthCarouselSection />
+      <PortfolioSection />
       <TestimonialsSection />
       <AwardsSlider />
       <Technologies />
