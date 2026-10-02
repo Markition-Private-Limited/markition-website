@@ -78,7 +78,7 @@ export function HeroSection({ onOpenAudit, selectedService }: HeroSectionProps) 
               <span className="w-2 h-2 rounded-full bg-[#1236E8] animate-pulse" />
               <span className="font-mono text-xs font-semibold text-[#030A28] uppercase tracking-wider">EXCLUSIVELY FOR MEDICAL SPAS &amp; AESTHETICIAN CLINICS</span>
             </div>
-            <h1 className="font-hero text-4xl sm:text-5xl lg:text-[54px] xl:text-[58px] font-bold tracking-tight text-[#030A28] leading-[1.08] mb-6 max-w-2xl">
+            <h1 className="text-4xl sm:text-5xl lg:text-[54px] xl:text-[58px] font-bold tracking-tight text-[#030A28] leading-[1.08] mb-6 max-w-2xl" style={{ fontFamily: "var(--font-familjen, 'Familjen Grotesk', sans-serif)" }}>
               Aesthetic Clinic Marketing Built to Bring{' '}
               <span className="text-[#1236E8] relative inline-block">
                 More Clients Booked.

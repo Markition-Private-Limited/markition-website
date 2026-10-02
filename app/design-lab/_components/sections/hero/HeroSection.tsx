@@ -154,7 +154,7 @@ export function HeroSection() {
 
         <h1
           className="font-extrabold leading-[1.05] tracking-tight text-gray-900 dl-hero-fade"
-          style={{ animationDelay: "0ms" }}
+          style={{ animationDelay: "0ms", fontFamily: "var(--font-familjen, 'Familjen Grotesk', sans-serif)" }}
         >
           <span className="text-5xl xl:text-6xl">
             Markition DesignLab: Branding,{" "}

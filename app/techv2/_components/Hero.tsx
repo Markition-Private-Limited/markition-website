@@ -12,7 +12,7 @@ export function Hero() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#1a3cff] mb-4">
               Technology / Digital Infrastructure
             </p>
-            <h1 className="text-[clamp(2.2rem,5vw,3.5rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[#0d0f14] mb-5">
+            <h1 className="text-[clamp(2.2rem,5vw,3.5rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[#0d0f14] mb-5" style={{ fontFamily: "var(--font-familjen, 'Familjen Grotesk', sans-serif)" }}>
               We Build Technology Around Your Business
             </h1>
             <p className="text-gray-500 text-[1.05rem] leading-[1.7] mt-1">
