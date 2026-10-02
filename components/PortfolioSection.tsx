@@ -237,7 +237,7 @@ export default function PortfolioSection() {
 
               {/* Heading */}
               <h2
-                className="font-bold leading-[1.1] mb-4" style={{ fontSize: "clamp(28px,3.6vw,44px)" }}
+                className="font-bold text-[34px] sm:text-[42px] lg:text-[48px] leading-[1.1] mb-4"
                 style={{
                   fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)",
                   letterSpacing: "-0.02em",

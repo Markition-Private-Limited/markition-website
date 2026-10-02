@@ -45,7 +45,7 @@ export default function FAQSection() {
           style={{
             textAlign: "center",
             margin: "0 0 36px",
-            fontSize: "clamp(28px,3.6vw,44px)",
+            fontSize: "clamp(24px,3vw,38px)",
             fontWeight: 800,
             letterSpacing: "-1px",
             lineHeight: 1.1,

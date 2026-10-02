@@ -62,7 +62,7 @@ export default function RealGrowthCarouselSection() {
         <ScrollReveal threshold={0.2}>
           <div className="text-center mb-8 lg:mb-10">
             <h2
-              className="font-bold leading-[1.15] mb-4" style={{ fontSize: "clamp(28px,3.6vw,44px)" }}
+              className="font-bold text-[28px] sm:text-[38px] lg:text-[44px] leading-[1.15] mb-4"
               style={{
                 fontFamily: "var(--font-jakarta, 'Plus Jakarta Sans', sans-serif)",
                 letterSpacing: "-0.02em",
