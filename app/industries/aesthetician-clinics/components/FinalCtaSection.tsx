@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { ArrowUpRight, Phone, ShieldCheck, Sparkles } from 'lucide-react';
 import { trackConversion } from '../utils/tracking';
@@ -25,7 +25,7 @@ export function FinalCtaSection({ onOpenAudit }: FinalCtaSectionProps) {
         </div>
 
         <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight mb-6 max-w-4xl mx-auto">
-          Ready to Turn More Searches Into Aesthetic Clients?
+          Ready to Turn More Searches Into Esthetic Clients?
         </h2>
 
         <p className="text-base sm:text-lg lg:text-xl text-slate-300 font-normal leading-relaxed max-w-2xl mx-auto mb-10">

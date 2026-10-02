@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { Star, ArrowUpRight, CheckCircle, Shield, ZoomIn } from 'lucide-react';
@@ -11,18 +11,18 @@ export function TrustSection({ onOpenAudit }: TrustSectionProps) {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const realResults = [
-    { category: 'injectables', treatmentBadge: 'BOTOX & DERMAL FILLERS', resultHighlight: '+36 High-Ticket Bookings in 60 Days', image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=80', imageAlt: 'Med spa injectable treatment room', quote: '"We went from 8 inconsistent injectable bookings a month to averaging 36 qualified inquiries. Our treatment rooms are now booked out four weeks in advance."', doctor: 'Dr. Vanessa Cole, Medical Director', practice: 'Lumiere Med Spa & Aesthetics', location: 'Scottsdale, AZ', stars: 5, verifiedSource: 'Google Verified Review', metric: '3.7x Return on Ad Spend' },
-    { category: 'laser', treatmentBadge: 'LASER & SKIN RESURFACING', resultHighlight: '24 Laser Treatment Inquiries Per Month', image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=900&q=80', imageAlt: 'Laser skin treatment consultation', quote: '"Before partnering with this team, we received dozens of price-shopping calls. Now, our front-desk phone rings with clients specifically asking about our laser resurfacing packages."', doctor: 'Amara Chen, Lead Aesthetician', practice: 'Glow Aesthetic Studio', location: 'Austin, TX', stars: 5, verifiedSource: 'Google Verified Review', metric: '+129% Inbound Calls' },
-    { category: 'ads', treatmentBadge: 'GOOGLE ADS & LOCAL 3-PACK RANKING', resultHighlight: '#1 Local Map Pack & $34 Cost Per Lead', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80', imageAlt: 'Google Ads campaign dashboard', quote: '"Our cost per booked consultation dropped by more than 36% within our first 60 days. The dynamic call tracking dashboard gives our clinic manager full visibility."', doctor: 'Dr. Marcus Sterling, Medical Director', practice: 'Sterling Aesthetic Clinic', location: 'Denver, CO', stars: 5, verifiedSource: 'Google Verified Review', metric: '72 Confirmed Bookings' },
+    { category: 'injectables', treatmentBadge: 'BOTOX & DERMAL FILLERS', resultHighlight: '+36 High-Ticket Bookings in 60 Days', image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=80', imageAlt: 'Med spa injectable treatment room', quote: '"We went from 8 inconsistent injectable bookings a month to averaging 36 qualified inquiries. Our treatment rooms are now booked out four weeks in advance."', doctor: 'Dr. Vanessa Cole, Medical Director', practice: 'Lumiere Med Spa & Esthetics', location: 'Scottsdale, AZ', stars: 5, verifiedSource: 'Google Verified Review', metric: '3.7x Return on Ad Spend' },
+    { category: 'laser', treatmentBadge: 'LASER & SKIN RESURFACING', resultHighlight: '24 Laser Treatment Inquiries Per Month', image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=900&q=80', imageAlt: 'Laser skin treatment consultation', quote: '"Before partnering with this team, we received dozens of price-shopping calls. Now, our front-desk phone rings with clients specifically asking about our laser resurfacing packages."', doctor: 'Amara Chen, Lead Esthetician', practice: 'Glow Esthetic Studio', location: 'Austin, TX', stars: 5, verifiedSource: 'Google Verified Review', metric: '+129% Inbound Calls' },
+    { category: 'ads', treatmentBadge: 'GOOGLE ADS & LOCAL 3-PACK RANKING', resultHighlight: '#1 Local Map Pack & $34 Cost Per Lead', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80', imageAlt: 'Google Ads campaign dashboard', quote: '"Our cost per booked consultation dropped by more than 36% within our first 60 days. The dynamic call tracking dashboard gives our clinic manager full visibility."', doctor: 'Dr. Marcus Sterling, Medical Director', practice: 'Sterling Esthetic Clinic', location: 'Denver, CO', stars: 5, verifiedSource: 'Google Verified Review', metric: '72 Confirmed Bookings' },
   ];
 
   const filtered = activeCategory === 'all' ? realResults : realResults.filter(r => r.category === activeCategory);
 
   const clientLogos = [
-    { name: 'LUMIERE MED SPA', subtitle: 'AESTHETICS & INJECTABLES' }, { name: 'GLOW AESTHETIC STUDIO', subtitle: 'LASER & SKIN CARE' },
-    { name: 'STERLING AESTHETICS', subtitle: 'MEDICAL SPA' }, { name: 'RADIANCE CLINIC', subtitle: 'SKINCARE & WELLNESS' },
-    { name: 'BLUSH MED SPA', subtitle: 'INJECTABLES & FACIALS' }, { name: 'PURE AESTHETIC CO', subtitle: 'LASER TREATMENTS' },
-    { name: 'VELVET SKIN CLINIC', subtitle: 'AESTHETIC MEDICINE' }, { name: 'AURA WELLNESS SPA', subtitle: 'FULL-SERVICE AESTHETICS' },
+    { name: 'LUMIERE MED SPA', subtitle: 'EstheticS & INJECTABLES' }, { name: 'GLOW Esthetic STUDIO', subtitle: 'LASER & SKIN CARE' },
+    { name: 'STERLING EstheticS', subtitle: 'MEDICAL SPA' }, { name: 'RADIANCE CLINIC', subtitle: 'SKINCARE & WELLNESS' },
+    { name: 'BLUSH MED SPA', subtitle: 'INJECTABLES & FACIALS' }, { name: 'PURE Esthetic CO', subtitle: 'LASER TREATMENTS' },
+    { name: 'VELVET SKIN CLINIC', subtitle: 'Esthetic MEDICINE' }, { name: 'AURA WELLNESS SPA', subtitle: 'FULL-SERVICE EstheticS' },
   ];
 
   const pills = [
@@ -44,7 +44,7 @@ export function TrustSection({ onOpenAudit }: TrustSectionProps) {
               <Shield className="w-3.5 h-3.5 text-[#1236E8]" />
               <span className="font-mono text-xs font-semibold text-[#1236E8] uppercase tracking-wider">VERIFIED CLINIC REVIEWS &amp; OUTCOMES</span>
             </div>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#030A28] leading-[1.12]">Marketing That Helps Aesthetic Clinics Grow With Confidence.</h2>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#030A28] leading-[1.12]">Marketing That Helps Esthetic Clinics Grow With Confidence.</h2>
           </div>
           <div className="flex items-center gap-4 bg-slate-50 border border-slate-200 px-5 py-4 rounded-2xl shrink-0">
             <div className="flex flex-col">
@@ -113,7 +113,7 @@ export function TrustSection({ onOpenAudit }: TrustSectionProps) {
           <div className="text-center mb-8">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-50 border border-slate-200 font-mono text-[11px] sm:text-xs font-semibold text-slate-600 uppercase tracking-wider shadow-sm">
               <span className="w-2 h-2 rounded-full bg-[#1236E8] animate-pulse" />
-              TRUSTED BY AMBITIOUS AESTHETIC CLINICS NATIONWIDE
+              TRUSTED BY AMBITIOUS Esthetic CLINICS NATIONWIDE
             </span>
           </div>
           <div className="relative w-full overflow-hidden py-4 sm:py-6">
@@ -142,7 +142,7 @@ export function TrustSection({ onOpenAudit }: TrustSectionProps) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={previewImage} alt="Real result enlarged" className="w-full h-auto max-h-[80vh] object-contain rounded-xl" />
             <div className="p-4 flex items-center justify-between">
-              <span className="font-display font-bold text-sm text-[#030A28]">Real Aesthetic Clinic Result Evidence</span>
+              <span className="font-display font-bold text-sm text-[#030A28]">Real Esthetic Clinic Result Evidence</span>
               <button onClick={() => setPreviewImage(null)} className="btn-agency-primary !py-1.5 !px-4 text-xs font-bold cursor-pointer">Close</button>
             </div>
           </div>

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import { ArrowUpRight, Phone, Clock, CheckCircle2, ChevronDown, Sparkles } from 'lucide-react';
@@ -18,9 +18,9 @@ export function HeroSection({ onOpenAudit, selectedService }: HeroSectionProps) 
     if (selectedService) {
       const lower = selectedService.toLowerCase();
       if (lower.includes('ads') || lower.includes('google') || lower.includes('ppc')) setFormData(p => ({ ...p, serviceRequired: 'Google Ads & PPC for Med Spas' }));
-      else if (lower.includes('seo') || lower.includes('map')) setFormData(p => ({ ...p, serviceRequired: 'Aesthetic Clinic Local SEO & Map Pack Ranking' }));
-      else if (lower.includes('landing') || lower.includes('funnel')) setFormData(p => ({ ...p, serviceRequired: 'High-Converting Aesthetic Clinic Landing Pages' }));
-      else if (lower.includes('lead') || lower.includes('inquir')) setFormData(p => ({ ...p, serviceRequired: 'Aesthetic Clinic Client Lead Generation' }));
+      else if (lower.includes('seo') || lower.includes('map')) setFormData(p => ({ ...p, serviceRequired: 'Esthetic Clinic Local SEO & Map Pack Ranking' }));
+      else if (lower.includes('landing') || lower.includes('funnel')) setFormData(p => ({ ...p, serviceRequired: 'High-Converting Esthetic Clinic Landing Pages' }));
+      else if (lower.includes('lead') || lower.includes('inquir')) setFormData(p => ({ ...p, serviceRequired: 'Esthetic Clinic Client Lead Generation' }));
       else if (lower.includes('social') || lower.includes('video')) setFormData(p => ({ ...p, serviceRequired: 'Social Media & Video Advertising' }));
       else setFormData(p => ({ ...p, serviceRequired: 'Complete Client Acquisition System' }));
     }
@@ -76,10 +76,10 @@ export function HeroSection({ onOpenAudit, selectedService }: HeroSectionProps) 
           <div className="lg:col-span-7 flex flex-col justify-center">
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/90 border border-slate-200 mb-6 self-start shadow-sm backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-[#1236E8] animate-pulse" />
-              <span className="font-mono text-xs font-semibold text-[#030A28] uppercase tracking-wider">EXCLUSIVELY FOR MEDICAL SPAS &amp; AESTHETICIAN CLINICS</span>
+              <span className="font-mono text-xs font-semibold text-[#030A28] uppercase tracking-wider">EXCLUSIVELY FOR MEDICAL SPAS &amp; Esthetician CLINICS</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-[54px] xl:text-[58px] font-bold tracking-tight text-[#030A28] leading-[1.08] mb-6 max-w-2xl" style={{ fontFamily: "var(--font-familjen, 'Familjen Grotesk', sans-serif)" }}>
-              Aesthetic Clinic Marketing Built to Bring{' '}
+              Esthetic Clinic Marketing Built to Bring{' '}
               <span className="text-[#1236E8] relative inline-block">
                 More Clients Booked.
                 <span className="absolute bottom-1.5 left-0 right-0 h-2.5 bg-[#20D9FF]/30 -z-10 rounded" />
@@ -125,7 +125,7 @@ export function HeroSection({ onOpenAudit, selectedService }: HeroSectionProps) 
                 <div className="py-12 text-center space-y-4">
                   <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto"><CheckCircle2 className="w-8 h-8" /></div>
                   <h4 className="font-display font-bold text-[#030A28] text-2xl">Inquiry Sent Successfully</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed max-w-sm mx-auto">Thank you, <strong>{formData.fullName}</strong>. Our aesthetic clinic marketing directors are preparing the audit for <strong>{formData.companyName || 'your clinic'}</strong>. We will reach out to <strong>{formData.email}</strong> shortly.</p>
+                  <p className="text-sm text-slate-600 leading-relaxed max-w-sm mx-auto">Thank you, <strong>{formData.fullName}</strong>. Our Esthetic clinic marketing directors are preparing the audit for <strong>{formData.companyName || 'your clinic'}</strong>. We will reach out to <strong>{formData.email}</strong> shortly.</p>
                   <button type="button" onClick={() => { setSubmitted(false); setFormData({ fullName: '', companyName: '', email: '', serviceRequired: 'Google Ads & PPC for Med Spas', projectBudget: '$500 – $1,500 / month', projectDetails: '' }); }} className="mt-4 px-6 py-2.5 rounded-full border border-slate-300 text-xs font-semibold text-slate-800 hover:bg-slate-50 transition-colors cursor-pointer">Submit Another Inquiry</button>
                 </div>
               ) : (
@@ -154,9 +154,9 @@ export function HeroSection({ onOpenAudit, selectedService }: HeroSectionProps) 
                       <div className="relative flex items-center border-b border-neutral-900 focus-within:border-[#1236E8] transition-colors">
                         <select required value={formData.serviceRequired} onChange={(e) => setFormData({ ...formData, serviceRequired: e.target.value })} className="w-full bg-transparent text-sm sm:text-base text-neutral-900 pb-2.5 pt-1 outline-none appearance-none cursor-pointer pr-8 font-normal transition-colors">
                           <option value="Google Ads & PPC for Med Spas">Google Ads &amp; PPC for Med Spas</option>
-                          <option value="Aesthetic Clinic Local SEO & Map Pack Ranking">Local SEO &amp; Google Maps</option>
-                          <option value="High-Converting Aesthetic Clinic Landing Pages">High-Converting Landing Pages</option>
-                          <option value="Aesthetic Clinic Client Lead Generation">Client Lead Generation</option>
+                          <option value="Esthetic Clinic Local SEO & Map Pack Ranking">Local SEO &amp; Google Maps</option>
+                          <option value="High-Converting Esthetic Clinic Landing Pages">High-Converting Landing Pages</option>
+                          <option value="Esthetic Clinic Client Lead Generation">Client Lead Generation</option>
                           <option value="Social Media & Video Advertising">Social Media &amp; Video Advertising</option>
                           <option value="Complete Client Acquisition System">Full Client Acquisition System</option>
                         </select>

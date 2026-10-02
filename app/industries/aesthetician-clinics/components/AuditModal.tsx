@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { X, ArrowUpRight, CheckCircle2, User, Phone, Mail, Building2, Shield } from 'lucide-react';
@@ -30,7 +30,7 @@ export function AuditModal({ isOpen, onClose, prefilledService }: AuditModalProp
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-      trackConversion('modal_audit_submission', { serviceInterest: prefilledService || 'General Aesthetic Clinic Marketing', businessName: formData.businessName });
+      trackConversion('modal_audit_submission', { serviceInterest: prefilledService || 'General Esthetic Clinic Marketing', businessName: formData.businessName });
     }, 600);
   };
 
@@ -48,7 +48,7 @@ export function AuditModal({ isOpen, onClose, prefilledService }: AuditModalProp
             </div>
             <h3 className="font-display text-2xl font-bold text-[#030A28]">Audit Request Received</h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Our aesthetic clinic marketing strategists are reviewing search competition for <strong className="text-[#030A28]">{formData.businessName}</strong>. Your customized clinic growth roadmap will be sent to <strong className="text-[#030A28]">{formData.email}</strong> within 24 business hours.
+              Our Esthetic clinic marketing strategists are reviewing search competition for <strong className="text-[#030A28]">{formData.businessName}</strong>. Your customized clinic growth roadmap will be sent to <strong className="text-[#030A28]">{formData.email}</strong> within 24 business hours.
             </p>
             <button onClick={onClose} className="w-full btn-agency-primary h-11 text-xs font-bold cursor-pointer">Close</button>
           </div>
@@ -58,7 +58,7 @@ export function AuditModal({ isOpen, onClose, prefilledService }: AuditModalProp
               <span className="w-1.5 h-1.5 rounded-full bg-[#1236E8]" />
               {prefilledService ? `Focus: ${prefilledService}` : 'CLINIC GROWTH INTAKE'}
             </div>
-            <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#030A28] tracking-tight mb-2">Free Aesthetic Clinic Marketing Audit</h3>
+            <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#030A28] tracking-tight mb-2">Free Esthetic Clinic Marketing Audit</h3>
             <p className="text-xs sm:text-sm text-slate-600 mb-6">Identify where your clinic is losing high-ticket clients and get actionable recommendations to increase qualified bookings.</p>
             {error && <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-xs mb-4">{error}</div>}
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -87,7 +87,7 @@ export function AuditModal({ isOpen, onClose, prefilledService }: AuditModalProp
                 <label className="block text-xs font-semibold text-slate-800 mb-1" htmlFor="modalBusiness">Clinic Name &amp; City *</label>
                 <div className="relative">
                   <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#1236E8]" />
-                  <input id="modalBusiness" type="text" required value={formData.businessName} onChange={(e) => setFormData({ ...formData, businessName: e.target.value })} placeholder="Lumiere Med Spa & Aesthetics, Scottsdale AZ" className="w-full bg-slate-50 border border-slate-300 focus:border-[#1236E8] focus:bg-white focus:ring-2 focus:ring-[#1236E8]/20 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-[#030A28] font-medium placeholder-slate-400 outline-none transition-all" />
+                  <input id="modalBusiness" type="text" required value={formData.businessName} onChange={(e) => setFormData({ ...formData, businessName: e.target.value })} placeholder="Lumiere Med Spa & Esthetics, Scottsdale AZ" className="w-full bg-slate-50 border border-slate-300 focus:border-[#1236E8] focus:bg-white focus:ring-2 focus:ring-[#1236E8]/20 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-[#030A28] font-medium placeholder-slate-400 outline-none transition-all" />
                 </div>
               </div>
               <button type="submit" disabled={isSubmitting} className="w-full btn-agency-primary h-12 text-sm font-semibold cursor-pointer mt-2 shadow-md hover:shadow-xl flex items-center justify-center gap-2">

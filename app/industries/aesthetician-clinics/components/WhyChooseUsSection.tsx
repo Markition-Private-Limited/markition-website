@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { ArrowUpRight, Activity, Target, Sparkles, BarChart3, CheckCircle2 } from 'lucide-react';
 import { trackConversion } from '../utils/tracking';
@@ -8,14 +8,14 @@ interface WhyChooseUsSectionProps { onOpenAudit: () => void; }
 
 export function WhyChooseUsSection({ onOpenAudit }: WhyChooseUsSectionProps) {
   const reasons = [
-    { index: '01', tag: 'CLINICAL KNOWLEDGE', title: 'Aesthetic Industry Focus', summary: 'Deep expertise in client psychology and treatment margins.', detail: 'We don\'t manage e-commerce stores, realtors, or general contractors. We exclusively focus on aesthetic clinic marketing, understanding the difference between high-margin injectables, laser packages, and routine facials.', highlights: ['Injectable &amp; Laser Specialization', 'Client Confidentiality Empathy', 'Medical Spa Compliance Awareness'], icon: Activity },
+    { index: '01', tag: 'CLINICAL KNOWLEDGE', title: 'Esthetic Industry Focus', summary: 'Deep expertise in client psychology and treatment margins.', detail: 'We don\'t manage e-commerce stores, realtors, or general contractors. We exclusively focus on Esthetic clinic marketing, understanding the difference between high-margin injectables, laser packages, and routine facials.', highlights: ['Injectable &amp; Laser Specialization', 'Client Confidentiality Empathy', 'Medical Spa Compliance Awareness'], icon: Activity },
     { index: '02', tag: 'SEARCH INTENT', title: 'Data-Driven Strategy', summary: 'Targeting high-intent client searchers ready to book.', detail: 'Every campaign is built upon verified search volume, local radius demographics, competitor bid density, and treatment profitability to maximize return on ad spend.', highlights: ['Negative Keyword Waste Hygiene', 'Geo-Targeted Radius Bidding', 'High-Ticket Search Intent'], icon: Target },
     { index: '03', tag: 'EXPERIENCE DESIGN', title: 'Conversion-Focused Experiences', summary: 'Editorial landing pages built for immediate confidence.', detail: 'We craft fast-loading, mobile-first client funnels that overcome hesitation, display verified testimonials, and simplify appointment scheduling.', highlights: ['Sub-Second Mobile Load Times', 'One-Tap Click-to-Call', 'Verified Review Integration'], icon: Sparkles },
     { index: '04', tag: 'CLOSED-LOOP ROI', title: 'Transparent Performance Tracking', summary: 'Every phone call and dollar tracked to actual clients.', detail: 'With dynamic call tracking, automated spam filtering, and 24/7 transparent reporting, you see the exact cost per qualified client enquiry at all times.', highlights: ['Dynamic Call Tracking (DNI)', 'Live Reception Attribution', '24/7 Clinic Dashboard'], icon: BarChart3 },
   ];
 
   const comparisonRows = [
-    { feature: 'Aesthetic Industry Focus', us: true, generic: false },
+    { feature: 'Esthetic Industry Focus', us: true, generic: false },
     { feature: 'Medical Spa Compliant Campaigns', us: true, generic: false },
     { feature: 'Treatment-Level ROI Tracking', us: true, generic: false },
     { feature: 'Dynamic Whisper Call Tracking', us: true, generic: false },
@@ -35,8 +35,8 @@ export function WhyChooseUsSection({ onOpenAudit }: WhyChooseUsSectionProps) {
             <span className="w-2 h-2 rounded-full bg-[#1236E8]" />
             <span className="font-mono text-xs font-semibold text-[#1236E8] uppercase tracking-wider">WHY CLINICS CHOOSE US</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#030A28] leading-[1.12] mb-4">Purpose-Built for Aesthetics. Not Adapted From Generic Marketing.</h2>
-          <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed">Med spas and aesthetic clinics have unique client funnels, compliance considerations, and treatment profit margins. Our approach is built around this specific context.</p>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#030A28] leading-[1.12] mb-4">Purpose-Built for Esthetics. Not Adapted From Generic Marketing.</h2>
+          <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed">Med spas and Esthetic clinics have unique client funnels, compliance considerations, and treatment profit margins. Our approach is built around this specific context.</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-7 mb-14">

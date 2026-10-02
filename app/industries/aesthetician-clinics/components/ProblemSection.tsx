@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { ArrowUpRight, Search, ShieldCheck, UserCheck } from 'lucide-react';
 import { trackConversion } from '../utils/tracking';
@@ -25,7 +25,7 @@ export function ProblemSection({ onOpenAudit }: ProblemSectionProps) {
             <span className="font-mono text-xs font-semibold text-[#1236E8] uppercase tracking-wider">THE CLIENT ACQUISITION CHALLENGE</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#030A28] leading-[1.12] mb-5">Great Treatments Mean Little If the Right Clients Can&apos;t Find You.</h2>
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">Clients are searching every day for Botox, fillers, laser treatments, and other high-value aesthetic services. Your marketing needs to make your clinic visible at the exact moment they are ready to book.</p>
+          <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">Clients are searching every day for Botox, fillers, laser treatments, and other high-value Esthetic services. Your marketing needs to make your clinic visible at the exact moment they are ready to book.</p>
         </div>
 
         <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-sm mb-16 overflow-hidden">
@@ -62,7 +62,7 @@ export function ProblemSection({ onOpenAudit }: ProblemSectionProps) {
           <div className="space-y-1.5 max-w-2xl">
             <span className="font-mono text-xs text-[#1236E8] uppercase tracking-wider font-bold">DIAGNOSTIC BENCHMARK</span>
             <h4 className="font-display text-xl sm:text-2xl font-bold text-[#030A28] tracking-tight">Is your clinic losing qualified client enquiries to local competitors?</h4>
-            <p className="text-sm text-slate-600 leading-relaxed">We review your search rankings, map pack placement, and conversion rate against local med spas and aesthetic clinics in your market.</p>
+            <p className="text-sm text-slate-600 leading-relaxed">We review your search rankings, map pack placement, and conversion rate against local med spas and Esthetic clinics in your market.</p>
           </div>
           <button onClick={() => { trackConversion('audit_cta_click', { source: 'problem_section' }); onOpenAudit(); }} className="btn-agency-primary h-12 px-6 sm:px-7 shrink-0 self-stretch sm:self-start lg:self-center shadow-md hover:shadow-xl flex items-center justify-center gap-2">
             <span className="hidden sm:inline">Improve My Clinic Marketing</span>

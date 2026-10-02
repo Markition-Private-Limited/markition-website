@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { ArrowUpRight, Search, MapPin, ShieldCheck, PhoneCall, CalendarCheck, Check, Sparkles, Zap, Star, Phone, Compass, CheckCheck, Lock, Flame, Award, Globe } from 'lucide-react';
 import { trackConversion } from '../utils/tracking';
@@ -127,18 +127,18 @@ export function SystemSection({ onOpenAudit }: SystemSectionProps) {
               <span className="px-2 py-0.5 rounded-full bg-emerald-500/90 text-white font-mono text-[10px] font-bold backdrop-blur-md">PHYSICIAN SUPERVISED</span>
             </div>
             <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
-              <p className="text-xs sm:text-sm font-semibold text-white drop-shadow-sm leading-tight">Dr. Vanessa Cole, Medical Director • Board-Certified Aesthetic Physician</p>
+              <p className="text-xs sm:text-sm font-semibold text-white drop-shadow-sm leading-tight">Dr. Vanessa Cole, Medical Director • Board-Certified Esthetic Physician</p>
               <span className="text-[10px] text-blue-200 font-mono">Treatment: Botox, Dermal Fillers &amp; Laser Skin Resurfacing</span>
             </div>
           </div>
           <div className="p-4 sm:p-5 space-y-3.5 bg-white">
-            <div className="p-3.5 rounded-xl bg-slate-900 text-white space-y-2"><span className="font-mono text-[10px] font-bold text-[#20D9FF] uppercase tracking-wider block">COMPREHENSIVE AESTHETIC CONSULTATION</span><h5 className="font-display text-sm sm:text-base font-bold text-white leading-snug">Natural-Looking Results from Licensed Injectors</h5><div className="flex items-center gap-2 text-[11px] text-slate-300"><span>Medical Director Supervised</span><span>•</span><span className="text-emerald-400">Flexible Payment Plans Available</span></div></div>
+            <div className="p-3.5 rounded-xl bg-slate-900 text-white space-y-2"><span className="font-mono text-[10px] font-bold text-[#20D9FF] uppercase tracking-wider block">COMPREHENSIVE Esthetic CONSULTATION</span><h5 className="font-display text-sm sm:text-base font-bold text-white leading-snug">Natural-Looking Results from Licensed Injectors</h5><div className="flex items-center gap-2 text-[11px] text-slate-300"><span>Medical Director Supervised</span><span>•</span><span className="text-emerald-400">Flexible Payment Plans Available</span></div></div>
             <div className="grid grid-cols-3 gap-2 text-center">
               <div className="p-2 rounded-lg bg-slate-50 border border-slate-100"><span className="font-display text-xs font-bold text-[#030A28] block">0.4s</span><span className="text-[10px] text-slate-500">Load Speed</span></div>
               <div className="p-2 rounded-lg bg-slate-50 border border-slate-100"><span className="font-display text-xs font-bold text-emerald-600 block">0% APR</span><span className="text-[10px] text-slate-500">Financing</span></div>
               <div className="p-2 rounded-lg bg-slate-50 border border-slate-100"><span className="font-display text-xs font-bold text-[#1236E8] block">1,200+</span><span className="text-[10px] text-slate-500">Treatments Done</span></div>
             </div>
-            <div className="p-2.5 rounded-xl bg-blue-50/80 border border-blue-100 flex items-center justify-between"><span className="text-xs font-semibold text-[#030A28]">Reserve Free Aesthetic Consult</span><span className="px-3 py-1 rounded-lg bg-[#1236E8] text-white font-bold text-xs shadow-sm">Instant Booking</span></div>
+            <div className="p-2.5 rounded-xl bg-blue-50/80 border border-blue-100 flex items-center justify-between"><span className="text-xs font-semibold text-[#030A28]">Reserve Free Esthetic Consult</span><span className="px-3 py-1 rounded-lg bg-[#1236E8] text-white font-bold text-xs shadow-sm">Instant Booking</span></div>
             <div className="flex items-center justify-between pt-1 text-[11px] text-slate-500 font-mono"><span className="flex items-center gap-1 text-emerald-600 font-bold"><ShieldCheck className="w-3.5 h-3.5" /> Physician Supervised</span><span>Conversion Rate: 14.5%</span></div>
           </div>
         </div>
@@ -210,7 +210,7 @@ export function SystemSection({ onOpenAudit }: SystemSectionProps) {
               <div className="p-2 rounded-lg bg-white border border-slate-200 text-slate-700 max-w-[85%] leading-relaxed text-[11px]">&ldquo;Hi Sarah! Your appointment with Dr. Cole is set for Thursday at 10:30 AM. Reply C to confirm.&rdquo;</div>
               <div className="p-2 rounded-lg bg-[#1236E8] text-white max-w-[70%] ml-auto text-right leading-relaxed font-semibold flex items-center justify-end gap-1.5 text-[11px]"><span>C — Looking forward to it!</span><Check className="w-3 h-3" /></div>
             </div>
-            <div className="flex items-center justify-between pt-1 text-[11px] font-mono text-slate-500"><span className="text-emerald-700 font-bold flex items-center gap-1"><Award className="w-3.5 h-3.5" /> No-Show Rate: &lt; 2.2%</span><span>CRM Sync: Aesthetic Record / PatientNow</span></div>
+            <div className="flex items-center justify-between pt-1 text-[11px] font-mono text-slate-500"><span className="text-emerald-700 font-bold flex items-center gap-1"><Award className="w-3.5 h-3.5" /> No-Show Rate: &lt; 2.2%</span><span>CRM Sync: Esthetic Record / PatientNow</span></div>
           </div>
         </div>
       ),
@@ -218,7 +218,7 @@ export function SystemSection({ onOpenAudit }: SystemSectionProps) {
   ];
 
   return (
-    <section id="aesthetic-system" className="w-full bg-white py-20 sm:py-28 border-b border-agency relative overflow-hidden">
+    <section id="Esthetic-system" className="w-full bg-white py-20 sm:py-28 border-b border-agency relative overflow-hidden">
       <div className="absolute inset-0 bg-studio-dots opacity-30 pointer-events-none z-0" />
       <div className="absolute bottom-1/4 right-0 w-[550px] h-[550px] bg-[#1236E8]/5 rounded-full blur-[150px] pointer-events-none z-0" />
 
@@ -229,7 +229,7 @@ export function SystemSection({ onOpenAudit }: SystemSectionProps) {
             <span className="font-mono text-xs font-bold text-[#1236E8] uppercase tracking-wider">HOW OUR CLIENT ACQUISITION PROCESS WORKS</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#030A28] leading-[1.15] mb-5">From First Search to Booked Treatment.</h2>
-          <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed">A transparent, 5-stage client conversion pipeline built exclusively for high-production med spas and aesthetic clinics. No vague promises — every phase delivers verifiable clinic growth.</p>
+          <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed">A transparent, 5-stage client conversion pipeline built exclusively for high-production med spas and Esthetic clinics. No vague promises — every phase delivers verifiable clinic growth.</p>
         </div>
 
         <div className="relative space-y-14 sm:space-y-20 mb-20">

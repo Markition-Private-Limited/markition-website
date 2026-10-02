@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { ArrowUpRight, CheckCircle2, TrendingUp, DollarSign, Calendar } from 'lucide-react';
 import { trackConversion } from '../utils/tracking';
@@ -40,7 +40,7 @@ export function CaseStudySection({ onOpenAudit }: CaseStudySectionProps) {
             <div className="lg:col-span-5 relative bg-slate-900 min-h-[380px] lg:min-h-full flex flex-col justify-between p-8 text-white">
               <img
                 src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80"
-                alt="Contemporary med spa treatment suite with aesthetic equipment"
+                alt="Contemporary med spa treatment suite with Esthetic equipment"
                 referrerPolicy="no-referrer"
                 className="absolute inset-0 w-full h-full object-cover opacity-60"
               />

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef } from 'react';
 import { HeroSection } from './components/HeroSection';
@@ -14,7 +14,7 @@ import { FinalCtaSection } from './components/FinalCtaSection';
 import { StickyMobileCta } from './components/StickyMobileCta';
 import { AuditModal } from './components/AuditModal';
 
-export default function AestheticianClinicsIndustryPage() {
+export default function EstheticianClinicsIndustryPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | undefined>();
   const heroFormRef = useRef<HTMLDivElement>(null);

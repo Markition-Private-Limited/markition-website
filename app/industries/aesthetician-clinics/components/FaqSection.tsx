@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
@@ -13,7 +13,7 @@ export function FaqSection({ onOpenAudit }: FaqSectionProps) {
 
   const faqs = [
     {
-      q: 'How quickly can Google Ads generate aesthetic clinic leads?',
+      q: 'How quickly can Google Ads generate Esthetic clinic leads?',
       a: 'Google Ads can generate qualified client calls and consultation requests within the first 48 to 72 hours of campaign activation. Unlike organic SEO which takes months to compound, search ads capture clients actively looking for Botox, fillers, or laser treatments today.',
     },
     {
@@ -62,7 +62,7 @@ export function FaqSection({ onOpenAudit }: FaqSectionProps) {
           </h2>
 
           <p className="text-base sm:text-lg text-slate-600 font-normal max-w-xl mx-auto">
-            Everything you need to know about partnering with our aesthetic clinic marketing team.
+            Everything you need to know about partnering with our Esthetic clinic marketing team.
           </p>
         </div>
 
