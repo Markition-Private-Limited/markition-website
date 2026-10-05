@@ -65,18 +65,31 @@ const SLOT_POS: Record<Slot, React.CSSProperties> = {
   center:   { left: "calc(50% - 44px)", top: 104  },
 };
 
+/* ─── Software & Tech sub-item → image map ──────────────────────────────── */
+const SOFTWARE_IMAGES: Record<string, string> = {
+  "Custom Web Development":       "/assets/services/software-tech/custom-web-development.webp",
+  "Mobile App Development":       "/assets/services/software-tech/mobile-app-development.webp",
+  "SaaS Platform Development":    "/assets/services/software-tech/saas-platform-development.webp",
+  "API Integration & Automation": "/assets/services/software-tech/api-integration-automation.webp",
+  "Cloud Infrastructure Setup":   "/assets/services/software-tech/cloud-infrastructure-setup.webp",
+  "AI-Powered Software Solutions":"/assets/services/software-tech/ai-powered-software-solutions.webp",
+};
+
 /* ─── Design Lab sub-item → image map ───────────────────────────────────── */
 const DESIGN_IMAGES: Record<string, string> = {
   "Brand Identity & Logo Design":  "/assets/services/design-lab/brand-identity.webp",
   "UI/UX Design":                  "/assets/services/design-lab/ui-ux-design.webp",
   "Website & App Design":          "/assets/services/design-lab/website-app-design.webp",
   "Marketing Collateral Design":   "/assets/services/design-lab/marketing-collateral.webp",
+  "Motion Graphics & Video":       "/assets/services/design-lab/motion-graphics-video.webp",
+  "Product Packaging Design":      "/assets/services/design-lab/product-packaging-design.webp",
 };
 
 /* ─── Digital Marketing sub-item → image map ────────────────────────────── */
 const DIGITAL_IMAGES: Record<string, string> = {
   "Google Ads":                              "/assets/services/digital-marketing/google-ads.webp",
   "Social Media Marketing":                 "/assets/services/digital-marketing/social-media-marketing.webp",
+  "Social Media Page Management":           "/assets/services/digital-marketing/social-media-page-management.webp",
   "Search Engine Optimization (SEO)":       "/assets/services/digital-marketing/seo.webp",
   "Generative Engine Optimization (GEO)":   "/assets/services/digital-marketing/geo.webp",
   "Answer Engine Optimization (AEO)":       "/assets/services/digital-marketing/aeo.webp",
@@ -117,7 +130,7 @@ export default function ServicesSection() {
     <section
       style={{
         background: "#000028",
-        padding: "68px 24px 80px",
+        padding: "40px 24px",
         fontFamily: "var(--font-inter, Inter, sans-serif)",
       }}
     >
@@ -337,6 +350,8 @@ export default function ServicesSection() {
               src={
                 activeService.id === "digital" && DIGITAL_IMAGES[activeService.items[activeItem]]
                   ? DIGITAL_IMAGES[activeService.items[activeItem]]
+                  : activeService.id === "software" && SOFTWARE_IMAGES[activeService.items[activeItem]]
+                  ? SOFTWARE_IMAGES[activeService.items[activeItem]]
                   : activeService.id === "design" && DESIGN_IMAGES[activeService.items[activeItem]]
                   ? DESIGN_IMAGES[activeService.items[activeItem]]
                   : "/rectangle-52.png"

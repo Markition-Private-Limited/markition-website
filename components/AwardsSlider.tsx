@@ -18,7 +18,7 @@ export default function AwardsSlider() {
         background: "#blue",
         borderTop: "1px solid rgba(255,255,255,0.05)",
         borderBottom: "1px solid rgba(255,255,255,0.05)",
-        padding: "28px 0",
+        padding: "40px 0",
         overflow: "hidden",
       }}
     >

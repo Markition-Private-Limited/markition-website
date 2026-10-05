@@ -3,38 +3,40 @@ import { ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
-    href: "https://www.aimscholar.in/",
-    title: "AimScholar",
-    desc: "An online examination and scholarship platform with live exams, secure payments, automated results, leaderboards and rank-based scholarships.",
-    bg: "#cfe2fb",
+    href: "#",
+    title: "Journey Joy",
+    desc: "Affordable daily university transport for Riyadh students — safe, reliable & subscription-based, serving students, drivers and fleet providers.",
+    bg: "#e8f3ff",
     tag: "Client Project",
-    bigText: "AimSchol",
+    bigText: "Journey",
+    img: "/assets/portofolio-v2/featured/journey-joy.webp",
   },
   {
-    href: "https://lavish-touch.vercel.app/",
-    title: "Apex Auto Studio",
-    desc: "A premium automotive customization website showcasing luxury car interiors, custom upholstery, ambient lighting and detailing services.",
-    bg: "#f0eef4",
+    href: "#",
+    title: "White Line",
+    desc: "A premium chauffeur platform combining luxury travel with modern technology — built for comfort, reliability, privacy and exceptional service.",
+    bg: "#1a1a2e",
     tag: "Client Project",
-    bigText: "Apex Aut",
-    img: "/assets/lavishTouchImg-e9bNmaJV.png",
+    bigText: "WhiteLin",
+    img: "/assets/portofolio-v2/featured/white-line.webp",
   },
   {
-    href: "https://rankview.vercel.app/",
-    title: "RankLocal",
-    desc: "A location-based platform that helps users compare nearby shops using real user reviews, ratings, and feedback.",
-    bg: "#eef1f8",
+    href: "#",
+    title: "GenixDrive",
+    desc: "A smart driving companion app with real-time location sharing, drive score insights, family safety features and rewards for safer journeys.",
+    bg: "#ede9ff",
     tag: "Client Project",
-    bigText: "RankLoca",
-    img: "/assets/ranklocal-C46CgvsG.png",
+    bigText: "Genix",
+    img: "/assets/portofolio-v2/featured/genix-drive.png",
   },
   {
-    href: "https://sssee.vercel.app/",
-    title: "Shree Swami Samarth Electrical",
-    desc: "A professional electrical infrastructure firm delivering EHV lines, substations, HT electrical systems, solar installations and contract work.",
-    bg: "#e3f3ee",
+    href: "https://isgh.markition.com/index-2.html",
+    title: "ISGH — Zakat & Sadaqah",
+    desc: "An Islamic charity portal empowering communities through Zakat and Sadaqah donations, with event management and Islamic centre resources.",
+    bg: "#e8f5e0",
     tag: "Client Project",
-    bigText: "SSSEE",
+    bigText: "ISGH",
+    img: "/assets/portofolio-v2/featured/isgh.webp",
   },
 ];
 
@@ -76,14 +78,15 @@ export function ProjectsSection() {
               <div className="absolute right-5 top-5 z-20 flex size-9 items-center justify-center rounded-full bg-[#1d1d1f] text-white transition-all duration-300 group-hover:rotate-45 sm:right-8 sm:top-8 sm:size-10">
                 <ArrowUpRight size={20} />
               </div>
-              <div className="absolute bottom-8 left-6 z-10 sm:bottom-10 sm:left-10">
-                <p className="mb-5 text-2xl font-black tracking-[-0.05em] text-[#1d1d1f]">View project</p>
-                <span className="rounded-full bg-[#1d1d1f] px-6 py-3 text-xs font-bold text-white">Visit Website</span>
-              </div>
+              {projects[0].img && (
+                <div className="absolute bottom-0 right-4 h-[160px] w-[200px] overflow-hidden rounded-t-[10px] border-x-[4px] border-t-[4px] border-b-0 border-[#111] bg-white shadow-xl sm:right-8 sm:h-[190px] sm:w-[240px]">
+                  <Image src={projects[0].img} alt={projects[0].title} fill className="object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+                </div>
+              )}
             </a>
           </div>
 
-          {/* Card 2 */}
+          {/* Card 2 — dark bg (White Line) */}
           <div className="h-[380px] sm:h-[355px] md:col-start-5 md:col-end-11">
             <a
               href={projects[1].href}
@@ -92,31 +95,26 @@ export function ProjectsSection() {
               className="group relative block h-full overflow-hidden rounded-[10px] p-6 sm:p-8 md:p-10"
               style={{ backgroundColor: projects[1].bg }}
             >
-              <h3 className="absolute bottom-1 left-1 select-none text-[58px] font-black uppercase leading-none tracking-[-0.08em] text-white/45 sm:text-[76px] md:text-[96px]">
+              <h3 className="absolute bottom-1 left-1 select-none text-[58px] font-black uppercase leading-none tracking-[-0.08em] text-white/20 sm:text-[76px] md:text-[96px]">
                 {projects[1].bigText}
               </h3>
               <div className="relative z-10 max-w-[330px]">
                 <div className="mb-2">
-                  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider border bg-[#062283]/10 text-[#062283] border-[#062283]/30">
+                  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider border bg-white/10 text-white border-white/20">
                     {projects[1].tag}
                   </span>
                 </div>
-                <h3 className="text-[20px] font-black tracking-[-0.04em] text-[#1d1d1f] sm:text-[22px]">
+                <h3 className="text-[20px] font-black tracking-[-0.04em] text-white sm:text-[22px]">
                   {projects[1].title}
                 </h3>
-                <p className="mt-2 text-sm leading-5 text-[#1d1d1f]/65 line-clamp-3">{projects[1].desc}</p>
+                <p className="mt-2 text-sm leading-5 text-white/60 line-clamp-3">{projects[1].desc}</p>
               </div>
-              <div className="absolute right-5 top-5 z-20 flex size-9 items-center justify-center rounded-full bg-[#1d1d1f] text-white transition-all duration-300 group-hover:rotate-45 sm:right-8 sm:top-8 sm:size-10">
+              <div className="absolute right-5 top-5 z-20 flex size-9 items-center justify-center rounded-full bg-white text-[#1a1a2e] transition-all duration-300 group-hover:rotate-45 sm:right-8 sm:top-8 sm:size-10">
                 <ArrowUpRight size={20} />
               </div>
               {projects[1].img && (
-                <div className="absolute bottom-0 right-4 h-[180px] w-[270px] overflow-hidden rounded-t-[14px] border-x-[5px] border-t-[5px] border-b-0 border-[#111] bg-white shadow-2xl sm:right-10 sm:h-[210px] sm:w-[360px]">
-                  <Image
-                    src={projects[1].img}
-                    alt={projects[1].title}
-                    fill
-                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  />
+                <div className="absolute bottom-0 right-4 h-[180px] w-[270px] overflow-hidden rounded-t-[14px] border-x-[5px] border-t-[5px] border-b-0 border-white/20 bg-white shadow-2xl sm:right-10 sm:h-[210px] sm:w-[360px]">
+                  <Image src={projects[1].img} alt={projects[1].title} fill className="object-cover object-top transition-transform duration-700 group-hover:scale-105" />
                 </div>
               )}
             </a>
@@ -187,6 +185,11 @@ export function ProjectsSection() {
               <div className="absolute right-5 top-5 z-20 flex size-9 items-center justify-center rounded-full bg-[#1d1d1f] text-white transition-all duration-300 group-hover:rotate-45 sm:right-8 sm:top-8 sm:size-10">
                 <ArrowUpRight size={20} />
               </div>
+              {projects[3].img && (
+                <div className="absolute bottom-0 right-0 left-0 h-[260px] overflow-hidden">
+                  <Image src={projects[3].img} alt={projects[3].title} fill className="object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+                </div>
+              )}
             </a>
           </div>
         </div>

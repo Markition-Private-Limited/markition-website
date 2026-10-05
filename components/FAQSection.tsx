@@ -37,7 +37,7 @@ export default function FAQSection() {
   const [open, setOpen] = useState<number>(0);
 
   return (
-    <section style={{ background: "#000028", padding: "64px 0 60px" }}>
+    <section style={{ background: "#000028", padding: "40px 0" }}>
       <div style={{ maxWidth: 680, margin: "0 auto", padding: "0 24px" }}>
 
         {/* Heading */}

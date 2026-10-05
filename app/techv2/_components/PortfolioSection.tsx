@@ -5,10 +5,10 @@ import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 
 const projects = [
-  { title: "AimScholar", img: "/assets/aimscholar-CvJCjHHq.png", href: "https://www.aimscholar.in/", year: "2026" },
-  { title: "Apex Auto Studio", img: "/assets/lavishTouchImg-e9bNmaJV.png", href: "https://lavish-touch.vercel.app/", year: "2026" },
-  { title: "RankLocal", img: "/assets/ranklocal-C46CgvsG.png", href: "https://rankview.vercel.app/", year: "2026" },
-  { title: "Shree Swami Samarth Electrical", img: "/assets/sssee-CGYazGZc.png", href: "https://sssee.vercel.app/", year: "2026" },
+  { title: "Journey Joy", img: "/assets/portofolio-v2/featured/journey-joy.webp", href: "#", year: "2026" },
+  { title: "White Line", img: "/assets/portofolio-v2/featured/white-line.webp", href: "#", year: "2026" },
+  { title: "GenixDrive", img: "/assets/portofolio-v2/featured/genix-drive.png", href: "#", year: "2026" },
+  { title: "ISGH", img: "/assets/portofolio-v2/featured/isgh.webp", href: "https://isgh.markition.com/index-2.html", year: "2026" },
   { title: "Aura", img: "/assets/aura-EBD47GL-.png", href: "https://aura-chi-ebon.vercel.app/", year: "2026" },
   { title: "ArkaHomes", img: "/assets/arkahomes-BW72MAUe.png", href: "https://arkahomes.vercel.app/", year: "2026" },
   { title: "Elora Homes", img: "/assets/elorahomes-eqfsMixA.png", href: "https://elorahomes.vercel.app/", year: "2026" },

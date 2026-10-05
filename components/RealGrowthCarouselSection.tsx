@@ -10,7 +10,7 @@ const TRACK = [...IMAGES, ...IMAGES];
 export default function RealGrowthCarouselSection() {
   return (
     <section
-      className="pt-12 pb-6 sm:pt-16 sm:pb-8 lg:pt-20 lg:pb-10"
+      className="py-10"
       style={{ background: "#000028" }}
     >
       <style>{`

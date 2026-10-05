@@ -89,7 +89,7 @@ export default function Technologies() {
         style={{
           maxWidth: 1200,
           margin: "0 auto",
-          padding: "64px 16px 72px",
+          padding: "40px 16px",
           textAlign: "center",
         }}
       >

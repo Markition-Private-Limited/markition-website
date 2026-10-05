@@ -85,10 +85,10 @@ function Strip({
 
 export default function ScaleWithAISection() {
   return (
-    <section style={{ background: "#000028", padding: "120px 24px 100px", position: "relative", overflow: "hidden" }}>
+    <section style={{ background: "#000028", padding: "40px 24px", position: "relative", overflow: "hidden", clipPath: "inset(0)" }}>
       {/* Tilted sliding strips — positioned relative to the full-width section */}
       <Strip background="#1A3BFF" textColor="#0B1740" rotate={2.2} top={34} zIndex={3} duration="32s" />
-      <Strip background="#22C5F5" textColor="#0B1740" rotate={-2.6} top={10} zIndex={4} duration="28s" />
+      <Strip background="#22C5F5" textColor="#0B1740" rotate={-1.3} top={10} zIndex={4} duration="28s" />
 
       <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative" }}>
 

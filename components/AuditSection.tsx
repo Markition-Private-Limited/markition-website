@@ -2,7 +2,7 @@
 
 export default function AuditSection() {
   return (
-    <section style={{ background: "#000028", padding: "60px 16px 70px" }}>
+    <section style={{ background: "#000028", padding: "40px 16px" }}>
       <style>{`
         @media (max-width: 767px) {
           .audit-outer { padding: 20px !important; }

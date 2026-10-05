@@ -306,7 +306,7 @@ export default function TestimonialsSection() {
   const doubled = [...TESTIMONIALS, ...TESTIMONIALS];
 
   return (
-    <section style={{ background: "#000028", padding: "64px 0 80px" }}>
+    <section style={{ background: "#000028", padding: "40px 0" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
         <ScrollReveal threshold={0.2}>
           <div style={{ textAlign: "center", marginBottom: 40 }}>

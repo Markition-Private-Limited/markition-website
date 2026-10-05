@@ -43,6 +43,7 @@ const featured = {
 export function ServicesSection() {
   return (
     <section
+      id="services"
       className="bg-transparent px-4 py-20 md:py-28"
       style={{
         backgroundImage:
@@ -60,13 +61,6 @@ export function ServicesSection() {
               Software Built Around Your Business
             </h2>
           </div>
-          <a
-            href="/services"
-            className="inline-flex w-fit items-center gap-2 rounded-lg bg-[#080b3f] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-1 hover:bg-[#062283]"
-          >
-            View All Services
-            <ArrowUpRight size={16} />
-          </a>
         </div>
 
         {/* Top row: 3 stacked cards + 1 featured */}

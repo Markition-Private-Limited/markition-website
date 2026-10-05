@@ -11,7 +11,7 @@ const tickerItems = [
 export default function Ticker() {
   return (
     <div
-      className="relative z-10 overflow-visible pt-16 pb-7 sm:pt-20 sm:pb-9 lg:pt-24 lg:pb-11"
+      className="relative z-10 overflow-visible py-10"
       style={{ background: "#010424", isolation: "isolate" }}
     >
       <div className="ticker-track flex items-center w-max">

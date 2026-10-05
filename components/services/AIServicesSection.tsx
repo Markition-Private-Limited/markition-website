@@ -10,7 +10,7 @@ export default function AIServicesSection() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6" style={{ background: "#000028" }}>
+    <section className="py-10 px-4 sm:px-6" style={{ background: "#000028" }}>
       <div className="max-w-[1200px] mx-auto space-y-8 sm:space-y-10">
 
         {/* Heading */}

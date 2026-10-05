@@ -24,8 +24,8 @@ export function HeroSection() {
   }
 
   return (
-    <section className="min-h-screen w-full overflow-hidden bg-[#f4f1ff]">
-      <div className="relative min-h-screen w-full overflow-hidden rounded-none pt-8 bg-[#fbfbfb] px-4 shadow-[0_30px_80px_rgba(110,100,180,0.18)] sm:px-6 md:px-10 md:pt-20 lg:px-0 lg:pt-24">
+    <section className="w-full overflow-hidden bg-[#f4f1ff]">
+      <div className="relative min-h-screen w-full overflow-hidden rounded-none pt-8 bg-[#fbfbfb] px-4 shadow-[0_30px_80px_rgba(110,100,180,0.18)] sm:px-6 md:px-10 md:pt-20 lg:px-0 lg:pt-20">
         {/* Interactive grid background */}
         <div className="absolute inset-0 z-10 pointer-events-auto" style={{ touchAction: "pan-y" }}>
           <div
@@ -49,19 +49,19 @@ export function HeroSection() {
           <p className="mb-4 text-[9px] uppercase tracking-[0.22em] text-[#666b74] sm:text-[10px] md:text-[12px] md:tracking-[0.25em]">
             CUSTOM SOFTWARE DEVELOPMENT
           </p>
-          <div className="leading-none">
-            <h1 className="text-[36px] font-black text-[#20232d] sm:text-[44px] md:text-[52px] lg:text-[60px]" style={{ fontFamily: "var(--font-familjen, 'Familjen Grotesk', sans-serif)" }}>
+          <div className="flex flex-col items-center gap-0">
+            <h1 className="text-[36px] font-black leading-none text-[#20232d] sm:text-[44px] md:text-[52px] lg:text-[60px]" style={{ fontFamily: "var(--font-familjen, 'Familjen Grotesk', sans-serif)" }}>
               We Build
             </h1>
-            <div className="relative -mt-3 flex items-center justify-center sm:-mt-5 lg:-mt-8">
-              <span className="text-[68px] font-black tracking-[-4px] text-[#20232d] sm:text-[76px] md:text-[105px] md:tracking-[-6px] lg:text-[140px] lg:tracking-[-8px]">
+            <div className="relative flex items-center justify-center">
+              <span className="text-[68px] font-black leading-none tracking-[-4px] text-[#20232d] sm:text-[76px] md:text-[105px] md:tracking-[-6px] lg:text-[140px] lg:tracking-[-8px]">
                 Software
               </span>
               <div className="absolute -right-5 top-1 flex h-7 w-7 items-center justify-center rounded-full bg-[#062283] text-white sm:-right-7 sm:h-8 sm:w-8 md:-right-8 md:h-9 md:w-9 lg:right-[-38px] lg:top-3 lg:h-10 lg:w-10">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
               </div>
             </div>
-            <div className="mt-1 flex items-center justify-center gap-2 sm:gap-3">
+            <div className="flex items-center justify-center gap-2 sm:gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8 rotate-[-15deg] fill-current md:h-12 md:w-12"><path d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z"/></svg>
               <p className="text-[34px] font-black text-[#20232d] sm:text-[42px] md:text-[52px] lg:text-[60px]">
                 That Scales.
@@ -81,13 +81,13 @@ export function HeroSection() {
               Start a Project
               <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
             </a>
-            <a
-              href="/portfolio"
+            <button
+              onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
               className="group inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[#080b3f] bg-transparent px-6 py-3.5 text-sm font-semibold text-[#080b3f] transition-all duration-300 hover:-translate-y-1 hover:bg-[#080b3f] hover:text-white md:px-8 md:py-4"
             >
               Explore Our Solutions
               <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
+            </button>
           </div>
         </div>
 
