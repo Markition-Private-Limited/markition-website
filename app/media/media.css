@@ -43,8 +43,7 @@
 
 /* ── Hero pre-hide — GSAP sets opacity:0 itself on mount.
    Never set it here: if GSAP fails to load the elements stay visible. ── */
-#media-root [data-hero-anim],
-#media-root [data-showcase-anim] {
+#media-root [data-hero-anim] {
   will-change: opacity, transform;
 }
 

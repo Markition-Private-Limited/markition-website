@@ -92,17 +92,21 @@ export default function HeroShowcase() {
             data-showcase-anim
             className="relative w-full rounded-2xl overflow-hidden aspect-video lg:aspect-auto lg:min-h-[680px]"
             style={{
-              background: "#e8edf5",
+              background: "#050b18",
               boxShadow: "0 0 80px rgba(25,100,209,0.25), 0 2px 40px rgba(0,0,0,0.3)",
+              transform: "translateZ(0)",
             }}
           >
             <video
               className="absolute inset-0 w-full h-full object-cover"
+              style={{ transform: "translateZ(0) scale(1.01)", backfaceVisibility: "hidden" }}
               src="/media/hero-showreel.mp4"
               autoPlay
               loop
               muted
               playsInline
+              preload="auto"
+              disablePictureInPicture
             />
           </div>
         </div>
