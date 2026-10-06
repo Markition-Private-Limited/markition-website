@@ -7,13 +7,14 @@ import { useRouter, usePathname } from "next/navigation";
 import { NAV_LINKS } from "@/lib/constants";
 import { ChevronDown, HamburgerIcon } from "@/lib/icons";
 
+const INTERNAL_LINKS: Record<string, string> = {
+  About: "/about",
+  "Case Studies": "/case-studies",
+  Portfolio: "/portfolio",
+};
+
 function scrollToContact() {
   const el = document.getElementById("contact");
-  if (el) el.scrollIntoView({ behavior: "smooth" });
-}
-
-function scrollToPortfolio() {
-  const el = document.getElementById("portfolio");
   if (el) el.scrollIntoView({ behavior: "smooth" });
 }
 
@@ -199,15 +200,6 @@ export default function Navbar() {
     }
   }
 
-  function handlePortfolioClick(e: React.MouseEvent) {
-    e.preventDefault();
-    if (document.getElementById("portfolio")) {
-      scrollToPortfolio();
-    } else {
-      router.push("/#portfolio");
-    }
-  }
-
   function openSolution(sol: (typeof SOLUTIONS_MENU)[number]) {
     if (!sol.href) return;
     if ("newTab" in sol && sol.newTab) {
@@ -327,20 +319,10 @@ export default function Navbar() {
                 {link.label}
               </a>
             );
-            if (link.label === "Portfolio") return (
-              <a
-                key={link.label}
-                href="#portfolio"
-                onClick={handlePortfolioClick}
-                className="hover:text-white/95 transition-colors duration-150 flex items-center gap-1 whitespace-nowrap px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05]"
-              >
-                {link.label}
-              </a>
-            );
-            if (link.label === "About") return (
+            if (link.label in INTERNAL_LINKS) return (
               <Link
                 key={link.label}
-                href="/about"
+                href={INTERNAL_LINKS[link.label]}
                 className="hover:text-white/95 transition-colors duration-150 flex items-center gap-1 whitespace-nowrap px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05]"
               >
                 {link.label}
@@ -793,23 +775,10 @@ export default function Navbar() {
                 </svg>
               </a>
             );
-            if (link.label === "Portfolio") return (
-              <a
-                key={link.label}
-                href="#portfolio"
-                onClick={(e) => { setMobileOpen(false); handlePortfolioClick(e); }}
-                className={`flex items-center justify-between px-5 py-3.5 text-[13.5px] text-white/75 hover:text-white hover:bg-white/[0.05] transition-colors duration-150 ${borderClass}`}
-              >
-                <span>{link.label}</span>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="opacity-30">
-                  <path d="M4 7h6M7 4l3 3-3 3" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-            );
-            if (link.label === "About") return (
+            if (link.label in INTERNAL_LINKS) return (
               <Link
                 key={link.label}
-                href="/about"
+                href={INTERNAL_LINKS[link.label]}
                 onClick={() => setMobileOpen(false)}
                 className={`flex items-center justify-between px-5 py-3.5 text-[13.5px] text-white/75 hover:text-white hover:bg-white/[0.05] transition-colors duration-150 ${borderClass}`}
               >
