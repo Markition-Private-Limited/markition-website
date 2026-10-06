@@ -1,110 +1,91 @@
 "use client";
 
-import { useEffect, useRef, useState, MouseEvent as ReactMouseEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const BLUE = "#1236E8";
 
-type ImageCard = { type: "image"; src: string; alt: string };
-type TextCard  = { type: "text";  title: string; body: string };
-type Card = ImageCard | TextCard;
+type Card = {
+  title:       string;
+  body:        string;
+  src?:        string;
+  alt?:        string;
+  staticBlue?: boolean;
+};
 
 const CARDS: Card[] = [
-  { type: "image", src: "/design-lab/assets/projects/showcase-branding.png", alt: "Brand Identity Design" },
-  { type: "image", src: "/design-lab/assets/projects/showcase-web.png",      alt: "Web & UI Design" },
-  { type: "image", src: "/design-lab/assets/projects/showcase-social.png",   alt: "Social Media Design" },
-  { type: "image", src: "/design-lab/assets/projects/showcase-saas.png",     alt: "SaaS Dashboard UI" },
   {
-    type: "text",
-    title: "Video Editing & Motion Design",
-    body: "Motion brings your brand to life. We create 2D and 3D animation, kinetic logo reveals, explainer videos, and social media reels that grab attention and keep people watching until the very end.",
+    title: "Brand Identity Design",
+    body:  "We build brands from the ground up: logo design, color systems, typography, brand guidelines, and stationery. Every asset works together so your business looks consistent, credible, and unforgettable across every channel.",
+    src:   "/design-lab/assets/projects/showcase-branding.png",
+    alt:   "Brand Identity Design",
   },
-  { type: "image", src: "/design-lab/assets/projects/showcase-branding.png", alt: "Creative Direction" },
+  {
+    title: "UI/UX Design",
+    body:  "We turn user research into clear journeys, wireframes, and polished interactive prototypes. Our web and app interfaces are intuitive, accessible, and responsive, built to keep users engaged and guide them toward conversion.",
+    src:   "/design-lab/assets/projects/showcase-web.png",
+    alt:   "UI/UX Design",
+  },
+  {
+    title: "Social Media Design",
+    body:  "We design scroll-stopping posts, carousels, stories, and reels covers, plus reusable templates for every platform. Your feed stays on-brand, recognizable, and engaging, so followers stop, interact, and remember you.",
+    src:   "/design-lab/assets/projects/showcase-social.png",
+    alt:   "Social Media Design",
+  },
+  {
+    title: "Advertising & Campaign Design",
+    body:  "From display banners and social ad creatives to print and out-of-home visuals, we design full campaigns around one clear idea. Every format is tailored to its channel to capture attention and drive measurable results.",
+    src:   "/design-lab/assets/projects/showcase-web.png",
+    alt:   "Advertising & Campaign Design",
+  },
+  {
+    title: "Motion & 2D/3D Design",
+    body:  "Motion is the heartbeat of modern digital communication. We craft cinematic 3D product renders, kinetic logo reveals, explainer animations, UI micro-interactions, and spatial visual assets that command attention and elevate brand prestige.",
+    staticBlue: true,
+  },
+  {
+    title: "E-Commerce Design",
+    body:  "We design storefronts, product pages, collection layouts, and checkout flows that showcase your products beautifully. Clear navigation, trust signals, and frictionless buying steps turn casual browsers into repeat customers.",
+    src:   "/design-lab/assets/projects/showcase-saas.png",
+    alt:   "E-Commerce Design",
+  },
 ];
 
-function TiltCard({ card, visible, index }: { card: Card; visible: boolean; index: number }) {
-  const ref     = useRef<HTMLDivElement>(null);
-  const fadeDelay = index * 90;
-  const [settled, setSettled] = useState(false);
+const FACE: React.CSSProperties = {
+  position:                 "absolute",
+  inset:                    0,
+  borderRadius:             20,
+  overflow:                 "hidden",
+  backfaceVisibility:       "hidden",
+  WebkitBackfaceVisibility: "hidden",
+};
 
-  useEffect(() => {
-    if (!visible) return;
-    const t = setTimeout(() => setSettled(true), fadeDelay + 700);
-    return () => clearTimeout(t);
-  }, [visible, fadeDelay]);
-
-  const transition = settled
-    ? "transform 0.3s cubic-bezier(.23,1,.32,1), box-shadow 0.3s ease"
-    : `opacity 0.65s ease ${fadeDelay}ms, transform 0.65s ease ${fadeDelay}ms, box-shadow 0.3s ease`;
-
-  function onMouseMove(e: ReactMouseEvent<HTMLDivElement>) {
-    const el = ref.current;
-    if (!el) return;
-    const r  = el.getBoundingClientRect();
-    const rY =  (((e.clientX - r.left) / r.width)  - 0.5) * 20;
-    const rX = -(((e.clientY - r.top)  / r.height) - 0.5) * 20;
-    el.style.transform = `perspective(900px) translateY(-14px) rotateX(${rX}deg) rotateY(${rY}deg) scale(1.06)`;
-    el.style.boxShadow = card.type === "text"
-      ? "0 40px 90px rgba(18,54,232,0.45), 0 12px 30px rgba(18,54,232,0.25)"
-      : "0 40px 90px rgba(0,0,0,0.22), 0 12px 30px rgba(0,0,0,0.12)";
-  }
-
-  function onMouseLeave() {
-    const el = ref.current;
-    if (!el) return;
-    el.style.transform = "perspective(900px) translateY(0) rotateX(0deg) rotateY(0deg) scale(1)";
-    el.style.boxShadow = card.type === "text"
-      ? "0 8px 32px rgba(18,54,232,0.18)"
-      : "0 4px 24px rgba(0,0,0,0.07)";
-  }
-
-  const base: React.CSSProperties = {
-    borderRadius: 20,
-    overflow:     "hidden",
-    willChange:   "transform",
-    cursor:       "pointer",
-    transition,
-    opacity:      visible ? 1 : 0,
-    transform:    visible
-      ? "perspective(900px) translateY(0) rotateX(0deg) rotateY(0deg) scale(1)"
-      : "perspective(900px) translateY(40px) rotateX(0deg) rotateY(0deg) scale(1)",
-  };
-
-  if (card.type === "text") {
-    return (
-      <div
-        ref={ref}
-        onMouseMove={onMouseMove}
-        onMouseLeave={onMouseLeave}
-        className="flex flex-col justify-between min-h-[280px] sm:min-h-[400px] lg:min-h-[480px]"
+function CardBack({ card }: { card: Card }) {
+  return (
+    <div
+      className="flex flex-col justify-between h-full"
+      style={{
+        background: `linear-gradient(160deg, #1b46f5 0%, ${BLUE} 55%, #0c27b8 100%)`,
+        padding:    "clamp(24px, 3vw, 40px) clamp(22px, 2.8vw, 36px)",
+      }}
+    >
+      <h3
+        className="font-bold leading-snug"
         style={{
-          ...base,
-          background: BLUE,
-          boxShadow:  "0 8px 32px rgba(18,54,232,0.18)",
-          padding:    "clamp(28px, 4vw, 52px) clamp(24px, 3.5vw, 44px)",
+          color:      "#fff",
+          fontSize:   "clamp(20px, 1.9vw, 28px)",
+          fontFamily: "var(--font-jakarta, sans-serif)",
         }}
       >
-        <div>
-          <h3
-            className="font-bold leading-snug mb-4 sm:mb-6"
-            style={{
-              color:      "#fff",
-              fontSize:   "clamp(20px, 2.2vw, 30px)",
-              fontFamily: "var(--font-jakarta, sans-serif)",
-            }}
-          >
-            {card.title}
-          </h3>
-          <p
-            className="leading-relaxed text-sm sm:text-[15px]"
-            style={{ color: "rgba(255,255,255,0.82)" }}
-          >
-            {card.body}
-          </p>
-        </div>
+        {card.title}
+      </h3>
 
+      <div>
+        <p className="leading-relaxed text-sm sm:text-[15px]" style={{ color: "rgba(255,255,255,0.85)" }}>
+          {card.body}
+        </p>
         <a
-          href="#"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-white mt-6 sm:mt-10 w-fit"
+          href="/design-lab/contact"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-white mt-6 w-fit"
           style={{
             border:       "1.5px solid rgba(255,255,255,0.45)",
             borderRadius: 50,
@@ -123,27 +104,89 @@ function TiltCard({ card, visible, index }: { card: Card; visible: boolean; inde
           Explore Now <span>→</span>
         </a>
       </div>
+    </div>
+  );
+}
+
+function FlipCard({ card, visible, index }: { card: Card; visible: boolean; index: number }) {
+  const fadeDelay = index * 90;
+  const [settled, setSettled] = useState(false);
+  const [flipped, setFlipped] = useState(false);
+  const pointerType = useRef("mouse");
+
+  useEffect(() => {
+    if (!visible) return;
+    const t = setTimeout(() => setSettled(true), fadeDelay + 700);
+    return () => clearTimeout(t);
+  }, [visible, fadeDelay]);
+
+  const size = "min-h-[360px] sm:min-h-[420px] lg:min-h-[480px]";
+  const outer: React.CSSProperties = {
+    perspective: 1200,
+    cursor:      "pointer",
+    opacity:     visible ? 1 : 0,
+    transform:   visible ? "translateY(0)" : "translateY(40px)",
+    transition:  settled
+      ? "transform 0.3s cubic-bezier(.23,1,.32,1)"
+      : `opacity 0.65s ease ${fadeDelay}ms, transform 0.65s ease ${fadeDelay}ms`,
+  };
+
+  if (card.staticBlue) {
+    return (
+      <div
+        className={`relative ${size}`}
+        style={{ ...outer, borderRadius: 20, boxShadow: "0 8px 32px rgba(18,54,232,0.18)" }}
+        onMouseEnter={e => { if (settled) (e.currentTarget as HTMLElement).style.transform = "translateY(-8px)"; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = visible ? "translateY(0)" : "translateY(40px)"; }}
+      >
+        <div style={FACE}><CardBack card={card} /></div>
+      </div>
     );
   }
 
   return (
     <div
-      ref={ref}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      className="min-h-[280px] sm:min-h-[400px] lg:min-h-[480px]"
-      style={{
-        ...base,
-        background: "#d8eaf5",
-        boxShadow:  "0 4px 24px rgba(0,0,0,0.07)",
-      }}
+      className={`relative ${size}`}
+      style={{ ...outer, borderRadius: 20 }}
+      onPointerDown={e => { pointerType.current = e.pointerType; }}
+      onMouseEnter={() => { if (pointerType.current === "mouse") setFlipped(true); }}
+      onMouseLeave={() => { if (pointerType.current === "mouse") setFlipped(false); }}
+      onClick={() => { if (pointerType.current !== "mouse") setFlipped(f => !f); }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={card.src}
-        alt={card.alt}
-        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-      />
+      <div
+        className="absolute inset-0"
+        style={{
+          transformStyle: "preserve-3d",
+          transform:      flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+          transition:     "transform 0.4s cubic-bezier(.4,.2,.2,1)",
+        }}
+      >
+        <div style={{ ...FACE, background: "#E2FAFF", boxShadow: "0 4px 24px rgba(0,0,0,0.07)" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={card.src}
+            alt={card.alt}
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
+          <h3
+            className="absolute font-bold leading-snug"
+            style={{
+              top:        "clamp(18px, 1.8vw, 26px)",
+              left:       "clamp(18px, 1.8vw, 26px)",
+              maxWidth:   "70%",
+              color:      "#0d0d0d",
+              fontSize:   "clamp(16px, 1.5vw, 21px)",
+              fontFamily: "var(--font-jakarta, sans-serif)",
+            }}
+          >
+            {card.title}
+          </h3>
+        </div>
+
+        <div style={{ ...FACE, transform: "rotateY(180deg)", boxShadow: "0 30px 70px rgba(18,54,232,0.35)" }}>
+          <CardBack card={card} />
+        </div>
+      </div>
     </div>
   );
 }
@@ -241,7 +284,7 @@ export function ShowcaseSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
           {CARDS.map((card, i) => (
-            <TiltCard key={i} card={card} visible={cardsIn} index={i} />
+            <FlipCard key={i} card={card} visible={cardsIn} index={i} />
           ))}
         </div>
 
