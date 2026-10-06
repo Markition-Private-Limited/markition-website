@@ -3,7 +3,7 @@ import { Phone } from "lucide-react";
 
 export function CtaBandSection() {
   return (
-    <section className="relative overflow-hidden py-8 md:py-20" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
+    <section className="relative overflow-hidden py-8 md:py-12" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative min-h-[360px] overflow-visible rounded-2xl bg-black py-12">
           {/* Grid pattern */}

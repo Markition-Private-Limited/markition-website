@@ -7,7 +7,7 @@ export function AboutSection() {
   ];
 
   return (
-    <section className="w-full overflow-hidden bg-transparent px-4 py-14 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:px-10 lg:py-28 xl:px-12 xl:py-32" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
+    <section className="w-full overflow-hidden bg-transparent px-4 pt-2 pb-10 sm:px-6 sm:pt-3 sm:pb-14 md:px-8 md:pt-4 md:pb-16 lg:px-10 lg:pt-5 lg:pb-20 xl:px-12 xl:pt-6 xl:pb-24" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
       <div className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-2xl border border-[#080b3f]/10 bg-white shadow-xl shadow-[#080b3f]/[0.02] px-5 py-9 sm:rounded-3xl sm:px-8 sm:py-12 md:px-10 md:py-14 lg:px-14 lg:py-16 xl:px-20 xl:py-20">
         <div className="relative z-10">
           <div className="grid grid-cols-1 gap-7 sm:gap-9 md:gap-10 lg:grid-cols-12 lg:items-start lg:gap-12 xl:gap-16">

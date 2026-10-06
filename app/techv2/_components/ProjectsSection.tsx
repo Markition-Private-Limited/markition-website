@@ -42,7 +42,7 @@ const projects = [
 
 export function ProjectsSection() {
   return (
-    <section className="bg-transparent py-20 md:py-28" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
+    <section className="bg-transparent py-12 md:py-16" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-[#062283]">Our Work</p>

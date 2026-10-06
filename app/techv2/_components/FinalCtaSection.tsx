@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 export function FinalCtaSection() {
   return (
-    <section className="py-16 md:py-24 bg-transparent" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
+    <section className="py-10 md:py-14 bg-transparent" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="relative py-12 group rounded-lg bg-black overflow-hidden flex items-center justify-center">
           <div className="relative z-10 mx-auto max-w-2xl px-6 text-center">

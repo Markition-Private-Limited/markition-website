@@ -87,7 +87,7 @@ export function ProcessSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden py-20 md:py-28"
+      className="relative overflow-hidden py-12 md:py-16"
       style={{
         backgroundImage:
           "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)",

@@ -14,7 +14,7 @@ const posts = [
 export function InstagramSection() {
   return (
     <section
-      className="relative overflow-hidden py-20 md:py-24"
+      className="relative overflow-hidden py-12 md:py-14"
       style={{
         backgroundImage:
           "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)",

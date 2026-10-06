@@ -11,6 +11,7 @@ import { WhySection } from "./_components/sections/why/WhySection";
 import { TestimonialsSection } from "./_components/sections/testimonials/TestimonialsSection";
 import { CtaSection } from "./_components/sections/cta/CtaSection";
 import { FaqSection } from "./_components/sections/faq/FaqSection";
+import Contact from "@/app/media/_components/sections/Contact";
 
 export const metadata: Metadata = {
   title: "UI/UX & Branding Design Agency | Markition DesignLab",
@@ -32,6 +33,10 @@ export default function DesignLabPage() {
       <TestimonialsSection />
       <FaqSection />
       <CtaSection />
+
+      <div style={{ background: "#020a1c" }}>
+        <Contact />
+      </div>
     </>
   );
 }

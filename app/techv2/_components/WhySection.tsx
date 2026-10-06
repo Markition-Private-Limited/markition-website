@@ -53,7 +53,7 @@ const cards = [
 
 export function WhySection() {
   return (
-    <section className="overflow-hidden bg-transparent py-20 md:py-28">
+    <section className="overflow-hidden bg-transparent py-12 md:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-14 max-w-3xl">
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-[#062283]">WHY US</p>

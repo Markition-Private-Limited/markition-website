@@ -134,7 +134,7 @@ function InfiniteColumn({
 export function TestimonialsSection() {
   return (
     <section
-      className="relative overflow-hidden bg-[#121212] px-4 py-16 md:py-24"
+      className="relative overflow-hidden bg-[#121212] px-4 py-10 md:py-14"
       style={{
         backgroundImage:
           "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",

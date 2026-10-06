@@ -44,7 +44,7 @@ export function ServicesSection() {
   return (
     <section
       id="services"
-      className="bg-transparent px-4 py-20 md:py-28"
+      className="bg-transparent px-4 py-12 md:py-16"
       style={{
         backgroundImage:
           "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)",

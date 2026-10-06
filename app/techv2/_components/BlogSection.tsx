@@ -61,7 +61,7 @@ export function BlogSection() {
   const [featured, overlayCard, ...smallCards] = posts;
 
   return (
-    <section className="bg-transparent px-4 py-20 sm:px-6 lg:px-8" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
+    <section className="bg-transparent px-4 py-12 sm:px-6 lg:px-8" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
       <div className="mx-auto max-w-6xl">
         <h2 className="mb-10 text-center text-3xl font-black tracking-tight text-[#080b3f] md:text-4xl">
           Our Blog

@@ -98,7 +98,7 @@ export function CaseStudySection() {
       }
     `}</style>
     <section
-      className="bg-transparent py-20 md:py-28 overflow-hidden"
+      className="bg-transparent py-12 md:py-16 overflow-hidden"
       style={{
         backgroundImage:
           "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)",

@@ -38,7 +38,7 @@ const categories = [
 
 export function TechStackSection() {
   return (
-    <section className="overflow-hidden bg-transparent py-20 md:py-28" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
+    <section className="overflow-hidden bg-transparent py-12 md:py-16" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mb-12 text-center mx-auto">
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-[#062283]">Expertise</p>
