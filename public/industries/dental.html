@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dental Growth — Markition</title>
+<meta name="description" content="Markition helps dental practices grow through Google Ads, Meta Ads, SEO, social media, reels and conversion-focused digital marketing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+ --ink:#101820;--navy:#07131f;--blue:#4f86f7;--aqua:#8edbd4;--paper:#f8f8f5;--white:#fff;
+ --muted:#66727d;--line:#dfe3e5;--soft:#eef3f3;--serif:Georgia,"Times New Roman",serif;
+ --display:"LEMON MILK","Manrope",sans-serif;--body:"DM Sans",sans-serif;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55}
+a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.wrap{width:min(1240px,calc(100% - 48px));margin:auto}
+h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:var(--display);letter-spacing:-.055em;line-height:1.03}
+h1{font-size:clamp(48px,7vw,94px);max-width:950px}h2{font-size:clamp(40px,5vw,68px)}h3{font-size:23px}
+.eyebrow{font-size:11px;letter-spacing:.17em;text-transform:uppercase;font-weight:700;color:#73808a}
+.muted{color:var(--muted)}.serif{font-family:var(--serif);font-style:italic;font-weight:400}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:3px;padding:14px 20px;font-weight:700;font-size:13px;transition:.25s}
+.btn.dark{background:var(--ink);color:#fff}.btn.light{background:#fff;color:var(--ink)}.btn.line{border:1px solid #aeb7bd}
+.btn:hover{transform:translateY(-2px)}
+header{height:78px;position:sticky;top:0;z-index:50;background:rgba(248,248,245,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(16,24,32,.08)}
+.nav{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{font-family:var(--display);font-size:23px;font-weight:800;letter-spacing:-.07em}.brand i{color:var(--blue);font-style:normal}
+.navlinks{display:flex;gap:30px;font-size:13px;color:#5c6872}.navlinks a:hover{color:var(--ink)}.navcta{display:flex;align-items:center;gap:10px}.hamb{display:none;background:none;border:0;font-size:25px}
+
+.hero{min-height:calc(100vh - 78px);display:grid;align-items:center;padding:55px 0 70px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:70px;align-items:center}
+.hero-copy .eyebrow{margin-bottom:22px}.hero h1{margin-bottom:25px}.hero h1 span{color:var(--blue)}
+.hero-copy>p{font-size:18px;max-width:650px;color:#56636e}.hero-actions{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
+.hero-note{font-size:11px;color:#7b858c;margin-top:14px}
+.visual{position:relative;height:650px}.photo{position:absolute;inset:0 0 0 70px;background:url("https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=1400&q=88") center/cover}.photo:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(7,19,31,.14))}
+.photo-label{position:absolute;left:0;bottom:35px;background:var(--navy);color:#fff;width:240px;padding:22px;z-index:2}.photo-label strong{font-family:var(--display);font-size:18px;display:block;margin-bottom:5px}.photo-label small{color:#b7c4cf}
+.form{background:#fff;padding:28px;position:absolute;right:-18px;top:38px;width:355px;z-index:3;box-shadow:0 28px 70px rgba(10,25,38,.18);border:1px solid rgba(0,0,0,.05)}
+.form h3{font-size:24px;margin-bottom:7px}.form p{font-size:12px;color:var(--muted);margin-bottom:18px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field{display:flex;flex-direction:column;gap:4px}.field.full{grid-column:1/-1}.field label{font-size:9px;font-weight:800;letter-spacing:.09em;color:#6c7780}.field input,.field select{border:0;border-bottom:1px solid #d4dadd;background:#fff;padding:9px 1px;outline:none;border-radius:0}.field input:focus,.field select:focus{border-color:var(--blue)}.form .btn{width:100%;border:0;margin-top:18px}.form .fine{font-size:10px;text-align:center;color:#8a949b;margin:8px 0 0}
+
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:17px 0;overflow:hidden;white-space:nowrap}.ticker-track{display:flex;gap:42px;justify-content:center;color:#69757e;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}.dot{color:var(--blue)}
+
+.intro{padding:120px 0}.intro-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:70px}.intro h2{max-width:700px}.intro-copy{font-size:18px;max-width:650px;color:#53606a}.under{border-bottom:1px solid var(--ink);padding-bottom:2px}
+
+.services{background:var(--navy);color:#fff;padding:115px 0}.services-head{display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-bottom:65px}.services .muted{color:#aab7c3}.service-list{border-top:1px solid rgba(255,255,255,.16)}.service-row{display:grid;grid-template-columns:70px 1fr 1fr 30px;gap:25px;padding:30px 0;border-bottom:1px solid rgba(255,255,255,.16);align-items:center;transition:.25s}.service-row:hover{padding-left:12px;background:rgba(255,255,255,.025)}.service-num{color:#6f8190;font-size:11px}.service-name{font-family:var(--display);font-size:25px}.service-copy{color:#aab7c3;font-size:14px;max-width:420px}.service-arrow{color:#8edbd4;font-size:20px}
+
+.treat{padding:120px 0}.treat-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}.treat-image{height:620px;background:url("https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=88") center/cover}.treat-copy h2{max-width:600px}.treat-copy>p{font-size:17px;color:var(--muted);max-width:550px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin:25px 0}.chip{border:1px solid #cbd2d6;padding:10px 13px;font-size:12px;background:#fff}.treat-note{border-left:2px solid var(--blue);padding-left:18px;color:#5c6872;font-size:14px}
+
+.proof{background:#eaf1f2;padding:115px 0}.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:65px}.proof h2{max-width:700px}.numbers{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #c7d1d3}.number{padding:28px 10px 28px 0;border-bottom:1px solid #c7d1d3}.number b{font:800 48px var(--display);display:block}.number span{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#6d7880}
+.case{padding:120px 0}.case-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:start}.case-photo{height:570px;background:url("https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1300&q=88") center/cover}.case-copy{padding-top:15px}.case-copy h2{font-size:clamp(40px,4.8vw,62px)}.case-copy p{font-size:16px;color:var(--muted);max-width:500px}.case-lines{border-top:1px solid var(--line);margin-top:30px}.case-line{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid var(--line);font-size:13px}.case-line span:last-child{color:#65717b;text-align:right}
+
+.reviews{background:#fff;padding:115px 0}.review-head{display:flex;justify-content:space-between;align-items:end;gap:30px}.slider{overflow:hidden;margin-top:45px}.track{display:flex;transition:transform .45s ease}.review{min-width:calc(50% - 10px);margin-right:20px;border-top:1px solid var(--ink);padding:25px 0 15px}.stars{font-size:13px;letter-spacing:2px;color:#bc8c28}.review blockquote{font:400 27px/1.25 var(--serif);margin:20px 0 30px;max-width:600px}.review small{color:#7c8790}.controls{display:flex;gap:7px}.control{width:42px;height:42px;border:1px solid #cfd5d8;background:#fff}
+
+.process{padding:115px 0}.process-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}.process-item{padding:27px 25px 27px 0;border-bottom:1px solid var(--line)}.process-item+ .process-item{border-left:1px solid var(--line);padding-left:25px}.process-item b{font-size:11px;color:#72808b}.process-item h3{margin-top:35px}.process-item p{font-size:14px;color:var(--muted)}
+
+.faq{padding:115px 0;background:#f0f3f2}.faq-wrap{max-width:900px}.faq-row{border-top:1px solid #bfc8cb}.faq-btn{width:100%;background:none;border:0;padding:23px 0;display:flex;justify-content:space-between;text-align:left;font-family:var(--display);font-size:18px}.faq-a{display:none;color:#67737b;font-size:14px;padding:0 40px 24px 0}.faq-row.open .faq-a{display:block}.faq-plus{font-size:22px;font-weight:400}
+
+.final{background:var(--navy);color:#fff;padding:115px 0}.final-grid{display:grid;grid-template-columns:1fr 390px;gap:70px;align-items:start}.final h2{max-width:750px}.final .muted{color:#adbbc6}.final-form{background:#fff;color:var(--ink);padding:30px}.final-form h3{font-size:25px}.final-form input,.final-form textarea,.final-form select{width:100%;border:0;border-bottom:1px solid #d5dadd;padding:12px 0;margin-bottom:13px;outline:0;background:#fff}.final-form textarea{min-height:70px}.final-form button{width:100%;border:0}.success{display:none;background:#edf8f6;padding:15px;font-size:13px;color:#286d67}
+
+footer{padding:40px 0;background:#04101a;color:#8999a7}.foot{display:flex;justify-content:space-between;gap:25px;align-items:center}.foot .brand{color:#fff}.foot p{font-size:12px;margin:0}.foot-links{display:flex;gap:20px;font-size:12px}
+
+.mobile{display:none}.reveal{opacity:0;transform:translateY(25px);transition:.7s ease}.reveal.show{opacity:1;transform:none}
+@media(max-width:1050px){.hero-grid,.treat-grid,.proof-grid,.case-grid,.final-grid{grid-template-columns:1fr}.visual{height:700px}.photo{left:0}.form{right:25px}.services-head{grid-template-columns:1fr}.service-row{grid-template-columns:50px 1fr 1fr 25px}.process-grid{grid-template-columns:1fr 1fr}.process-item:nth-child(3){border-left:0;padding-left:0}.process-item:nth-child(3),.process-item:nth-child(4){border-top:1px solid var(--line)}.navlinks{display:none}.navcta .line{display:none}.hamb{display:block}}
+@media(max-width:650px){.wrap{width:calc(100% - 30px)}header{height:68px}.navcta{display:none}.hero{padding:45px 0}.hero-grid{gap:35px}.hero h1{font-size:48px}.hero-copy>p{font-size:16px}.visual{height:590px}.photo{inset:0;height:440px}.form{top:270px;right:0;width:100%;padding:23px}.photo-label{bottom:175px;left:15px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.intro,.treat,.proof,.case,.reviews,.process,.faq,.final{padding:80px 0}.intro-grid,.proof-grid{gap:30px}.services-head{margin-bottom:40px}.service-row{grid-template-columns:35px 1fr 22px}.service-copy{grid-column:2/-1}.service-name{font-size:21px}.treat-image{height:390px}.numbers{margin-top:30px}.number b{font-size:38px}.case-photo{height:390px}.review{min-width:100%}.review blockquote{font-size:23px}.review-head{display:block}.controls{margin-top:20px}.process-grid{grid-template-columns:1fr}.process-item+ .process-item{border-left:0;padding-left:0;border-top:1px solid var(--line)}.process-item h3{margin-top:20px}.final-grid{gap:40px}.final-form{padding:22px}.foot{display:block}.foot-links{margin-top:15px}.mobile{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:60;background:rgba(255,255,255,.96);padding:8px;gap:8px;border-top:1px solid #d8dee1}.mobile a{flex:1;text-align:center;padding:12px;background:var(--ink);color:#fff;font-size:12px;font-weight:800}.mobile a:last-child{background:#fff;color:var(--ink);border:1px solid #cdd5d8}}
+</style>
+<style>
+/* Typography normalization: standard, professional heading/body scale */
+:root{
+  --h1: clamp(42px, 5vw, 64px);
+  --h2: clamp(32px, 3.6vw, 46px);
+  --h3: clamp(22px, 2vw, 28px);
+  --body: 16px;
+  --small: 14px;
+}
+h1,.hero h1,.display,.hero-title{font-size:var(--h1)!important;line-height:1.08!important;letter-spacing:-.035em!important}
+h2,.section-title{font-size:var(--h2)!important;line-height:1.12!important;letter-spacing:-.025em!important}
+h3,.service-title,.treatment-title{font-size:var(--h3)!important;line-height:1.2!important}
+body,p,.body-copy,.service-copy,.faq-answer{font-size:var(--body)!important;line-height:1.65!important}
+.eyebrow,.label,.kicker,.section-kicker{font-size:12px!important;line-height:1.4!important;letter-spacing:.12em!important}
+nav,.nav,.header,.btn,.button,input,select,textarea{font-size:14px!important}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a href="#" class="brand">MARKI<i>TION</i></a>
+<nav class="navlinks"><a href="#services">Services</a><a href="#work">Our Approach</a><a href="#proof">Results</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a></nav>
+<div class="navcta"><a class="btn line" href="tel:+923342722337">Call Us</a><a class="btn dark" href="#audit">Free Audit</a></div>
+<button class="hamb">☰</button>
+</div></header>
+
+<main>
+<section class="hero"><div class="wrap hero-grid">
+<div class="hero-copy reveal">
+<div class="eyebrow">Dental Growth · Performance Marketing</div>
+<h1>More visibility.<br><span>More enquiries.</span><br>More patients.</h1>
+<p>We help dental practices turn Google searches and social attention into qualified patient enquiries through performance marketing built around what you actually want to grow.</p>
+<div class="hero-actions"><a class="btn dark" href="#audit">Book a Free Dental Audit →</a><a class="btn line" href="tel:+923342722337">Talk to Markition</a></div>
+<div class="hero-note">No obligation · Confidential review · Built around your practice</div>
+</div>
+<div class="visual reveal">
+<div class="photo"></div>
+<div class="photo-label"><strong>Built for Dental Practices.</strong><small>Google · Meta · SEO · Social · Creative</small></div>
+<div class="form" id="audit">
+<div class="eyebrow">Start Here</div><h3>Let's look at your growth.</h3><p>A focused review of your current marketing, visibility and patient acquisition opportunities.</p>
+<form class="lead-form">
+<div class="fields">
+<div class="field"><label>NAME</label><input required placeholder="Your name"></div>
+<div class="field"><label>PRACTICE</label><input required placeholder="Practice name"></div>
+<div class="field"><label>EMAIL</label><input required type="email" placeholder="you@practice.com"></div>
+<div class="field"><label>PHONE</label><input required type="tel" placeholder="+1 ..."></div>
+<div class="field full"><label>WHAT DO YOU WANT TO GROW?</label><select><option>New patient enquiries</option><option>Dental implants</option><option>Cosmetic dentistry</option><option>Invisalign / orthodontics</option><option>General dentistry</option></select></div>
+</div>
+<button class="btn dark" type="submit">REQUEST MY FREE AUDIT</button><p class="fine">We keep your information private. No spam.</p>
+</form></div>
+</div>
+</div></section>
+
+<div class="ticker"><div class="ticker-track"><span>GOOGLE ADS</span><span class="dot">●</span><span>META ADS</span><span class="dot">●</span><span>SEO</span><span class="dot">●</span><span>SOCIAL MEDIA</span><span class="dot">●</span><span>REELS & EDITING</span><span class="dot">●</span><span>LEAD GENERATION</span></div></div>
+
+<section class="intro" id="work"><div class="wrap intro-grid">
+<div class="eyebrow">The Markition Approach</div>
+<div><h2>Your marketing should feel less like advertising — and more like a <span class="serif">system.</span></h2><p class="intro-copy">We connect the pieces that influence growth: the search someone makes, the ad they see, the content that earns trust, the page they land on, and the action they take.</p><p class="intro-copy">Every channel has a job. <span class="under">Together, they create momentum.</span></p></div>
+</div></section>
+
+<section class="services" id="services"><div class="wrap">
+<div class="services-head"><div><div class="eyebrow" style="color:#8aa0b1">What We Do</div><h2>Six focused services.<br>One growth direction.</h2></div><p class="muted">No unnecessary layers. We focus on the channels that can create visibility, attention, enquiries and long-term demand for your practice.</p></div>
+<div class="service-list">
+<div class="service-row"><div class="service-num">01</div><div class="service-name">Google Ads</div><div class="service-copy"><b>Capture intent.</b> Put your practice in front of people actively searching for the treatment you provide, when they are ready to take action.</div><div class="service-arrow">↗</div></div>
+<div class="service-row"><div class="service-num">02</div><div class="service-name">Meta Ads</div><div class="service-copy"><b>Create demand.</b> Reach the right local audience with targeted campaigns that introduce treatments, offers and reasons to choose your practice.</div><div class="service-arrow">↗</div></div>
+<div class="service-row"><div class="service-num">03</div><div class="service-name">SEO</div><div class="service-copy"><b>Build discoverability.</b> Improve your organic presence so valuable treatment and local searches can keep finding your practice beyond paid campaigns.</div><div class="service-arrow">↗</div></div>
+<div class="service-row"><div class="service-num">04</div><div class="service-name">Social Media Page Management</div><div class="service-copy"><b>Build trust.</b> Keep your practice visible, credible and consistent with content that makes prospective patients more comfortable choosing you.</div><div class="service-arrow">↗</div></div>
+<div class="service-row"><div class="service-num">05</div><div class="service-name">Reels</div><div class="service-copy"><b>Earn attention.</b> Turn expertise, treatments, doctor personality and patient education into short-form content people actually stop to watch.</div><div class="service-arrow">↗</div></div>
+<div class="service-row"><div class="service-num">06</div><div class="service-name">Editing</div><div class="service-copy"><b>Make every asset stronger.</b> Clean, premium editing gives your videos and creative the quality needed to represent a serious dental brand.</div><div class="service-arrow">↗</div></div>
+</div></div></section>
+
+<section class="treat"><div class="wrap treat-grid">
+<div class="treat-image reveal"></div>
+<div class="treat-copy reveal"><div class="eyebrow">Treatment-Led Marketing</div><h2>Not every patient is looking for the same thing.</h2><p>Your marketing should reflect the treatment your practice wants to grow — from high-value implants to cosmetic dentistry and everyday new-patient searches.</p>
+<div class="chips"><span class="chip">Dental Implants</span><span class="chip">All-on-4</span><span class="chip">Cosmetic Dentistry</span><span class="chip">Veneers</span><span class="chip">Invisalign</span><span class="chip">Emergency Dentistry</span><span class="chip">General Dentistry</span></div>
+<p class="treat-note">We can build campaigns and landing experiences around treatment intent, location and the action you want the patient to take.</p><a class="btn dark" href="#audit">Discuss Your Practice →</a></div>
+</div></section>
+
+<section class="proof" id="proof"><div class="wrap proof-grid">
+<div><div class="eyebrow">Performance</div><h2>We care about what happens after the click.</h2><p class="muted" style="font-size:17px;max-width:540px">Clicks are a starting point. The real question is whether the right people enquire, call and move toward an appointment.</p><a class="btn dark" href="#audit">Get My Growth Review →</a></div>
+<div class="numbers">
+<div class="number"><b>XX+</b><span>Qualified Leads</span></div><div class="number"><b>XX+</b><span>Patient Enquiries</span></div><div class="number"><b>XX%</b><span>Conversion Rate</span></div><div class="number"><b>$XX</b><span>Cost / Qualified Lead</span></div>
+<p class="muted" style="grid-column:1/-1;font-size:11px;margin:15px 0 0">Replace these design placeholders with verified Markition results before publishing.</p>
+</div></div></section>
+
+<section class="case" id="case"><div class="wrap case-grid">
+<div class="case-photo reveal"></div>
+<div class="case-copy reveal"><div class="eyebrow">How We Think About Campaigns</div><h2>One message.<br>One intent.<br>One next step.</h2><p>When someone searches for a specific treatment, the journey should feel relevant from the first impression to the enquiry.</p>
+<div class="case-lines"><div class="case-line"><span>Search</span><span>High-intent treatment query</span></div><div class="case-line"><span>Campaign</span><span>Relevant message + audience</span></div><div class="case-line"><span>Experience</span><span>Focused landing page</span></div><div class="case-line"><span>Conversion</span><span>Call / form / consultation</span></div></div>
+<div style="margin-top:28px"><a class="btn dark" href="#audit">Build My Acquisition Plan →</a></div></div>
+</div></section>
+
+<section class="reviews" id="reviews"><div class="wrap">
+<div class="review-head"><div><div class="eyebrow">Client Reviews</div><h2>Good marketing should be felt in the practice.</h2></div><div class="controls"><button class="control" id="prev">←</button><button class="control" id="next">→</button></div></div>
+<div class="slider"><div class="track" id="track">
+<article class="review"><div class="stars">★★★★★</div><blockquote>“Replace this with a real verified review from a dental client describing their experience with Markition.”</blockquote><small>Verified Client · Dental Practice</small></article>
+<article class="review"><div class="stars">★★★★★</div><blockquote>“Use a real client quote here focused on lead quality, communication or measurable growth.”</blockquote><small>Verified Client · Dental Practice</small></article>
+<article class="review"><div class="stars">★★★★★</div><blockquote>“Use a verified review that explains why the practice chose Markition and what improved.”</blockquote><small>Verified Client · Dental Practice</small></article>
+<article class="review"><div class="stars">★★★★★</div><blockquote>“Add another genuine client experience here. Keep the language natural and specific.”</blockquote><small>Verified Client · Dental Practice</small></article>
+</div></div>
+</div></section>
+
+<section class="process"><div class="wrap"><div class="eyebrow">Simple Process</div><h2 style="max-width:760px;margin:18px 0 55px">A clear process keeps the marketing focused.</h2>
+<div class="process-grid">
+<div class="process-item"><b>01 / AUDIT</b><h3>Understand</h3><p>We look at your current visibility, campaigns, website and opportunities.</p></div>
+<div class="process-item"><b>02 / STRATEGY</b><h3>Prioritize</h3><p>We identify the treatments, audiences and channels worth pursuing.</p></div>
+<div class="process-item"><b>03 / LAUNCH</b><h3>Execute</h3><p>Campaigns, creative, content and conversion experiences go live.</p></div>
+<div class="process-item"><b>04 / OPTIMIZE</b><h3>Improve</h3><p>We use performance data to refine what brings the right enquiries.</p></div>
+</div></div></section>
+
+<section class="faq" id="faq"><div class="wrap faq-wrap"><div class="eyebrow">FAQ</div><h2 style="margin:18px 0 45px">Before we talk.</h2>
+<div class="faq-row"><button class="faq-btn">Do you work specifically with dental practices?<span class="faq-plus">+</span></button><div class="faq-a">This page and service structure are specifically designed around dental practice marketing, including treatment-led acquisition and patient enquiry generation.</div></div>
+<div class="faq-row"><button class="faq-btn">Which channels do you manage?<span class="faq-plus">+</span></button><div class="faq-a">Google Ads, Meta Ads, SEO, Social Media Page Management, Reels and Editing are the core services presented on this landing page.</div></div>
+<div class="faq-row"><button class="faq-btn">Can you focus on a specific treatment?<span class="faq-plus">+</span></button><div class="faq-a">Yes. Campaigns can be structured around treatments such as implants, cosmetic dentistry, veneers, Invisalign and other services your practice wants to grow.</div></div>
+<div class="faq-row"><button class="faq-btn">Can you also improve our social media?<span class="faq-plus">+</span></button><div class="faq-a">Yes. Social Media Page Management, Reels and Editing are included so your organic presence can support trust and visibility alongside paid acquisition.</div></div>
+<div class="faq-row"><button class="faq-btn">How do I start?<span class="faq-plus">+</span></button><div class="faq-a">Request the free dental marketing audit. We can then review your current position and discuss the opportunities that make sense for your practice.</div></div>
+</div></section>
+
+<section class="final"><div class="wrap final-grid">
+<div><div class="eyebrow" style="color:#88a2b7">Your Next Step</div><h2 style="margin-top:18px">Let's find where your next patients are coming from.</h2><p class="muted" style="font-size:18px;max-width:650px">Get a focused review of your current marketing and discover what could be improved across Google, Meta, SEO and social.</p><div style="margin-top:30px"><a class="btn light" href="#audit">Book My Free Dental Audit →</a></div></div>
+<div class="final-form"><div class="eyebrow">Free Audit</div><h3>Tell us about your practice.</h3><form class="lead-form"><input required placeholder="Your name"><input required placeholder="Practice name"><input required type="email" placeholder="Email address"><input required placeholder="Phone number"><textarea placeholder="What would you like to improve?"></textarea><button class="btn dark" type="submit">REQUEST MY AUDIT</button><div class="success">Thank you — your request has been received.</div></form></div>
+</div></section>
+</main>
+
+<footer><div class="wrap foot"><div><a class="brand" href="#">MARKI<i>TION</i></a><p>Dental growth through performance marketing.</p></div><div class="foot-links"><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="#audit">Contact</a></div></div></footer>
+<div class="mobile"><a href="#audit">FREE DENTAL AUDIT</a><a href="tel:+923342722337">CALL NOW</a></div>
+
+<script>
+const reveal=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(x=>reveal.observe(x));
+
+document.querySelectorAll('.faq-btn').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
+
+const track=document.getElementById('track');let idx=0;
+function slide(dir){
+ const cards=[...track.children], mobile=innerWidth<651, visible=mobile?1:2;
+ const max=Math.max(0,cards.length-visible);idx=Math.max(0,Math.min(max,idx+dir));
+ track.style.transform=`translateX(-${idx*(cards[0].getBoundingClientRect().width+20)}px)`;
+}
+document.getElementById('prev').onclick=()=>slide(-1);document.getElementById('next').onclick=()=>slide(1);
+window.addEventListener('resize',()=>slide(0));
+
+document.querySelectorAll('.lead-form').forEach(form=>form.addEventListener('submit',e=>{
+ e.preventDefault();
+ if(!form.checkValidity()){form.reportValidity();return}
+ const success=form.querySelector('.success');if(success)success.style.display='block';
+ form.reset();
+}));
+</script>
+</body>
+</html>
