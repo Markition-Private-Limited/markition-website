@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { NAV_LINKS } from "@/lib/constants";
 import { ChevronDown, HamburgerIcon } from "@/lib/icons";
@@ -335,6 +336,15 @@ export default function Navbar() {
               >
                 {link.label}
               </a>
+            );
+            if (link.label === "About") return (
+              <Link
+                key={link.label}
+                href="/about"
+                className="hover:text-white/95 transition-colors duration-150 flex items-center gap-1 whitespace-nowrap px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05]"
+              >
+                {link.label}
+              </Link>
             );
             return (
               <a
@@ -795,6 +805,19 @@ export default function Navbar() {
                   <path d="M4 7h6M7 4l3 3-3 3" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
+            );
+            if (link.label === "About") return (
+              <Link
+                key={link.label}
+                href="/about"
+                onClick={() => setMobileOpen(false)}
+                className={`flex items-center justify-between px-5 py-3.5 text-[13.5px] text-white/75 hover:text-white hover:bg-white/[0.05] transition-colors duration-150 ${borderClass}`}
+              >
+                <span>{link.label}</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="opacity-30">
+                  <path d="M4 7h6M7 4l3 3-3 3" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
             );
             return (
               <a
