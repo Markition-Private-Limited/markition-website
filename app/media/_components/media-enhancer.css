@@ -1,0 +1,96 @@
+/* Styles for MediaEnhancer — everything here is new, namespaced mx-*, and sits
+   in its own fixed layer; nothing targets or overrides the existing sections
+   except the two transition lines for the magnetic buttons at the bottom. */
+
+/* ── Scroll progress ── */
+.mx-progress { position: fixed; left: 0; right: 0; top: 0; height: 3px; z-index: 100; pointer-events: none; }
+.mx-progress-bar {
+  height: 100%; width: 100%; transform-origin: 0 50%; transform: scaleX(0); will-change: transform;
+  background: linear-gradient(90deg, #1964d1, #00d4ff, #8ea0ff);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.55);
+}
+
+/* ── Cursor glow ── */
+.mx-glow {
+  position: fixed; left: 0; top: 0; width: 520px; height: 520px; z-index: 1; pointer-events: none;
+  border-radius: 50%; opacity: 0; transition: opacity 0.5s; will-change: transform;
+  background: radial-gradient(circle, rgba(60, 130, 255, 0.13) 0%, rgba(60, 130, 255, 0.05) 38%, transparent 68%);
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) { .mx-glow { display: none; } }
+
+/* ── Section rail ── */
+.mx-rail {
+  position: fixed; right: 14px; top: 50%; z-index: 35; display: flex; flex-direction: column; gap: 2px;
+  padding: 10px 6px; border-radius: 999px; transform: translate(14px, -50%); opacity: 0; pointer-events: none;
+  background: rgba(8, 16, 52, 0.62); border: 1px solid rgba(120, 160, 255, 0.18);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: 0 14px 40px -14px rgba(0, 0, 0, 0.55);
+  transition: opacity 0.4s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mx-rail.is-on { opacity: 1; transform: translate(0, -50%); pointer-events: auto; }
+.mx-rail-item { position: relative; display: flex; align-items: center; justify-content: flex-end; width: 22px; height: 22px; padding: 0; border: 0; background: none; cursor: pointer; color: #fff; }
+.mx-rail-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255, 255, 255, 0.38); transition: background 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s; margin: 0 auto; }
+.mx-rail-item:hover .mx-rail-dot { background: #fff; transform: scale(1.35); }
+.mx-rail-item.is-active .mx-rail-dot { background: #00d4ff; transform: scale(1.55); box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2), 0 0 12px rgba(0, 212, 255, 0.8); }
+.mx-rail-label {
+  position: absolute; right: 30px; top: 50%; transform: translate(8px, -50%); white-space: nowrap; pointer-events: none;
+  padding: 6px 11px; border-radius: 999px; font: 600 11px/1 var(--font-inter, Inter, sans-serif); letter-spacing: 0.06em; text-transform: uppercase;
+  background: rgba(8, 16, 52, 0.92); border: 1px solid rgba(120, 160, 255, 0.22); opacity: 0;
+  transition: opacity 0.25s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mx-rail-item:hover .mx-rail-label, .mx-rail-item:focus-visible .mx-rail-label { opacity: 1; transform: translate(0, -50%); }
+.mx-rail-item:focus-visible { outline: 2px solid #00d4ff; outline-offset: 2px; border-radius: 50%; }
+@media (max-width: 1023px) { .mx-rail { display: none; } }
+
+/* ── First-load scroll hint ── */
+.mx-hint {
+  position: fixed; left: 50%; bottom: 22px; z-index: 35; display: flex; align-items: center; gap: 10px; padding: 9px 16px 9px 12px;
+  border-radius: 999px; transform: translate(-50%, 12px); opacity: 0; pointer-events: none;
+  font: 600 11px/1 var(--font-inter, Inter, sans-serif); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.82);
+  background: rgba(8, 16, 52, 0.55); border: 1px solid rgba(120, 160, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  transition: opacity 0.5s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mx-hint.is-on { opacity: 1; transform: translate(-50%, 0); transition-delay: 1.6s; }
+.mx-hint-mouse { position: relative; width: 16px; height: 25px; border: 1.5px solid rgba(255, 255, 255, 0.7); border-radius: 9px; }
+.mx-hint-mouse i { position: absolute; left: 50%; top: 5px; width: 2.5px; height: 5px; margin-left: -1.25px; border-radius: 2px; background: #00d4ff; animation: mx-wheel 1.6s ease-in-out infinite; }
+@keyframes mx-wheel { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(9px); } }
+
+/* ── Floating CTA + back to top ── */
+.mx-dock { position: fixed; right: clamp(14px, 2.4vw, 30px); bottom: clamp(14px, 2.4vw, 26px); z-index: 35; display: flex; align-items: center; gap: 10px; pointer-events: none; }
+.mx-cta {
+  display: inline-flex; align-items: center; gap: 10px; padding: 13px 19px 13px 16px; border-radius: 999px; text-decoration: none; color: #fff;
+  font: 700 12px/1 var(--font-inter, Inter, sans-serif); letter-spacing: 0.1em; text-transform: uppercase;
+  background: linear-gradient(135deg, #0a1152, #1964d1);
+  box-shadow: 0 16px 36px -12px rgba(25, 100, 209, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  opacity: 0; transform: translateY(18px) scale(0.96); pointer-events: none;
+  transition: opacity 0.4s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s, translate 0.25s ease-out;
+}
+.mx-cta.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.mx-cta:hover { box-shadow: 0 20px 44px -12px rgba(25, 100, 209, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.22); }
+.mx-cta b { font-weight: 700; transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+.mx-cta:hover b { transform: translate(3px, -3px); }
+.mx-cta-dot { width: 8px; height: 8px; border-radius: 50%; background: #5cf2a4; animation: mx-dot 2s infinite; }
+@keyframes mx-dot { 0% { box-shadow: 0 0 0 0 rgba(92, 242, 164, 0.6); } 70%, 100% { box-shadow: 0 0 0 9px rgba(92, 242, 164, 0); } }
+.mx-top {
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border-radius: 50%; cursor: pointer; color: #fff;
+  background: rgba(8, 16, 52, 0.72); border: 1px solid rgba(120, 160, 255, 0.3);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.6);
+  opacity: 0; transform: translateY(18px) scale(0.9); pointer-events: none;
+  transition: opacity 0.4s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s, border-color 0.3s;
+}
+.mx-top.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.mx-top:hover { background: #1964d1; border-color: #1964d1; transform: translateY(-3px); }
+.mx-top svg { transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+.mx-top:hover svg { transform: translateY(-2px); }
+.mx-cta:focus-visible, .mx-top:focus-visible { outline: 2px solid #00d4ff; outline-offset: 3px; }
+@media (max-width: 600px) { .mx-cta { padding: 12px 15px 12px 13px; font-size: 11px; } .mx-hint { bottom: 76px; } }
+
+/* ── Magnetic buttons: let the individual `translate` property ease (leaves `transform` and GSAP alone) ── */
+[data-hero] a[href="#contact"] { transition: opacity 0.2s, translate 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .mx-hint-mouse i, .mx-cta-dot { animation: none; }
+  .mx-rail, .mx-hint, .mx-cta, .mx-top { transition: opacity 0.2s; }
+}

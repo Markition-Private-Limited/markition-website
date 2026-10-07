@@ -213,7 +213,7 @@ export default function Testimonials() {
   return (
     <section
       className="media-testimonials-section"
-      style={{ position:"relative", overflow:"hidden", padding:"80px 0 80px", minHeight: CARD_H + 160 }}
+      style={{ position:"relative", overflow:"hidden", padding:"80px 0 80px", minHeight: CARD_H + 160, background:"#e6ecf8" }}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
@@ -323,8 +323,8 @@ export default function Testimonials() {
             [side]: 20,
             transform: "translateY(-50%)",
             width: 48, height: 48, borderRadius: "50%",
-            border: "1.5px solid rgba(255,255,255,0.55)",
-            background: "transparent", color: "#ffffff",
+            border: "1.5px solid rgba(8,12,66,0.4)",
+            background: "transparent", color: "#080c42",
             fontSize: 24, cursor: "pointer",
             display: "flex", alignItems: "center", justifyContent: "center",
             zIndex: 10,

@@ -106,6 +106,7 @@ export default function Portfolio() {
   if (isMobile) {
     return (
       <section
+        id="media-portfolio"
         style={{
           position: "relative",
           width: "100%",
@@ -216,6 +217,7 @@ export default function Portfolio() {
 
   return (
     <section
+      id="media-portfolio"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}

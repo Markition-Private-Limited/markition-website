@@ -15,7 +15,7 @@ const STATS = [
 
 export default function Stats() {
   return (
-    <section className="media-stats-section" style={{ padding: "0 clamp(24px, 5vw, 80px)" }}>
+    <section id="media-stats" className="media-stats-section" style={{ padding: "0 clamp(24px, 5vw, 80px)" }}>
       <style>{`
         @media (min-width: 768px) {
           .media-stats-section {

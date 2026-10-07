@@ -115,7 +115,7 @@ export default function Industries() {
           .media-industries-col {
             flex: 0 0 100% !important;
             border-left: none !important;
-            border-top: 1px solid rgba(255,255,255,0.15) !important;
+            border-top: 1px solid rgba(8,12,66,0.12) !important;
           }
           .media-industries-col:first-child {
             border-top: none !important;
@@ -134,7 +134,7 @@ export default function Industries() {
             border-left: none !important;
           }
           .media-industries-col:nth-child(even) {
-            border-left: 1px solid rgba(255,255,255,0.15) !important;
+            border-left: 1px solid rgba(8,12,66,0.12) !important;
           }
         }
       `}</style>
@@ -150,7 +150,7 @@ export default function Industries() {
           letterSpacing: "-3px",
           textAlign: "center",
           textTransform: "capitalize",
-          color: "#ffffff",
+          color: "#080c42",
           margin: "0 0 clamp(40px,5vw,64px)",
         }}
       >
@@ -165,7 +165,7 @@ export default function Industries() {
             className="media-industries-col"
             style={{
               flex: 1,
-              borderLeft: i === 0 ? "none" : "1px solid rgba(255,255,255,0.15)",
+              borderLeft: i === 0 ? "none" : "1px solid rgba(8,12,66,0.12)",
               padding: "clamp(24px,3vw,40px) clamp(20px,2.5vw,36px) clamp(28px,4vw,48px)",
               display: "flex",
               flexDirection: "column",
@@ -177,7 +177,7 @@ export default function Industries() {
                 fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                 fontWeight: 700,
                 fontSize: "clamp(15px,1.4vw,18px)",
-                color: "#ffffff",
+                color: "#080c42",
                 margin: 0,
               }}
             >
@@ -188,7 +188,7 @@ export default function Industries() {
                 fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
                 fontSize: "clamp(13px,1.1vw,15px)",
                 fontWeight: 400,
-                color: "rgba(255,255,255,0.55)",
+                color: "rgba(8,12,66,0.62)",
                 lineHeight: 1.65,
                 margin: 0,
                 flex: 1,
@@ -204,7 +204,7 @@ export default function Industries() {
       </div>
 
       {/* Bottom rule */}
-      <div style={{ height: 1, background: "rgba(255,255,255,0.15)" }} />
+      <div style={{ height: 1, background: "rgba(8,12,66,0.12)" }} />
     </section>
   );
 }
