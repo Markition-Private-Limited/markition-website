@@ -46,12 +46,12 @@ const SERVICES_MENU = {
     "Digital Marketing": {
       title: "Digital Marketing Services",
       items: [
-        { icon: "bolt",     name: "Google Ads",                    description: "High-ROI PPC campaigns managed by certified specialists." },
+        { icon: "bolt",     name: "Google Ads",                    description: "High-ROI PPC campaigns managed by certified specialists.", href: "/media/google-ads" },
         { icon: "chart",    name: "Social Media Marketing",        description: "Strategic social campaigns that drive engagement & growth." },
-        { icon: "seo",      name: "On-Page SEO",                   description: "Technical & content optimisations to rank higher on Google." },
-        { icon: "link",     name: "Off-Page SEO",                  description: "Authority-building link strategies that lift domain rating." },
-        { icon: "pen",      name: "Brand Identity & Design",       description: "Logos, colour systems & brand guidelines that stand out." },
-        { icon: "megaphone",name: "Social Media Page Management",  description: "Consistent posting, community management & analytics." },
+        { icon: "seo",      name: "On-Page SEO",                   description: "Technical & content optimisations to rank higher on Google.", href: "/media/seo" },
+        { icon: "link",     name: "Off-Page SEO",                  description: "Authority-building link strategies that lift domain rating.", href: "/media/seo" },
+        { icon: "chart",    name: "Meta Ads",                      description: "Targeted Facebook & Instagram campaigns that reach the right audience.", href: "/media/meta-ads" },
+        { icon: "megaphone",name: "Social Media Page Management",  description: "Consistent posting, community management & analytics.", href: "/media/social-media-page-management" },
       ],
     },
     "Enterprise Solution": {
@@ -686,7 +686,7 @@ export default function Navbar() {
             if (link.label === "Services") {
               const ALL_SERVICE_CARDS = [
                 { icon: "code",      label: "Tech Solution",       desc: "Web, mobile & SaaS platforms built to scale",  href: "/tech" },
-                { icon: "bolt",      label: "Digital Marketing",   desc: "Google Ads, SEO & social campaigns",            href: "#" },
+                { icon: "bolt",      label: "Digital Marketing",   desc: "Google Ads, SEO & social campaigns",            href: "/media" },
                 { icon: "building",  label: "Enterprise Solution",  desc: "ERP, CRM & operational systems",               href: "/tech#solutions" },
                 { icon: "robot",     label: "AI Solutions",        desc: "Agents, chatbots & workflow automation",        href: "#" },
                 { icon: "chart",     label: "Industry Solutions",  desc: "Fintech, healthcare, retail & more",            href: "#" },
