@@ -67,10 +67,13 @@ export default function AnimationOrchestrator() {
 
         section.querySelectorAll<HTMLElement>("h2, h3").forEach((h) => preHide(h, 48));
         if (!isWork) {
+          const isServices = section.id === "media-services";
           section.querySelectorAll<HTMLElement>(
             "p:not([class*='review']):not([class*='quote'])"
           ).forEach((p) => preHide(p, 28));
-          section.querySelectorAll<HTMLElement>("[data-stagger]").forEach((c) => preHide(c, 44, 0.93));
+          section.querySelectorAll<HTMLElement>("[data-stagger]").forEach((c) =>
+            isServices ? gsap.set(c, { opacity: 0 }) : preHide(c, 44, 0.93)
+          );
           section.querySelectorAll<HTMLElement>("article:not([class*='review'])").forEach((a) => preHide(a, 40, 0.94));
           section.querySelectorAll<HTMLElement>("img").forEach((img) => preHide(img, 24, 0.95));
         }
@@ -94,11 +97,15 @@ export default function AnimationOrchestrator() {
 
               const cards = section.querySelectorAll<HTMLElement>("[data-stagger]");
               if (cards.length) {
+                const isServices = section.id === "media-services";
                 gsap.to(Array.from(cards), {
-                  opacity: 1, y: 0, scale: 1,
-                  duration: 0.82, ease: "back.out(1.6)",
+                  opacity: 1,
+                  ...(isServices ? {} : { y: 0, scale: 1 }),
+                  duration: isServices ? 0.6 : 0.82,
+                  ease: isServices ? "power2.out" : "back.out(1.6)",
                   stagger: { amount: 0.48, from: "start" },
-                  delay: 0.08, clearProps: "transform",
+                  delay: 0.08,
+                  clearProps: isServices ? "opacity" : "transform",
                 });
               }
 

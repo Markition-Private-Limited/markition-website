@@ -38,7 +38,6 @@ const finePointer = () => window.matchMedia("(hover: hover) and (pointer: fine)"
 export default function MediaEnhancer() {
   const [active, setActive] = useState(0);
   const [railOn, setRailOn] = useState(false);
-  const [ctaOn, setCtaOn] = useState(false);
   const [topOn, setTopOn] = useState(false);
   const [hintOn, setHintOn] = useState(true);
   const barRef = useRef<HTMLDivElement>(null);
@@ -77,7 +76,6 @@ export default function MediaEnhancer() {
       const inContact = !!contact && contact.getBoundingClientRect().top < vh * 0.7;
       setRailOn(y > vh * 0.45);
       setTopOn(y > vh * 1.2);
-      setCtaOn(y > vh * 1.2 && !inContact);
       setHintOn(y < 60);
     };
     const onScroll = () => {
@@ -222,15 +220,6 @@ export default function MediaEnhancer() {
       </div>
 
       <div className="mx-dock">
-        <a
-          href="#contact"
-          className={`mx-cta mx-magnet ${ctaOn ? "is-on" : ""}`}
-          onClick={(e) => { e.preventDefault(); jump(SPY.length - 1); }}
-          tabIndex={ctaOn ? 0 : -1}
-        >
-          <span className="mx-cta-dot" />
-          Start a project <b>↗</b>
-        </a>
         <button
           type="button"
           className={`mx-top ${topOn ? "is-on" : ""}`}

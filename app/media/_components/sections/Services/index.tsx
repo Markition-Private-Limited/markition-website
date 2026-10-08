@@ -4,26 +4,37 @@ const CARDS = [
   {
     title: "SEO",
     sub: "Search visibility",
-    desc: "Technical, on-page and content optimisation that helps the right customers find you on search, and keeps you ahead as algorithms change.",
+    desc: "We optimise your site technically and on-page so the right customers find you first — and you stay ahead as Google's algorithms evolve.",
+    img: "/services/seo.webp",
   },
   {
-    title: "Paid Media",
+    title: "Google Ads",
     sub: "Performance campaigns",
-    desc: "Data-driven campaigns across search and social, built around measurable outcomes and continuously optimised for return on spend.",
+    desc: "Search and display campaigns built to capture high-intent buyers, drive qualified traffic, and deliver measurable return on every pound spent.",
+    img: "/services/google-ads.webp",
   },
   {
-    title: "Social",
-    sub: "Audience engagement",
-    desc: "Platform-native content and community management that builds an engaged audience and turns attention into conversations.",
+    title: "Meta Ads",
+    sub: "Social advertising",
+    desc: "Facebook and Instagram campaigns that reach your ideal audience, create demand, and retarget warm leads until they convert.",
+    img: "/services/meta-ads.webp",
   },
   {
-    title: "Content",
-    sub: "Meaningful communication",
-    desc: "Clear, compelling storytelling across web, video and campaigns that speaks to your customers and moves them to act.",
+    title: "Social Media",
+    sub: "page management",
+    desc: "We handle your social pages end-to-end — content calendars, posting, community engagement, and growth across all major platforms.",
+    img: "/services/social-media.webp",
+  },
+  {
+    title: "Video Editing",
+    sub: "Visual storytelling",
+    desc: "Raw footage transformed into polished brand videos, reels, and ads that stop the scroll and move people to act.",
+    img: "/services/video-editing.webp",
   },
 ];
 
 export default function Services() {
+
   return (
     <section
       id="media-services"
@@ -69,47 +80,64 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Cards row */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-start">
+        {/* Cards row — all 5 in one strip */}
+        <div className="flex flex-nowrap gap-3 sm:gap-4 items-start justify-center w-full">
           {CARDS.map((card, i) => (
             <div
               key={card.title}
               data-stagger={String(i + 2)}
-              className="relative flex flex-col overflow-hidden rounded-2xl cursor-pointer group shadow-[0_2px_16px_rgba(0,0,0,0.08)] hover:shadow-[0_24px_48px_-12px_rgba(0,212,255,0.35),0_8px_20px_rgba(0,0,40,0.25)] hover:-translate-y-2 hover:scale-[1.04] focus-within:-translate-y-2 focus-within:scale-[1.04] transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
-              style={{
-                gap: 0,
-                background: "#ffffff",
-              }}
+              className="relative flex flex-col overflow-hidden rounded-2xl cursor-pointer group shadow-[0_2px_16px_rgba(0,0,0,0.08)] hover:shadow-[0_24px_48px_-12px_rgba(0,212,255,0.35),0_8px_20px_rgba(0,0,40,0.25)] hover:-translate-y-2 hover:scale-[1.04] transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+              style={{ gap: 0, flex: "1 1 0", maxWidth: "260px", minWidth: "0" }}
             >
-              {/* Accent bar sweeps in across the top */}
+              {/* Background image — blurred/glassy at rest, clears on hover */}
+              <div
+                aria-hidden
+                className="absolute inset-[-12px] bg-cover bg-center transition-[filter] duration-500 ease-out blur-[6px] group-hover:blur-[0px]"
+                style={{ backgroundImage: `url(${card.img})` }}
+              />
+              {/* Frosted glass tint at rest — fades out on hover */}
+              <div
+                aria-hidden
+                className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-0"
+                style={{ background: "rgba(10,25,70,0.38)" }}
+              />
+              {/* Dark depth overlay — fades IN on hover so text stays readable */}
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{ background: "linear-gradient(to bottom, rgba(0,0,20,0.04) 0%, rgba(0,0,20,0.4) 100%)" }}
+              />
+
+              {/* Accent bar */}
               <span
                 aria-hidden
-                className="absolute top-0 left-0 h-[3px] w-full origin-left scale-x-0 group-hover:scale-x-100 group-focus-within:scale-x-100 transition-transform duration-500 ease-out"
+                className="absolute top-0 left-0 h-[3px] w-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out z-10"
                 style={{ background: "linear-gradient(90deg, #1964D1, #00D4FF)" }}
               />
-              <div className="flex flex-col items-center justify-center px-6 py-6 sm:px-8 sm:py-8">
-              <span
-                className="text-[#000028] block leading-none group-hover:text-[#1964D1] group-hover:-translate-y-0.5 group-hover:tracking-[0.01em] transition-all duration-500"
-                style={{
-                  fontFamily: "var(--font-instrument, 'Instrument Serif', serif)",
-                  fontSize: "clamp(32px, 3.8vw, 52px)",
-                  fontWeight: 400,
-                }}
-              >
-                {card.title}
-              </span>
-              <span className="text-[#000028]/50 text-[12px] sm:text-[13px] font-medium tracking-wide text-center">
-                {card.sub}
-              </span>
+
+              <div className="relative z-10 flex flex-col items-center justify-center px-5 py-6 sm:px-6 sm:py-8">
+                <span
+                  className="block leading-tight text-white transition-all duration-500 group-hover:text-[#000028] group-hover:tracking-[0.01em] text-center"
+                  style={{
+                    fontFamily: "var(--font-instrument, 'Instrument Serif', serif)",
+                    fontSize: "clamp(20px, 2.6vw, 40px)",
+                    fontWeight: 600,
+                  }}
+                >
+                  {card.title}
+                </span>
+                <span className="text-white/60 group-hover:text-[#000028]/80 transition-colors duration-500 text-[11px] sm:text-[12px] font-medium tracking-wide text-center mt-1">
+                  {card.sub}
+                </span>
               </div>
 
-              {/* Description — card grows downward on hover to reveal it */}
+              {/* Description — expands on hover, sits above the blurred bg */}
               <div
-                className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] group-focus-within:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out"
-                style={{ background: "#000028" }}
+                className="relative z-10 grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out"
+                style={{ background: "rgba(0,0,40,0.82)" }}
               >
                 <div className="overflow-hidden">
-                  <p className="text-white/85 text-[12px] sm:text-[13px] leading-[1.6] text-center px-6 py-5 sm:px-8">
+                  <p className="text-white/90 text-[11px] sm:text-[12px] leading-[1.6] text-center px-5 py-4 sm:px-6">
                     {card.desc}
                   </p>
                 </div>

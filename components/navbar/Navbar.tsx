@@ -220,10 +220,10 @@ export default function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const INDUSTRIES = [
-    { label: "Dental", href: "/industries/dental", icon: "🦷", desc: "Google Ads, SEO & lead gen for dental practices" },
-    { label: "Roofing", href: "/industries/roofing", icon: "🏠", desc: "Google Ads, SEO & lead gen for roofing contractors" },
-    { label: "Hair Restoration", href: "/industries/hair-restoration", icon: "💇", desc: "Patient lead generation for hair transplant & restoration clinics" },
-    { label: "Aesthetician Clinics", href: "/industries/aesthetician-clinics", icon: "✨", desc: "Client acquisition for med spas & aesthetic clinics" },
+    { label: "Dental", href: "/industries/dental", icon: "star", desc: "Google Ads, SEO & lead gen for dental practices" },
+    { label: "Roofing", href: "/industries/roofing", icon: "building", desc: "Google Ads, SEO & lead gen for roofing contractors" },
+    { label: "Hair Restoration", href: "/industries/hair-restoration", icon: "chart", desc: "Patient lead generation for hair transplant & restoration clinics" },
+    { label: "Aesthetician Clinics", href: "/industries/aesthetician-clinics", icon: "bolt", desc: "Client acquisition for med spas & aesthetic clinics" },
   ];
 
   useEffect(() => {
@@ -612,7 +612,9 @@ export default function Navbar() {
                   onMouseEnter={e => { e.currentTarget.style.background = "rgba(75,142,255,0.12)"; e.currentTarget.style.borderColor = "rgba(75,142,255,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
                   onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"; e.currentTarget.style.transform = "translateY(0)"; }}
                 >
-                  <span style={{ fontSize: 28, lineHeight: 1, flexShrink: 0 }}>{ind.icon}</span>
+                  <div style={{ flexShrink: 0, width: 36, height: 36, borderRadius: 8, background: "rgba(75,142,255,0.15)", border: "1px solid rgba(75,142,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", color: "#4B8EFF" }}>
+                    <ServiceIcon type={ind.icon} />
+                  </div>
                   <div>
                     <p style={{ margin: "0 0 4px", fontSize: 15, fontWeight: 700, color: "#ffffff", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>{ind.label}</p>
                     <p style={{ margin: 0, fontSize: 12, color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", lineHeight: 1.5 }}>{ind.desc}</p>
@@ -673,7 +675,9 @@ export default function Navbar() {
                         onClick={() => setMobileOpen(false)}
                         className="flex flex-col gap-1 p-3 rounded-xl border border-white/[0.07] bg-white/[0.04] hover:bg-blue-500/10 hover:border-blue-400/30 transition-colors duration-150"
                       >
-                        <span className="text-xl">{ind.icon}</span>
+                        <div style={{ width: 32, height: 32, borderRadius: 8, background: "rgba(75,142,255,0.15)", border: "1px solid rgba(75,142,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", color: "#4B8EFF" }}>
+                          <ServiceIcon type={ind.icon} />
+                        </div>
                         <span className="text-[13px] font-bold text-white">{ind.label}</span>
                         <span className="text-[11px] text-white/50 leading-snug">{ind.desc}</span>
                       </a>

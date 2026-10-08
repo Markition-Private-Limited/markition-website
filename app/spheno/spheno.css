@@ -1,0 +1,81 @@
+/* Scoped styles for the Spheno AI page — ported from the standalone
+   markition-SPHENO app's utility classes. Intentionally does NOT redefine
+   :root vars, @theme tokens, or body/html — those are shared with the main
+   site and must not be overridden here. Keyframes/classes are prefixed
+   sph- (or scoped under #spheno-root) to avoid colliding with other pages'
+   same-named animations. */
+
+#spheno-root .headline-section {
+  font-family: var(--font-display, var(--font-jakarta));
+  font-size: clamp(2.25rem, 4vw, 3.15rem);
+  line-height: 1.15;
+  letter-spacing: -0.028em;
+  font-weight: 700;
+}
+
+#spheno-root .body-lead {
+  font-family: var(--font-sans, var(--font-inter));
+  font-size: clamp(1.15rem, 1.45vw, 1.325rem);
+  line-height: 1.75;
+  max-width: 48rem;
+}
+
+#spheno-root .label-eyebrow {
+  font-size: 0.8125rem;
+  font-family: var(--font-sans, var(--font-inter));
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+@keyframes sph-marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+#spheno-root .animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: sph-marquee 38s linear infinite;
+}
+
+#spheno-root .animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes sph-pulse-subtle {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.03); }
+}
+
+#spheno-root .animate-pulse-subtle {
+  animation: sph-pulse-subtle 6s ease-in-out infinite;
+}
+
+@keyframes sph-voice-halo-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+#spheno-root .animate-voice-halo {
+  animation: sph-voice-halo-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes sph-voice-ring-ping {
+  0% { transform: scale(1); opacity: 0.85; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
+
+#spheno-root .animate-voice-ring {
+  animation: sph-voice-ring-ping 1.8s cubic-bezier(0.15, 0, 0.3, 1) infinite;
+}
+
+@keyframes sph-voice-bar-bounce {
+  0%, 100% { transform: scaleY(0.8); }
+  50% { transform: scaleY(1.3); }
+}
+
+#spheno-root .animate-voice-bar {
+  transform-origin: bottom;
+  animation: sph-voice-bar-bounce 0.9s ease-in-out infinite;
+}

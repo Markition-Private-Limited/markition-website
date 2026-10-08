@@ -169,17 +169,26 @@ function CaseStack() {
     const update = () => {
       const items = itemRefs.current;
       const cards = cardRefs.current;
+      // An incoming card closes its remaining distance quadratically (fast
+      // at first, easing in at the end) so it covers the previous card early
+      // instead of lingering half-over it. `lift` is how far above its natural
+      // scroll position the card is drawn; it is 0 once the card is stuck.
+      const lifts: number[] = [];
       const arrivals = items.map((el, j) => {
+        lifts[j] = 0;
         if (!el || j === 0) return 0;
         const stuckTop = parseFloat(getComputedStyle(el).top) || 0;
         const travel = (cards[j]?.offsetHeight ?? 400) * 0.9;
-        return Math.min(1, Math.max(0, 1 - (el.getBoundingClientRect().top - stuckTop) / travel));
+        const remaining = Math.max(0, el.getBoundingClientRect().top - stuckTop);
+        const x = Math.min(1, remaining / travel);
+        if (remaining <= travel) lifts[j] = remaining - travel * x * x;
+        return 1 - x * x;
       });
       cards.forEach((card, i) => {
         if (!card) return;
         let depth = 0;
         for (let j = i + 1; j < arrivals.length; j++) depth += arrivals[j];
-        card.style.transform = reduce ? "" : `scale(${(1 - depth * 0.05).toFixed(4)})`;
+        card.style.transform = reduce ? "" : `translateY(${(-lifts[i]).toFixed(1)}px) scale(${(1 - depth * 0.05).toFixed(4)})`;
         card.style.filter = reduce ? "" : `brightness(${(1 - depth * 0.06).toFixed(4)})`;
       });
     };
@@ -228,15 +237,18 @@ function CaseStack() {
 
 export default function Growth() {
   const [openService, setOpenService] = useState<number | null>(null);
+  const [clickOpen, setClickOpen] = useState<number | null>(null);
   const rowsRef = useRef<HTMLDivElement>(null);
   const colRef = useRef<HTMLDivElement>(null);
   const pinRef = useRef<HTMLElement>(null);
 
   // Scroll-locked sequence. On desktop the section is pinned (sticky) for a
   // stretch of scrolling: the page stays put while scroll drives the sequence —
-  // service 1 expands, closes back into the list, then service 2, and so on.
-  // On narrower screens the details are too tall to pin, so the same sequence
-  // plays as the list scrolls past instead.
+  // service 1 opens, the next scroll step closes it and opens service 2, and
+  // so on. Exactly one row is open at a time with a direct step index — no
+  // fractional sub-window — so there's no boundary to flicker on. Clicking a
+  // row toggles it open/closed directly. On narrower screens the details are
+  // too tall to pin, so the same sequence plays as the list scrolls past.
   useEffect(() => {
     const section = pinRef.current;
     const rows = rowsRef.current;
@@ -245,8 +257,6 @@ export default function Growth() {
     let frame = 0;
     let current: number | null = null;
 
-    const OPEN_FROM = 0.14; // fraction of a step spent closed before it opens
-    const OPEN_TO = 0.86;   // ...and where it closes again
     const stepPx = () => Math.max(520, window.innerHeight * 0.8);
 
     const layout = () => {
@@ -258,16 +268,19 @@ export default function Growth() {
     };
 
     const update = () => {
-      let phase: number;
+      let next: number | null;
       if (pinQuery.matches) {
-        const scrolled = Math.max(0, -section.getBoundingClientRect().top);
-        phase = scrolled / stepPx();
+        const top = section.getBoundingClientRect().top;
+        if (top > 0) {
+          next = null;
+        } else {
+          const phase = -top / stepPx();
+          next = Math.min(Math.max(Math.floor(phase), 0), SERVICES.length - 1);
+        }
       } else {
-        phase = (window.innerHeight * 0.4 - rows.getBoundingClientRect().top) / 130;
+        const phase = (window.innerHeight * 0.4 - rows.getBoundingClientRect().top) / 130;
+        next = phase < 0 ? null : Math.min(Math.max(Math.floor(phase), 0), SERVICES.length - 1);
       }
-      const i = Math.floor(phase);
-      const frac = phase - i;
-      const next = i >= 0 && i < SERVICES.length && frac >= OPEN_FROM && frac <= OPEN_TO ? i : null;
       if (next !== current) {
         current = next;
         setOpenService(next);
@@ -292,38 +305,26 @@ export default function Growth() {
     };
   }, []);
 
-  // While pinned, slide the whole column up so the open service's row sits near
-  // the top of the screen and its details fit in the remaining space.
+  // While pinned, slide the whole column up so the active row sits near the
+  // top of the screen. A click always wins; otherwise the column follows
+  // scroll position continuously.
+  const transformTarget = clickOpen !== null ? clickOpen : openService;
   useEffect(() => {
     const col = colRef.current;
     const rows = rowsRef.current;
     if (!col || !rows) return;
-    if (!window.matchMedia("(min-width: 1051px)").matches || openService === null) {
+    if (!window.matchMedia("(min-width: 1051px)").matches || transformTarget === null) {
       col.style.transform = "";
       return;
     }
     const firstRow = rows.querySelector<HTMLElement>(".gm-row");
     const rowH = (firstRow?.offsetHeight ?? 85) + 1;
-    const rowTop = rows.offsetTop + openService * rowH;
+    const rowTop = rows.offsetTop + transformTarget * rowH;
     col.style.transform = `translateY(${-Math.max(0, rowTop - 96)}px)`;
-  }, [openService]);
+  }, [transformTarget]);
 
   return (
     <div id="media-growth" className="gm-wrap">
-      {/* Trust */}
-      <section className="gm-trust">
-        <div className="gm-container gm-trust-row">
-          <div className="gm-trust-title">Trusted by businesses<br />that want to grow.</div>
-          <div className="gm-client-list">
-            <span>ANIA AESTHETICS</span>
-            <span>CAR EASE</span>
-            <span>IN RIDE</span>
-            <span>TAKEME</span>
-            <span>AROMATIC EXPRESSIONS</span>
-          </div>
-        </div>
-      </section>
-
       {/* Intro */}
       <section className="gm-section">
         <div className="gm-container gm-intro-grid">
@@ -360,20 +361,36 @@ export default function Growth() {
           <div ref={rowsRef} className="gm-rows">
             {SERVICES.map((svc, i) => {
               const d = DETAILS[i];
-              const isOpen = openService === i;
+              const isOpen = clickOpen === i || (clickOpen === null && openService === i);
               return (
                 <div
                   key={svc.id}
                   id={svc.id}
                   className={`gm-row-wrap ${isOpen ? "gm-open" : ""}`}
                 >
-                  <div className="gm-row">
+                  <div
+                    className="gm-row"
+                    role="button"
+                    tabIndex={0}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setClickOpen(clickOpen === i ? null : i)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setClickOpen(clickOpen === i ? null : i);
+                      }
+                    }}
+                  >
                     <div className="gm-num">{svc.n}</div>
                     <h3 className="gm-display">{svc.name}</h3>
                     <p>{svc.short}</p>
                     <div className="gm-row-link">
                       {isOpen ? (
-                        <Link className="gm-btn gm-row-btn" href={svc.href}>
+                        <Link
+                          className="gm-btn gm-row-btn"
+                          href={svc.href}
+                          onClick={(e) => e.stopPropagation()}
+                        >
                           Explore Service <span>→</span>
                         </Link>
                       ) : (
