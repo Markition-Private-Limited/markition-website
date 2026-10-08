@@ -303,7 +303,7 @@ export function Footer() {
             </a>
             <span className="flex items-center gap-2 text-white/70">
               <PinIcon />
-              Houston, Texas, USA
+              117 S Lexington St, Suite 100, Harrisonville, MO 64701, USA
             </span>
           </div>
           <p style={{ color: "rgba(255,255,255,0.35)" }}>&copy; {year} Markition. All rights reserved.</p>

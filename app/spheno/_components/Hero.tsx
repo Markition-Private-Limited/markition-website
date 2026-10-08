@@ -62,68 +62,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
         }}
       />
 
-      {/* Keyframe Animations */}
-      <style>{`
-        @keyframes sparkle-aura-pulse {
-          0%, 100% {
-            transform: scale(1);
-            opacity: 0.6;
-          }
-          50% {
-            transform: scale(1.1);
-            opacity: 0.85;
-          }
-        }
-
-        @keyframes hand-breathe-wave {
-          0%, 100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(-3px) scale(1.04); }
-        }
-
-        @keyframes twinkle-a {
-          0%, 100% { opacity: 0.3; transform: scale(0.8); }
-          50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        @keyframes twinkle-b {
-          0%, 100% { opacity: 0.8; transform: scale(1.1); }
-          50% { opacity: 0.25; transform: scale(0.7); }
-        }
-
-        .anim-aura {
-          animation: sparkle-aura-pulse 4.5s infinite ease-in-out;
-        }
-
-        .anim-hand {
-          filter: drop-shadow(0 0 14px rgba(0, 242, 254, 0.82)) drop-shadow(0 0 28px rgba(0, 112, 243, 0.52));
-          animation: hand-breathe-wave 3.8s infinite ease-in-out;
-        }
-
-        .anim-twinkle-1 {
-          animation: twinkle-a 2.2s infinite ease-in-out;
-        }
-
-        .anim-twinkle-2 {
-          animation: twinkle-b 2.8s infinite ease-in-out;
-        }
-      `}</style>
-
-      {/* SVG Gradient Definitions */}
-      <svg className="absolute w-0 h-0" aria-hidden="true">
-        <defs>
-          <linearGradient id="starGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#FFFFFF" />
-            <stop offset="45%" stopColor="#E2F5FE" />
-            <stop offset="100%" stopColor="#00F2FE" />
-          </linearGradient>
-          <linearGradient id="exactHandGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#FFFFFF" />
-            <stop offset="65%" stopColor="#FFFFFF" />
-            <stop offset="100%" stopColor="#00F2FE" />
-          </linearGradient>
-        </defs>
-      </svg>
-
       {/* ========================================================= */}
       {/* 2. MAIN HERO CONTENT: PERFECTLY CENTERED & BALANCED       */}
       {/* Symmetrical counter-spacers guarantee mathematical center */}
@@ -137,94 +75,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
             fontSize: 'clamp(34px, 5.2vw, 76px)',
           }}
         >
-          {/* LINE 1: [SPARKLE ON LEFT] + "One AI system," + [BALANCING SPACER ON RIGHT] */}
-          {/* Plain inline flow below sm (lets long lines wrap without forcing overflow); a real
-              flex row with no wrap at sm+ restores the original guaranteed-single-line desktop layout. */}
-          <div className="w-full sm:flex sm:items-center sm:justify-center sm:gap-x-4">
-
-            {/* 4-Point Radiant Sparkle Star with Soft Aura */}
-            <span className="inline-flex items-center justify-center relative align-middle shrink-0 mr-2 sm:mr-0 w-7 h-7 xs:w-8 xs:h-8 sm:w-12 sm:h-12 md:w-15 md:h-15 lg:w-[64px] lg:h-[64px]">
-
-              {/* Soft, Diffused Glow Aura behind Sparkle (No harsh spots) */}
-              <span
-                className="anim-aura absolute -inset-3 sm:-inset-5 rounded-full pointer-events-none blur-xl sm:blur-2xl"
-                style={{
-                  background: 'radial-gradient(circle, rgba(0, 242, 254, 0.45) 0%, rgba(0, 85, 255, 0.3) 50%, transparent 80%)'
-                }}
-              />
-
-              {/* Sparkle Star SVG Geometry */}
-              <svg
-                className="relative z-10 w-7 h-7 xs:w-8 xs:h-8 sm:w-12 sm:h-12 md:w-15 md:h-15 lg:w-[64px] lg:h-[64px] drop-shadow-[0_0_18px_rgba(0,242,254,0.85)] cursor-pointer"
-                viewBox="0 0 100 100"
-                fill="url(#starGradient)"
-              >
-                <path d="M50 0 C50 28 72 50 100 50 C72 50 50 72 50 100 C50 72 28 50 0 50 C28 50 50 28 50 0 Z" />
-              </svg>
-
-              {/* Orbiting Twinkle Dots */}
-              <span className="anim-twinkle-1 absolute -top-1 -right-1.5 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#00F2FE]" />
-              <span className="anim-twinkle-2 absolute -bottom-1 -left-1.5 w-1.5 h-1.5 rounded-full bg-[#E0F7FF] shadow-[0_0_5px_#00F2FE]" />
-            </span>
-
-            {/* Centered Main Text */}
+          {/* LINE 1 */}
+          <div className="w-full sm:flex sm:items-center sm:justify-center">
             <span className="align-middle sm:whitespace-nowrap">One AI system,</span>
-
-            {/* Symmetrical Counter-Spacer on Right (Guarantees Perfect Mathematical Center) */}
-            <span
-              className="inline-block align-middle shrink-0 ml-2 sm:ml-0 w-7 h-7 xs:w-8 xs:h-8 sm:w-12 sm:h-12 md:w-15 md:h-15 lg:w-[64px] lg:h-[64px] invisible pointer-events-none"
-              aria-hidden="true"
-            />
           </div>
 
-          {/* LINE 2: [BALANCING SPACER ON LEFT] + "your business, automated." + [HAND ON RIGHT] */}
-          {/* Same responsive treatment as line 1: inline flow below sm so the hand icon wraps
-              together with the trailing word "automated." instead of dropping to its own line;
-              a nowrap flex row at sm+ restores the original guaranteed-single-line desktop layout. */}
-          <div className="w-full mt-1.5 sm:mt-2.5 sm:flex sm:items-center sm:justify-center sm:gap-x-1.5">
-
-            {/* Symmetrical Counter-Spacer on Left (Guarantees Perfect Mathematical Center) */}
-            <span
-              className="inline-block align-middle shrink-0 mr-2 sm:mr-0 w-7 h-7 xs:w-8 xs:h-8 sm:w-11 sm:h-11 md:w-14 md:h-14 lg:w-[60px] lg:h-[60px] invisible pointer-events-none"
-              aria-hidden="true"
-            />
-
-            {/* Centered Main Text */}
+          {/* LINE 2 */}
+          <div className="w-full mt-1.5 sm:mt-2.5 sm:flex sm:items-center sm:justify-center">
             <span className="align-middle sm:whitespace-nowrap">your business, automated.</span>
-
-            {/* Hand Icon on Right with Soft Symmetrical Aura */}
-            <span className="inline-flex items-center justify-center relative align-middle shrink-0 ml-2 sm:ml-0 w-7 h-7 xs:w-8 xs:h-8 sm:w-11 sm:h-11 md:w-14 md:h-14 lg:w-[60px] lg:h-[60px]">
-
-              {/* Soft, Diffused Glow Aura behind Hand */}
-              <span 
-                className="anim-aura absolute -inset-3 sm:-inset-5 rounded-full pointer-events-none blur-xl sm:blur-2xl"
-                style={{
-                  background: 'radial-gradient(circle, rgba(0, 242, 254, 0.45) 0%, rgba(0, 112, 243, 0.3) 50%, transparent 80%)'
-                }}
-              />
-
-              {/* Hand Icon (Hand + 3 Lightbulb Coils) */}
-              <svg
-                className="anim-hand relative z-10 w-7 h-7 xs:w-8 xs:h-8 sm:w-11 sm:h-11 md:w-14 md:h-14 lg:w-[60px] lg:h-[60px] cursor-pointer"
-                viewBox="0 0 70 76" 
-                fill="none"
-              >
-                {/* Hand Outline */}
-                <path 
-                  d="M 23 40 C 18 36 15 29 19 24 C 23 20 28 22 30 27 L 31 31 L 31 16 C 31 12 36 12 36 16 L 36 30 L 36 12 C 36 8 41 8 41 12 L 41 30 L 41 14 C 41 10 46 10 46 14 L 46 32 L 46 20 C 46 16 51 16 51 20 L 51 42 C 51 49 45 55 37 55 C 29 55 24 47 23 40 Z" 
-                  stroke="url(#exactHandGrad)" 
-                  strokeWidth="3.4" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                />
-                {/* 3 Curved Lightbulb Thread Rings under the Wrist */}
-                <path d="M 28 60 C 34 62.5 42 62.5 48 60" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
-                <path d="M 29.5 65.5 C 35 68 41 68 46.5 65.5" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
-                <path d="M 33 71 C 36 73 40 73 43 71" stroke="#00F2FE" strokeWidth="2.8" strokeLinecap="round" />
-              </svg>
-
-            </span>
-
           </div>
         </h1>
 

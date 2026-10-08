@@ -9,7 +9,7 @@ interface NavbarProps {
 }
 
 const NAV_LINKS = [
-  { label: "System", href: "#system" },
+  { label: "SPHENO AI", href: "#system" },
   { label: "Products", href: "#products" },
   { label: "Industries", href: "#industries" },
   { label: "How It Works", href: "#execution" },

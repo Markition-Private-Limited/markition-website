@@ -63,14 +63,14 @@ const NavLinks: React.FC<{ links: { label: string; href: string }[] }> = ({ link
   </div>
 );
 
-const ContactRow: React.FC<{ icon: React.ReactNode; text: string; href: string }> = ({ icon, text, href }) => (
+const ContactRow: React.FC<{ icon: React.ReactNode; text: React.ReactNode; href: string }> = ({ icon, text, href }) => (
   <a
     href={href}
     target={href.startsWith("http") ? "_blank" : undefined}
     rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-    className="flex items-center gap-3 text-[13.5px] text-[#c8d8ee] hover:text-white transition-colors duration-150"
+    className="flex items-start gap-3 text-[13.5px] leading-relaxed text-[#c8d8ee] hover:text-white transition-colors duration-150"
   >
-    <span className="shrink-0 text-cyan-400">{icon}</span>
+    <span className="shrink-0 text-cyan-400 mt-px">{icon}</span>
     {text}
   </a>
 );
@@ -130,7 +130,7 @@ export const Footer: React.FC = () => {
           <div>
             <ColHeading>Get In Touch</ColHeading>
             <div className="flex flex-col gap-4">
-              <ContactRow icon={<PinIcon />} text="Houston, Texas, USA" href="https://maps.google.com/?q=Houston,Texas,USA" />
+              <ContactRow icon={<PinIcon />} text={<>117 S Lexington St, Suite 100<br />Harrisonville, MO 64701, USA</>} href="https://maps.google.com/?q=117+S+Lexington+St,+Suite+100,+Harrisonville,+MO+64701,+USA" />
               <ContactRow icon={<PhoneIcon />} text="+1 (713) 894-7727" href="tel:+17138947727" />
               <ContactRow icon={<MailIcon />} text="hey@markition.com" href="mailto:hey@markition.com" />
             </div>

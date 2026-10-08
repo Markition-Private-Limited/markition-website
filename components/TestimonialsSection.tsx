@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 /* ─── Platform ratings ───────────────────────────────────────────────────── */
@@ -47,6 +48,8 @@ interface Testimonial {
   brandLogos?: string[];
   /* person's full name shown on the left panel */
   panelName?: string;
+  /* video testimonial src — when set, left panel plays this video instead of the static image */
+  videoSrc?: string;
 }
 
 const TESTIMONIALS: Testimonial[] = [
@@ -61,6 +64,7 @@ const TESTIMONIALS: Testimonial[] = [
     panelName: "SUSAN HICKS",
     imageSrc: "/susan-hicks.png",
     avatarSrc: "/susan-hicks.png",
+    videoSrc: "/reviews/review-1.mp4",
   },
   {
     stars: 5,
@@ -109,6 +113,7 @@ const TESTIMONIALS: Testimonial[] = [
     panelName: "DAVID MORGAN",
     imageSrc: "/susan-hicks.png",
     avatarSrc: "/susan-hicks.png",
+    videoSrc: "/reviews/review-2.mp4",
   },
 ];
 
@@ -156,6 +161,161 @@ const CARD_HEIGHT = 270;
 const LEFT_W      = 190;
 const RIGHT_W     = 300;
 
+function VideoLeftPanel({ t }: { t: Testimonial }) {
+  const [muted, setMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          vid.play().catch(() => {});
+        } else {
+          vid.pause();
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(vid);
+    return () => observer.disconnect();
+  }, []);
+
+  const refCb = (el: HTMLVideoElement | null) => {
+    videoRef.current = el;
+    if (!el) return;
+    el.muted = true;
+    el.defaultMuted = true;
+    el.setAttribute("muted", "");
+    el.load();
+  };
+
+  function toggleMute(e: MouseEvent) {
+    e.stopPropagation();
+    const vid = (e.currentTarget.parentElement as HTMLElement).querySelector("video") as HTMLVideoElement | null;
+    if (!vid) return;
+    vid.muted = !vid.muted;
+    setMuted(vid.muted);
+  }
+
+  return (
+    <div className="tc-left" style={{ width: LEFT_W, height: "100%", flexShrink: 0, position: "relative", overflow: "hidden", background: "#0e1a36" }}>
+      <video
+        ref={refCb}
+        src={t.videoSrc}
+        loop
+        playsInline
+        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transform: "translateZ(0)", willChange: "transform" }}
+      />
+
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.78) 30%, rgba(0,0,0,0.08) 100%)", pointerEvents: "none" }} />
+
+      <button
+        onClick={toggleMute}
+        title={muted ? "Unmute" : "Mute"}
+        style={{
+          position: "absolute", bottom: 34, right: 8,
+          width: 26, height: 26, borderRadius: "50%",
+          background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)",
+          border: "1px solid rgba(255,255,255,0.3)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          cursor: "pointer", zIndex: 10, padding: 0,
+        }}
+      >
+        {muted ? (
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+            <path d="M16.5 12A4.5 4.5 0 0 0 14 7.97V10.18l2.45 2.45c.03-.2.05-.41.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A9.9 9.9 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a9.55 9.55 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+          </svg>
+        ) : (
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+          </svg>
+        )}
+      </button>
+
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "10px 12px", zIndex: 3 }}>
+        <p style={{ margin: 0, color: "#fff", fontWeight: 800, fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase" }}>
+          {t.panelName ?? t.name}
+        </p>
+        <p style={{ margin: "2px 0 0", color: "rgba(255,255,255,0.55)", fontSize: 9, letterSpacing: "0.04em" }}>
+          {t.company}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function StaticLeftPanel({ t }: { t: Testimonial }) {
+  return (
+    <div className="tc-left"
+      style={{
+        width: LEFT_W,
+        height: "100%",
+        flexShrink: 0,
+        position: "relative",
+        background: t.imageSrc
+          ? "transparent"
+          : "linear-gradient(160deg, #1a2a4e 0%, #0e1a36 100%)",
+        overflow: "hidden",
+      }}
+    >
+      {/* Background photo */}
+      {t.imageSrc ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={t.imageSrc}
+          alt={t.panelName ?? t.name}
+          draggable={false}
+          className="tc-img"
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }}
+        />
+      ) : (
+        /* Placeholder silhouette */
+        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <svg width="90" height="90" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="14" r="8" fill="#2D3F5E" />
+            <path d="M4 40c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="#2D3F5E" />
+          </svg>
+        </div>
+      )}
+
+      {/* Dark overlay gradient */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "linear-gradient(to top, rgba(0,0,0,0.78) 30%, rgba(0,0,0,0.08) 100%)",
+      }} />
+
+      {/* Play button */}
+      <div className="tc-play" style={{
+        position: "absolute", top: "50%", left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: 40, height: 40, borderRadius: "50%",
+        background: "rgba(255,255,255,0.18)",
+        backdropFilter: "blur(6px)",
+        border: "1px solid rgba(255,255,255,0.28)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}>
+        <svg width="11" height="11" viewBox="0 0 14 14" fill="white" style={{ marginLeft: 2 }}>
+          <path d="M3 2l9 5-9 5V2z" />
+        </svg>
+      </div>
+
+      {/* Bottom name + company */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "10px 12px" }}>
+        <p style={{ margin: 0, color: "#fff", fontWeight: 800, fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase" }}>
+          {t.panelName ?? t.name}
+        </p>
+        <p style={{ margin: "2px 0 0", color: "rgba(255,255,255,0.55)", fontSize: 9, letterSpacing: "0.04em" }}>
+          {t.company}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
     <div className="tc-card"
@@ -171,69 +331,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
       }}
     >
       {/* ── Left panel — customer photo / video ── */}
-      <div className="tc-left"
-        style={{
-          width: LEFT_W,
-          height: "100%",
-          flexShrink: 0,
-          position: "relative",
-          background: t.imageSrc
-            ? "transparent"
-            : "linear-gradient(160deg, #1a2a4e 0%, #0e1a36 100%)",
-          overflow: "hidden",
-        }}
-      >
-        {/* Background photo */}
-        {t.imageSrc ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={t.imageSrc}
-            alt={t.panelName ?? t.name}
-            draggable={false}
-            className="tc-img"
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }}
-          />
-        ) : (
-          /* Placeholder silhouette */
-          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <svg width="90" height="90" viewBox="0 0 40 40" fill="none">
-              <circle cx="20" cy="14" r="8" fill="#2D3F5E" />
-              <path d="M4 40c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="#2D3F5E" />
-            </svg>
-          </div>
-        )}
-
-        {/* Dark overlay gradient */}
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(to top, rgba(0,0,0,0.78) 30%, rgba(0,0,0,0.08) 100%)",
-        }} />
-
-        {/* Play button */}
-        <div className="tc-play" style={{
-          position: "absolute", top: "50%", left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 40, height: 40, borderRadius: "50%",
-          background: "rgba(255,255,255,0.18)",
-          backdropFilter: "blur(6px)",
-          border: "1px solid rgba(255,255,255,0.28)",
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
-          <svg width="11" height="11" viewBox="0 0 14 14" fill="white" style={{ marginLeft: 2 }}>
-            <path d="M3 2l9 5-9 5V2z" />
-          </svg>
-        </div>
-
-        {/* Bottom name + company */}
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "10px 12px" }}>
-          <p style={{ margin: 0, color: "#fff", fontWeight: 800, fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase" }}>
-            {t.panelName ?? t.name}
-          </p>
-          <p style={{ margin: "2px 0 0", color: "rgba(255,255,255,0.55)", fontSize: 9, letterSpacing: "0.04em" }}>
-            {t.company}
-          </p>
-        </div>
-      </div>
+      {t.videoSrc ? <VideoLeftPanel t={t} /> : <StaticLeftPanel t={t} />}
 
       {/* ── Right panel — stars + quote + author ── */}
       <div className="tc-right"

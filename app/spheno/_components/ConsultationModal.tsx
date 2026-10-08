@@ -47,7 +47,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 text-[#9EA6CA] hover:text-white p-2 rounded-lg transition-colors cursor-pointer"
+          className="absolute top-5 right-5 z-10 inline-flex items-center justify-center w-9 h-9 text-[#9EA6CA] hover:text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />

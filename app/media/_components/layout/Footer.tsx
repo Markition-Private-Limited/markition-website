@@ -89,7 +89,7 @@ export default function Footer() {
           <div>
             <ColHeading>Get In Touch</ColHeading>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <ContactRow icon={<PinIcon />}   text="Houston, Texas, USA"  href="https://maps.google.com/?q=Houston,Texas,USA" />
+              <ContactRow icon={<PinIcon />}   text={<>117 S Lexington St, Suite 100<br />Harrisonville, MO 64701, USA</>}  href="https://maps.google.com/?q=117+S+Lexington+St,+Suite+100,+Harrisonville,+MO+64701,+USA" />
               <ContactRow icon={<PhoneIcon />} text="+1 (217) 401-0041"    href="tel:+12174010041" />
               <ContactRow icon={<MailIcon />}  text="hey@markition.com"    href="mailto:hey@markition.com" />
             </div>
@@ -162,10 +162,10 @@ function NavLinks({ links }: { links: { label: string; href: string }[] }) {
   );
 }
 
-function ContactRow({ icon, text, href }: { icon: React.ReactNode; text: string; href: string }) {
+function ContactRow({ icon, text, href }: { icon: React.ReactNode; text: React.ReactNode; href: string }) {
   return (
-    <a href={href} style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", color: "#c8d8ee", fontSize: 13.5 }}>
-      <span style={{ flexShrink: 0, color: "#00bcd4" }}>{icon}</span>
+    <a href={href} style={{ display: "flex", alignItems: "flex-start", gap: 12, textDecoration: "none", color: "#c8d8ee", fontSize: 13.5, lineHeight: 1.5 }}>
+      <span style={{ flexShrink: 0, color: "#00bcd4", marginTop: 1 }}>{icon}</span>
       {text}
     </a>
   );
