@@ -1,51 +1,52 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const BLUE = "#1236E8";
 
 type Card = {
-  title:       string;
-  body:        string;
-  src?:        string;
-  alt?:        string;
-  staticBlue?: boolean;
+  title: string;
+  body:  string;
+  src?:  string;
+  alt?:  string;
 };
 
 const CARDS: Card[] = [
   {
     title: "Brand Identity Design",
-    body:  "We build brands from the ground up: logo design, color systems, typography, brand guidelines, and stationery. Every asset works together so your business looks consistent, credible, and unforgettable across every channel.",
-    src:   "/design-lab/assets/projects/showcase-branding.png",
+    body:  "We build brands from the ground up — logo design, colour systems, typography, brand guidelines, and full stationery suites. Every asset is crafted to work together so your business looks consistent, credible, and instantly recognisable whether someone sees you on a business card, a billboard, or a social feed. A strong identity doesn't just look good; it earns trust before a single word is read.",
+    src:   "/design-lab/assets/projects/showcase-branding.webp",
     alt:   "Brand Identity Design",
   },
   {
     title: "UI/UX Design",
-    body:  "We turn user research into clear journeys, wireframes, and polished interactive prototypes. Our web and app interfaces are intuitive, accessible, and responsive, built to keep users engaged and guide them toward conversion.",
-    src:   "/design-lab/assets/projects/showcase-web.png",
+    body:  "We turn user research and business goals into clear journeys, wireframes, and high-fidelity interactive prototypes. Every screen we design is intuitive, accessible, and responsive — built to reduce friction, keep users engaged, and guide them toward the action that matters. Whether it's a SaaS dashboard, a mobile app, or a marketing site, we design with conversion in mind at every step.",
+    src:   "/design-lab/assets/projects/showcase-uiux.webp",
     alt:   "UI/UX Design",
   },
   {
     title: "Social Media Design",
-    body:  "We design scroll-stopping posts, carousels, stories, and reels covers, plus reusable templates for every platform. Your feed stays on-brand, recognizable, and engaging, so followers stop, interact, and remember you.",
-    src:   "/design-lab/assets/projects/showcase-social.png",
+    body:  "We design scroll-stopping posts, carousels, stories, reels covers, and highlight icons, plus reusable branded templates your team can use independently. Your feed stays on-brand, visually consistent, and engaging across every platform — so followers stop, interact, and remember you long after they've scrolled past. Good social design is the difference between being noticed and being remembered.",
+    src:   "/design-lab/assets/projects/showcase-social.webp",
     alt:   "Social Media Design",
   },
   {
     title: "Advertising & Campaign Design",
-    body:  "From display banners and social ad creatives to print and out-of-home visuals, we design full campaigns around one clear idea. Every format is tailored to its channel to capture attention and drive measurable results.",
-    src:   "/design-lab/assets/projects/showcase-web.png",
+    body:  "From display banners and social ad creatives to print collateral and out-of-home visuals, we build full campaigns around one clear, compelling idea. Every format is tailored to its channel, audience, and objective — so your ad stops the right people, communicates fast, and drives measurable results. We don't just make things look good; we make them work harder.",
+    src:   "/design-lab/assets/projects/showcase-advertising.webp",
     alt:   "Advertising & Campaign Design",
   },
   {
     title: "Motion & 2D/3D Design",
-    body:  "Motion is the heartbeat of modern digital communication. We craft cinematic 3D product renders, kinetic logo reveals, explainer animations, UI micro-interactions, and spatial visual assets that command attention and elevate brand prestige.",
-    staticBlue: true,
+    body:  "Motion is the heartbeat of modern digital communication. We craft cinematic 3D product renders, kinetic logo reveals, explainer animations, UI micro-interactions, and spatial visual assets. Whether it's a 3-second bumper ad or a 60-second brand film, every frame is intentional — designed to command attention, communicate clearly, and leave a lasting impression that static design simply cannot.",
+    src:   "/design-lab/assets/projects/showcase-motion.webp",
+    alt:   "Motion & 2D/3D Design",
   },
   {
     title: "E-Commerce Design",
-    body:  "We design storefronts, product pages, collection layouts, and checkout flows that showcase your products beautifully. Clear navigation, trust signals, and frictionless buying steps turn casual browsers into repeat customers.",
-    src:   "/design-lab/assets/projects/showcase-saas.png",
+    body:  "We design storefronts, product pages, collection layouts, and checkout flows that make your products impossible to ignore. Clear navigation, compelling product presentation, trust signals, and frictionless buying steps work together to turn casual browsers into confident buyers and first-time customers into repeat ones. Every pixel is optimised to reduce drop-off and increase average order value.",
+    src:   "/design-lab/assets/projects/showcase-ecommerce.webp",
     alt:   "E-Commerce Design",
   },
 ];
@@ -72,20 +73,21 @@ function CardBack({ card }: { card: Card }) {
         className="font-bold leading-snug"
         style={{
           color:      "#fff",
-          fontSize:   "clamp(20px, 1.9vw, 28px)",
+          fontSize:   "clamp(18px, 1.8vw, 26px)",
           fontFamily: "var(--font-jakarta, sans-serif)",
+          textAlign:  "center",
         }}
       >
         {card.title}
       </h3>
 
-      <div>
+      <div style={{ textAlign: "center" }}>
         <p className="leading-relaxed text-sm sm:text-[15px]" style={{ color: "rgba(255,255,255,0.85)" }}>
           {card.body}
         </p>
         <a
           href="/design-lab/contact"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-white mt-6 w-fit"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-white mt-6 mx-auto w-fit"
           style={{
             border:       "1.5px solid rgba(255,255,255,0.45)",
             borderRadius: 50,
@@ -131,19 +133,6 @@ function FlipCard({ card, visible, index }: { card: Card; visible: boolean; inde
       : `opacity 0.65s ease ${fadeDelay}ms, transform 0.65s ease ${fadeDelay}ms`,
   };
 
-  if (card.staticBlue) {
-    return (
-      <div
-        className={`relative ${size}`}
-        style={{ ...outer, borderRadius: 20, boxShadow: "0 8px 32px rgba(18,54,232,0.18)" }}
-        onMouseEnter={e => { if (settled) (e.currentTarget as HTMLElement).style.transform = "translateY(-8px)"; }}
-        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = visible ? "translateY(0)" : "translateY(40px)"; }}
-      >
-        <div style={FACE}><CardBack card={card} /></div>
-      </div>
-    );
-  }
-
   return (
     <div
       className={`relative ${size}`}
@@ -161,22 +150,28 @@ function FlipCard({ card, visible, index }: { card: Card; visible: boolean; inde
           transition:     "transform 0.4s cubic-bezier(.4,.2,.2,1)",
         }}
       >
-        <div style={{ ...FACE, background: "#E2FAFF", boxShadow: "0 4px 24px rgba(0,0,0,0.07)" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={card.src}
-            alt={card.alt}
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        <div style={{ ...FACE, background: "#f0f8ff", boxShadow: "0 4px 24px rgba(0,0,0,0.07)" }}>
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(255,255,255,0.72) 0%, transparent 45%)", zIndex: 1 }} />
+          <Image
+            src={card.src!}
+            alt={card.alt ?? card.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            style={{ objectFit: "cover", objectPosition: "top center" }}
+            quality={95}
           />
           <h3
             className="absolute font-bold leading-snug"
             style={{
               top:        "clamp(18px, 1.8vw, 26px)",
-              left:       "clamp(18px, 1.8vw, 26px)",
-              maxWidth:   "70%",
-              color:      "#0d0d0d",
-              fontSize:   "clamp(16px, 1.5vw, 21px)",
+              left:       0,
+              right:      0,
+              textAlign:  "center",
+              color:      "#0d0d17",
+              fontSize:   "clamp(18px, 1.8vw, 26px)",
               fontFamily: "var(--font-jakarta, sans-serif)",
+              padding:    "0 16px",
+              zIndex:     2,
             }}
           >
             {card.title}

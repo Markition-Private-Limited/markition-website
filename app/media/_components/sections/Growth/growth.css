@@ -202,10 +202,40 @@
 
 /* industries */
 #media-root .gm-industry-list { border-top: 1px solid var(--gm-line); margin-top: 50px; }
-#media-root .gm-industry { display: grid; grid-template-columns: 60px 1fr 1.4fr 1fr; gap: 25px; align-items: center; padding: 25px 0; border-bottom: 1px solid var(--gm-line); }
-#media-root .gm-industry h3 { font-size: 24px; margin: 0; }
-#media-root .gm-industry p { font-size: 14px; margin: 0; }
-#media-root .gm-industry strong { color: var(--gm-navy); }
+#media-root .gm-industry {
+  display: grid; grid-template-columns: 60px 1fr 1.4fr 1fr; gap: 25px; align-items: center;
+  padding: 25px 18px; border-bottom: 1px solid var(--gm-line);
+  position: relative; overflow: hidden;
+  transition: color 0.28s ease;
+}
+#media-root .gm-industry::before {
+  content: ""; position: absolute; inset: 0;
+  background: #080c42;
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+#media-root .gm-industry:hover::before { transform: scaleX(1); }
+#media-root .gm-industry:hover { color: #fff; }
+#media-root .gm-industry > * { position: relative; z-index: 1; }
+#media-root .gm-industry h3 { font-size: 24px; margin: 0; transition: color 0.28s ease; }
+#media-root .gm-industry p { font-size: 14px; margin: 0; transition: color 0.28s ease; }
+#media-root .gm-industry strong { color: var(--gm-navy); transition: color 0.28s ease; }
+#media-root .gm-industry:hover h3,
+#media-root .gm-industry:hover p { color: #fff; }
+#media-root .gm-industry:hover strong { color: rgba(255,255,255,0.7); }
+#media-root .gm-industry .gm-num { transition: color 0.28s ease; }
+#media-root .gm-industry:hover .gm-num { color: rgba(255,255,255,0.5); }
+#media-root .gm-industry-hint {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  font-size: 16px; line-height: 1; color: #fff;
+  opacity: 0; transform: translateX(-6px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  pointer-events: none; flex-shrink: 0; position: relative; z-index: 1;
+}
+#media-root .gm-industry:hover .gm-industry-hint { opacity: 1; transform: translateX(0); }
 
 /* process */
 #media-root .gm-process-grid { display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--gm-line); border-left: 1px solid var(--gm-line); margin-top: 50px; }

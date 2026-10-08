@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Reveal } from "../../ui/Reveal";
 
 const BG   = "#030A28";
@@ -148,8 +149,12 @@ export function IndustriesSection() {
 
         <Reveal variant="up" delay={200} duration={800}>
           <div className="flex justify-center mt-14">
-            <button
+            <Link
+              href="/portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative overflow-hidden rounded-full border border-white/30 px-8 py-3.5 text-[15px] font-semibold text-white flex items-center gap-3 cursor-pointer"
+              style={{ textDecoration: "none" }}
             >
               <span
                 className="absolute top-0 h-full w-0 group-hover:w-[250%] pointer-events-none"
@@ -165,7 +170,7 @@ export function IndustriesSection() {
                 Explore Our Work
               </span>
               <span className="relative text-lg leading-none" style={{ zIndex: 1 }}>→</span>
-            </button>
+            </Link>
           </div>
         </Reveal>
 

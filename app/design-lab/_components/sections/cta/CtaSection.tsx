@@ -38,10 +38,11 @@ export function CtaSection() {
           <img
             src="/design-lab/section-3.png"
             alt="Creative collage of a designer at work"
-            className="h-auto w-full rounded-[28px] object-cover lg:rounded-none"
+            className="h-auto w-full rounded-[28px] object-cover lg:rounded-none lg:min-h-[520px]"
+            style={{ maxHeight: "620px" }}
           />
 
-          <div className="mt-8 text-center lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:flex lg:w-[46%] lg:flex-col lg:items-start lg:justify-center lg:px-6 lg:pt-10 xl:px-10">
+          <div className="mt-8 text-center lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:flex lg:w-[42%] lg:flex-col lg:items-start lg:justify-center lg:px-6 lg:pt-10 xl:px-10">
             <div
               className="lg:w-full lg:max-w-[300px]"
               style={{

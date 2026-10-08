@@ -1,25 +1,30 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 const INDUSTRIES = [
   {
     name: "Roofing",
+    href: "/industries/roofing",
     description:
       "Local SEO and paid ads that keep your calendar full.",
   },
   {
     name: "Dental",
+    href: "/industries/dental",
     description:
       "Google Ads and SEO campaigns that fill your dental chairs.",
   },
   {
     name: "Aesthetician",
+    href: "/industries/aesthetician-clinics",
     description:
       "Social and paid campaigns that book you more consultations weekly.",
   },
   {
     name: "Hair Transplant",
+    href: "/industries/hair-restoration",
     description:
       "Lead generation campaigns built to fill your full consultation calendar.",
   },
@@ -160,8 +165,11 @@ export default function Industries() {
       {/* Columns */}
       <div style={{ display: "flex" }} className="media-industries-grid">
         {INDUSTRIES.map((item, i) => (
-          <div
+          <Link
             key={i}
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
             className="media-industries-col"
             style={{
               flex: 1,
@@ -170,7 +178,11 @@ export default function Industries() {
               display: "flex",
               flexDirection: "column",
               gap: 12,
+              textDecoration: "none",
+              transition: "background 0.2s ease",
             }}
+            onMouseEnter={e => (e.currentTarget.style.background = "rgba(8,12,66,0.04)")}
+            onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
           >
             <h3
               style={{
@@ -196,10 +208,10 @@ export default function Industries() {
             >
               {item.description}
             </p>
-            <div style={{ marginTop: 8 }}>
+            <div style={{ marginTop: 8 }} onClick={e => e.preventDefault()}>
               <ProjectButton industry={item.name} />
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

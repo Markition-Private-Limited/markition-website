@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import InfinityModel from "../InfinityModel";
+import { TestimonialsSection } from "@/app/design-lab/_components/sections/testimonials/TestimonialsSection";
 import "./growth.css";
 
 /* Sections ported from markition_media_clean_minimal_v2.html (header, mobile
@@ -123,10 +124,10 @@ const CASES = [
 ];
 
 const INDUSTRIES = [
-  { n: "01", name: "ROOFING", challenge: "Customers search locally when they need a service.", approach: "SEO + Google Ads + local visibility." },
-  { n: "02", name: "DENTAL", challenge: "Patients compare clinics before booking.", approach: "Google Ads + SEO + social proof." },
-  { n: "03", name: "AESTHETIC / MED SPA", challenge: "Visual discovery and trust matter before consultation.", approach: "Meta Ads + Social + Content." },
-  { n: "04", name: "HAIR TRANSPLANT", challenge: "High-consideration customers need confidence.", approach: "Meta Ads + Google Ads + Content." },
+  { n: "01", name: "ROOFING", href: "/industries/roofing", challenge: "Customers search locally when they need a service.", approach: "SEO + Google Ads + local visibility." },
+  { n: "02", name: "DENTAL", href: "/industries/dental", challenge: "Patients compare clinics before booking.", approach: "Google Ads + SEO + social proof." },
+  { n: "03", name: "AESTHETIC / MED SPA", href: "/industries/aesthetician-clinics", challenge: "Visual discovery and trust matter before consultation.", approach: "Meta Ads + Social + Content." },
+  { n: "04", name: "HAIR TRANSPLANT", href: "/industries/hair-restoration", challenge: "High-consideration customers need confidence.", approach: "Meta Ads + Google Ads + Content." },
 ];
 
 const PROCESS = [
@@ -475,9 +476,17 @@ export default function Growth() {
           <h2 className="gm-display gm-title-lg">MARKETING WITH CONTEXT.</h2>
           <div className="gm-industry-list">
             {INDUSTRIES.map((x) => (
-              <div key={x.n} className="gm-industry">
+              <div
+                key={x.n}
+                className="gm-industry"
+                style={{ cursor: "pointer" }}
+                onClick={() => window.open(x.href, "_blank", "noopener,noreferrer")}
+              >
                 <div className="gm-num">{x.n}</div>
-                <h3 className="gm-display">{x.name}</h3>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <h3 className="gm-display" style={{ margin: 0 }}>{x.name}</h3>
+                  <span className="gm-industry-hint">›</span>
+                </div>
                 <p><strong>Challenge:</strong> {x.challenge}</p>
                 <p><strong>Approach:</strong> {x.approach}</p>
               </div>
@@ -504,21 +513,7 @@ export default function Growth() {
       </section>
 
       {/* Testimonial */}
-      <section className="gm-section gm-alt">
-        <div className="gm-container">
-          <div className="gm-eyebrow">Client perspective</div>
-          <h2 className="gm-display gm-title-lg">TRUSTED BY THE PEOPLE<br />WE GROW WITH.</h2>
-          <div className="gm-quote-layout">
-            <div className="gm-quote">
-              “Markition is very organized in planning to achieve the goals within the set deadlines. We feel they were truly part of our internal team project.”
-            </div>
-            <div className="gm-person">
-              <b>Alvaro Araujo</b>
-              <span>Founder &amp; CEO, Relocate Now</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TestimonialsSection background="#ffffff" />
     </div>
   );
 }

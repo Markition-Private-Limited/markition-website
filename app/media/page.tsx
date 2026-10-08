@@ -38,10 +38,8 @@ export default function MediaHomePage() {
         </div>
         {/* ── Third macro-section: navy, from Process down into the footer ── */}
         <div style={{ background: "linear-gradient(180deg, #0c1e40 0%, #060f28 40%, #020a1c 100%)" }}>
-          <Process />
-          {/* Same reasoning as HeroShowcase above — Process's height drives its own
-              scroll-jacked step animation via getBoundingClientRect(). */}
-          <div className="media-gap-spacer" aria-hidden="true" />
+          {/* <Process /> */}
+          {/* <div className="media-gap-spacer" aria-hidden="true" /> */}
           <Stats />
           <Portfolio />
           {/* Portfolio has a fixed pixel height with absolutely-positioned
