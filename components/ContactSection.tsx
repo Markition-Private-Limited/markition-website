@@ -193,7 +193,7 @@ export default function ContactSection() {
                   textAlign: "center",
                 }}
               >
-                +1 (713) 894-7727
+                +1 (217) 401-0041
               </p>
 
               <div

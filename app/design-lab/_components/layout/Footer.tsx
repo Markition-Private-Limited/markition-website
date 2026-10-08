@@ -297,9 +297,9 @@ export function Footer() {
               <MailIcon />
               hey@markition.com
             </a>
-            <a href="tel:+17138947727" className="flex items-center gap-2 text-white/70 transition-colors hover:text-white">
+            <a href="tel:+12174010041" className="flex items-center gap-2 text-white/70 transition-colors hover:text-white">
               <PhoneIcon />
-              +1 (713) 894-7727
+              +1 (217) 401-0041
             </a>
             <span className="flex items-center gap-2 text-white/70">
               <PinIcon />

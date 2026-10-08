@@ -38,9 +38,9 @@ export function FinalCtaSection({ onOpenAudit }: FinalCtaSectionProps) {
             <span className="sm:hidden">Get Free Marketing Audit</span>
             <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 btn-arrow shrink-0" />
           </button>
-          <a href="tel:+17138947727" onClick={() => trackConversion('phone_call_click', { source: 'final_cta_phone' })} className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-full border border-white/20 hover:border-white text-white font-semibold text-base transition-colors bg-white/5">
+          <a href="tel:+12174010041" onClick={() => trackConversion('phone_call_click', { source: 'final_cta_phone' })} className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-full border border-white/20 hover:border-white text-white font-semibold text-base transition-colors bg-white/5">
             <Phone className="w-4 h-4 text-[#20D9FF]" />
-            <span className="font-mono text-sm">+1 (713) 894-7727</span>
+            <span className="font-mono text-sm">+1 (217) 401-0041</span>
           </a>
         </div>
 

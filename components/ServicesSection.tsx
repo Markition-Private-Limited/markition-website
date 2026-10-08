@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /* ─── Data ───────────────────────────────────────────────────────────────── */
 const SERVICES = [
@@ -113,17 +113,34 @@ export default function ServicesSection() {
       .find(([, sid]) => sid === id)![0];
   }
 
-  /* Rotate the triangle so the clicked service comes to the centre */
+  /* Rotate the triangle one step. dir: "cw" brings topLeft to centre, "ccw" brings topRight to centre. */
+  function rotate(dir: "cw" | "ccw") {
+    setActiveItem(0);
+    setAssign(prev =>
+      dir === "cw"
+        ? { center: prev.topLeft, topRight: prev.center, topLeft: prev.topRight }
+        : { center: prev.topRight, topLeft: prev.center, topRight: prev.topLeft }
+    );
+  }
+
+  /* Auto-shuffle the triangle every few seconds; restarts whenever the visitor clicks a node */
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  function restartAutoplay() {
+    if (autoplayRef.current) clearInterval(autoplayRef.current);
+    autoplayRef.current = setInterval(() => rotate("cw"), 5000);
+  }
+  useEffect(() => {
+    restartAutoplay();
+    return () => {
+      if (autoplayRef.current) clearInterval(autoplayRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function handleClick(id: ServiceId) {
     if (slotOf(id) === "center") return;
-    setActiveItem(0);
-    if (slotOf(id) === "topLeft") {
-      /* CW step: topLeft→center, center→topRight, topRight→topLeft */
-      setAssign({ center: assign.topLeft, topRight: assign.center, topLeft: assign.topRight });
-    } else {
-      /* CCW step: topRight→center, center→topLeft, topLeft→topRight */
-      setAssign({ center: assign.topRight, topLeft: assign.center, topRight: assign.topLeft });
-    }
+    rotate(slotOf(id) === "topLeft" ? "cw" : "ccw");
+    restartAutoplay();
   }
 
   return (
