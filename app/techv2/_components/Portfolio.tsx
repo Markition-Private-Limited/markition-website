@@ -1,6 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
-import { projectOutcomes, projects } from "../../tech/_data/site";
+import { projectOutcomes, projects } from "../_data/site";
 import { SectionHeading } from "./SectionHeading";
 
 export function Portfolio() {

@@ -1,4 +1,4 @@
-import { connectedBenefits, connectedNodes } from "../../tech/_data/site";
+import { connectedBenefits, connectedNodes } from "../_data/site";
 import { SectionHeading } from "./SectionHeading";
 
 export function ConnectedSection() {

@@ -1,6 +1,6 @@
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { featuredMetrics, stats } from "../../tech/_data/site";
+import { featuredMetrics, stats } from "../_data/site";
 
 export function Hero() {
   return (

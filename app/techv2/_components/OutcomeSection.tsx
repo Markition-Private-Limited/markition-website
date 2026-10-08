@@ -1,4 +1,4 @@
-import { outcomes } from "../../tech/_data/site";
+import { outcomes } from "../_data/site";
 import { SectionHeading } from "./SectionHeading";
 
 export function OutcomeSection() {

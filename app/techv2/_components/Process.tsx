@@ -1,4 +1,4 @@
-import { processSteps } from "../../tech/_data/site";
+import { processSteps } from "../_data/site";
 import { SectionHeading } from "./SectionHeading";
 
 export function Process() {
