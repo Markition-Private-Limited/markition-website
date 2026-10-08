@@ -25,7 +25,7 @@ export function CtaSection() {
     <section
       ref={sectionRef}
       data-navbar-theme="light"
-      className="bg-white px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+      className="bg-white px-5 pt-6 pb-16 sm:px-8 sm:pt-8 sm:pb-20 lg:px-10 lg:pt-10 lg:pb-24"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(32px)",

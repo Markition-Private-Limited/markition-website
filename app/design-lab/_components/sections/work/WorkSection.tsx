@@ -261,7 +261,9 @@ export function WorkSection() {
           }}
         >
           <a
-            href="#"
+            href="/portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
             onMouseEnter={() => setBtnHover(true)}
             onMouseLeave={() => setBtnHover(false)}
             className="inline-flex items-center gap-2.5 text-[15px] font-semibold"

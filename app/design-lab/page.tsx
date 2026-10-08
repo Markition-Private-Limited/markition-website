@@ -7,7 +7,6 @@ import { WorkSection } from "./_components/sections/work/WorkSection";
 import { IndustriesSection } from "./_components/sections/industries/IndustriesSection";
 import { ProcessSection } from "./_components/sections/process/ProcessSection";
 import { ToolsSection } from "./_components/sections/tools/ToolsSection";
-import { WhySection } from "./_components/sections/why/WhySection";
 import { TestimonialsSection } from "./_components/sections/testimonials/TestimonialsSection";
 import { CtaSection } from "./_components/sections/cta/CtaSection";
 import { FaqSection } from "./_components/sections/faq/FaqSection";
@@ -29,7 +28,6 @@ export default function DesignLabPage() {
       <IndustriesSection />
       <ProcessSection />
       <ToolsSection />
-      <WhySection />
       <TestimonialsSection />
       <FaqSection />
       <CtaSection />
