@@ -39,7 +39,7 @@ export function FaqSection() {
   const [open, setOpen] = useState<number>(0);
 
   return (
-    <section data-navbar-theme="light" className="bg-white py-20 sm:py-28 px-5 sm:px-8 lg:px-10">
+    <section data-navbar-theme="light" className="bg-white pt-20 pb-10 sm:pt-28 sm:pb-14 px-5 sm:px-8 lg:px-10">
       <div className="mx-auto" style={{ maxWidth: 720 }}>
 
         <div className="text-center mb-12">
