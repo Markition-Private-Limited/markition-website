@@ -110,7 +110,7 @@ export default function Footer({ variant = "media" }: { variant?: "media" | "tec
             <ColHeading>Get In Touch</ColHeading>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <ContactRow icon={<PinIcon />}   text="Houston, Texas, USA"  href="https://maps.google.com/?q=Houston,Texas,USA" />
-              <ContactRow icon={<PhoneIcon />} text="+1 (713) 894-7727"    href="tel:+17138947727" />
+              <ContactRow icon={<PhoneIcon />} text="+1 (217) 401-0041"    href="tel:+12174010041" />
               <ContactRow icon={<MailIcon />}  text="hey@markition.com"    href="mailto:hey@markition.com" />
             </div>
             <div style={{ display: "flex", gap: 14, marginTop: 24, flexWrap: "wrap" }}>

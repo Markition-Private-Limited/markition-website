@@ -94,9 +94,9 @@ export function HeroSection({ onOpenAudit, selectedService }: HeroSectionProps) 
                 <span className="sm:hidden">Request Free Audit</span>
                 <ArrowUpRight className="w-4 h-4 btn-arrow shrink-0" />
               </button>
-              <a href="tel:+17138947727" onClick={() => trackConversion('phone_call_click', { source: 'hero_phone_button' })} className="btn-agency-secondary h-12 px-5 flex items-center gap-2">
+              <a href="tel:+12174010041" onClick={() => trackConversion('phone_call_click', { source: 'hero_phone_button' })} className="btn-agency-secondary h-12 px-5 flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#1236E8]" />
-                <span className="font-mono text-sm font-semibold tracking-tight">+1 (713) 894-7727</span>
+                <span className="font-mono text-sm font-semibold tracking-tight">+1 (217) 401-0041</span>
               </a>
               <div className="inline-flex items-center justify-center gap-2 h-10 px-3.5 rounded-full bg-emerald-50/90 border border-emerald-200/90 text-emerald-900 text-xs font-semibold">
                 <Clock className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
