@@ -7,7 +7,7 @@ export const techHtml = `
   <p class="eyebrow-dark">Markition Tech</p>
   <h1>We Build Technology Around Your Business</h1>
   <p class="hero-p">CRM, ERP, web platforms and mobile apps, designed around how your company really works and connected into one system your team can run on.</p>
-  <div class="hero-actions"><a class="btn btn-glass" href="#contact"><span class="btn-in"><span class="btn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 6l6 6-6 6M12 6l6 6-6 6" opacity=".95"/></svg></span><span class="btn-tx">Start a Project</span></span></a><a class="link-arrow" href="#work">See what we've built <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  <div class="hero-actions"><a class="btn-simple" href="#contact">Start a Project<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="link-arrow" href="#work">See what we've built <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
  </div>
  <div class="wrap hero-foot"><p>One connected system instead of a stack of tools that don't talk to each other.</p>
   <ul class="hero-tags"><li>CRM</li><li>ERP</li><li>Web</li><li>Mobile</li><li>APIs</li><li>Data</li></ul></div>

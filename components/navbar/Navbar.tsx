@@ -575,8 +575,8 @@ export default function Navbar() {
                       cursor: "pointer", overflow: "hidden", position: "relative", boxShadow: "0 6px 20px rgba(0,0,0,0.25)",
                     }}
                     onClick={() => { setSolutionsOpen(false); openSolution(sol); }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.05)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.4)"; const bg = e.currentTarget.querySelector(".sol-img-bg") as HTMLElement | null; if (bg) { bg.style.filter = "blur(0px) brightness(1.25) saturate(1.3)"; bg.style.transform = "scale(1.12)"; } }}
-                    onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.25)"; const bg = e.currentTarget.querySelector(".sol-img-bg") as HTMLElement | null; if (bg) { bg.style.filter = "blur(1.5px) brightness(1) saturate(1)"; bg.style.transform = "scale(1.08)"; } }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.05)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.4), 0 0 28px rgba(75,142,255,0.45)"; const bg = e.currentTarget.querySelector(".sol-img-bg") as HTMLElement | null; if (bg) { bg.style.filter = "blur(0px) brightness(1.15) saturate(1.2)"; } }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.25)"; const bg = e.currentTarget.querySelector(".sol-img-bg") as HTMLElement | null; if (bg) { bg.style.filter = "blur(4px) brightness(1) saturate(1)"; } }}
                   >
                     {/* Blurred background image layer */}
                     {"image" in sol && sol.image && (
@@ -586,14 +586,12 @@ export default function Navbar() {
                           position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
                           backgroundImage: `linear-gradient(145deg, rgba(8,14,44,0.18), rgba(10,20,60,0.32)), url(${sol.image})`,
                           backgroundSize: "cover", backgroundPosition: "center",
-                          filter: "blur(1.5px) brightness(1) saturate(1)",
-                          transform: "scale(1.08)",
-                          transition: "filter 0.3s ease, transform 0.3s ease",
+                          filter: "blur(4px) brightness(1) saturate(1)",
+                          transform: "scale(1.1)",
+                          transition: "filter 0.3s ease",
                         }}
                       />
                     )}
-                    {/* Moving shine sweep */}
-                    <div className="sol-shine" style={{ position: "absolute", top: 0, left: "-80%", width: "55%", height: "100%", background: "linear-gradient(105deg, transparent, rgba(255,255,255,0.22), transparent)", pointerEvents: "none", borderRadius: 12, zIndex: 1 }} />
                     <span style={{
                       color: "#ffffff", fontSize: 19, fontWeight: 800, letterSpacing: "0.04em",
                       textTransform: "uppercase", textAlign: "center", lineHeight: 1.3, padding: "0 10px",
@@ -643,7 +641,7 @@ export default function Navbar() {
             <button onClick={() => setIndustriesOpen(false)} style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>✕</button>
           </div>
           <div style={{ height: 1, background: "rgba(255,255,255,0.07)", marginBottom: 20 }} />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12 }}>
+          <div style={{ display: "grid", gridTemplateColumns: `repeat(${INDUSTRIES.length}, 1fr)`, gap: 12 }}>
             {INDUSTRIES.map((ind) => (
               <a
                 key={ind.label}
@@ -672,19 +670,12 @@ export default function Navbar() {
           from { clip-path: inset(0 0 100% 0); }
           to   { clip-path: inset(0 0 0% 0); }
         }
-        .sol-col:hover .sol-shine {
-          animation: solShine 0.55s ease forwards;
-        }
         .svc-pill-item:hover .svc-pill-icon {
           background: rgba(75,142,255,0.15);
           border-color: rgba(75,142,255,0.35);
         }
         .svc-pill-item:hover span {
           color: #4B8EFF;
-        }
-        @keyframes solShine {
-          from { left: -80%; }
-          to   { left: 160%; }
         }
       `}</style>
 
