@@ -575,7 +575,7 @@ export default function Navbar() {
                       cursor: "pointer", overflow: "hidden", position: "relative", boxShadow: "0 6px 20px rgba(0,0,0,0.25)",
                     }}
                     onClick={() => { setSolutionsOpen(false); openSolution(sol); }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.05)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.4)"; const bg = e.currentTarget.querySelector(".sol-img-bg") as HTMLElement | null; if (bg) { bg.style.filter = "blur(2px) brightness(1.25) saturate(1.3)"; bg.style.transform = "scale(1.12)"; } }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.05)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.4)"; const bg = e.currentTarget.querySelector(".sol-img-bg") as HTMLElement | null; if (bg) { bg.style.filter = "blur(0px) brightness(1.25) saturate(1.3)"; bg.style.transform = "scale(1.12)"; } }}
                     onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.25)"; const bg = e.currentTarget.querySelector(".sol-img-bg") as HTMLElement | null; if (bg) { bg.style.filter = "blur(1.5px) brightness(1) saturate(1)"; bg.style.transform = "scale(1.08)"; } }}
                   >
                     {/* Blurred background image layer */}
