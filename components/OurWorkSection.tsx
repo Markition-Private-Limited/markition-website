@@ -192,6 +192,7 @@ export default function OurWorkSection() {
   // bottom-row items (index > 0 within their column) get the fade overlay
   return (
     <section style={{ background: "#000028", position: "relative" }}>
+      <style>{`@media(max-width:480px){.work-masonry{grid-template-columns:1fr!important}}`}</style>
       {/* ── Heading + tabs ─────────────────────────────────────── */}
       <div
         style={{
@@ -269,6 +270,7 @@ export default function OurWorkSection() {
           }}
         >
           <div
+            className="work-masonry"
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",

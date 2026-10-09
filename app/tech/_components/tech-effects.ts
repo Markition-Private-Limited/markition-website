@@ -98,6 +98,82 @@ function setupReveal(root: HTMLElement): Cleanup {
   };
 }
 
+/* "Seven steps" process: pins the section while the user scrolls, filling
+   the connecting line and lighting up each dot one by one. The section
+   becomes sticky inside a taller wrapper that provides the scroll travel
+   (0.5 vh per dot). Progress = 0 when the section just locks into place,
+   1 when the last dot is reached — then normal scrolling resumes. */
+function setupStepsProgress(root: HTMLElement): Cleanup {
+  const section = root.querySelector<HTMLElement>("#process");
+  if (!section) return () => {};
+  const steps = section.querySelector<HTMLElement>(".steps");
+  if (!steps) return () => {};
+  const dots = Array.from(steps.querySelectorAll<HTMLElement>(".dot"));
+  if (!dots.length) return () => {};
+
+  const apply = (progress: number) => {
+    steps.style.setProperty("--fill", String(progress));
+    dots.forEach((dot, i) => {
+      const threshold = (i + 0.5) / dots.length;
+      dot.classList.toggle("filled", progress >= threshold);
+    });
+  };
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    apply(1);
+    return () => {};
+  }
+
+  // Wrap section in an oversized container to create extra scroll travel
+  const wrapper = document.createElement("div");
+  wrapper.className = "steps-pin-wrapper";
+  section.parentNode!.insertBefore(wrapper, section);
+  wrapper.appendChild(section);
+
+  const TOP = 60; // sticky offset below navbar
+  section.style.position = "sticky";
+  section.style.top = TOP + "px";
+
+  let extraScroll = 0;
+
+  const resize = () => {
+    extraScroll = Math.round(window.innerHeight * 0.5 * dots.length);
+    wrapper.style.height = section.offsetHeight + extraScroll + "px";
+    update();
+  };
+
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const wTop = wrapper.getBoundingClientRect().top;
+    // wTop = TOP → section just locked (progress 0)
+    // wTop = TOP - extraScroll → all dots filled (progress 1)
+    const progress = Math.min(1, Math.max(0, (TOP - wTop) / (extraScroll || 1)));
+    apply(progress);
+  };
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+
+  resize();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", resize);
+
+  return () => {
+    window.removeEventListener("scroll", onScroll);
+    window.removeEventListener("resize", resize);
+    if (wrapper.parentNode) {
+      wrapper.parentNode.insertBefore(section, wrapper);
+      wrapper.parentNode.removeChild(wrapper);
+    }
+    section.style.position = "";
+    section.style.top = "";
+  };
+}
+
 /* Horizontally-scrolling industries carousel: side nav, prev/next arrows,
    progress bar and active-item tracking all stay in sync with the scroll position. */
 function setupIndustriesCarousel(root: HTMLElement): Cleanup {
@@ -173,7 +249,11 @@ function setupWorkFilter(root: HTMLElement): Cleanup {
       tabs.forEach((t) => t.classList.toggle("on", t === tab));
       const filter = tab.dataset.f;
       cases.forEach((c) => {
-        c.hidden = !(filter === "all" || c.dataset.k === filter);
+        const visible = filter === "all" || c.dataset.k === filter;
+        c.hidden = !visible;
+        // Also hide/show the sticky scroll-stack wrapper if one exists
+        const wrap = c.closest<HTMLElement>(".case-wrap");
+        if (wrap) wrap.hidden = !visible;
       });
     };
     tab.addEventListener("click", handler);
@@ -181,6 +261,93 @@ function setupWorkFilter(root: HTMLElement): Cleanup {
   });
 
   return () => handlers.forEach(([tab, handler]) => tab.removeEventListener("click", handler));
+}
+
+/* "Products we've built" scroll stack: each case card sticks near the top as
+   the user scrolls and the next one slides up over it, while cards underneath
+   scale down and dim slightly — identical mechanic to the media page's
+   CaseStack component. */
+function setupCasesScrollStack(root: HTMLElement): Cleanup {
+  const casesEl = root.querySelector<HTMLElement>("#cases");
+  if (!casesEl) return () => {};
+
+  const cases = Array.from(casesEl.querySelectorAll<HTMLElement>(".case"));
+  if (cases.length < 2) return () => {};
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Wrap each .case in a sticky .case-wrap so transform can be applied to the
+  // inner card without conflicting with position:sticky on the outer wrapper.
+  const wrappers: HTMLElement[] = cases.map((c, i) => {
+    const wrap = document.createElement("div");
+    wrap.className = "case-wrap";
+    wrap.style.setProperty("--i", String(i));
+    c.parentNode!.insertBefore(wrap, c);
+    wrap.appendChild(c);
+    // Keep opacity reveal but disable transform transition so the stack
+    // responds instantly to scroll without a 0.7 s lag.
+    c.style.transition = "opacity .7s cubic-bezier(.2,.7,.2,1)";
+    return wrap;
+  });
+
+  let frame = 0;
+
+  const update = () => {
+    const visWrappers: HTMLElement[] = [];
+    const visCards: HTMLElement[] = [];
+    wrappers.forEach((w) => {
+      if (!w.hidden) {
+        visWrappers.push(w);
+        const c = w.querySelector<HTMLElement>(".case");
+        if (c) visCards.push(c);
+      }
+    });
+
+    const lifts: number[] = new Array(visWrappers.length).fill(0);
+    const arrivals = visWrappers.map((el, j) => {
+      if (j === 0) return 0;
+      const stuckTop = parseFloat(getComputedStyle(el).top) || 0;
+      const travel = (visCards[j]?.offsetHeight ?? 400) * 0.9;
+      const remaining = Math.max(0, el.getBoundingClientRect().top - stuckTop);
+      const x = Math.min(1, remaining / travel);
+      if (remaining <= travel) lifts[j] = remaining - travel * x * x;
+      return 1 - x * x;
+    });
+
+    visCards.forEach((card, i) => {
+      let depth = 0;
+      for (let j = i + 1; j < arrivals.length; j++) depth += arrivals[j];
+      card.style.transform = reduce
+        ? ""
+        : `translateY(${(-lifts[i]).toFixed(1)}px) scale(${(1 - depth * 0.05).toFixed(4)})`;
+      card.style.filter = reduce ? "" : `brightness(${(1 - depth * 0.06).toFixed(4)})`;
+    });
+  };
+
+  const onScroll = () => {
+    window.cancelAnimationFrame(frame);
+    frame = window.requestAnimationFrame(update);
+  };
+
+  update();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+
+  return () => {
+    window.cancelAnimationFrame(frame);
+    window.removeEventListener("scroll", onScroll);
+    window.removeEventListener("resize", onScroll);
+    wrappers.forEach((wrap) => {
+      const card = wrap.querySelector<HTMLElement>(".case");
+      if (card) {
+        wrap.parentNode?.insertBefore(card, wrap);
+        card.style.transform = "";
+        card.style.filter = "";
+        card.style.transition = "";
+      }
+      wrap.parentNode?.removeChild(wrap);
+    });
+  };
 }
 
 /* Preview-only contact form: validates, then shows a status note instead of
@@ -446,7 +613,9 @@ export function setupTechEffects(root: HTMLElement): Cleanup {
     setupAnchorScrolling(root),
     setupStickyCta(root),
     setupReveal(root),
+    setupStepsProgress(root),
     setupIndustriesCarousel(root),
+    setupCasesScrollStack(root),
     setupWorkFilter(root),
     setupContactForm(root),
     setupEcosystemPulses(root),

@@ -5,7 +5,6 @@ export const NAV_LINKS = [
   { label: "Services", dropdown: true },
   { label: "Solutions" },
   { label: "Industries", dropdown: true },
-  { label: "Locations", dropdown: true },
   { label: "Case Studies" },
   { label: "Portfolio" },
   { label: "Contact" },

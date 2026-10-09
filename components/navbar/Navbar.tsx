@@ -19,10 +19,10 @@ function scrollToContact() {
 }
 
 const navGlassStyle: React.CSSProperties = {
-  background: "rgba(8, 16, 52, 0.85)",
+  background: "rgba(18, 30, 78, 0.92)",
   backdropFilter: "blur(20px) saturate(1.8)",
   WebkitBackdropFilter: "blur(20px) saturate(1.8)",
-  boxShadow: "0 2px 24px rgba(0,0,0,0.28), inset 0 1px 0 rgba(100,150,255,0.06)",
+  boxShadow: "0 2px 24px rgba(0,0,0,0.28), inset 0 1px 0 rgba(130,170,255,0.12)",
 };
 
 type ServiceItem = { icon: string; name: string; description: string; href?: string };
@@ -99,6 +99,7 @@ const SOLUTIONS_MENU = [
     heading: "Media",
     gradient: "radial-gradient(ellipse at 25% 60%, #ffffff 0%, #20D9FF 40%, #1236E8 100%)",
     accentBar: "linear-gradient(90deg, #20D9FF, #1236E8)",
+    image: "/solutions/media-bg.webp",
     icon: "megaphone",
     description: "Google Ads, SEO, social media management & paid campaigns that turn traffic into measurable growth.",
     linkText: "Explore Media",
@@ -109,6 +110,7 @@ const SOLUTIONS_MENU = [
     heading: "Technologies",
     gradient: "linear-gradient(135deg, #1236E8 0%, #20D9FF 100%)",
     accentBar: "linear-gradient(90deg, #1236E8, #20D9FF)",
+    image: "/solutions/tech-bg.webp",
     icon: "code",
     description: "Custom software, web apps, mobile platforms & SaaS products engineered for scale and peak performance.",
     linkText: "Explore Technologies",
@@ -119,6 +121,7 @@ const SOLUTIONS_MENU = [
     heading: "Design Lab",
     gradient: "linear-gradient(220deg, #20D9FF 0%, #1236E8 50%, #20D9FF 100%)",
     accentBar: "linear-gradient(90deg, #20D9FF, #1236E8, #20D9FF)",
+    image: "/solutions/designlab-bg.webp",
     icon: "pen",
     description: "Brand identity, UI/UX design, motion graphics & print — creative work that makes your brand impossible to ignore.",
     linkText: "Explore Design Lab",
@@ -129,6 +132,7 @@ const SOLUTIONS_MENU = [
     heading: "SPHENO AI",
     gradient: "radial-gradient(ellipse at 75% 25%, #ffffff 0%, #20D9FF 35%, #1236E8 100%)",
     accentBar: "linear-gradient(90deg, #1236E8, #20D9FF, #1236E8)",
+    image: "/solutions/spheno-bg.webp",
     icon: "robot",
     description: "AI agents, chatbots, voice AI & workflow automation that make your business operate intelligently.",
     linkText: "Explore SPHENO AI",
@@ -191,6 +195,72 @@ export default function Navbar() {
     }
   }
 
+  const servicesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function cancelServicesClose() {
+    if (servicesCloseTimer.current) {
+      clearTimeout(servicesCloseTimer.current);
+      servicesCloseTimer.current = null;
+    }
+  }
+
+  function openServicesHover() {
+    cancelServicesClose();
+    setSolutionsOpen(false);
+    setIndustriesOpen(false);
+    setServicesOpen(true);
+    if (!activeServiceLinks.includes(activeService)) {
+      setActiveService(activeServiceLinks[0]);
+    }
+  }
+
+  function scheduleServicesClose() {
+    cancelServicesClose();
+    servicesCloseTimer.current = setTimeout(() => setServicesOpen(false), 150);
+  }
+
+  const solutionsCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function cancelSolutionsClose() {
+    if (solutionsCloseTimer.current) {
+      clearTimeout(solutionsCloseTimer.current);
+      solutionsCloseTimer.current = null;
+    }
+  }
+
+  function openSolutionsHover() {
+    cancelSolutionsClose();
+    setServicesOpen(false);
+    setIndustriesOpen(false);
+    setSolutionsOpen(true);
+  }
+
+  function scheduleSolutionsClose() {
+    cancelSolutionsClose();
+    solutionsCloseTimer.current = setTimeout(() => setSolutionsOpen(false), 150);
+  }
+
+  const industriesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function cancelIndustriesClose() {
+    if (industriesCloseTimer.current) {
+      clearTimeout(industriesCloseTimer.current);
+      industriesCloseTimer.current = null;
+    }
+  }
+
+  function openIndustriesHover() {
+    cancelIndustriesClose();
+    setServicesOpen(false);
+    setSolutionsOpen(false);
+    setIndustriesOpen(true);
+  }
+
+  function scheduleIndustriesClose() {
+    cancelIndustriesClose();
+    industriesCloseTimer.current = setTimeout(() => setIndustriesOpen(false), 150);
+  }
+
   function handleContactClick(e: React.MouseEvent) {
     e.preventDefault();
     if (document.getElementById("contact")) {
@@ -217,7 +287,6 @@ export default function Navbar() {
   const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const INDUSTRIES = [
     { label: "Dental", href: "/industries/dental", icon: "star", desc: "Google Ads, SEO & lead gen for dental practices" },
@@ -225,6 +294,7 @@ export default function Navbar() {
     { label: "Hair Restoration", href: "/industries/hair-restoration", icon: "chart", desc: "Patient lead generation for hair transplant & restoration clinics" },
     { label: "Aesthetician Clinics", href: "/industries/aesthetician-clinics", icon: "bolt", desc: "Client acquisition for med spas & aesthetic clinics" },
   ];
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
@@ -236,8 +306,9 @@ export default function Navbar() {
 
   return (
     <div className="sticky top-0 z-50 px-4 sm:px-6 pt-2 sm:pt-3" ref={dropdownRef}>
+      <div style={{ position: "relative" }}>
       <nav
-        className="w-full flex items-center justify-between px-5 sm:px-8 py-3 sm:py-4 rounded-xl border border-white/[0.08] gap-4"
+        className="w-full flex items-center justify-between px-5 sm:px-8 py-3 sm:py-4 rounded-xl border border-white/[0.16] gap-4"
         style={navGlassStyle}
       >
         {/* Logo */}
@@ -274,6 +345,8 @@ export default function Navbar() {
               <button
                 key={link.label}
                 onClick={() => { setIndustriesOpen((v) => !v); setServicesOpen(false); setSolutionsOpen(false); }}
+                onMouseEnter={openIndustriesHover}
+                onMouseLeave={scheduleIndustriesClose}
                 className="hover:text-white/95 transition-colors duration-150 flex items-center gap-1 whitespace-nowrap px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05] text-[13px] font-normal"
                 style={{ background: "none", border: "none", cursor: "pointer", color: industriesOpen ? "#ffffff" : "inherit" }}
               >
@@ -287,6 +360,8 @@ export default function Navbar() {
               <button
                 key={link.label}
                 onClick={openServicesMenu}
+                onMouseEnter={openServicesHover}
+                onMouseLeave={scheduleServicesClose}
                 className="hover:text-white/95 transition-colors duration-150 flex items-center gap-1 whitespace-nowrap px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05] text-[13px] font-normal"
                 style={{ background: "none", border: "none", cursor: "pointer", color: servicesOpen ? "#ffffff" : "inherit" }}
               >
@@ -300,6 +375,8 @@ export default function Navbar() {
               <button
                 key={link.label}
                 onClick={() => { setSolutionsOpen((v) => !v); setServicesOpen(false); }}
+                onMouseEnter={openSolutionsHover}
+                onMouseLeave={scheduleSolutionsClose}
                 className="hover:text-white/95 transition-colors duration-150 flex items-center gap-1 whitespace-nowrap px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05] text-[13px] font-normal"
                 style={{ background: "none", border: "none", cursor: "pointer", color: solutionsOpen ? "#ffffff" : "inherit" }}
               >
@@ -367,120 +444,71 @@ export default function Navbar() {
       {/* ── Services mega dropdown ── */}
       {servicesOpen && (
         <div
-          style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 40, background: "rgba(0,0,20,0.55)", backdropFilter: "blur(2px)" }}
-          onClick={() => setServicesOpen(false)}
+          onMouseEnter={cancelServicesClose}
+          onMouseLeave={scheduleServicesClose}
+          style={{ position: "absolute", top: "calc(100% + 10px)", left: 0, right: 0, background: "linear-gradient(145deg, #060e2e 0%, #0a1540 100%)", border: "1px solid rgba(100,130,255,0.18)", borderRadius: 18, boxShadow: "0 24px 80px rgba(0,0,40,0.7)", padding: "30px 34px 34px", zIndex: 40, animation: "megaFadeIn 0.32s ease" }}
         >
-          <div
-            style={{ position: "absolute", top: 80, left: "50%", transform: "translateX(-50%)", width: "min(1160px, 96vw)", background: "linear-gradient(145deg, #060e2e 0%, #0a1540 100%)", border: "1px solid rgba(100,130,255,0.18)", borderRadius: 18, boxShadow: "0 24px 80px rgba(0,0,40,0.7)", padding: "32px 32px 28px", animation: "megaFadeIn 0.22s ease" }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
-              <p style={{ margin: 0, fontSize: 32, fontWeight: 800, letterSpacing: "0.04em", color: "rgba(255,255,255,0.75)", textTransform: "uppercase", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>
-                YOUR ONE STOP DIGITAL SOLUTION
-              </p>
-              <button
-                onClick={() => setServicesOpen(false)}
-                style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}
-              >
-                ✕
-              </button>
+          <p style={{ margin: "0 0 22px", fontSize: 11, fontWeight: 700, letterSpacing: "0.16em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>
+            All Services
+          </p>
+
+          <div style={{ display: "grid", gridTemplateColumns: "190px 1fr", gap: 36 }}>
+            {/* ── Sidebar: category tabs ── */}
+            <div style={{ borderRight: "1px solid rgba(255,255,255,0.08)", paddingRight: 24 }}>
+              {activeServiceLinks.map((label) => {
+                const isActive = label === activeService;
+                return (
+                  <button
+                    key={label}
+                    onClick={() => setActiveService(label)}
+                    onMouseEnter={() => setActiveService(label)}
+                    style={{
+                      display: "flex", alignItems: "center", gap: 9, width: "100%", textAlign: "left",
+                      padding: "9px 12px", borderRadius: 9, marginBottom: 2,
+                      background: isActive ? "rgba(75,142,255,0.12)" : "transparent",
+                      border: "none", cursor: "pointer",
+                      fontSize: 14.5, fontWeight: isActive ? 700 : 500,
+                      color: isActive ? "#ffffff" : "rgba(255,255,255,0.5)",
+                      fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)",
+                      transition: "background 0.15s, color 0.15s",
+                    }}
+                  >
+                    {isActive && (
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="#4B8EFF" style={{ flexShrink: 0 }} aria-hidden="true">
+                        <path d="M12 0 L14.2 9.8 L24 12 L14.2 14.2 L12 24 L9.8 14.2 L0 12 L9.8 9.8 Z" />
+                      </svg>
+                    )}
+                    {label}
+                  </button>
+                );
+              })}
             </div>
-            <div style={{ height: 1, background: "rgba(255,255,255,0.07)", marginBottom: 28 }} />
 
-            {/* 3 cols + promo card */}
-            <div style={{ display: "grid", gridTemplateColumns: "220px 1fr 240px", gap: "0 28px" }}>
-
-              {/* ── Col 1: Big main nav tabs ── */}
-              <div style={{ borderRight: "1px solid rgba(255,255,255,0.07)", paddingRight: 24 }}>
-                {activeServiceLinks.map((label) => {
-                  const isActive = label === activeService;
-                  return (
-                    <button
-                      key={label}
-                      onClick={() => setActiveService(label)}
-                      style={{
-                        display: "block", width: "100%", textAlign: "left",
-                        padding: "9px 12px", fontSize: 20, fontWeight: 800,
-                        color: isActive ? "#4B8EFF" : "rgba(255,255,255,0.75)",
-                        background: isActive ? "rgba(75,142,255,0.1)" : "transparent",
-                        border: "none", borderRadius: 8, cursor: "pointer",
-                        letterSpacing: "-0.3px",
-                        fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)",
-                        transition: "color 0.15s, background 0.15s, transform 0.15s",
-                        transform: isActive ? "translateX(4px)" : "translateX(0)",
-                        borderLeft: isActive ? "3px solid #4B8EFF" : "3px solid transparent",
-                        marginBottom: 2,
-                      }}
-                      onMouseEnter={e => { if (!isActive) { e.currentTarget.style.color = "#ffffff"; e.currentTarget.style.transform = "translateX(4px)"; } }}
-                      onMouseLeave={e => { if (!isActive) { e.currentTarget.style.color = "rgba(255,255,255,0.75)"; e.currentTarget.style.transform = "translateX(0)"; } }}
-                    >
-                      {label}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* ── Middle: 2-col service card grid ── */}
-              <div style={{ borderRight: "1px solid rgba(255,255,255,0.07)", paddingRight: 28 }}>
-                <p style={{ margin: "0 0 20px", fontSize: 11, fontWeight: 700, letterSpacing: "0.13em", color: "#4B8EFF", textTransform: "uppercase", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>
-                  {SERVICES_MENU.content[activeService]?.title}
-                </p>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px 16px" }}>
-                  {(SERVICES_MENU.content[activeService]?.items ?? []).map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href ?? "#"}
-                      target={item.href ? "_blank" : undefined}
-                      rel={item.href ? "noopener noreferrer" : undefined}
-                      onClick={() => setServicesOpen(false)}
-                      className="svc-card-item"
-                      style={{
-                        display: "flex", alignItems: "flex-start", gap: 12,
-                        padding: "12px 10px", borderRadius: 10,
-                        textDecoration: "none", transition: "background 0.15s",
-                      }}
-                      onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.05)")}
-                      onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                    >
-                      <div style={{
-                        flexShrink: 0, width: 36, height: 36, borderRadius: 8,
-                        background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.1)",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        color: "#4B8EFF",
-                      }}>
-                        <ServiceIcon type={item.icon} />
-                      </div>
-                      <div>
-                        <p style={{ margin: "0 0 3px", fontSize: 14, fontWeight: 700, color: "#ffffff", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", lineHeight: 1.3 }}>
-                          {item.name}
-                        </p>
-                        <p style={{ margin: 0, fontSize: 11.5, color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", lineHeight: 1.55 }}>
-                          {item.description}
-                        </p>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* ── Promo card ── */}
-              <div style={{ background: "rgba(26,71,204,0.18)", border: "1px solid rgba(100,140,255,0.2)", borderRadius: 12, padding: "18px 16px", display: "flex", flexDirection: "column", gap: 10 }}>
-                <div style={{ width: "100%", height: 100, borderRadius: 8, background: "linear-gradient(135deg, #1a47cc 0%, #22c5f5 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Image src="/markition-logo.svg" alt="Markition" width={90} height={24} style={{ opacity: 0.9 }} />
-                </div>
-                <p style={{ margin: 0, fontSize: 12.5, fontWeight: 700, color: "#ffffff", lineHeight: 1.4, fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>
-                  {SERVICES_MENU.card.title}
-                </p>
-                <p style={{ margin: 0, fontSize: 11, color: "rgba(255,255,255,0.58)", lineHeight: 1.65, fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>
-                  {SERVICES_MENU.card.body}
-                </p>
-                <a href="#" onClick={() => setServicesOpen(false)}
-                  style={{ marginTop: "auto", display: "inline-flex", alignItems: "center", gap: 6, background: "#1A47CC", color: "#fff", borderRadius: 999, padding: "7px 14px", fontSize: 11.5, fontWeight: 700, textDecoration: "none", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}
+            {/* ── Items grid ── */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "26px 20px", alignContent: "start" }}>
+              {(SERVICES_MENU.content[activeService]?.items ?? []).map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href ?? "#"}
+                  target={item.href ? "_blank" : undefined}
+                  rel={item.href ? "noopener noreferrer" : undefined}
+                  onClick={() => setServicesOpen(false)}
+                  className="svc-pill-item"
+                  style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}
                 >
-                  Get Started →
+                  <div className="svc-pill-icon" style={{
+                    flexShrink: 0, width: 36, height: 36, borderRadius: 8,
+                    background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    color: "#4B8EFF", transition: "background 0.15s, border-color 0.15s",
+                  }}>
+                    <ServiceIcon type={item.icon} />
+                  </div>
+                  <span style={{ fontSize: 13.5, fontWeight: 700, color: "#ffffff", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", lineHeight: 1.3, transition: "color 0.15s" }}>
+                    {item.name}
+                  </span>
                 </a>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -489,13 +517,10 @@ export default function Navbar() {
       {/* ── Solutions mega dropdown ── */}
       {solutionsOpen && (
         <div
-          style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 40, background: "rgba(0,0,18,0.7)", backdropFilter: "blur(6px)" }}
-          onClick={() => setSolutionsOpen(false)}
+          onMouseEnter={cancelSolutionsClose}
+          onMouseLeave={scheduleSolutionsClose}
+          style={{ position: "absolute", top: "calc(100% + 10px)", left: 0, right: 0, background: "linear-gradient(145deg, #080e2c 0%, #0d1850 55%, #060e28 100%)", border: "1px solid rgba(100,140,255,0.22)", borderRadius: 22, boxShadow: "0 32px 100px rgba(0,0,50,0.85), inset 0 1px 0 rgba(255,255,255,0.07)", padding: "36px 36px 42px", zIndex: 40, animation: "megaFadeIn 0.32s ease", overflow: "hidden" }}
         >
-          <div
-            style={{ position: "absolute", top: 80, left: "50%", transform: "translateX(-50%)", width: "min(1220px, 96vw)", background: "linear-gradient(145deg, #080e2c 0%, #0d1850 55%, #060e28 100%)", border: "1px solid rgba(100,140,255,0.22)", borderRadius: 22, boxShadow: "0 32px 100px rgba(0,0,50,0.85), inset 0 1px 0 rgba(255,255,255,0.07)", padding: "36px 36px 42px", animation: "megaFadeIn 0.22s ease", overflow: "hidden" }}
-            onClick={(e) => e.stopPropagation()}
-          >
             {/* Decorative ambient glow orbs */}
             <div style={{ position: "absolute", top: -90, right: -60, width: 380, height: 380, borderRadius: "50%", background: "radial-gradient(circle, rgba(75,142,255,0.13) 0%, transparent 70%)", pointerEvents: "none" }} />
             <div style={{ position: "absolute", bottom: -110, left: 60, width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(34,197,244,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
@@ -524,40 +549,59 @@ export default function Navbar() {
 
             {/* 5-column grid */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0 20px", position: "relative", zIndex: 1 }}>
-              {SOLUTIONS_MENU.map((sol) => (
+              {SOLUTIONS_MENU.map((sol, i) => (
                 <div
                   key={sol.heading}
                   className="sol-col"
-                  style={{ display: "flex", flexDirection: "column", borderRadius: 16, padding: "14px 14px 18px", transition: "background 0.2s, transform 0.2s" }}
+                  style={{
+                    display: "flex", flexDirection: "column", borderRadius: 16, padding: "14px 14px 18px",
+                    transition: "background 0.2s, transform 0.2s",
+                    borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.1)" : "1px solid transparent",
+                  }}
                   onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.transform = "translateY(-3px)"; }}
                   onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "translateY(0)"; }}
                 >
                   {/* Colored top accent bar */}
                   <div style={{ height: 3, borderRadius: 99, background: sol.accentBar, marginBottom: 14 }} />
 
-                  {/* Heading */}
-                  <p
-                    style={{ margin: "0 0 14px", fontSize: 15, fontWeight: 800, color: "#ffffff", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", letterSpacing: "-0.2px", textAlign: "center", transition: "color 0.18s, transform 0.18s", cursor: sol.href ? "pointer" : "default", transformOrigin: "center" }}
-                    onClick={() => { setSolutionsOpen(false); openSolution(sol); }}
-                    onMouseEnter={e => { e.currentTarget.style.color = "#4B8EFF"; e.currentTarget.style.transform = "scale(1.06)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = "#ffffff"; e.currentTarget.style.transform = "scale(1)"; }}
-                  >
-                    {sol.heading}
-                  </p>
-
                   {/* Visual / image area */}
                   <div
                     className="sol-img"
-                    style={{ height: 128, borderRadius: 12, background: sol.gradient, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "transform 0.25s cubic-bezier(0.34,1.56,0.64,1), filter 0.25s ease, box-shadow 0.25s ease", cursor: "pointer", overflow: "hidden", position: "relative", boxShadow: "0 6px 20px rgba(0,0,0,0.25)" }}
+                    style={{
+                      height: 128, borderRadius: 12,
+                      background: !("image" in sol && sol.image) ? sol.gradient : undefined,
+                      display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+                      transition: "transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease",
+                      cursor: "pointer", overflow: "hidden", position: "relative", boxShadow: "0 6px 20px rgba(0,0,0,0.25)",
+                    }}
                     onClick={() => { setSolutionsOpen(false); openSolution(sol); }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.05)"; e.currentTarget.style.filter = "brightness(1.18) saturate(1.25)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.4)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.filter = "none"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.25)"; }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.05)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.4)"; const bg = e.currentTarget.querySelector(".sol-img-bg") as HTMLElement | null; if (bg) { bg.style.filter = "blur(2px) brightness(1.25) saturate(1.3)"; bg.style.transform = "scale(1.12)"; } }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.25)"; const bg = e.currentTarget.querySelector(".sol-img-bg") as HTMLElement | null; if (bg) { bg.style.filter = "blur(1.5px) brightness(1) saturate(1)"; bg.style.transform = "scale(1.08)"; } }}
                   >
+                    {/* Blurred background image layer */}
+                    {"image" in sol && sol.image && (
+                      <div
+                        className="sol-img-bg"
+                        style={{
+                          position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
+                          backgroundImage: `linear-gradient(145deg, rgba(8,14,44,0.18), rgba(10,20,60,0.32)), url(${sol.image})`,
+                          backgroundSize: "cover", backgroundPosition: "center",
+                          filter: "blur(1.5px) brightness(1) saturate(1)",
+                          transform: "scale(1.08)",
+                          transition: "filter 0.3s ease, transform 0.3s ease",
+                        }}
+                      />
+                    )}
                     {/* Moving shine sweep */}
-                    <div className="sol-shine" style={{ position: "absolute", top: 0, left: "-80%", width: "55%", height: "100%", background: "linear-gradient(105deg, transparent, rgba(255,255,255,0.22), transparent)", pointerEvents: "none", borderRadius: 12 }} />
-                    <div style={{ color: "rgba(255,255,255,0.92)", transform: "scale(2.8)", filter: "drop-shadow(0 4px 14px rgba(0,0,0,0.4))" }}>
-                      <ServiceIcon type={sol.icon} />
-                    </div>
+                    <div className="sol-shine" style={{ position: "absolute", top: 0, left: "-80%", width: "55%", height: "100%", background: "linear-gradient(105deg, transparent, rgba(255,255,255,0.22), transparent)", pointerEvents: "none", borderRadius: 12, zIndex: 1 }} />
+                    <span style={{
+                      color: "#ffffff", fontSize: 19, fontWeight: 800, letterSpacing: "0.04em",
+                      textTransform: "uppercase", textAlign: "center", lineHeight: 1.3, padding: "0 10px",
+                      fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)",
+                      filter: "drop-shadow(0 4px 14px rgba(0,0,0,0.5))", position: "relative", zIndex: 2,
+                    }}>
+                      {sol.heading}
+                    </span>
                   </div>
 
                   {/* Description + link */}
@@ -580,59 +624,63 @@ export default function Navbar() {
                 </div>
               ))}
             </div>
-          </div>
         </div>
       )}
+
 
       {/* ── Industries dropdown ── */}
       {industriesOpen && (
         <div
-          style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 40, background: "rgba(0,0,20,0.55)", backdropFilter: "blur(2px)" }}
-          onClick={() => setIndustriesOpen(false)}
+          onMouseEnter={cancelIndustriesClose}
+          onMouseLeave={scheduleIndustriesClose}
+          style={{ position: "absolute", top: "calc(100% + 10px)", left: 0, right: 0, background: "linear-gradient(145deg, #060e2e 0%, #0a1540 100%)", border: "1px solid rgba(100,130,255,0.18)", borderRadius: 18, boxShadow: "0 24px 80px rgba(0,0,40,0.7)", padding: "28px 28px 24px", zIndex: 40, animation: "megaFadeIn 0.32s ease" }}
         >
-          <div
-            style={{ position: "absolute", top: 80, left: "50%", transform: "translateX(-50%)", width: "min(640px, 96vw)", background: "linear-gradient(145deg, #060e2e 0%, #0a1540 100%)", border: "1px solid rgba(100,130,255,0.18)", borderRadius: 18, boxShadow: "0 24px 80px rgba(0,0,40,0.7)", padding: "28px 28px 24px", animation: "megaFadeIn 0.22s ease" }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
-              <div>
-                <p style={{ margin: "0 0 3px", fontSize: 11, fontWeight: 700, letterSpacing: "0.13em", color: "#4B8EFF", textTransform: "uppercase", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>INDUSTRY-SPECIFIC MARKETING</p>
-                <p style={{ margin: 0, fontSize: 22, fontWeight: 800, color: "#ffffff", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>Choose Your Industry</p>
-              </div>
-              <button onClick={() => setIndustriesOpen(false)} style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>✕</button>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+            <div>
+              <p style={{ margin: "0 0 3px", fontSize: 11, fontWeight: 700, letterSpacing: "0.13em", color: "#4B8EFF", textTransform: "uppercase", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>INDUSTRY-SPECIFIC MARKETING</p>
+              <p style={{ margin: 0, fontSize: 22, fontWeight: 800, color: "#ffffff", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>Choose Your Industry</p>
             </div>
-            <div style={{ height: 1, background: "rgba(255,255,255,0.07)", marginBottom: 20 }} />
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-              {INDUSTRIES.map((ind) => (
-                <a
-                  key={ind.label}
-                  href={ind.href}
-                  onClick={() => setIndustriesOpen(false)}
-                  style={{ display: "flex", alignItems: "flex-start", gap: 14, padding: "14px 16px", borderRadius: 12, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)", textDecoration: "none", transition: "background 0.15s, border-color 0.15s, transform 0.15s" }}
-                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(75,142,255,0.12)"; e.currentTarget.style.borderColor = "rgba(75,142,255,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"; e.currentTarget.style.transform = "translateY(0)"; }}
-                >
-                  <div style={{ flexShrink: 0, width: 36, height: 36, borderRadius: 8, background: "rgba(75,142,255,0.15)", border: "1px solid rgba(75,142,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", color: "#4B8EFF" }}>
-                    <ServiceIcon type={ind.icon} />
-                  </div>
-                  <div>
-                    <p style={{ margin: "0 0 4px", fontSize: 15, fontWeight: 700, color: "#ffffff", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>{ind.label}</p>
-                    <p style={{ margin: 0, fontSize: 12, color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", lineHeight: 1.5 }}>{ind.desc}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
+            <button onClick={() => setIndustriesOpen(false)} style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>✕</button>
+          </div>
+          <div style={{ height: 1, background: "rgba(255,255,255,0.07)", marginBottom: 20 }} />
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12 }}>
+            {INDUSTRIES.map((ind) => (
+              <a
+                key={ind.label}
+                href={ind.href}
+                onClick={() => setIndustriesOpen(false)}
+                style={{ display: "flex", alignItems: "flex-start", gap: 14, padding: "14px 16px", borderRadius: 12, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)", textDecoration: "none", transition: "background 0.15s, border-color 0.15s, transform 0.15s" }}
+                onMouseEnter={e => { e.currentTarget.style.background = "rgba(75,142,255,0.12)"; e.currentTarget.style.borderColor = "rgba(75,142,255,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"; e.currentTarget.style.transform = "translateY(0)"; }}
+              >
+                <div style={{ flexShrink: 0, width: 36, height: 36, borderRadius: 8, background: "rgba(75,142,255,0.15)", border: "1px solid rgba(75,142,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", color: "#4B8EFF" }}>
+                  <ServiceIcon type={ind.icon} />
+                </div>
+                <div>
+                  <p style={{ margin: "0 0 4px", fontSize: 15, fontWeight: 700, color: "#ffffff", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)" }}>{ind.label}</p>
+                  <p style={{ margin: 0, fontSize: 12, color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-jakarta,'Plus Jakarta Sans',sans-serif)", lineHeight: 1.5 }}>{ind.desc}</p>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       )}
+      </div>
 
       <style>{`
         @keyframes megaFadeIn {
-          from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-          to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+          from { clip-path: inset(0 0 100% 0); }
+          to   { clip-path: inset(0 0 0% 0); }
         }
         .sol-col:hover .sol-shine {
           animation: solShine 0.55s ease forwards;
+        }
+        .svc-pill-item:hover .svc-pill-icon {
+          background: rgba(75,142,255,0.15);
+          border-color: rgba(75,142,255,0.35);
+        }
+        .svc-pill-item:hover span {
+          color: #4B8EFF;
         }
         @keyframes solShine {
           from { left: -80%; }
@@ -654,6 +702,7 @@ export default function Navbar() {
           {NAV_LINKS.map((link, i) => {
             const isLast = i === NAV_LINKS.length - 1;
             const borderClass = !isLast ? "border-b border-white/[0.05]" : "";
+
 
             if (link.label === "Industries") return (
               <div key={link.label} className={borderClass}>

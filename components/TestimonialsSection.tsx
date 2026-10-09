@@ -184,30 +184,24 @@ function VideoLeftPanel({ t }: { t: Testimonial }) {
     return () => observer.disconnect();
   }, []);
 
-  const refCb = (el: HTMLVideoElement | null) => {
-    videoRef.current = el;
-    if (!el) return;
-    el.muted = true;
-    el.defaultMuted = true;
-    el.setAttribute("muted", "");
-    el.load();
-  };
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (vid) vid.muted = muted;
+  }, [muted]);
 
   function toggleMute(e: MouseEvent) {
     e.stopPropagation();
-    const vid = (e.currentTarget.parentElement as HTMLElement).querySelector("video") as HTMLVideoElement | null;
-    if (!vid) return;
-    vid.muted = !vid.muted;
-    setMuted(vid.muted);
+    setMuted(m => !m);
   }
 
   return (
     <div className="tc-left" style={{ width: LEFT_W, height: "100%", flexShrink: 0, position: "relative", overflow: "hidden", background: "#0e1a36" }}>
       <video
-        ref={refCb}
+        ref={videoRef}
         src={t.videoSrc}
         loop
         playsInline
+        muted
         style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transform: "translateZ(0)", willChange: "transform" }}
       />
 
@@ -460,11 +454,13 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Edge fades */}
-        <div style={{ pointerEvents: "none", position: "absolute", inset: "0 auto 0 0", width: 120, background: "linear-gradient(to right, #000028, transparent)", zIndex: 10 }} />
-        <div style={{ pointerEvents: "none", position: "absolute", inset: "0 0 0 auto", width: 120, background: "linear-gradient(to left, #000028, transparent)", zIndex: 10 }} />
+        <div className="tc-fade tc-fade-l" style={{ pointerEvents: "none", position: "absolute", inset: "0 auto 0 0", background: "linear-gradient(to right, #000028, transparent)", zIndex: 10 }} />
+        <div className="tc-fade tc-fade-r" style={{ pointerEvents: "none", position: "absolute", inset: "0 0 0 auto", background: "linear-gradient(to left, #000028, transparent)", zIndex: 10 }} />
       </div>
 
       <style>{`
+        .tc-fade { width: 120px; }
+        @media (max-width: 480px) { .tc-fade { width: 40px; } }
         .testimonials-track { animation: scroll-testimonials 44s linear infinite; }
         .testimonials-track:hover { animation-play-state: paused; }
         @keyframes scroll-testimonials {

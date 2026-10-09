@@ -100,7 +100,11 @@ interface StarSpec {
 }
 
 function makeBackgroundStars(): StarSpec[] {
-  return Array.from({ length: 40 }, () => ({
+  // Mobile renders these as individually-animated absolutely-positioned spans;
+  // halving the count noticeably cuts style/paint work during the long pinned
+  // scroll without being visually missed against the small viewport.
+  const count = typeof window !== 'undefined' && window.innerWidth <= 800 ? 20 : 40;
+  return Array.from({ length: count }, () => ({
     x: Math.random() * 100,
     y: Math.random() * 100,
     size: 0.6 + Math.random() * 1.8,
@@ -122,6 +126,8 @@ export const SphenoSystem: React.FC = () => {
   const orbitImgRef = useRef<HTMLImageElement>(null);
   const cardRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const panelRef = useRef<HTMLDivElement>(null);
+  const cardsWrapperRef = useRef<HTMLDivElement>(null);
+  const cardsStageRef = useRef<HTMLDivElement>(null);
 
   const [active, setActive] = useState<ModuleId>('voice');
   const [displayed, setDisplayed] = useState<EcosystemModule>(MODULES[0]);
@@ -162,10 +168,21 @@ export const SphenoSystem: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Mobile renders the orb much smaller and needs to share the main thread
+    // with scroll-driven layout work, so it gets a deliberately cheaper scene:
+    // fewer particles, fewer ring segments, lower pixel density. Read once —
+    // this is a performance tier, not something that needs to react live to
+    // a resize.
+    const isMobile = window.innerWidth <= 800;
+    const RING_COUNT = isMobile ? 2 : 5;
+    const RING_SEGMENTS = isMobile ? 22 : 60;
+    const PARTICLE_COUNT = isMobile ? 24 : 80;
+    const BLOB_COUNT = isMobile ? 2 : 4;
+
     let W = 0, H = 0, dpr = 1;
     const resize = () => {
       const r = canvas.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.5);
       W = r.width; H = r.height;
       canvas.width = W * dpr; canvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -174,7 +191,7 @@ export const SphenoSystem: React.FC = () => {
     ro.observe(canvas);
     resize();
 
-    const particles = Array.from({ length: 80 }, () => ({
+    const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
       a: Math.random() * Math.PI * 2,
       r: 0.16 + Math.pow(Math.random(), 0.65) * 0.40,
       z: Math.random() * Math.PI * 2,
@@ -230,10 +247,10 @@ export const SphenoSystem: React.FC = () => {
       ctx.beginPath(); ctx.arc(cx, cy, base * (0.5 + hv * 0.03), 0, Math.PI * 2); ctx.fill();
 
       ctx.save(); ctx.translate(cx, cy);
-      for (let k = 0; k < 5; k++) {
+      for (let k = 0; k < RING_COUNT; k++) {
         ctx.beginPath();
-        for (let i = 0; i <= 60; i++) {
-          const p = i / 60, a = p * Math.PI * 2 + t * (0.18 + k * 0.025);
+        for (let i = 0; i <= RING_SEGMENTS; i++) {
+          const p = i / RING_SEGMENTS, a = p * Math.PI * 2 + t * (0.18 + k * 0.025);
           const rad = base * (0.15 + k * 0.026) + Math.sin(a * 3 + t * (0.7 + k * 0.1)) * base * 0.009;
           const x = Math.cos(a) * rad * (1.0 + 0.16 * Math.sin(t * 0.5 + k));
           const y = Math.sin(a) * rad * 0.47;
@@ -268,7 +285,7 @@ export const SphenoSystem: React.FC = () => {
       const r = base * 0.19 * pulse;
 
       ctx.save(); ctx.globalCompositeOperation = 'screen';
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < BLOB_COUNT; i++) {
         const a = t * (0.3 + i * 0.08) + i * 1.55;
         const x = cx + Math.cos(a) * r * 0.42, y = cy + Math.sin(a) * r * 0.42;
         const bg = ctx.createRadialGradient(x, y, 0, x, y, r * 0.55);
@@ -311,9 +328,13 @@ export const SphenoSystem: React.FC = () => {
   }, []);
 
   // ---- Pointer parallax, scoped to this section only ----
+  // Skipped on mobile: there's no real hover there, and on some mobile
+  // browsers touch-dragging still fires pointermove, which would otherwise
+  // spend the scroll gesture writing CSS custom properties for an effect
+  // nobody can see.
   useEffect(() => {
     const section = sectionRef.current;
-    if (!section) return;
+    if (!section || window.innerWidth <= 800) return;
     const onMove = (e: PointerEvent) => {
       pointerRef.current = { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight };
       section.style.setProperty('--mx', `${(e.clientX / window.innerWidth) * 100}%`);
@@ -329,6 +350,11 @@ export const SphenoSystem: React.FC = () => {
     if (!cards.length) return;
 
     const observer = new IntersectionObserver((entries) => {
+      // The mobile sticky-stack picks its active card from measure() below instead
+      // (see the window.innerWidth <= 800 branch) — this center-band intersection
+      // logic is calibrated for the desktop long-scroll list and would otherwise
+      // fight with it.
+      if (window.innerWidth <= 800) return;
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setActive((entry.target as HTMLElement).dataset.id as ModuleId);
@@ -348,6 +374,30 @@ export const SphenoSystem: React.FC = () => {
       ticking = false;
       const sectionRect = sectionRef.current?.getBoundingClientRect();
       if (!sectionRect || sectionRect.bottom < 0 || sectionRect.top > window.innerHeight) return;
+
+      if (window.innerWidth <= 800) {
+        // Mobile: cards no longer move at all — they sit in one fixed "window"
+        // (eco-cards-stage) and simply crossfade between each other. Which one
+        // is active is just how far we've scrolled through the eco-cards track
+        // (a plain spacer), measured against a fixed per-card distance — NOT
+        // against the wrapper's own height. The wrapper is deliberately made
+        // taller than 4 × that distance (see the CSS) so the orb/description,
+        // which are sticky-pinned via a much bigger offset+height "reach" than
+        // the card, don't run out of room and unstick early, before the 4th
+        // card's segment is even over. Using a fixed distance here keeps the
+        // card-swap pacing independent of that extra tail space.
+        const wrapper = cardsWrapperRef.current;
+        if (wrapper) {
+          const wrapperRect = wrapper.getBoundingClientRect();
+          const perSegment = window.innerHeight * (window.innerWidth <= 520 ? 0.56 : 0.62);
+          const totalSegment = perSegment * MODULES.length;
+          const progress = Math.min(1, Math.max(0, -wrapperRect.top / totalSegment));
+          const idx = Math.min(MODULES.length - 1, Math.floor(progress * MODULES.length));
+          setActive(MODULES[idx].id);
+        }
+        return;
+      }
+
       const nearest = cards
         .map((c) => {
           const r = c.getBoundingClientRect();
@@ -467,7 +517,8 @@ export const SphenoSystem: React.FC = () => {
         </header>
 
         <div className="eco-experience">
-          <div className="eco-cards">
+          <div className="eco-cards" ref={cardsWrapperRef}>
+            <div className="eco-cards-stage" ref={cardsStageRef}>
             {MODULES.map((m, i) => {
               const Icon = m.icon;
               const isActive = active === m.id;
@@ -496,6 +547,7 @@ export const SphenoSystem: React.FC = () => {
                 </button>
               );
             })}
+            </div>
           </div>
 
           <div className="eco-visual">
@@ -769,23 +821,92 @@ export const SphenoSystem: React.FC = () => {
         @media(max-width:800px){
           .spheno-eco .eco-container{width:min(100% - 30px,620px)}
           .spheno-eco .eco-hero{padding:78px 0 45px}
-          .spheno-eco .eco-experience{display:block;padding-top:0}
-          .spheno-eco .eco-cards{padding-top:0}
-          .spheno-eco .eco-visual{position:sticky;top:0;height:520px;transform:none;z-index:1;background:linear-gradient(var(--bg),rgba(2,5,13,.92),transparent);margin:0 -15px}
-          .spheno-eco .eco-orb-stage{width:min(510px,100vw)}
-          .spheno-eco .eco-card{margin-bottom:32vh;min-height:235px}
-          .spheno-eco .eco-card:last-child{margin-bottom:calc(32vh + 560px)}
-          .spheno-eco .eco-details{position:sticky;top:120px;height:auto;min-height:0;margin:0 0 60px;z-index:5}
-          .spheno-eco .eco-panel{box-shadow:0 25px 80px rgba(0,0,0,.4)}
+
+          /* Mobile re-architecture: three clean, non-overlapping rows —
+             card, orb, description — instead of the desktop's three
+             side-by-side sticky columns. eco-cards is a plain tall spacer
+             that drives the scroll distance; eco-cards-stage is a small
+             sticky "window" inside it where cards simply crossfade/swap
+             (no sliding or stacking). The orb and description sit in the
+             same grid cell as eco-cards, each sticky at its own offset
+             directly below the row before it, so they read as stacked
+             rows while staying pinned for the whole scroll. */
+          .spheno-eco .eco-experience{display:grid;grid-template-columns:1fr;gap:0;padding-top:0}
+          /* The 4 × 62vh is the "logical" scroll distance the active-card
+             index is paced against (see measure() in the component). The
+             +834px on top is extra tail room: the description panel is
+             sticky 454px down with ~320px of height, so (being a grid item
+             sharing this same tall cell) it only has "room" to stay stuck
+             for (this height − 774px) of scroll before it runs out and
+             un-sticks — without the tail, that happens before the 4th
+             card's segment is even over. 774 + ~60px safety ≈ 834px. */
+          .spheno-eco .eco-cards{grid-column:1;grid-row:1;position:relative;height:calc(4 * 62vh + 834px);padding-top:0}
+
+          /* Row 1 — a fixed window pinned near the top (below the fixed
+             navbar, ~78px tall); the active card simply fades in while the
+             previous one fades out in place. Kept compact so the
+             description row below has enough height to show in full. */
+          .spheno-eco .eco-cards-stage{position:sticky;top:76px;height:190px;border-radius:22px;overflow:hidden;will-change:transform;contain:layout paint}
+          .spheno-eco .eco-card{position:absolute;inset:0;margin:0;min-height:0;height:auto;padding:18px 20px;opacity:0;pointer-events:none;transition:opacity .5s ease}
+          /* The base desktop rule .eco-card:last-child{margin-bottom:calc(45vh + 760px)}
+             has higher specificity (class+pseudo-class) than the plain .eco-card
+             reset above, so it still wins here and crushes the last (CRM) card's
+             stretch-to-fill height down to almost nothing. Match its specificity
+             to actually override it. */
+          .spheno-eco .eco-card:last-child{margin-bottom:0}
+          .spheno-eco .eco-card.active{opacity:1;pointer-events:auto}
+          .spheno-eco .eco-card.muted{opacity:0}
+          .spheno-eco .eco-card-head{margin-bottom:10px}
+          .spheno-eco .eco-card h2{font-size:18px;margin:0 0 8px}
+          .spheno-eco .eco-card p{font-size:12px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+          /* Row 2 — the revolving orb, its own clear space below the card:
+             top = card-top(76) + card-height(190) + gap(14). It also gets a
+             margin-top matching that same offset: without it, this grid item
+             starts at the exact same natural (pre-stick) position as the card,
+             and since its stick threshold (280) is numerically bigger than the
+             card's (76), it would lock into place long before the card does,
+             sitting stuck mid-card for a big chunk of the scroll. The margin
+             pushes its natural starting point down to line up with its own
+             threshold, so it settles into place in sync with the card instead
+             of ahead of it. Same reasoning applies to row 3 below. */
+          .spheno-eco .eco-visual{grid-column:1;grid-row:1;position:sticky;top:280px;height:160px;margin-top:280px;transform:none;z-index:2;background:none;will-change:transform;contain:layout paint}
+          .spheno-eco .eco-orb-stage{width:min(160px,44vw)}
+          .spheno-eco .eco-scroll-guide{display:none}
+
+          /* Row 3 — the wide description card, its own clear space below
+             the orb; content cross-fades (existing panelState out/snap/in
+             machine) whenever the active module changes.
+             top = orb-top(280) + orb-height(160) + gap(14). max-height is
+             generous enough to fit the full panel (kicker/title/copy/2
+             features/metrics/CTA) without clipping or an internal scrollbar —
+             the feature list is trimmed to 2 items on mobile (see
+             .eco-feature-list li below) specifically so it fits. */
+          .spheno-eco .eco-details{grid-column:1;grid-row:1;position:sticky;top:454px;height:auto;max-height:min(340px,44vh);overflow-y:auto;min-height:0;margin-top:454px;z-index:3;align-items:flex-start;will-change:transform}
+          .spheno-eco .eco-panel{max-width:none;margin:0;padding:18px;box-shadow:0 25px 80px rgba(0,0,0,.4)}
+          .spheno-eco .eco-panel-kicker{margin-bottom:6px}
+          .spheno-eco .eco-panel h3{font-size:21px;margin:0 0 8px}
+          .spheno-eco .eco-panel-copy{font-size:12px;line-height:1.5;margin:0 0 12px}
+          .spheno-eco .eco-feature-list{margin:0 0 12px;gap:5px}
+          .spheno-eco .eco-feature-list li{font-size:10.5px}
+          .spheno-eco .eco-feature-list li:nth-child(n+3){display:none}
+          .spheno-eco .eco-metrics{margin-bottom:10px}
+          .spheno-eco .eco-explore{padding:9px 14px}
         }
         @media(max-width:520px){
           .spheno-eco .eco-hero{padding-top:64px}
           .spheno-eco .eco-hero p{font-size:12.5px}
-          .spheno-eco .eco-visual{height:410px}
-          .spheno-eco .eco-core-ring{width:40%}
-          .spheno-eco .eco-card{padding:21px;min-height:210px}
-          .spheno-eco .eco-panel{padding:24px}
-          .spheno-eco .eco-panel h3{font-size:27px}
+
+          .spheno-eco .eco-cards{height:calc(4 * 56vh + 793px)}
+          .spheno-eco .eco-cards-stage{top:68px;height:160px}
+          .spheno-eco .eco-card{padding:16px 18px}
+          .spheno-eco .eco-card h2{font-size:16px}
+          .spheno-eco .eco-card p{font-size:11px;-webkit-line-clamp:2}
+          .spheno-eco .eco-visual{top:238px;height:140px;margin-top:238px}
+          .spheno-eco .eco-orb-stage{width:min(130px,40vw)}
+          .spheno-eco .eco-details{top:388px;max-height:min(345px,44vh);margin-top:388px}
+          .spheno-eco .eco-panel{padding:16px}
+          .spheno-eco .eco-panel h3{font-size:19px}
           .spheno-eco .eco-metrics{grid-template-columns:1fr 1fr}
         }
         @media(prefers-reduced-motion:reduce){

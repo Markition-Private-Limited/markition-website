@@ -86,6 +86,7 @@ function Strip({
 export default function ScaleWithAISection() {
   return (
     <section style={{ background: "#000028", padding: "40px 24px", position: "relative", overflow: "hidden", clipPath: "inset(0)" }}>
+      <style>{`@media(max-width:600px){.scale-inner-card{padding:56px 24px 40px!important}}`}</style>
       {/* Tilted sliding strips — positioned relative to the full-width section */}
       <Strip background="#1A3BFF" textColor="#0B1740" rotate={2.2} top={34} zIndex={3} duration="32s" />
       <Strip background="#22C5F5" textColor="#0B1740" rotate={-1.3} top={10} zIndex={4} duration="28s" />
@@ -94,6 +95,7 @@ export default function ScaleWithAISection() {
 
         {/* Dark navy card */}
         <div
+          className="scale-inner-card"
           style={{
             position: "relative",
             zIndex: 2,

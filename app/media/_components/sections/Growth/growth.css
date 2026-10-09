@@ -296,7 +296,7 @@
   #media-root .gm-visual-card { width: 200px; padding: 13px; }
   #media-root .gm-visual-card.gm-top { left: 15px; top: 15px; }
   #media-root .gm-visual-card.gm-bottom { right: 15px; bottom: 15px; }
-  #media-root .gm-stack-item { top: calc(84px + var(--i, 0) * 14px); margin-bottom: 12vh; }
+  #media-root .gm-stack-item { position: relative; top: auto; margin-bottom: 32px; }
   #media-root .gm-case { grid-template-columns: 1fr; grid-template-rows: 170px auto; height: auto; border-radius: 22px; }
   #media-root .gm-case-image { min-height: 170px; }
   #media-root .gm-case-body { padding: 20px 22px; justify-content: flex-start; }
@@ -306,6 +306,10 @@
   #media-root .gm-process-grid { grid-template-columns: 1fr 1fr; }
   #media-root .gm-quote-layout { grid-template-columns: 1fr; gap: 35px; }
   #media-root .gm-slide-count { display: none; }
+}
+
+@media (max-width: 400px) {
+  #media-root .gm-process-grid { grid-template-columns: 1fr; }
 }
 
 /* ── scroll-locked services sequence ── */

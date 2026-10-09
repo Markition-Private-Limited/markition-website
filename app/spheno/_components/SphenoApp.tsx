@@ -11,6 +11,7 @@ import { AiWorkforce } from "./AiWorkforce";
 import { Industries } from "./Industries";
 import { TalkThinkAct } from "./TalkThinkAct";
 import { WhySpheno } from "./WhySpheno";
+import { SphenoTestimonials } from "./SphenoTestimonials";
 import { Faq } from "./Faq";
 import { FinalCta } from "./FinalCta";
 import { ContactSection } from "./ContactSection";
@@ -37,6 +38,7 @@ export default function SphenoApp() {
         <Industries />
         <TalkThinkAct />
         <WhySpheno />
+        <SphenoTestimonials />
         <Faq />
         <FinalCta onOpenConsultation={() => setConsultationOpen(true)} />
         <ContactSection />

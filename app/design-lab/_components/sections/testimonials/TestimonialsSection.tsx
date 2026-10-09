@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef, useState, type MouseEvent } from "react";
+
 const BLUE = "#1236E8";
 const BG   = "#dff2ff";
 
@@ -14,59 +16,65 @@ interface Testimonial {
   imageSrc?: string;
   avatarSrc?: string;
   panelName?: string;
+  videoSrc?: string;
 }
 
 
 const TESTIMONIALS: Testimonial[] = [
   {
-    stars: 4,
-    quote: "They created my website and a more professional face online. I highly recommend Markition for business development.",
-    highlight: "I highly recommend Markition",
-    name: "Susan",
-    verified: true,
-    role: "CEO & Founder",
-    company: "Concierge",
-    panelName: "SUSAN HICKS",
-  },
-  {
     stars: 5,
-    quote: "Markition transformed our digital presence completely. Their team delivered beyond expectations and the results speak for themselves.",
+    quote: "Markition transformed our brand completely. Their team delivered beyond expectations and the results speak for themselves.",
     highlight: "delivered beyond expectations",
-    name: "Jill Nicole",
+    name: "Tyler",
     verified: true,
-    role: "Revenue Integrity Consulting",
-    company: "Healthcare",
-    panelName: "JILL NICOLE GEESEY",
+    role: "Marketing Director",
+    company: "Vantage Creative",
+    panelName: "TYLER WARREN",
+    videoSrc: "/reviews/dl-1.mp4",
   },
   {
     stars: 5,
-    quote: "From SEO to paid ads, they handled everything with precision. Our leads doubled within 3 months of working with Markition.",
+    quote: "From strategy to execution, they handled everything with precision. Our leads doubled within 3 months of working with Markition.",
     highlight: "Our leads doubled",
-    name: "Michael",
-    verified: true,
-    role: "Director of Marketing",
-    company: "TechVentures",
-    panelName: "MICHAEL CARTER",
-  },
-  {
-    stars: 4,
-    quote: "The branding and website design they delivered was exactly what our business needed. Clean, professional and conversion-focused.",
-    highlight: "exactly what our business needed",
-    name: "Amanda",
-    verified: true,
-    role: "Founder",
-    company: "Bloom Agency",
-    panelName: "AMANDA WELLS",
-  },
-  {
-    stars: 5,
-    quote: "Working with Markition was a game-changer for us. Their data-driven approach and attention to detail set them apart.",
-    highlight: "game-changer for us",
-    name: "David",
+    name: "Ryan",
     verified: true,
     role: "CEO",
-    company: "ScaleUp Labs",
-    panelName: "DAVID MORGAN",
+    company: "Apex Digital",
+    panelName: "RYAN MITCHELL",
+    videoSrc: "/reviews/dl-2.mp4",
+  },
+  {
+    stars: 4,
+    quote: "The branding and design they delivered was exactly what our business needed. Clean, professional and conversion-focused.",
+    highlight: "exactly what our business needed",
+    name: "Nathan",
+    verified: true,
+    role: "Founder",
+    company: "Crestline Studio",
+    panelName: "NATHAN PIERCE",
+    videoSrc: "/reviews/dl-3.mp4",
+  },
+  {
+    stars: 5,
+    quote: "Their creative direction completely changed how we present our brand. Results were visible within the first month.",
+    highlight: "Results were visible within the first month",
+    name: "Brandon",
+    verified: true,
+    role: "Managing Director",
+    company: "Hayes Group",
+    panelName: "BRANDON HAYES",
+    videoSrc: "/reviews/dl-4.mp4",
+  },
+  {
+    stars: 5,
+    quote: "Professional, responsive, and results-driven. Markition helped us build a brand presence we're genuinely proud of.",
+    highlight: "a brand presence we're genuinely proud of",
+    name: "Lauren",
+    verified: true,
+    role: "Head of Brand",
+    company: "Clearview Media",
+    panelName: "LAUREN BROOKS",
+    videoSrc: "/reviews/dl-5.mp4",
   },
 ];
 
@@ -115,6 +123,75 @@ const CARD_H = 270;
 const LEFT_W = 190;
 const RIGHT_W = 300;
 
+function VideoLeftPanel({ t }: { t: Testimonial }) {
+  const [muted, setMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) { vid.play().catch(() => {}); }
+        else { vid.pause(); }
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(vid);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (vid) vid.muted = muted;
+  }, [muted]);
+
+  function toggleMute(e: MouseEvent) {
+    e.stopPropagation();
+    setMuted(m => !m);
+  }
+
+  return (
+    <div className="dl-tc-left" style={{ width: LEFT_W, height: "100%", flexShrink: 0, position: "relative", overflow: "hidden", background: "#0e1a36" }}>
+      <video
+        ref={videoRef}
+        src={t.videoSrc}
+        loop
+        playsInline
+        muted
+        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transform: "translateZ(0)", willChange: "transform" }}
+      />
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.78) 30%, rgba(0,0,0,0.08) 100%)", pointerEvents: "none" }} />
+      <button
+        onClick={toggleMute}
+        title={muted ? "Unmute" : "Mute"}
+        style={{
+          position: "absolute", bottom: 34, right: 8,
+          width: 26, height: 26, borderRadius: "50%",
+          background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)",
+          border: "1px solid rgba(255,255,255,0.3)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          cursor: "pointer", zIndex: 10, padding: 0,
+        }}
+      >
+        {muted ? (
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+            <path d="M16.5 12A4.5 4.5 0 0 0 14 7.97V10.18l2.45 2.45c.03-.2.05-.41.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A9.9 9.9 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a9.55 9.55 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+          </svg>
+        ) : (
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+          </svg>
+        )}
+      </button>
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "10px 12px", zIndex: 3 }}>
+        <p style={{ margin: 0, color: "#fff", fontWeight: 800, fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase" }}>{t.panelName ?? t.name}</p>
+        <p style={{ margin: "2px 0 0", color: "rgba(255,255,255,0.55)", fontSize: 9, letterSpacing: "0.04em" }}>{t.company}</p>
+      </div>
+    </div>
+  );
+}
+
 function StaticPanel({ t }: { t: Testimonial }) {
   return (
     <div
@@ -160,7 +237,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
         border: "1px solid rgba(18,54,232,0.12)",
       }}
     >
-      <StaticPanel t={t} />
+      {t.videoSrc ? <VideoLeftPanel t={t} /> : <StaticPanel t={t} />}
 
       <div
         className="dl-tc-right"
