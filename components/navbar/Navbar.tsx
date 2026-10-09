@@ -412,7 +412,7 @@ export default function Navbar() {
                 className="hover:text-white/95 transition-colors duration-150 flex items-center gap-1 whitespace-nowrap px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05]"
               >
                 {link.label}
-                {"dropdown" in link && link.dropdown && <ChevronDown />}
+                {(link as { dropdown?: boolean }).dropdown && <ChevronDown />}
               </a>
             );
           })}
