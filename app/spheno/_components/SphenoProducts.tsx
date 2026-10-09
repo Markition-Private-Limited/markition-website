@@ -257,7 +257,7 @@ export const SphenoProducts: React.FC = () => {
   });
 
   const total = servicesData.length;
-  const perCard = isMobileViewport ? 78 : 92;
+  const perCard = 92;
 
   return (
     <section id="products" className="py-24 sm:py-32 bg-[#020412] text-white border-b border-[#141A3D] relative overflow-x-clip select-none">
@@ -318,8 +318,10 @@ export const SphenoProducts: React.FC = () => {
         </div>
 
         {/* 4 Sticky Stacking Services Cards — pin in place while the next card scrolls
-            over it, shrinking slightly, matching the White Line homepage services animation */}
-        <div ref={containerRef} className="relative" style={{ height: `${total * perCard}vh` }}>
+            over it, shrinking slightly, matching the White Line homepage services animation.
+            AiWorkforce (the section directly after this one) carries z-10 so it slides
+            cleanly over the sticky last card instead of bleeding underneath it. */}
+        <div ref={containerRef} className="relative" style={isMobileViewport ? undefined : { height: `${total * perCard}vh` }}>
           {servicesData.map((service, idx) => (
             <ProductCard
               key={service.id}

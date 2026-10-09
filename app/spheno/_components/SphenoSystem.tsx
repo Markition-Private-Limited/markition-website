@@ -125,7 +125,7 @@ export const SphenoSystem: React.FC = () => {
 
   const [active, setActive] = useState<ModuleId>('voice');
   const [displayed, setDisplayed] = useState<EcosystemModule>(MODULES[0]);
-  const [panelChanging, setPanelChanging] = useState(false);
+  const [panelState, setPanelState] = useState<'out' | 'snap' | 'in' | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [orbDragging, setOrbDragging] = useState(false);
 
@@ -143,12 +143,15 @@ export const SphenoSystem: React.FC = () => {
 
   useEffect(() => {
     activeRef.current = active;
-    setPanelChanging(true);
+    setPanelState('out');
     clearTimeout(changeTimer.current);
+    // Phase 1 — let the exit animation play, then swap content and snap to enter-from position
     changeTimer.current = setTimeout(() => {
       setDisplayed(MODULES.find((m) => m.id === active)!);
-      setPanelChanging(false);
-    }, 180);
+      setPanelState('snap'); // instant reposition above, no transition
+      // Phase 2 — one rAF pair ensures the snap paint lands before we start the enter animation
+      requestAnimationFrame(() => requestAnimationFrame(() => setPanelState('in')));
+    }, 360);
     return () => clearTimeout(changeTimer.current);
   }, [active]);
 
@@ -357,7 +360,7 @@ export const SphenoSystem: React.FC = () => {
       // section (desktop 3-column layout only — the panel isn't sticky below 1120px).
       const panelEl = panelRef.current;
       if (panelEl && window.innerWidth > 1120) {
-        const stuckTopPx = window.innerHeight * 0.14; // matches the CSS `top:14vh`
+        const stuckTopPx = (window.innerHeight - panelEl.offsetHeight) / 2; // vertically centered
         const drift = stuckTopPx - panelEl.getBoundingClientRect().top;
         if (drift > 4) {
           const fadeDistance = panelEl.offsetHeight * 0.85;
@@ -399,6 +402,12 @@ export const SphenoSystem: React.FC = () => {
   }, []);
 
   const onCardPointerMove = (e: React.PointerEvent<HTMLButtonElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty('--cx', `${((e.clientX - r.left) / r.width) * 100}%`);
+    e.currentTarget.style.setProperty('--cy', `${((e.clientY - r.top) / r.height) * 100}%`);
+  };
+
+  const onPanelPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty('--cx', `${((e.clientX - r.left) / r.width) * 100}%`);
     e.currentTarget.style.setProperty('--cy', `${((e.clientY - r.top) / r.height) * 100}%`);
@@ -475,7 +484,7 @@ export const SphenoSystem: React.FC = () => {
                 >
                   <span className="eco-card-shimmer" aria-hidden="true" />
                   <div className="eco-card-head">
-                    <span className="eco-icon"><Icon className="w-[21px] h-[21px]" strokeWidth={1.6} /></span>
+                    <span className="eco-icon"><Icon className="w-[18px] h-[18px]" strokeWidth={1.6} /></span>
                     <span className="eco-num">{m.num}</span>
                   </div>
                   <h2>{m.cardTitle}</h2>
@@ -514,20 +523,51 @@ export const SphenoSystem: React.FC = () => {
           </div>
 
           <aside className="eco-details">
-            <div ref={panelRef} className={`eco-panel ${panelChanging ? 'change' : ''}`} style={{ '--accent': displayed.accent } as React.CSSProperties}>
-              <span className="eco-card-shimmer" aria-hidden="true" />
-              <div className="eco-panel-kicker">{displayed.kicker}</div>
-              <h3>{displayed.title}</h3>
-              <p className="eco-panel-copy">{displayed.copy}</p>
-              <ul className="eco-feature-list">
-                {displayed.features.map((f) => <li key={f}>{f}</li>)}
-              </ul>
-              <div className="eco-metrics">
-                {displayed.metrics.map(([val, label]) => (
-                  <div className="eco-metric" key={label}><b>{val}</b><span>{label}</span></div>
-                ))}
-              </div>
-              <a className="eco-explore" href="#chat-demo">{displayed.cta} <span>↗</span></a>
+            <div
+              ref={panelRef}
+              onPointerMove={onPanelPointerMove}
+              className="eco-panel"
+              style={{
+                '--accent': displayed.accent,
+                ...(panelState === 'out' && {
+                  opacity: 0,
+                  transform: 'scale(0.95)',
+                  transition: 'opacity 0.22s ease-in, transform 0.22s ease-in',
+                }),
+                ...(panelState === 'snap' && {
+                  opacity: 0,
+                  transition: 'none',
+                }),
+                ...(panelState === 'in' && {
+                  opacity: 1,
+                  transform: 'scale(1)',
+                  transition: 'opacity 0.14s ease-out',
+                }),
+              } as React.CSSProperties}
+            >
+              {(() => {
+                const c = (delay: number): React.CSSProperties =>
+                  panelState === 'in'
+                    ? { animation: `cascadeIn 0.65s cubic-bezier(0.16,1,0.3,1) ${delay}ms both` }
+                    : {};
+                return (
+                  <>
+                    <span className="eco-card-shimmer" aria-hidden="true" />
+                    <div className="eco-panel-kicker" style={c(30)}>{displayed.kicker}</div>
+                    <h3 style={c(110)}>{displayed.title}</h3>
+                    <p className="eco-panel-copy" style={c(200)}>{displayed.copy}</p>
+                    <ul className="eco-feature-list" style={c(300)}>
+                      {displayed.features.map((f) => <li key={f}>{f}</li>)}
+                    </ul>
+                    <div className="eco-metrics" style={c(400)}>
+                      {displayed.metrics.map(([val, label]) => (
+                        <div className="eco-metric" key={label}><b>{val}</b><span>{label}</span></div>
+                      ))}
+                    </div>
+                    <a className="eco-explore" href="#chat-demo" style={c(500)}>{displayed.cta} <span>↗</span></a>
+                  </>
+                );
+              })()}
             </div>
           </aside>
         </div>
@@ -576,8 +616,7 @@ export const SphenoSystem: React.FC = () => {
         .spheno-eco .eco-hero p{max-width:600px;margin:auto;color:#899dbb;font-size:14px;line-height:1.85}
 
         .spheno-eco .eco-experience{position:relative;display:grid;grid-template-columns:340px minmax(430px,1fr) 340px;gap:40px;align-items:start;padding-top:16vh;padding-bottom:130px}
-        .spheno-eco .eco-cards{padding-top:10vh;opacity:0;transform:translateY(32px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
-        .spheno-eco.is-revealed .eco-cards{opacity:1;transform:translateY(0)}
+        .spheno-eco .eco-cards{padding-top:10vh}
         .spheno-eco .eco-card{
           position:relative;min-height:270px;margin-bottom:45vh;padding:25px 23px;text-align:left;width:100%;
           border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(10,24,42,.97),rgba(3,11,23,.95));
@@ -618,7 +657,7 @@ export const SphenoSystem: React.FC = () => {
 
         .spheno-eco .eco-card-head{position:relative;display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
         .spheno-eco .eco-icon{
-          width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
+          width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
           color:#8fe2ff;background:rgba(69,143,240,.08);border:1px solid rgba(133,199,255,.18);
           transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .4s,background .4s,border-color .4s
         }
@@ -631,9 +670,9 @@ export const SphenoSystem: React.FC = () => {
         }
         .spheno-eco .eco-num{font-size:10px;letter-spacing:.2em;color:#5f789b;transition:color .35s}
         .spheno-eco .eco-card:hover .eco-num{color:var(--accent,#8fe2ff)}
-        .spheno-eco .eco-card h2{position:relative;font-size:22px;letter-spacing:-.045em;margin:0 0 10px;color:#f7fbff;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+        .spheno-eco .eco-card h2{position:relative;font-size:26px;letter-spacing:-.045em;margin:0 0 10px;color:#f7fbff;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
         .spheno-eco .eco-card:hover h2{transform:translateX(3px)}
-        .spheno-eco .eco-card p{position:relative;color:#879ab7;font-size:12px;line-height:1.75;margin:0}
+        .spheno-eco .eco-card p{position:relative;color:#879ab7;font-size:13.5px;line-height:1.75;margin:0}
         .spheno-eco .eco-card-foot{position:relative;display:flex;justify-content:space-between;align-items:center;margin-top:25px;color:#69dce9;font-size:9px;font-weight:800;letter-spacing:.12em}
         .spheno-eco .eco-arrow{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(142,194,241,.18);transition:transform .4s cubic-bezier(.34,1.56,.64,1),background .35s,border-color .35s}
         .spheno-eco .eco-card.active .eco-arrow{transform:rotate(-45deg);background:rgba(70,154,245,.19);border-color:rgba(108,215,255,.3)}
@@ -667,10 +706,8 @@ export const SphenoSystem: React.FC = () => {
         .spheno-eco .eco-core-status{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:18px;font-size:7px;color:#89b1d6;letter-spacing:.14em}
         .spheno-eco .eco-core-status b{width:4px;height:4px;border-radius:50%;background:#63efd2;box-shadow:0 0 9px #63efd2}
 
-        .spheno-eco .eco-details{position:sticky;top:14vh;display:flex;align-items:flex-start}
-        .spheno-eco .eco-details .eco-panel{opacity:0;transform:translate(0,32px);transition:opacity 1s cubic-bezier(.16,1,.3,1) .15s,transform 1s cubic-bezier(.16,1,.3,1) .15s}
-        .spheno-eco.is-revealed .eco-details .eco-panel{opacity:1;transform:translate(0,0)}
-        .spheno-eco.is-revealed .eco-details .eco-panel.change{opacity:.25;transform:translate(10px,0)}
+        .spheno-eco .eco-details{position:sticky;top:0;height:100vh;display:flex;align-items:center}
+        .spheno-eco .eco-details .eco-panel{}
         .spheno-eco .eco-panel{
           position:relative;overflow:hidden;
           width:100%;padding:22px;border-radius:22px;border:1px solid rgba(139,192,246,.17);
@@ -678,27 +715,33 @@ export const SphenoSystem: React.FC = () => {
             radial-gradient(300px circle at 100% 0,rgba(70,160,255,.09),transparent 70%),
             linear-gradient(145deg,rgba(11,28,49,.97),rgba(3,12,25,.99));
           box-shadow:0 30px 100px rgba(0,0,0,.25);
-          transition:opacity .3s,transform .35s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s
+          border-color:transition .4s;box-shadow:transition .4s;
         }
-        .spheno-eco .eco-panel.change{opacity:.25;transform:translateX(10px)}
+        .spheno-eco .eco-panel:before{
+          content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+          background:radial-gradient(280px circle at var(--cx,50%) var(--cy,0),color-mix(in srgb,var(--accent,#64dcff) 50%,transparent),transparent 65%);
+          opacity:0;transition:opacity .4s
+        }
+        .spheno-eco .eco-panel:hover:before{opacity:.9}
         .spheno-eco.is-revealed .eco-details .eco-panel:hover{
           transform:translateY(-6px) scale(1.015);
-          border-color:color-mix(in srgb,var(--accent,#67eaff) 45%,transparent);
-          box-shadow:0 36px 110px rgba(0,0,0,.35),0 0 46px color-mix(in srgb,var(--accent,#67eaff) 24%,transparent);
+          border-color:color-mix(in srgb,var(--accent,#67eaff) 55%,transparent);
+          box-shadow:0 36px 110px rgba(0,0,0,.35),0 0 46px color-mix(in srgb,var(--accent,#67eaff) 30%,transparent);
         }
         .spheno-eco .eco-panel:hover .eco-card-shimmer{opacity:1;animation:eco-shimmer-sweep 1.1s ease forwards}
-        .spheno-eco .eco-panel-kicker{font-size:9px;color:#67e2ef;font-weight:800;letter-spacing:.2em;margin-bottom:9px}
-        .spheno-eco .eco-panel h3{font-size:26px;line-height:1.08;letter-spacing:-.04em;margin:0 0 10px;color:#fff}
-        .spheno-eco .eco-panel-copy{font-size:12.5px;line-height:1.6;color:#8da1be;margin:0 0 16px}
-        .spheno-eco .eco-feature-list{list-style:none;padding:0;margin:0 0 16px;display:grid;gap:6px}
+        .spheno-eco .eco-panel-kicker{position:relative;z-index:1;font-size:9px;color:#67e2ef;font-weight:800;letter-spacing:.2em;margin-bottom:9px}
+        .spheno-eco .eco-panel h3{position:relative;z-index:1;font-size:26px;line-height:1.08;letter-spacing:-.04em;margin:0 0 10px;color:#fff}
+        .spheno-eco .eco-panel-copy{position:relative;z-index:1;font-size:12.5px;line-height:1.6;color:#8da1be;margin:0 0 16px}
+        .spheno-eco .eco-feature-list{position:relative;z-index:1;list-style:none;padding:0;margin:0 0 16px;display:grid;gap:6px}
         .spheno-eco .eco-feature-list li{display:flex;gap:10px;align-items:center;color:#b9cce5;font-size:11px}
         .spheno-eco .eco-feature-list li:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent,#67eaff);box-shadow:0 0 10px var(--accent,#67eaff);flex:none}
-        .spheno-eco .eco-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+        .spheno-eco .eco-metrics{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
         .spheno-eco .eco-metric{padding:9px 11px;border-radius:11px;border:1px solid rgba(134,183,235,.12);background:rgba(93,151,225,.04);transition:border-color .4s,background .4s}
         .spheno-eco .eco-panel:hover .eco-metric{border-color:color-mix(in srgb,var(--accent,#67eaff) 30%,transparent);background:color-mix(in srgb,var(--accent,#67eaff) 6%,rgba(93,151,225,.04))}
         .spheno-eco .eco-metric b{display:block;font-size:15px;letter-spacing:-.03em;color:#fff}
         .spheno-eco .eco-metric span{font-size:8px;color:#657e9f;letter-spacing:.1em}
         .spheno-eco .eco-explore{
+          position:relative;z-index:1;
           display:flex;align-items:center;justify-content:space-between;gap:15px;text-decoration:none;color:#fff;
           padding:11px 16px;border-radius:12px;background:linear-gradient(105deg,#267be8,#1e55ac);
           font-size:11px;font-weight:800;transition:transform .25s,filter .25s,box-shadow .25s
@@ -712,6 +755,10 @@ export const SphenoSystem: React.FC = () => {
         }
         .spheno-eco .eco-scroll-guide i{width:1px;height:31px;background:linear-gradient(#6feeff,transparent);animation:eco-scroll-pulse 1.7s ease-in-out infinite}
         @keyframes eco-scroll-pulse{50%{height:43px;opacity:.4}}
+        @keyframes cascadeIn{
+          from{opacity:0;transform:translateY(22px)}
+          to{opacity:1;transform:translateY(0)}
+        }
 
         @media(max-width:1120px){
           .spheno-eco .eco-experience{grid-template-columns:280px minmax(380px,1fr);gap:25px}

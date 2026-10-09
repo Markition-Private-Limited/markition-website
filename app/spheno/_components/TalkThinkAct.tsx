@@ -111,6 +111,18 @@ export const TalkThinkAct: React.FC = () => {
       id="execution"
       className="bg-[#020410] text-white border-b border-[#141A3D] relative overflow-x-clip select-none"
     >
+      <style>{`
+        @keyframes shimmerFlow {
+          0%   { top: -70px; opacity: 0; }
+          10%  { opacity: 1; }
+          90%  { opacity: 1; }
+          100% { top: 100%; opacity: 0; }
+        }
+        @keyframes cardEnter {
+          0%   { opacity: 0; transform: translateY(14px) scale(0.97); }
+          100% { opacity: 1; transform: translateY(0)    scale(1); }
+        }
+      `}</style>
       {/* Tall scroll-jack track: the section pins (via the sticky wrapper inside)
           for this whole extra height, giving the timeline room to fill before the
           page continues scrolling to the next section. overflow-x-clip (not
@@ -168,7 +180,11 @@ export const TalkThinkAct: React.FC = () => {
               </p>
 
               {/* Active Step Feature Card */}
-              <div className="mt-4 p-3.5 rounded-2xl bg-white/[0.03] border border-cyan-400/20 backdrop-blur-md">
+              <div
+                key={activeStepIndex}
+                className="mt-4 p-3.5 rounded-2xl bg-white/[0.03] border border-cyan-400/20 backdrop-blur-md"
+                style={{ animation: 'cardEnter 0.45s cubic-bezier(0.16,1,0.3,1) forwards' }}
+              >
                 <div className="flex items-center justify-between text-xs font-mono mb-1.5">
                   <span className="text-cyan-400 font-bold uppercase tracking-wider">
                     CURRENT PHASE {processSteps[activeStepIndex].step}
@@ -190,11 +206,6 @@ export const TalkThinkAct: React.FC = () => {
                 </div>
               </div>
 
-              {/* Quick Navigation Help */}
-              <div className="mt-3 flex items-center gap-3 text-xs text-[#64748B] font-mono">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-                <span>Scroll or click steps to view phase requirements</span>
-              </div>
 
             </div>
 
@@ -206,15 +217,30 @@ export const TalkThinkAct: React.FC = () => {
               {/* 1. Base Grey Timeline Spine (Full Height) */}
               <div className="absolute left-[19px] sm:left-[35px] top-6 bottom-10 w-[2px] bg-[#1E293B] pointer-events-none" />
 
-              {/* 2. Active Glowing Gradient Spine (Spheno Cyan Theme) */}
-              <div 
-                className="absolute left-[19px] sm:left-[35px] top-6 w-[2px] transition-all duration-500 ease-out pointer-events-none"
+              {/* 2. Active Glowing Gradient Spine — with flowing energy shimmer */}
+              <div
+                className="absolute left-[19px] sm:left-[35px] top-6 w-[2px] overflow-hidden pointer-events-none transition-all duration-[850ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
                 style={{
                   height: currentLineHeight,
-                  background: 'linear-gradient(to bottom, #FFFFFF 0%, #00F2FE 50%, #0070F3 100%)',
-                  boxShadow: '0 0 14px rgba(0, 242, 254, 0.9), 0 0 24px rgba(0, 112, 243, 0.6)',
+                  background: 'linear-gradient(to bottom, #FFFFFF 0%, #00F2FE 45%, #0070F3 100%)',
+                  boxShadow:
+                    '0 0 4px rgba(255,255,255,0.9), 0 0 12px rgba(0,242,254,1), 0 0 28px rgba(0,242,254,0.65), 0 0 50px rgba(0,112,243,0.45)',
                 }}
-              />
+              >
+                {/* Energy flow shimmer — travels down the filled portion on loop */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    width: '100%',
+                    height: '70px',
+                    background:
+                      'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.95) 50%, transparent 100%)',
+                    animation: 'shimmerFlow 1.8s ease-in-out infinite',
+                  }}
+                />
+              </div>
+
 
               {/* 3. Steps Stack */}
               <div className="space-y-5 sm:space-y-6">
@@ -231,7 +257,7 @@ export const TalkThinkAct: React.FC = () => {
                       className="relative pl-12 sm:pl-16 group cursor-pointer transition-all duration-300"
                     >
                       {/* Timeline Node / Bead (Spheno Cyan Theme) */}
-                      <div 
+                      <div
                         className={`absolute left-[13px] sm:left-[29px] top-1.5 rounded-full transition-all duration-400 flex items-center justify-center ${
                           isActive
                             ? 'w-4 h-4 -left-[2px] sm:-left-[2px] bg-white border-2 border-cyan-400 shadow-[0_0_16px_#00F2FE] scale-125'

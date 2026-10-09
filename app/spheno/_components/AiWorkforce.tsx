@@ -117,7 +117,7 @@ export const AiWorkforce: React.FC = () => {
     <section 
       ref={sectionRef} 
       id="products" 
-      className="py-24 md:py-36 bg-white text-[#080C42] border-b border-[#E5E5E0] relative overflow-hidden selection:bg-[#0018C5] selection:text-white"
+      className="py-24 md:py-36 bg-white text-[#080C42] border-b border-[#E5E5E0] relative z-10 overflow-hidden selection:bg-[#0018C5] selection:text-white"
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         
