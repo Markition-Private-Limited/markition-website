@@ -450,6 +450,9 @@ function setupHeroCanvas(root: HTMLElement): Cleanup {
   let center = { x: 0, y: 0 };
   let nodes: NetworkNode[] = [];
 
+  const faviconImg = new Image();
+  faviconImg.src = "/favicon.ico";
+
   const size = () => {
     const r = canvas.getBoundingClientRect();
     W = r.width;
@@ -550,13 +553,24 @@ function setupHeroCanvas(root: HTMLElement): Cleanup {
     ctx.arc(center.x, center.y, 26, 0, 2 * Math.PI);
     ctx.fill();
     ctx.stroke();
-    ctx.fillStyle = "#fff";
-    ctx.font = "700 12px Manrope,system-ui,sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("M", center.x, center.y + 1);
+    if (faviconImg.complete && faviconImg.naturalWidth > 0) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(center.x, center.y, 22, 0, 2 * Math.PI);
+      ctx.clip();
+      ctx.drawImage(faviconImg, center.x - 22, center.y - 22, 44, 44);
+      ctx.restore();
+    } else {
+      ctx.fillStyle = "#fff";
+      ctx.font = "700 12px Manrope,system-ui,sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("M", center.x, center.y + 1);
+    }
 
     ctx.font = "600 13px Manrope,system-ui,sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
     nodes.forEach((n) => {
       const w = ctx.measureText(n.l).width + 28;
       ctx.fillStyle = "rgba(10,18,40,.92)";
