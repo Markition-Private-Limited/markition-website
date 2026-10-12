@@ -313,28 +313,30 @@ export default function Navbar() {
         style={navGlassStyle}
       >
         {/* Logo */}
-        {(() => {
-          const pageLogo = PAGE_LOGOS[pathname] ?? PAGE_LOGOS[Object.keys(PAGE_LOGOS).find(k => pathname.startsWith(k)) ?? ""];
-          return pageLogo ? (
-            <Image
-              src={pageLogo.src}
-              alt="Markition"
-              width={pageLogo.width}
-              height={pageLogo.height}
-              priority
-              className="h-[26px] sm:h-[30px] w-auto flex-shrink-0"
-            />
-          ) : (
-            <Image
-              src="/markition-logo.svg"
-              alt="Markition"
-              width={120}
-              height={28}
-              priority
-              className="h-[26px] sm:h-[28px] w-auto flex-shrink-0"
-            />
-          );
-        })()}
+        <Link href="/" aria-label="Markition home">
+          {(() => {
+            const pageLogo = PAGE_LOGOS[pathname] ?? PAGE_LOGOS[Object.keys(PAGE_LOGOS).find(k => pathname.startsWith(k)) ?? ""];
+            return pageLogo ? (
+              <Image
+                src={pageLogo.src}
+                alt="Markition"
+                width={pageLogo.width}
+                height={pageLogo.height}
+                priority
+                className="h-[26px] sm:h-[30px] w-auto flex-shrink-0"
+              />
+            ) : (
+              <Image
+                src="/markition-logo.svg"
+                alt="Markition"
+                width={120}
+                height={28}
+                priority
+                className="h-[26px] sm:h-[28px] w-auto flex-shrink-0"
+              />
+            );
+          })()}
+        </Link>
 
         {/* Desktop nav links */}
         <div className="hidden lg:flex items-center gap-1 xl:gap-1.5 text-[13px] text-white font-normal flex-1 justify-center">

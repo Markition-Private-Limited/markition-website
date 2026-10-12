@@ -77,6 +77,7 @@ const TESTIMONIALS: Testimonial[] = [
     panelName: "JILL NICOLE GEESEY",
     imageSrc: "/susan-hicks.png",
     avatarSrc: "/susan-hicks.png",
+    videoSrc: "/reviews/review-2.mp4",
   },
   {
     stars: 5,
@@ -89,6 +90,7 @@ const TESTIMONIALS: Testimonial[] = [
     panelName: "MICHAEL CARTER",
     imageSrc: "/susan-hicks.png",
     avatarSrc: "/susan-hicks.png",
+    videoSrc: "/reviews/review-3.mp4",
   },
   {
     stars: 4,
@@ -113,7 +115,6 @@ const TESTIMONIALS: Testimonial[] = [
     panelName: "DAVID MORGAN",
     imageSrc: "/susan-hicks.png",
     avatarSrc: "/susan-hicks.png",
-    videoSrc: "/reviews/review-2.mp4",
   },
 ];
 
