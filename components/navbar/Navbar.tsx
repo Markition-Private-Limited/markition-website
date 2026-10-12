@@ -11,6 +11,7 @@ const INTERNAL_LINKS: Record<string, string> = {
   About: "/about",
   "Case Studies": "/case-studies",
   Portfolio: "/portfolio",
+  Contact: "/contact",
 };
 
 function scrollToContact() {
@@ -386,16 +387,6 @@ export default function Navbar() {
                 </span>
               </button>
             );
-            if (link.label === "Contact") return (
-              <a
-                key={link.label}
-                href="#contact"
-                onClick={handleContactClick}
-                className="hover:text-white/95 transition-colors duration-150 flex items-center gap-1 whitespace-nowrap px-2.5 py-1.5 rounded-lg hover:bg-white/[0.05]"
-              >
-                {link.label}
-              </a>
-            );
             if (link.label in INTERNAL_LINKS) return (
               <Link
                 key={link.label}
@@ -420,15 +411,14 @@ export default function Navbar() {
 
         {/* Right side */}
         <div className="flex items-center gap-2.5 flex-shrink-0">
-          <a
-            href="#contact"
-            onClick={handleContactClick}
+          <Link
+            href="/contact"
             className="bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white text-[12.5px] font-medium px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-[5px] flex items-center gap-1.5 transition-colors duration-150 whitespace-nowrap"
           >
             <span className="hidden sm:inline">Book Free Consultation</span>
             <span className="sm:hidden">Book Now</span>
             <span aria-hidden="true" className="text-[11px]">→</span>
-          </a>
+          </Link>
 
           <button
             onClick={() => setMobileOpen((v) => !v)}
@@ -806,19 +796,6 @@ export default function Navbar() {
               </div>
             );
 
-            if (link.label === "Contact") return (
-              <a
-                key={link.label}
-                href="#contact"
-                onClick={(e) => { setMobileOpen(false); handleContactClick(e); }}
-                className={`flex items-center justify-between px-5 py-3.5 text-[13.5px] text-white/75 hover:text-white hover:bg-white/[0.05] transition-colors duration-150 ${borderClass}`}
-              >
-                <span>{link.label}</span>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="opacity-30">
-                  <path d="M4 7h6M7 4l3 3-3 3" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-            );
             if (link.label in INTERNAL_LINKS) return (
               <Link
                 key={link.label}
@@ -847,13 +824,13 @@ export default function Navbar() {
             );
           })}
           <div className="p-4 border-t border-white/[0.05]">
-            <a
-              href="#contact"
-              onClick={(e) => { setMobileOpen(false); handleContactClick(e); }}
+            <Link
+              href="/contact"
+              onClick={() => setMobileOpen(false)}
               className="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white text-[13.5px] font-medium px-5 py-2.5 rounded-[5px] transition-colors duration-150"
             >
               Book Free Consultation →
-            </a>
+            </Link>
           </div>
         </div>
       </div>

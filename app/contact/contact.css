@@ -1,0 +1,359 @@
+/* Scoped styles for the Contact page — everything lives under .ct-page */
+.ct-page {
+  --navy: #080c42;
+  --blue: #0137D7;
+  --ink: #111827;
+  --muted: #6b7280;
+  --label: #4b5563;
+  --line: #e5e7eb;
+  --soft: #f5f6fa;
+  font-family: var(--font-inter, Inter, sans-serif);
+  color: var(--ink);
+  background: #fff;
+  overflow-x: clip;
+}
+.ct-page * { box-sizing: border-box; }
+.ct-page a { text-decoration: none; color: inherit; }
+.ct-page .container { width: min(1200px, calc(100% - 48px)); margin: auto; }
+
+/* ── Hero ── */
+.ct-hero {
+  background: #fff;
+  padding: 80px 0 80px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+/* Full-bleed interactive grid background */
+.ct-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+/* Enable pointer events so the canvas responds to cursor */
+.ct-hero:hover .ct-hero-bg,
+.ct-hero:focus-within .ct-hero-bg {
+  pointer-events: auto;
+}
+.ct-hero-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+}
+.ct-hero-text { position: relative; z-index: 2; max-width: 900px; }
+
+.ct-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-jakarta, 'Plus Jakarta Sans', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+.ct-eyebrow::before {
+  content: "✦";
+  font-size: 9px;
+  opacity: 0.8;
+}
+.ct-hero h1 {
+  font-family: var(--font-familjen, 'Familjen Grotesk', sans-serif);
+  font-size: clamp(52px, 8.5vw, 112px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  margin: 0 0 28px;
+  color: var(--navy);
+  max-width: 900px;
+}
+.ct-hero h1 .accent { color: var(--blue); }
+.ct-hero .hero-sub {
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--ink);
+  max-width: 620px;
+  margin: 0;
+  opacity: 0.7;
+}
+
+/* ── Main two-column layout ── */
+.ct-main {
+  background: #fff;
+  padding: 80px 0 100px;
+}
+.ct-main-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(44px, 7vw, 100px);
+}
+
+/* ── Left: intro + contact info ── */
+.ct-intro .sec-eyebrow {
+  font-family: var(--font-jakarta, 'Plus Jakarta Sans', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ct-intro .sec-eyebrow::before { content: "✦"; font-size: 9px; opacity: 0.7; }
+.ct-intro h2 {
+  font-family: var(--font-jakarta, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  margin: 0 0 16px;
+  color: var(--navy);
+}
+.ct-intro > p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.85;
+  max-width: 460px;
+  margin: 0 0 36px;
+}
+
+/* ── Contact info cards ── */
+.ct-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.ct-info-card {
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 20px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.ct-info-card:hover {
+  border-color: rgba(1, 55, 215, 0.35);
+  box-shadow: 0 4px 16px rgba(1, 55, 215, 0.07);
+}
+.ct-info-card small {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 7px;
+}
+.ct-info-card a,
+.ct-info-card strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+.ct-info-card a:hover { color: var(--blue); }
+.ct-info-card p {
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 5px 0 0;
+}
+
+/* ── Hours row ── */
+.ct-hours {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.ct-hours strong { font-size: 12px; font-weight: 700; color: var(--navy); }
+.ct-hours span { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.7; }
+
+/* ── Right: form panel ── */
+.ct-form-panel {
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: clamp(24px, 4vw, 44px);
+}
+.ct-form-panel .form-eyebrow {
+  font-family: var(--font-jakarta, 'Plus Jakarta Sans', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ct-form-panel .form-eyebrow::before { content: "✦"; font-size: 9px; opacity: 0.7; }
+.ct-form-panel h2 {
+  font-family: var(--font-jakarta, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(20px, 2.4vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  margin: 0 0 8px;
+  color: var(--navy);
+}
+.ct-form-panel > p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin: 0 0 26px;
+}
+
+/* ── Form fields ── */
+.ct-field { margin: 0 0 22px; }
+.ct-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--label);
+  margin-bottom: 7px;
+}
+.ct-field input,
+.ct-field textarea {
+  display: block;
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: 13px;
+  font-family: var(--font-inter, Inter, sans-serif);
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.ct-field input:focus,
+.ct-field textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(1, 55, 215, 0.1);
+}
+.ct-field input::placeholder,
+.ct-field textarea::placeholder { color: #9ca3af; }
+.ct-field textarea { min-height: 110px; resize: vertical; line-height: 1.7; }
+
+/* ── Submit button ── */
+.ct-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--navy);
+  border: none;
+  border-radius: 8px;
+  padding: 13px 28px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-inter, Inter, sans-serif);
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 4px;
+  width: 100%;
+  justify-content: center;
+}
+.ct-submit:hover { background: var(--blue); transform: translateY(-1px); }
+.ct-status {
+  display: none;
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--navy);
+  background: rgba(1, 55, 215, 0.06);
+  border: 1px solid rgba(1, 55, 215, 0.2);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-weight: 500;
+}
+.ct-status.show { display: block; }
+.ct-status a { color: var(--blue); text-decoration: underline; }
+
+/* ── Location band ── */
+.ct-location {
+  background: var(--navy);
+  padding: 60px 0;
+}
+.ct-location-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+.ct-location .loc-eyebrow {
+  font-family: var(--font-jakarta, 'Plus Jakarta Sans', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ct-location .loc-eyebrow::before { content: "✦"; font-size: 9px; }
+.ct-location h2 {
+  font-family: var(--font-jakarta, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(22px, 3.2vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: 0 0 10px;
+  color: #fff;
+}
+.ct-location p { font-size: 13px; color: rgba(255, 255, 255, 0.6); line-height: 1.9; margin: 0; }
+.ct-location-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 13px 26px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+  font-family: var(--font-inter, Inter, sans-serif);
+}
+.ct-location-btn:hover { background: rgba(255, 255, 255, 0.88); }
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .ct-hero { padding: 100px 0 72px; }
+}
+@media (max-width: 860px) {
+  .ct-main-grid { grid-template-columns: 1fr; gap: 48px; }
+  .ct-location-inner { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 600px) {
+  .ct-page .container { width: calc(100% - 36px); }
+  .ct-hero { padding: 90px 0 56px; }
+  .ct-main { padding: 56px 0 72px; }
+  .ct-info-grid { grid-template-columns: 1fr; }
+  .ct-hours { flex-direction: column; align-items: flex-start; }
+  .ct-hours span { text-align: left; }
+  .ct-form-panel { padding: 22px 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ct-page *, .ct-page *::before, .ct-page *::after { transition: none !important; }
+}
