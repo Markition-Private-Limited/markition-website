@@ -8,6 +8,7 @@ export const NAV_LINKS = [
   { label: "Case Studies" },
   { label: "Portfolio" },
   { label: "Contact" },
+  { label: "Blog" },
 ] as const;
 
 export const STATS = [

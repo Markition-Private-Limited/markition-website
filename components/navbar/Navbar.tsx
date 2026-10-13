@@ -12,6 +12,7 @@ const INTERNAL_LINKS: Record<string, string> = {
   "Case Studies": "/case-studies",
   Portfolio: "/portfolio",
   Contact: "/contact",
+  Blog: "/blog",
 };
 
 function scrollToContact() {
