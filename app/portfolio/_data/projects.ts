@@ -92,8 +92,8 @@ export const PROJECTS: Project[] = [
       "brand",
       "marketing"
     ],
-    image: "https://images.pexels.com/photos/4489732/pexels-photo-4489732.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    alt: "Commercial vehicle",
+    image: "/case-studies/hinopak-dutro.webp",
+    alt: "Hino Dutro 300 Series trucks - Hinopak Motors",
     kind: "Automotive · Brand",
     name: "Hinopak Motors",
     blurb: "Brand-facing digital communication for an established automotive business.",
@@ -102,7 +102,7 @@ export const PROJECTS: Project[] = [
       "Brand",
       "Marketing"
     ],
-    modalImage: "https://images.pexels.com/photos/4489732/pexels-photo-4489732.jpeg?auto=compress&cs=tinysrgb&w=1600"
+    modalImage: "/case-studies/hinopak-dutro.webp"
   },
   {
     id: "rmd",
@@ -129,7 +129,7 @@ export const PROJECTS: Project[] = [
       "web",
       "marketing"
     ],
-    image: "https://images.pexels.com/photos/5691659/pexels-photo-5691659.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    image: "/case-studies/service-express.webp",
     alt: "HVAC technician",
     kind: "Growth · Home Services",
     name: "Service Express",
@@ -140,7 +140,7 @@ export const PROJECTS: Project[] = [
       "Paid Media",
       "Growth"
     ],
-    modalImage: "https://images.pexels.com/photos/5691659/pexels-photo-5691659.jpeg?auto=compress&cs=tinysrgb&w=1600"
+    modalImage: "/case-studies/service-express.webp"
   },
   {
     id: "pht",
@@ -148,7 +148,7 @@ export const PROJECTS: Project[] = [
       "web",
       "marketing"
     ],
-    image: "https://images.pexels.com/photos/5691583/pexels-photo-5691583.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    image: "/case-studies/pht-security.webp",
     alt: "Security technology",
     kind: "Security · Lead Generation",
     name: "PHT Security Systems",
@@ -159,7 +159,7 @@ export const PROJECTS: Project[] = [
       "Leads",
       "Web"
     ],
-    modalImage: "https://images.pexels.com/photos/5691583/pexels-photo-5691583.jpeg?auto=compress&cs=tinysrgb&w=1600"
+    modalImage: "/case-studies/pht-security.webp"
   }
 ];
 

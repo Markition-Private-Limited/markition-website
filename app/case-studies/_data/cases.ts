@@ -54,7 +54,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     id: "hinopak",
     category: "AUTOMOTIVE / BRAND",
     name: "Hinopak Motors",
-    image: "/case-studies/hinopak.png",
+    image: "/case-studies/hinopak-dutro.webp",
     tag: "BRAND EXPERIENCE",
     scope: "Digital Marketing · Creative · Social · Brand Communication",
     blurb: "A digital marketing and brand communication engagement focused on stronger digital presence, creative consistency and audience connection.",

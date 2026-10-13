@@ -13,7 +13,7 @@
   overflow-x: clip;
 }
 .ct-page * { box-sizing: border-box; }
-.ct-page a { text-decoration: none; color: inherit; }
+.ct-page a:not(footer a) { text-decoration: none; color: inherit; }
 .ct-page .container { width: min(1200px, calc(100% - 48px)); margin: auto; }
 
 /* ── Hero ── */
@@ -179,7 +179,6 @@
   border-radius: 12px;
 }
 .ct-hours strong { font-size: 12px; font-weight: 700; color: var(--navy); }
-.ct-hours span { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.7; }
 
 /* ── Right: form panel ── */
 .ct-form-panel {

@@ -3,7 +3,11 @@ import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import ContactForm from "./_components/ContactForm";
 import CursorGrid from "./_components/CursorGrid";
+import ContactCards from "./_components/ContactCards";
+import OfficeClocks from "./_components/OfficeClocks";
+import Reveal from "./_components/Reveal";
 import "./contact.css";
+import "./contact-enhance.css";
 
 const DESCRIPTION =
   "Contact Markition for digital marketing, software, design and AI solutions. Let's talk about what's next for your business.";
@@ -59,6 +63,11 @@ export default function ContactPage() {
               to start, reach out — no complicated process, just a straightforward
               conversation about what your business needs.
             </p>
+            <div className="ct-hero-actions">
+              <a className="ct-btn primary" href="#message">Send a message ↓</a>
+              <a className="ct-btn ghost" href="mailto:hey@markition.com">hey@markition.com ↗</a>
+              <span className="ct-badge"><i aria-hidden="true" />Replies within 1 business day</span>
+            </div>
           </div>
 
         </div>
@@ -68,7 +77,7 @@ export default function ContactPage() {
       <section className="ct-main">
         <div className="container ct-main-grid">
           {/* Left: info */}
-          <div className="ct-intro">
+          <Reveal className="ct-intro">
             <div className="sec-eyebrow">Start a conversation</div>
             <h2>Big idea? Small question? We&apos;re listening.</h2>
             <p>
@@ -77,45 +86,28 @@ export default function ContactPage() {
               help you work out a practical next step.
             </p>
 
-            <div className="ct-info-grid">
-              <div className="ct-info-card">
-                <small>Email us</small>
-                <a href="mailto:hey@markition.com">hey@markition.com</a>
-                <p>Project enquiries and partnerships</p>
-              </div>
-              <div className="ct-info-card">
-                <small>Call us · Saudi Arabia</small>
-                <a href="tel:+966510855709">+966 51 085 5709</a>
-                <p>For enquiries across Saudi Arabia</p>
-              </div>
-              <div className="ct-info-card">
-                <small>Call us · Pakistan</small>
-                <a href="tel:+923342722337">+92 (334) 272-2337</a>
-                <p>Connect with our Pakistan team</p>
-              </div>
-              <div className="ct-info-card">
-                <small>Call us · USA</small>
-                <a href="tel:+12174010041">+1 (217) 401-0041</a>
-                <p>Connect with our USA team</p>
-              </div>
-            </div>
+            <ContactCards />
 
             <div className="ct-hours">
-              <strong>When to reach us</strong>
-              <span>
-                Send us a message anytime.<br />
-                We&apos;ll get back to you as soon as we can.
-              </span>
+              <div>
+                <strong>When to reach us</strong>
+                <span>
+                  Send us a message anytime. We&apos;ll get back to you as soon as we can.
+                </span>
+              </div>
+              <OfficeClocks />
             </div>
-          </div>
+          </Reveal>
 
           {/* Right: form */}
-          <div className="ct-form-panel">
-            <div className="form-eyebrow">Get in touch</div>
-            <h2>Send us a message.</h2>
-            <p>Fill in the details below and tell us what&apos;s on your mind.</p>
-            <ContactForm />
-          </div>
+          <Reveal delay={120} className="ct-form-wrap">
+            <div className="ct-form-panel" id="message">
+              <div className="form-eyebrow">Get in touch</div>
+              <h2>Send us a message.</h2>
+              <p>Pick a topic, fill in the details and tell us what&apos;s on your mind.</p>
+              <ContactForm />
+            </div>
+          </Reveal>
         </div>
       </section>
 
