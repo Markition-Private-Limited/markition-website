@@ -20,7 +20,7 @@
 
 .cs-page .wrap{width:min(1380px,calc(100% - 72px));margin:auto}
 
-.cs-page .hero{position:relative;min-height:100svh;background:var(--navy);color:#fff;overflow:hidden;display:flex;align-items:flex-end;padding:170px 0 72px}
+.cs-page .hero{position:relative;min-height:100svh;background:var(--navy);color:#fff;overflow:hidden;display:flex;align-items:flex-end;padding:170px 0 72px}.cs-page .hero>.wrap{transform:translateY(-140px)}
 .cs-page .hero-bg{position:absolute;inset:0;background:
 linear-gradient(90deg,rgba(8,12,66,.98) 0%,rgba(8,12,66,.84) 42%,rgba(8,12,66,.38) 75%,rgba(8,12,66,.68) 100%),
 url("https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1800&q=80") center/cover}

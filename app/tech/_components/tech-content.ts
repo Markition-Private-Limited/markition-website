@@ -123,6 +123,50 @@ export const techHtml = `
   </div>
  </div>
 </section>
+
+<section class="sec pad-panel" id="faq">
+ <div class="panel">
+ <div class="wrap">
+  <header class="sec-head center rv">
+   <span class="chip dark">FAQ</span>
+   <h2 class="on-dark">Frequently asked questions</h2>
+  </header>
+  <div class="tech-faq-list">
+
+   <details class="tech-faq-item rv">
+    <summary class="tech-faq-q">Does Markition build custom software from scratch?<span class="tech-faq-icon"></span></summary>
+    <p class="tech-faq-a">Yes. We design and engineer bespoke web applications, mobile apps, internal tools and enterprise platforms — all built around your specific workflows, not an off-the-shelf template.</p>
+   </details>
+
+   <details class="tech-faq-item rv">
+    <summary class="tech-faq-q">Do you integrate AI into existing business systems?<span class="tech-faq-icon"></span></summary>
+    <p class="tech-faq-a">Absolutely. We embed AI — including automation agents, predictive analytics, and LLM-powered features — directly into your existing infrastructure without requiring you to replace your current stack.</p>
+   </details>
+
+   <details class="tech-faq-item rv">
+    <summary class="tech-faq-q">What technologies do you work with?<span class="tech-faq-icon"></span></summary>
+    <p class="tech-faq-a">We work across React, Next.js, Node.js, Python, and cloud platforms including AWS and Vercel. Our team selects the right stack for your project based on performance, scalability and long-term maintainability.</p>
+   </details>
+
+   <details class="tech-faq-item rv">
+    <summary class="tech-faq-q">How long does a software project typically take?<span class="tech-faq-icon"></span></summary>
+    <p class="tech-faq-a">Timelines depend on scope. A focused web platform can launch in 6–10 weeks. Larger enterprise systems or AI-integrated products typically take 3–6 months. We provide a clear roadmap before any work begins.</p>
+   </details>
+
+   <details class="tech-faq-item rv">
+    <summary class="tech-faq-q">Can you take over or improve an existing codebase?<span class="tech-faq-icon"></span></summary>
+    <p class="tech-faq-a">Yes. We audit existing systems, identify bottlenecks and technical debt, then refactor or extend the codebase — so you don't lose what's already working while still moving forward.</p>
+   </details>
+
+   <details class="tech-faq-item rv">
+    <summary class="tech-faq-q">Do you offer ongoing support after launch?<span class="tech-faq-icon"></span></summary>
+    <p class="tech-faq-a">We do. Post-launch retainers cover monitoring, performance optimisation, feature updates and bug fixes — keeping your product stable and improving over time.</p>
+   </details>
+
+  </div>
+ </div>
+ </div>
+</section>
+
 </main>
-<a class="sticky-cta" href="#contact" id="stickyCta"><span class="btn-in"><span class="btn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 6l6 6-6 6M12 6l6 6-6 6" opacity=".95"/></svg></span><span class="btn-tx">Start a Project</span></span></a>
 `;
