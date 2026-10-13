@@ -73,7 +73,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="media-gap" style={{ padding: "100px 0 110px" }}>
+    <section id="contact" className="media-gap" style={{ padding: "100px 0 110px", background: "#020a1c" }}>
       <style>{`
         @media (max-width: 767px) {
           .media-contact-section { padding: 64px 0 80px !important; }

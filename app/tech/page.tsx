@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import TechRoot from "./_components/TechRoot";
 
-const manrope = Manrope({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700", "800"] });
+const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Markition Tech",

@@ -9,6 +9,7 @@ import { ChevronDown, HamburgerIcon } from "@/lib/icons";
 
 const INTERNAL_LINKS: Record<string, string> = {
   About: "/about",
+  Services: "/services",
   "Case Studies": "/case-studies",
   Portfolio: "/portfolio",
   Contact: "/contact",

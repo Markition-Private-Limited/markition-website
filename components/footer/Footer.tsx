@@ -40,6 +40,32 @@ export default function Footer({ variant = "media" }: { variant?: "media" | "tec
           flex-wrap: wrap;
           gap: 10px;
         }
+        .footer-nav-link {
+          font-size: 13.5px;
+          color: #8aa4c8;
+          text-decoration: none;
+          position: relative;
+          display: inline-block;
+          transition: color 0.3s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
+          width: fit-content;
+        }
+        .footer-nav-link::before {
+          content: '→';
+          position: absolute;
+          left: -20px;
+          top: 0;
+          opacity: 0;
+          color: #aab5ff;
+          transition: opacity 0.3s ease, left 0.3s cubic-bezier(0.16,1,0.3,1);
+        }
+        .footer-nav-link:hover {
+          color: #ffffff;
+          transform: translateX(20px);
+        }
+        .footer-nav-link:hover::before {
+          opacity: 1;
+          left: -20px;
+        }
         @media (max-width: 767px) {
           .footer-grid {
             grid-template-columns: 1fr 1fr;
@@ -158,13 +184,9 @@ function ColHeading({ children }: { children: React.ReactNode }) {
 
 function NavLinks({ links }: { links: { label: string; href: string }[] }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 12, paddingLeft: 20 }}>
       {links.map(({ label, href }) => (
-        <a
-          key={label}
-          href={href}
-          style={{ fontSize: 13.5, color: "#8aa4c8", textDecoration: "none" }}
-        >
+        <a key={label} href={href} className="footer-nav-link">
           {label}
         </a>
       ))}

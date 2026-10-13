@@ -6,7 +6,6 @@ const pages = [
   { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/blog", label: "Blog" },
 ];
 
 const servicesLinks = [

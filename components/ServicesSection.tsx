@@ -336,7 +336,8 @@ export default function ServicesSection() {
               })}
             </ul>
 
-            <button
+            <a
+              href="/services"
               style={{
                 marginTop: 22,
                 border: "1px solid rgba(255,255,255,0.18)",
@@ -345,18 +346,19 @@ export default function ServicesSection() {
                 fontSize: 13, fontWeight: 600, cursor: "pointer",
                 display: "flex", alignItems: "center", gap: 6,
                 width: "fit-content", transition: "border-color .2s, color .2s",
+                textDecoration: "none",
               }}
               onMouseEnter={e => {
-                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0,212,255,0.5)";
-                (e.currentTarget as HTMLButtonElement).style.color = "#00d4ff";
+                (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(0,212,255,0.5)";
+                (e.currentTarget as HTMLAnchorElement).style.color = "#00d4ff";
               }}
               onMouseLeave={e => {
-                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.18)";
-                (e.currentTarget as HTMLButtonElement).style.color = "#c0d4ee";
+                (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.18)";
+                (e.currentTarget as HTMLAnchorElement).style.color = "#c0d4ee";
               }}
             >
               Explore All Services →
-            </button>
+            </a>
           </div>
 
           {/* RIGHT: dashboard screenshot */}
