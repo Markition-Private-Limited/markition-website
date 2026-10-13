@@ -398,7 +398,7 @@ export default function AIServicesSection() {
         style={{
           position: "relative",
           minHeight: "auto",
-          padding: "28px 20px 36px",
+          padding: "30px 20px",
           overflow: "hidden",
           background: "#000028",
           fontFamily: "var(--font-inter, Inter, sans-serif)",

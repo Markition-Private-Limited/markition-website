@@ -197,8 +197,8 @@ export default function PortfolioSection() {
   return (
     <section
       id="portfolio"
-      className="py-10 px-4 sm:px-6"
-      style={{ background: "#000028" }}
+      className="px-4 sm:px-6"
+      style={{ paddingTop: 30, paddingBottom: 30, background: "#000028" }}
     >
       <style>{`
         @keyframes portfolio-scroll-up {

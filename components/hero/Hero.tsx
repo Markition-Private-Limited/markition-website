@@ -33,7 +33,7 @@ export default function Hero() {
 
   return (
     <div className="relative z-10 px-4 sm:px-6 pt-3 sm:pt-4">
-      <div className="text-center max-w-3xl mx-auto pt-2 sm:pt-4 lg:pt-6 pb-2 sm:pb-4 lg:pb-6 px-2 sm:px-4">
+      <div className="text-center max-w-3xl mx-auto pt-2 sm:pt-4 lg:pt-11 pb-2 sm:pb-4 lg:pb-6 px-2 sm:px-4">
         <h1
           className="hero-heading text-[28px] xs:text-[32px] sm:text-[42px] md:text-[52px] lg:text-[56px] font-bold leading-[1.18] text-white mb-3 sm:mb-4"
           style={{
@@ -41,9 +41,8 @@ export default function Hero() {
             letterSpacing: "-0.025em",
           }}
         >
-          <span className="block">Markition</span>
-          <span className="block">Your AI Powered <span style={{ color: "#20D9FF" }}>Growth</span></span>
-          <span className="block"><span style={{ color: "#20D9FF" }}>Agency</span> For Marketing,</span>
+          <span className="block">Markition Your AI Powered</span>
+          <span className="block"><span style={{ color: "#20D9FF" }}>Growth Agency</span> For Marketing,</span>
           <span className="block">Tech &amp; Design</span>
         </h1>
 

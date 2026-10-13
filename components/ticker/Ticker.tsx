@@ -11,21 +11,21 @@ const tickerItems = [
 export default function Ticker() {
   return (
     <div
-      className="relative z-10 overflow-visible py-10"
+      className="relative z-10 overflow-visible py-3"
       style={{ background: "#010424", isolation: "isolate" }}
     >
       <div className="ticker-track flex items-center w-max">
         {tickerItems.map((logo, i) => (
           <div
             key={i}
-            className="flex items-center px-8 sm:px-12 lg:px-16 select-none flex-shrink-0"
+            className="flex items-center px-5 sm:px-7 lg:px-10 select-none flex-shrink-0"
           >
             <Image
               src={logo.src}
               alt={logo.alt}
               width={120}
               height={36}
-              className="h-6 sm:h-7 lg:h-9 w-auto object-contain brightness-0 invert"
+              className="h-4 sm:h-5 lg:h-6 w-auto object-contain brightness-0 invert"
               draggable={false}
             />
           </div>

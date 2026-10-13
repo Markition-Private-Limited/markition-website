@@ -123,19 +123,27 @@ export default function ServicesSection() {
     );
   }
 
-  /* Auto-shuffle the triangle every few seconds; restarts whenever the visitor clicks a node */
+  /* Auto-shuffle every 5 s; gate inside the tick so hover always wins */
   const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const hoveredRef = useRef(false);
+  const rotateRef = useRef(rotate);
+  rotateRef.current = rotate;
+
+  useEffect(() => {
+    autoplayRef.current = setInterval(() => {
+      if (!hoveredRef.current) rotateRef.current("cw");
+    }, 5000);
+    return () => { if (autoplayRef.current) clearInterval(autoplayRef.current); };
+  }, []);
+
   function restartAutoplay() {
     if (autoplayRef.current) clearInterval(autoplayRef.current);
-    autoplayRef.current = setInterval(() => rotate("cw"), 5000);
+    autoplayRef.current = setInterval(() => {
+      if (!hoveredRef.current) rotateRef.current("cw");
+    }, 5000);
   }
-  useEffect(() => {
-    restartAutoplay();
-    return () => {
-      if (autoplayRef.current) clearInterval(autoplayRef.current);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  function pauseAutoplay() { hoveredRef.current = true; }
+  function resumeAutoplay() { hoveredRef.current = false; }
 
   function handleClick(id: ServiceId) {
     if (slotOf(id) === "center") return;
@@ -147,7 +155,7 @@ export default function ServicesSection() {
     <section
       style={{
         background: "#000028",
-        padding: "40px 24px",
+        padding: "30px 24px",
         fontFamily: "var(--font-inter, Inter, sans-serif)",
       }}
     >
@@ -267,6 +275,8 @@ export default function ServicesSection() {
         {/* ── Service panel ── */}
         <div
           className="svc-panel"
+          onMouseEnter={pauseAutoplay}
+          onMouseLeave={resumeAutoplay}
           style={{
             background: "#010424",
             border: "1px solid rgba(0,200,255,0.2)",
