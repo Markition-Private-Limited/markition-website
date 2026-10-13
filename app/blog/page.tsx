@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <div>
+    <div style={{ background: "#ffffff" }}>
       <Navbar />
       <BlogContent />
       <Footer />
