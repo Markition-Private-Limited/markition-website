@@ -87,7 +87,7 @@ export default function TechV2Page() {
 
       {/* Contact — "Let's Build Something Great" form */}
       <div style={{ background: "#000028" }}>
-        <Contact />
+        <Contact source="Tech Page" />
       </div>
 
       <Footer variant="tech" />

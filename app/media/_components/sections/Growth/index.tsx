@@ -15,7 +15,7 @@ const SERVICES = [
   { id: "gm-google-ads", href: "/media/google-ads", n: "02", name: "GOOGLE ADS", short: "Put your business in front of people with buying intent." },
   { id: "gm-meta-ads", href: "/media/meta-ads", n: "03", name: "META ADS", short: "Reach the right audiences and create demand." },
   { id: "gm-social", href: "/media/social-media-page-management", n: "04", name: "SOCIAL MEDIA", short: "Build a presence that makes your business look worth choosing." },
-  { id: "gm-content", href: "#contact", n: "05", name: "CONTENT", short: "Give people a reason to stop, understand, trust and act." },
+  { id: "gm-content", href: "#contact", n: "05", name: "CONTENT & VIDEO EDITNG", short: "Give people a reason to stop, understand, trust and act." },
 ];
 
 type Visual = "lines" | "meta" | "social" | "stack";
@@ -35,7 +35,7 @@ const DETAILS: {
     id: "gm-seo",
     eyebrow: "01 / SEO",
     title: "GET FOUND WHEN YOUR CUSTOMERS ARE LOOKING.",
-    body: "SEO helps your business appear higher on Google when people search for the products or services you offer. The simple goal: more relevant people discovering you without paying for every click.",
+    body: "SEO (Search Engine Optimization) helps your business appear higher on Google when people search for the products or services you offer. The simple goal: more relevant people discovering you without paying for every click.",
     points: [
       "More visibility for the searches that matter to your business.",
       "More qualified visitors instead of random traffic.",
@@ -101,7 +101,7 @@ const DETAILS: {
       "Build credibility and answer the questions people actually have.",
       "Support SEO, paid campaigns, social media and conversion.",
     ],
-    image: "https://images.unsplash.com/photo-1553484771-047a44eee27b?auto=format&fit=crop&w=1500&q=80",
+    image: "/media/content-creation.jpg",
     alt: "Content creation and campaign creative",
     top: { label: "Content system", text: "ONE IDEA → MULTIPLE TOUCHPOINTS.", visual: "stack" },
     bottom: { label: "The result", text: "MORE REASONS TO BELIEVE." },

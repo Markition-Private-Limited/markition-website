@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ArrowUpRight, Phone, Clock, CheckCircle2, ChevronDown, Sparkles } from 'lucide-react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { trackConversion } from '../utils/tracking';
 
 interface HeroSectionProps {
@@ -13,6 +14,9 @@ export function HeroSection({ onOpenAudit, selectedService }: HeroSectionProps) 
   const [formData, setFormData] = useState({ fullName: '', companyName: '', email: '', serviceRequired: 'Google Ads & PPC for Dentists', projectBudget: '$500 – $1,500 / month', projectDetails: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   useEffect(() => {
     if (selectedService) {
@@ -26,11 +30,39 @@ export function HeroSection({ onOpenAudit, selectedService }: HeroSectionProps) 
     }
   }, [selectedService]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.fullName.trim() || !formData.email.trim() || !formData.projectDetails.trim()) {
+      setError('Please fill in your name, email and project details.');
+      return;
+    }
+    setError('');
     setIsSubmitting(true);
-    trackConversion('form_submit', { formName: 'hero_primary_audit_form', serviceRequired: formData.serviceRequired });
-    setTimeout(() => { setIsSubmitting(false); setSubmitted(true); }, 700);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          service: formData.serviceRequired,
+          message: `Practice: ${formData.companyName || '—'} | Budget: ${formData.projectBudget}\n\n${formData.projectDetails}`,
+          source: 'Dental — Hero Audit Form',
+          recaptchaToken: captchaToken,
+        }),
+      });
+      if (res.ok) {
+        trackConversion('form_submit', { formName: 'hero_primary_audit_form', serviceRequired: formData.serviceRequired });
+        setSubmitted(true);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch {
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleFocusForm = () => {
@@ -180,6 +212,16 @@ export function HeroSection({ onOpenAudit, selectedService }: HeroSectionProps) 
                     <label className="text-sm font-semibold text-neutral-900 mb-2 block">Project details *</label>
                     <textarea rows={2} value={formData.projectDetails} onChange={(e) => setFormData({ ...formData, projectDetails: e.target.value })} placeholder="Tell us more about your idea" className="w-full bg-transparent border-b border-neutral-900 focus:border-[#1236E8] text-sm sm:text-base text-neutral-900 pb-2.5 pt-1 outline-none placeholder:text-neutral-400 font-normal transition-colors resize-none" />
                   </div>
+                  <div>
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      size="compact"
+                      sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr"
+                      onChange={(token) => { setCaptchaToken(token); setError(''); }}
+                      onExpired={() => setCaptchaToken(null)}
+                    />
+                  </div>
+                  {error && <p className="text-xs text-red-600">{error}</p>}
                   <div className="pt-2">
                     <button type="submit" disabled={isSubmitting} className="w-full h-12 sm:h-[50px] rounded-full bg-[#030A28] hover:bg-[#1236E8] active:scale-[0.985] text-white font-semibold text-sm sm:text-base transition-all duration-200 cursor-pointer shadow-md hover:shadow-xl text-center flex items-center justify-center gap-2 disabled:opacity-75 group">
                       <span>{isSubmitting ? 'Sending inquiry...' : 'Send inquiry'}</span>

@@ -216,21 +216,75 @@ footer{background:#111;color:#fff;padding:55px 0 100px}.footer-top{display:flex;
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.treatment img,.service,.btn{transition:none}}
 </style>
+<style>
+.mk-nav-wrap{position:sticky;top:0;z-index:999;height:0;display:flow-root}
+.mk-nav{width:min(1180px,calc(100% - 32px));margin:10px auto 0;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 22px;border-radius:14px;background:rgba(23,23,23,.92);backdrop-filter:blur(20px) saturate(1.8);-webkit-backdrop-filter:blur(20px) saturate(1.8);border:1px solid rgba(199,167,122,.25);box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.mk-nav-logo{display:flex;align-items:center;flex-shrink:0}
+.mk-nav-logo img{height:26px;width:auto;display:block}
+.mk-nav-links{display:flex;gap:2px;align-items:center}
+.mk-nav-links a{color:rgba(255,255,255,.78);font-size:13px;font-weight:600;padding:8px 12px;border-radius:8px;transition:.2s}
+.mk-nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.mk-nav-cta{display:flex;align-items:center;gap:10px}
+.mk-btn-cta{display:inline-flex;align-items:center;gap:8px;background:#C7A77A;color:#171717;font-size:12.5px;font-weight:800;padding:10px 16px;border-radius:7px;white-space:nowrap;transition:.2s}
+.mk-btn-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.mk-nav-toggle{display:none;flex-direction:column;gap:4px;background:none;border:0;padding:6px}
+.mk-nav-toggle span{width:20px;height:2px;background:#fff;border-radius:2px}
+.mk-nav-mobile{display:none;flex-direction:column;width:min(1180px,calc(100% - 32px));margin:8px auto 0;padding:6px;border-radius:14px;background:rgba(23,23,23,.96);border:1px solid rgba(199,167,122,.25);backdrop-filter:blur(20px)}
+.mk-nav-mobile.open{display:flex}
+.mk-nav-mobile a{color:rgba(255,255,255,.82);font-size:14px;font-weight:600;padding:12px 14px;border-radius:9px}
+.mk-nav-mobile a:hover{background:rgba(255,255,255,.08);color:#fff}
+.mk-nav-mobile .mk-btn-cta{justify-content:center;margin-top:6px}
+@media(max-width:860px){.mk-nav-links{display:none}.mk-nav-toggle{display:flex}}
+.mk-footer{background:#171717;color:#fff}
+.mk-footer-grid{max-width:1200px;margin:0 auto;padding:60px 24px 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:40px 48px}
+.mk-footer-logo{margin-bottom:16px}
+.mk-footer-logo img{height:28px;width:auto;display:block}
+.mk-footer-brand p{font-size:13.5px;line-height:1.75;color:rgba(255,255,255,.55);max-width:260px;margin:0}
+.mk-footer-heading{font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin:0 0 18px}
+.mk-footer-links{display:flex;flex-direction:column;gap:11px}
+.mk-footer-links a{font-size:13.5px;color:rgba(255,255,255,.55);transition:.25s}
+.mk-footer-links a:hover{color:#C7A77A}
+.mk-footer-contact{display:flex;flex-direction:column;gap:13px}
+.mk-footer-contact a{font-size:13px;color:rgba(255,255,255,.55);line-height:1.5}
+.mk-footer-contact a:hover{color:#C7A77A}
+.mk-footer-socials{display:flex;gap:13px;margin-top:20px}
+.mk-footer-socials a{color:#C7A77A;opacity:.8}
+.mk-footer-socials a:hover{opacity:1}
+.mk-footer-bottom{background:#0e0e0e;padding:16px 24px}
+.mk-footer-bottom-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.mk-footer-bottom span{font-size:12.5px;color:rgba(255,255,255,.45)}
+.mk-footer-bottom-links a{font-size:12.5px;color:rgba(255,255,255,.45);margin-left:20px}
+@media(max-width:767px){.mk-footer-grid{grid-template-columns:1fr 1fr;gap:32px 20px;padding:48px 20px 40px}.mk-footer-brand{grid-column:1/-1}}
+@media(max-width:479px){.mk-footer-grid{grid-template-columns:1fr}}
+</style>
 </head>
 
 <body>
-<header id="site-header">
-  <nav class="nav" aria-label="Primary">
-    <a href="#" class="logo" aria-label="Markition home">MARKITION</a>
-    <div class="navlinks">
-      <a href="#why">Why Markition</a><a href="#services">Services</a><a href="#process">Process</a><a href="#proof">Results</a><a href="#faq">FAQ</a>
+<div class="mk-nav-wrap">
+  <nav class="mk-nav" aria-label="Primary">
+    <a href="/" class="mk-nav-logo" aria-label="Markition home"><img src="/markition-logo.svg" alt="Markition"></a>
+    <div class="mk-nav-links">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="#services">Services</a>
+      <a href="#proof">Results</a>
+      <a href="#faq">FAQ</a>
+      <a href="/contact">Contact</a>
     </div>
-    <div class="nav-actions"><a class="btn btn-dark" href="#book-audit">Get Free Audit</a></div>
-    <button class="menu" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="mk-nav-cta">
+      <a class="mk-btn-cta" href="#book-audit">Get Free Audit <span>→</span></a>
+      <button class="mk-nav-toggle" id="mkNavToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </nav>
-</header>
-<div class="mobile-nav" id="mobileNav">
-  <a href="#why">Why Markition</a><a href="#services">Services</a><a href="#process">Process</a><a href="#proof">Results</a><a href="#faq">FAQ</a><a href="#book-audit">Get Free Audit</a>
+  <div class="mk-nav-mobile" id="mkNavMobile">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="#services">Services</a>
+    <a href="#proof">Results</a>
+    <a href="#faq">FAQ</a>
+    <a href="/contact">Contact</a>
+    <a class="mk-btn-cta" href="#book-audit">Get Free Audit →</a>
+  </div>
 </div>
 
 <main>
@@ -264,7 +318,9 @@ footer{background:#111;color:#fff;padding:55px 0 100px}.footer-top{display:flex;
             </div>
             <div class="field full"><label for="budget">Monthly Marketing Budget</label><select id="budget" name="budget" required><option value="">Monthly Marketing Budget</option><option>Under $1,000</option><option>$1,000–$2,500</option><option>$2,500–$5,000</option><option>$5,000–$10,000</option><option>$10,000+</option></select></div>
           </div>
+          <div class="g-recaptcha" data-sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr" style="margin:10px 0"></div>
           <button class="btn btn-dark" type="submit">Get My Free Aesthetic Marketing Audit</button>
+          <p class="form-error" style="color:#c0392b;font-size:13px;display:none"></p>
           <div class="form-small">No obligation · No spam · Built around your clinic</div>
         </form>
       </div>
@@ -463,14 +519,16 @@ footer{background:#111;color:#fff;padding:55px 0 100px}.footer-top{display:flex;
       <div class="eyebrow">Free Clinic Growth Audit</div><h3>Let's Talk About Your Next Growth Opportunity.</h3>
       <form data-lead-form>
         <div class="form-grid">
-          <div class="field"><label for="f-name">Full Name</label><input id="f-name" placeholder="Full Name" required></div>
-          <div class="field"><label for="f-clinic">Clinic Name</label><input id="f-clinic" placeholder="Clinic Name" required></div>
-          <div class="field"><label for="f-email">Work Email</label><input id="f-email" type="email" placeholder="Work Email" required></div>
-          <div class="field"><label for="f-phone">Phone</label><input id="f-phone" placeholder="Phone" required></div>
-          <div class="field full"><label for="f-website">Website</label><input id="f-website" placeholder="Clinic Website"></div>
-          <div class="field full"><label for="f-city">City / Service Area</label><input id="f-city" placeholder="City / Service Area" required></div>
+          <div class="field"><label for="f-name">Full Name</label><input id="f-name" name="name" placeholder="Full Name" required></div>
+          <div class="field"><label for="f-clinic">Clinic Name</label><input id="f-clinic" name="clinic" placeholder="Clinic Name" required></div>
+          <div class="field"><label for="f-email">Work Email</label><input id="f-email" name="email" type="email" placeholder="Work Email" required></div>
+          <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" placeholder="Phone" required></div>
+          <div class="field full"><label for="f-website">Website</label><input id="f-website" name="website" placeholder="Clinic Website"></div>
+          <div class="field full"><label for="f-city">City / Service Area</label><input id="f-city" name="city" placeholder="City / Service Area" required></div>
         </div>
+        <div class="g-recaptcha" data-sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr" style="margin:10px 0"></div>
         <button class="btn btn-dark" type="submit">Get My Free Aesthetic Marketing Audit</button>
+        <p class="form-error" style="color:#c0392b;font-size:13px;display:none"></p>
         <div class="form-small">You're In. Thanks — our team will review your details and get back to you shortly.</div>
       </form>
     </div>
@@ -478,13 +536,49 @@ footer{background:#111;color:#fff;padding:55px 0 100px}.footer-top{display:flex;
 </section>
 </main>
 
-<footer>
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand"><div class="logo">MARKITION</div><p>Digital marketing for aesthetic clinics focused on visibility, qualified leads, consultations and growth.</p></div>
-      <div class="footer-links"><a href="#why">Why Markition</a><a href="#services">Services</a><a href="#process">Process</a><a href="#proof">Results</a><a href="#faq">FAQ</a></div>
+<footer class="mk-footer">
+  <div class="mk-footer-grid">
+    <div class="mk-footer-brand">
+      <div class="mk-footer-logo"><img src="/markition-logo.svg" alt="Markition"></div>
+      <p>Digital marketing for aesthetic clinics focused on visibility, qualified leads, consultations and growth.</p>
     </div>
-    <div class="footer-bottom"><span>© 2026 Markition Private Limited. All rights reserved.</span><span>Digital Marketing · SEO · PPC · Social · Creative</span></div>
+    <div>
+      <p class="mk-footer-heading">Company</p>
+      <div class="mk-footer-links">
+        <a href="/about">About Us</a>
+        <a href="/services">Services</a>
+        <a href="/portfolio">Portfolio</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+    <div>
+      <p class="mk-footer-heading">On This Page</p>
+      <div class="mk-footer-links">
+        <a href="#why">Why Markition</a>
+        <a href="#services">Services</a>
+        <a href="#proof">Results</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+    <div>
+      <p class="mk-footer-heading">Get In Touch</p>
+      <div class="mk-footer-contact">
+        <a href="https://maps.google.com/?q=117+S+Lexington+St,+Suite+100,+Harrisonville,+MO+64701,+USA">117 S Lexington St, Suite 100<br>Harrisonville, MO 64701, USA</a>
+        <a href="tel:+12174010041">+1 (217) 401-0041</a>
+        <a href="mailto:hey@markition.com">hey@markition.com</a>
+      </div>
+      <div class="mk-footer-socials">
+        <a href="https://x.com/MarkitionPvt" aria-label="X / Twitter" target="_blank" rel="noopener noreferrer">✕</a>
+        <a href="https://linkedin.com/company/markition/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
+        <a href="https://www.instagram.com/markitionmedia" aria-label="Instagram" target="_blank" rel="noopener noreferrer">◎</a>
+      </div>
+    </div>
+  </div>
+  <div class="mk-footer-bottom">
+    <div class="mk-footer-bottom-inner">
+      <span>© 2026 Markition. All rights reserved.</span>
+      <div class="mk-footer-bottom-links"><a href="/terms">Terms of Use</a><a href="/privacy">Privacy Policy</a></div>
+    </div>
   </div>
 </footer>
 
@@ -499,9 +593,14 @@ footer{background:#111;color:#fff;padding:55px 0 100px}.footer-top{display:flex;
 const header=document.getElementById('site-header');
 window.addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>20),{passive:true});
 
-const menuBtn=document.getElementById('menuBtn');
-menuBtn.addEventListener('click',()=>{document.body.classList.toggle('menu-open');menuBtn.setAttribute('aria-expanded',document.body.classList.contains('menu-open'))});
-document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu-open')));
+(function(){
+  var btn=document.getElementById('mkNavToggle');
+  var menu=document.getElementById('mkNavMobile');
+  if(btn&&menu){btn.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });}
+})();
 
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
@@ -512,14 +611,36 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',
 
 const toast=document.getElementById('toast');
 function showToast(msg){toast.textContent=msg;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),4200)}
-document.querySelectorAll('[data-lead-form]').forEach(form=>{
-  form.addEventListener('submit',e=>{
+const allLeadForms=[...document.querySelectorAll('[data-lead-form]')];
+allLeadForms.forEach((form,fi)=>{
+  form.addEventListener('submit',async e=>{
     e.preventDefault();
     if(!form.checkValidity()){form.reportValidity();return}
-    const btn=form.querySelector('button[type="submit"]');const old=btn.textContent;
-    btn.textContent='Reviewing Your Details…';form.classList.add('loading');
-    setTimeout(()=>{btn.textContent='You’re In — Thank You';form.classList.remove('loading');showToast("You're In. Thanks — our team will review your details and get back to you shortly.");form.reset()},900);
-    /* Replace this simulated success with your CRM/form endpoint. */
+    const errEl=form.querySelector('.form-error');
+    const captcha=grecaptcha.getResponse(fi);
+    if(!captcha){if(errEl){errEl.textContent='Please complete the reCAPTCHA.';errEl.style.display='block';}return;}
+    const btn=form.querySelector('button[type="submit"]');
+    if(btn)btn.disabled=true;
+    const fd=new FormData(form);
+    const payload={
+      source:'Aesthetician Clinics Page',
+      name:fd.get('name')||'',email:fd.get('email')||'',
+      phone:fd.get('phone')||'',website:fd.get('website')||'',
+      service:fd.get('service')||'',budget:fd.get('budget')||'',
+      message:(fd.get('clinic')?`Clinic: ${fd.get('clinic')}\n`:'')+(fd.get('city')?`City: ${fd.get('city')}`:''),
+      recaptchaToken:captcha
+    };
+    try{
+      const res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      if(res.ok){
+        showToast("You're In. Thanks — our team will review your details and get back to you shortly.");
+        form.reset();grecaptcha.reset(fi);if(errEl)errEl.style.display='none';
+      }else{
+        const d=await res.json().catch(()=>({}));
+        if(errEl){errEl.textContent=d.error||'Something went wrong. Please try again.';errEl.style.display='block';}
+      }
+    }catch{if(errEl){errEl.textContent='Something went wrong. Please try again.';errEl.style.display='block';}}
+    finally{if(btn)btn.disabled=false;}
   });
 });
 
@@ -543,5 +664,6 @@ document.querySelectorAll('.btn,.text-link').forEach(el=>el.addEventListener('cl
 }));
 document.getElementById('call-now')?.addEventListener('click',()=>{window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'phone_click'})});
 </script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>

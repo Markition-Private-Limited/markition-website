@@ -33,7 +33,7 @@ export default function DesignLabPage() {
       <CtaSection />
 
       <div style={{ background: "#020a1c" }}>
-        <Contact />
+        <Contact source="Design Lab Page" />
       </div>
     </>
   );

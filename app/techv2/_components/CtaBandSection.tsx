@@ -1,7 +1,29 @@
+"use client";
+
 import Image from "next/image";
 import { Phone } from "lucide-react";
+import { useState } from "react";
 
 export function CtaBandSection() {
+  const [phone, setPhone] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!phone.trim()) return;
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: "Phone Lead", email: "", phone, message: `Call back request: +91 ${phone}`, source: "Tech Page — CTA Band", recaptchaToken: null }),
+      });
+      setStatus(res.ok ? "success" : "error");
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <section className="relative overflow-hidden py-8 md:py-12" style={{ backgroundImage: "linear-gradient(to right, #e4e4e4 1px, transparent 1px), linear-gradient(to bottom, #e4e4e4 1px, transparent 1px)", backgroundSize: "80px 80px" }}>
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -40,27 +62,35 @@ export function CtaBandSection() {
               </p>
 
               {/* Phone form */}
-              <form className="mt-9 flex w-full max-w-[520px] items-center rounded-2xl bg-white p-2 shadow-[0_18px_45px_rgba(255,255,255,0.13)]">
-                <div className="flex h-12 items-center border-r border-black/10 px-4">
-                  <span className="text-sm font-semibold text-black">+91</span>
-                </div>
-                <input
-                  type="tel"
-                  inputMode="numeric"
-                  autoComplete="tel"
-                  placeholder="Enter your phone"
-                  maxLength={10}
-                  className="h-12 min-w-0 flex-1 bg-transparent rounded-lg px-4 mx-2 py-2 text-sm font-medium text-black outline-none placeholder:text-black/40"
-                />
-                <button
-                  type="submit"
-                  className="flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#080b3f] px-5 text-xs font-bold text-white transition duration-300 hover:bg-[#062283] sm:px-7"
-                >
-                  <Phone size={16} />
-                  <span className="hidden sm:inline">Get A Call</span>
-                  <span className="sm:hidden">Get</span>
-                </button>
-              </form>
+              {status === "success" ? (
+                <p className="mt-9 text-sm font-semibold text-white">✓ Got it! We&apos;ll call you back shortly.</p>
+              ) : (
+                <form onSubmit={handleSubmit} className="mt-9 flex w-full max-w-[520px] items-center rounded-2xl bg-white p-2 shadow-[0_18px_45px_rgba(255,255,255,0.13)]">
+                  <div className="flex h-12 items-center border-r border-black/10 px-4">
+                    <span className="text-sm font-semibold text-black">+91</span>
+                  </div>
+                  <input
+                    type="tel"
+                    inputMode="numeric"
+                    autoComplete="tel"
+                    placeholder="Enter your phone"
+                    maxLength={10}
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="h-12 min-w-0 flex-1 bg-transparent rounded-lg px-4 mx-2 py-2 text-sm font-medium text-black outline-none placeholder:text-black/40"
+                  />
+                  <button
+                    type="submit"
+                    disabled={status === "sending"}
+                    className="flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#080b3f] px-5 text-xs font-bold text-white transition duration-300 hover:bg-[#062283] sm:px-7 disabled:opacity-60"
+                  >
+                    <Phone size={16} />
+                    <span className="hidden sm:inline">{status === "sending" ? "Sending…" : "Get A Call"}</span>
+                    <span className="sm:hidden">Get</span>
+                  </button>
+                </form>
+              )}
+              {status === "error" && <p className="mt-2 text-xs text-red-400">Something went wrong. Please try again.</p>}
             </div>
           </div>
         </div>

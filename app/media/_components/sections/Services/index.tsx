@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const CARDS = [
   {
@@ -8,30 +9,35 @@ const CARDS = [
     sub: "Search visibility",
     desc: "We optimise your site technically and on-page so the right customers find you first — and you stay ahead as Google's algorithms evolve.",
     img: "/services/seo.webp",
+    href: "/media/seo",
   },
   {
     title: "Google Ads",
     sub: "Performance campaigns",
     desc: "Search and display campaigns built to capture high-intent buyers, drive qualified traffic, and deliver measurable return on every pound spent.",
     img: "/services/google-ads.webp",
+    href: "/media/google-ads",
   },
   {
     title: "Meta Ads",
     sub: "Social advertising",
     desc: "Facebook and Instagram campaigns that reach your ideal audience, create demand, and retarget warm leads until they convert.",
     img: "/services/meta-ads.webp",
+    href: "/media/meta-ads",
   },
   {
     title: "Social Media",
     sub: "page management",
     desc: "We handle your social pages end-to-end — content calendars, posting, community engagement, and growth across all major platforms.",
     img: "/services/social-media.webp",
+    href: "/media/social-media-page-management",
   },
   {
     title: "Video Editing",
     sub: "Visual storytelling",
     desc: "Raw footage transformed into polished brand videos, reels, and ads that stop the scroll and move people to act.",
-    img: "/services/video-editing.webp",
+    img: "/services/content-creation.jpg",
+    href: "/media/video-editing",
   },
 ];
 
@@ -149,9 +155,16 @@ export default function Services() {
                 style={{ background: "rgba(0,0,40,0.82)" }}
               >
                 <div className="overflow-hidden">
-                  <p className="text-white/90 text-[11px] sm:text-[12px] leading-[1.6] text-center px-5 py-4 sm:px-6">
+                  <p className="text-white/90 text-[11px] sm:text-[12px] leading-[1.6] text-center px-5 pt-4 sm:px-6">
                     {card.desc}
                   </p>
+                  <Link
+                    href={card.href}
+                    onClick={(e) => e.stopPropagation()}
+                    className="block text-center text-[11px] sm:text-[12px] font-semibold text-[#00D4FF] hover:text-white transition-colors duration-300 px-5 pt-2 pb-4 sm:px-6"
+                  >
+                    Explore service ↗
+                  </Link>
                 </div>
               </div>
             </div>

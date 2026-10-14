@@ -21,7 +21,7 @@ function validate(name: string, email: string, message: string, captcha: string 
   return errs;
 }
 
-export default function Contact() {
+export default function Contact({ source = "Media Page" }: { source?: string }) {
   const [budgetMin, setBudgetMin] = useState(1000);
   const [budgetMax, setBudgetMax] = useState(5000);
   const [name, setName] = useState("");
@@ -64,7 +64,7 @@ export default function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, service, budgetMin, budgetMax, message, source: "Media Page", recaptchaToken: captchaToken }),
+        body: JSON.stringify({ name, email, service, budgetMin, budgetMax, message, source, recaptchaToken: captchaToken }),
       });
       setStatus(res.ok ? "success" : "error");
     } catch {

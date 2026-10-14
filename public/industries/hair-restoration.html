@@ -245,7 +245,7 @@ p{margin:0;color:var(--muted)}
 .keywords span{padding:9px 12px;background:#fff;border:1px solid var(--line);font-size:11px;color:var(--forest)}
 
 /* Final CTA */
-.final{background:var(--deep);color:#fff;position:relative;overflow:hidden}
+.final{background:var(--forest);color:#fff;position:relative;overflow:hidden}
 .final:before{content:"";position:absolute;right:-15%;top:-60%;width:60%;height:140%;background:radial-gradient(circle,rgba(185,154,107,.2),transparent 60%)}
 .final-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr .65fr;gap:80px;align-items:center}
 .final p{color:rgba(255,255,255,.7);max-width:620px;margin-top:20px}
@@ -340,25 +340,76 @@ footer{background:#141916;color:#f4f1e9;padding:38px 0 100px}
   *,*:before,*:after{transition:none!important;animation:none!important}
 }
 </style>
+<style>
+.mk-nav-wrap{position:sticky;top:0;z-index:999;height:0;display:flow-root}
+.mk-nav{width:min(1180px,calc(100% - 32px));margin:10px auto 0;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 22px;border-radius:14px;background:rgba(23,35,29,.92);backdrop-filter:blur(20px) saturate(1.8);-webkit-backdrop-filter:blur(20px) saturate(1.8);border:1px solid rgba(185,154,107,.25);box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.mk-nav-logo{display:flex;align-items:center;flex-shrink:0}
+.mk-nav-logo img{height:26px;width:auto;display:block}
+.mk-nav-links{display:flex;gap:2px;align-items:center}
+.mk-nav-links a{color:rgba(255,255,255,.78);font-size:13px;font-weight:600;padding:8px 12px;border-radius:8px;transition:.2s}
+.mk-nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.mk-nav-cta{display:flex;align-items:center;gap:10px}
+.mk-btn-cta{display:inline-flex;align-items:center;gap:8px;background:#b99a6b;color:#171714;font-size:12.5px;font-weight:800;padding:10px 16px;border-radius:7px;white-space:nowrap;transition:.2s}
+.mk-btn-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.mk-nav-toggle{display:none;flex-direction:column;gap:4px;background:none;border:0;padding:6px}
+.mk-nav-toggle span{width:20px;height:2px;background:#fff;border-radius:2px}
+.mk-nav-mobile{display:none;flex-direction:column;width:min(1180px,calc(100% - 32px));margin:8px auto 0;padding:6px;border-radius:14px;background:rgba(23,35,29,.96);border:1px solid rgba(185,154,107,.25);backdrop-filter:blur(20px)}
+.mk-nav-mobile.open{display:flex}
+.mk-nav-mobile a{color:rgba(255,255,255,.82);font-size:14px;font-weight:600;padding:12px 14px;border-radius:9px}
+.mk-nav-mobile a:hover{background:rgba(255,255,255,.08);color:#fff}
+.mk-nav-mobile .mk-btn-cta{justify-content:center;margin-top:6px}
+@media(max-width:860px){.mk-nav-links{display:none}.mk-nav-toggle{display:flex}}
+.mk-footer{background:#171714;color:#fff}
+.mk-footer-grid{max-width:1200px;margin:0 auto;padding:60px 24px 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:40px 48px}
+.mk-footer-logo{margin-bottom:16px}
+.mk-footer-logo img{height:28px;width:auto;display:block}
+.mk-footer-brand p{font-size:13.5px;line-height:1.75;color:rgba(255,255,255,.55);max-width:260px;margin:0}
+.mk-footer-heading{font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin:0 0 18px}
+.mk-footer-links{display:flex;flex-direction:column;gap:11px}
+.mk-footer-links a{font-size:13.5px;color:rgba(255,255,255,.55);transition:.25s}
+.mk-footer-links a:hover{color:#b99a6b}
+.mk-footer-contact{display:flex;flex-direction:column;gap:13px}
+.mk-footer-contact a{font-size:13px;color:rgba(255,255,255,.55);line-height:1.5}
+.mk-footer-contact a:hover{color:#b99a6b}
+.mk-footer-socials{display:flex;gap:13px;margin-top:20px}
+.mk-footer-socials a{color:#b99a6b;opacity:.8}
+.mk-footer-socials a:hover{opacity:1}
+.mk-footer-bottom{background:#0f0f0d;padding:16px 24px}
+.mk-footer-bottom-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.mk-footer-bottom span{font-size:12.5px;color:rgba(255,255,255,.45)}
+.mk-footer-bottom-links a{font-size:12.5px;color:rgba(255,255,255,.45);margin-left:20px}
+@media(max-width:767px){.mk-footer-grid{grid-template-columns:1fr 1fr;gap:32px 20px;padding:48px 20px 40px}.mk-footer-brand{grid-column:1/-1}}
+@media(max-width:479px){.mk-footer-grid{grid-template-columns:1fr}}
+</style>
 </head>
 
 <body>
-<header class="header" id="header">
-  <div class="container nav">
-    <a class="logo" href="#">MARK<span>ITION</span></a>
-    <nav class="navlinks">
-      <a href="#why">Why Markition</a>
+<div class="mk-nav-wrap">
+  <nav class="mk-nav" aria-label="Primary">
+    <a href="/" class="mk-nav-logo" aria-label="Markition home"><img src="/markition-logo.svg" alt="Markition"></a>
+    <div class="mk-nav-links">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
       <a href="#services">Services</a>
-      <a href="#process">Process</a>
       <a href="#proof">Results</a>
       <a href="#faq">FAQ</a>
-    </nav>
-    <div class="nav-cta">
-      <a class="btn btn-dark" href="#book-audit">Get Free Audit <span class="arrow">↗</span></a>
+      <a href="/contact">Contact</a>
     </div>
-    <button class="menu" id="menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <div class="mk-nav-cta">
+      <a class="mk-btn-cta" href="#hero-form">Get Free Audit <span>→</span></a>
+      <button class="mk-nav-toggle" id="mkNavToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mk-nav-mobile" id="mkNavMobile">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="#services">Services</a>
+    <a href="#proof">Results</a>
+    <a href="#faq">FAQ</a>
+    <a href="/contact">Contact</a>
+    <a class="mk-btn-cta" href="#hero-form">Get Free Audit →</a>
   </div>
-</header>
+</div>
 
 <main>
 <section class="hero" id="top">
@@ -392,7 +443,9 @@ footer{background:#141916;color:#f4f1e9;padding:38px 0 100px}
           <select name="service"><option>Hair Transplant</option><option>FUE</option><option>DHI</option><option>Sapphire FUE</option><option>Hairline Restoration</option><option>Beard Transplant</option><option>Eyebrow Restoration</option><option>PRP / Non-Surgical Hair Restoration</option><option>Other</option></select>
         </div>
       </div>
+      <div class="g-recaptcha" data-sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr" style="margin:10px 0"></div>
       <button class="btn btn-dark form-submit" type="submit">Get My Free Growth Audit <span class="arrow">↗</span></button>
+      <p class="form-error" style="color:#c0392b;font-size:13px;display:none"></p>
       <div class="privacy">Your information stays private. No spam. No obligation.</div>
     </form>
   </div>
@@ -653,16 +706,57 @@ footer{background:#141916;color:#f4f1e9;padding:38px 0 100px}
       <input required type="email" name="email" placeholder="Work email">
       <input required name="phone" placeholder="Phone / WhatsApp">
       <input name="website" placeholder="Clinic website">
+      <div class="g-recaptcha" data-sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr" style="margin:10px 0"></div>
       <button class="btn btn-dark" type="submit">Request Your Audit <span class="arrow">↗</span></button>
+      <p class="form-error" style="color:#c0392b;font-size:13px;display:none"></p>
     </form>
   </div>
 </section>
 </main>
 
-<footer>
-  <div class="container footer-inner">
-    <div><div class="footer-logo">MARK<span>ITION</span></div><div class="footer-copy">Hair restoration clinic growth through performance marketing.</div></div>
-    <div class="footer-links"><a href="#services">Services</a><a href="#proof">Results</a><a href="#faq">FAQ</a><a href="#book-audit">Get Free Audit</a></div>
+<footer class="mk-footer">
+  <div class="mk-footer-grid">
+    <div class="mk-footer-brand">
+      <div class="mk-footer-logo"><img src="/markition-logo.svg" alt="Markition"></div>
+      <p>Hair restoration clinic growth through performance marketing that turns searches into consultations.</p>
+    </div>
+    <div>
+      <p class="mk-footer-heading">Company</p>
+      <div class="mk-footer-links">
+        <a href="/about">About Us</a>
+        <a href="/services">Services</a>
+        <a href="/portfolio">Portfolio</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+    <div>
+      <p class="mk-footer-heading">On This Page</p>
+      <div class="mk-footer-links">
+        <a href="#why">Why Markition</a>
+        <a href="#services">Services</a>
+        <a href="#proof">Results</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+    <div>
+      <p class="mk-footer-heading">Get In Touch</p>
+      <div class="mk-footer-contact">
+        <a href="https://maps.google.com/?q=117+S+Lexington+St,+Suite+100,+Harrisonville,+MO+64701,+USA">117 S Lexington St, Suite 100<br>Harrisonville, MO 64701, USA</a>
+        <a href="tel:+12174010041">+1 (217) 401-0041</a>
+        <a href="mailto:hey@markition.com">hey@markition.com</a>
+      </div>
+      <div class="mk-footer-socials">
+        <a href="https://x.com/MarkitionPvt" aria-label="X / Twitter" target="_blank" rel="noopener noreferrer">✕</a>
+        <a href="https://linkedin.com/company/markition/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
+        <a href="https://www.instagram.com/markitionmedia" aria-label="Instagram" target="_blank" rel="noopener noreferrer">◎</a>
+      </div>
+    </div>
+  </div>
+  <div class="mk-footer-bottom">
+    <div class="mk-footer-bottom-inner">
+      <span>© 2026 Markition. All rights reserved.</span>
+      <div class="mk-footer-bottom-links"><a href="/terms">Terms of Use</a><a href="/privacy">Privacy Policy</a></div>
+    </div>
   </div>
 </footer>
 
@@ -706,46 +800,48 @@ document.getElementById('next').addEventListener('click',()=>{reviewIndex++;move
 document.getElementById('prev').addEventListener('click',()=>{reviewIndex--;moveReviews()});
 window.addEventListener('resize',moveReviews);
 
-document.querySelectorAll('[data-form]').forEach(form=>{
-  form.addEventListener('submit',e=>{
+const allForms=[...document.querySelectorAll('[data-form]')];
+allForms.forEach((form,fi)=>{
+  form.addEventListener('submit',async e=>{
     e.preventDefault();
-    const toast=document.getElementById('toast');
-    toast.classList.add('show');
-    form.reset();
-    setTimeout(()=>toast.classList.remove('show'),4000);
-    // PPC tracking hooks:
-    // dataLayer.push({event:'hair_restoration_audit_submit'});
-    // gtag('event','generate_lead',{lead_source:'hair_restoration_ppc'});
+    const errEl=form.querySelector('.form-error');
+    const captcha=grecaptcha.getResponse(fi);
+    if(!captcha){if(errEl){errEl.textContent='Please complete the reCAPTCHA.';errEl.style.display='block';}return;}
+    const btn=form.querySelector('[type=submit]');
+    if(btn)btn.disabled=true;
+    const fd=new FormData(form);
+    const payload={
+      source:'Hair Restoration Page',
+      name:fd.get('name')||'',email:fd.get('email')||'',
+      phone:fd.get('phone')||'',website:fd.get('website')||'',
+      service:fd.get('service')||'',budget:fd.get('budget')||'',
+      message:fd.get('message')||'',recaptchaToken:captcha
+    };
+    try{
+      const res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      if(res.ok){
+        const toast=document.getElementById('toast');
+        toast.classList.add('show');form.reset();grecaptcha.reset(fi);
+        if(errEl)errEl.style.display='none';
+        setTimeout(()=>toast.classList.remove('show'),4000);
+      }else{
+        const d=await res.json().catch(()=>({}));
+        if(errEl){errEl.textContent=d.error||'Something went wrong. Please try again.';errEl.style.display='block';}
+      }
+    }catch{if(errEl){errEl.textContent='Something went wrong. Please try again.';errEl.style.display='block';}}
+    finally{if(btn)btn.disabled=false;}
   });
 });
 
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',()=>{
-    const menu=document.getElementById('menu');
-    if(menu.dataset.open==='1'){menu.dataset.open='0'}
-  })
-});
-
-const menu=document.getElementById('menu');
-menu.addEventListener('click',()=>{
-  const links=document.querySelector('.navlinks');
-  if(menu.dataset.open!=='1'){
-    links.style.display='flex';
-    links.style.position='absolute';
-    links.style.top='68px';
-    links.style.left='15px';
-    links.style.right='15px';
-    links.style.flexDirection='column';
-    links.style.alignItems='stretch';
-    links.style.padding='18px';
-    links.style.background='rgba(251,250,247,.98)';
-    links.style.border='1px solid rgba(23,23,20,.12)';
-    menu.dataset.open='1';
-  }else{
-    links.style.display='';
-    menu.dataset.open='0';
-  }
-});
+(function(){
+  var btn=document.getElementById('mkNavToggle');
+  var menu=document.getElementById('mkNavMobile');
+  if(btn&&menu){btn.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });}
+})();
 </script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>

@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { X, CheckCircle2, ArrowRight, ShieldCheck } from 'lucide-react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { SphenoLogo } from './SphenoLogo';
 
 interface ConsultationModalProps {
@@ -9,8 +10,14 @@ interface ConsultationModalProps {
   onClose: () => void;
 }
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, onClose }) => {
   const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
+  const [error, setError] = useState('');
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -22,10 +29,48 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.fullName || !formData.email) return;
-    setSubmitted(true);
+    if (!formData.fullName.trim() || !formData.email.trim()) {
+      setError('Full name and work email are required.');
+      return;
+    }
+    if (!EMAIL_RE.test(formData.email)) {
+      setError('Enter a valid email address.');
+      return;
+    }
+    if (process.env.NODE_ENV !== 'development' && !captchaToken) {
+      setError('Please complete the reCAPTCHA.');
+      return;
+    }
+
+    setError('');
+    setStatus('sending');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          service: formData.channels.join(', '),
+          message: `Business: ${formData.businessName || '—'} | Phone: ${formData.phone || '—'} | Industry: ${formData.industry} | Products requested: ${formData.channels.join(', ') || '—'}`,
+          source: 'Spheno — Consultation Modal',
+          recaptchaToken: captchaToken,
+        }),
+      });
+      if (res.ok) {
+        setStatus('idle');
+        setSubmitted(true);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || 'Something went wrong. Please try again.');
+        setStatus('error');
+      }
+    } catch {
+      setError('Something went wrong. Please try again.');
+      setStatus('error');
+    }
   };
 
   const toggleChannel = (channel: string) => {
@@ -189,12 +234,25 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({ isOpen, on
               </div>
             </div>
 
+            <div>
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr"
+                theme="dark"
+                onChange={(token) => { setCaptchaToken(token); setError(''); }}
+                onExpired={() => setCaptchaToken(null)}
+              />
+            </div>
+
+            {error && <p className="text-xs text-red-400">{error}</p>}
+
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full py-3 bg-white text-[#080C42] hover:bg-[#EEF0FF] rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                disabled={status === 'sending'}
+                className="w-full py-3 bg-white text-[#080C42] hover:bg-[#EEF0FF] rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                <span>Request Custom Spheno AI Proposal</span>
+                <span>{status === 'sending' ? 'Sending…' : 'Request Custom Spheno AI Proposal'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>

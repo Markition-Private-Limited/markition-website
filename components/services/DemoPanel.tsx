@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { IconActivity } from "@/lib/icons";
 import AgentDemo from "./demos/AgentDemo";
 import ChatbotDemo from "./demos/ChatbotDemo";
@@ -85,12 +86,13 @@ export default function DemoPanel({ svc }: Props) {
         className="px-4 sm:px-6 py-4"
         style={{ borderTop: "1px solid rgba(51,65,85,0.4)" }}
       >
-        <button
+        <Link
+          href="/spheno"
           className="inline-flex items-center gap-2 text-sm font-semibold py-2.5 px-6 rounded-lg text-white transition-opacity hover:opacity-90 active:opacity-80"
           style={{ background: "#0137D7" }}
         >
           {svc.cta} →
-        </button>
+        </Link>
       </div>
     </div>
   );

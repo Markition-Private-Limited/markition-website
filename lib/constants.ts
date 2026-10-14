@@ -1,6 +1,7 @@
 import type { Service } from "./types";
 
 export const NAV_LINKS = [
+  { label: "Home" },
   { label: "About" },
   { label: "Services", dropdown: true },
   { label: "Solutions" },
@@ -8,7 +9,6 @@ export const NAV_LINKS = [
   { label: "Case Studies" },
   { label: "Portfolio" },
   { label: "Contact" },
-  { label: "Blog" },
 ] as const;
 
 export const STATS = [
@@ -33,12 +33,14 @@ export const STATS = [
 ] as const;
 
 export const TICKER_LOGOS = [
-  { src: "/logos/logo03.png", alt: "Partner logo" },
-  { src: "/logos/logo07.png", alt: "Partner logo" },
-  { src: "/logos/logo11.png", alt: "Partner logo" },
-  { src: "/logos/vector.png", alt: "Partner logo" },
-  { src: "/logos/vector-1.png", alt: "Partner logo" },
-  { src: "/logos/vector-2.png", alt: "Partner logo" },
+  { src: "/logos/clients/takeme.png", alt: "TakeMe", width: 1227, height: 1160 },
+  { src: "/logos/clients/outdoor-cinema.png", alt: "Outdoor Cinema", width: 1326, height: 1049 },
+  { src: "/logos/clients/rmd.png", alt: "Repair My Devices", width: 1689, height: 902 },
+  { src: "/logos/clients/fast-access.png", alt: "Fast Access Logistic Services", width: 1324, height: 985 },
+  { src: "/logos/clients/white-line.png", alt: "White Line", width: 2103, height: 572 },
+  { src: "/logos/clients/high-voltage.png", alt: "High Voltage Specialists", width: 1594, height: 889 },
+  { src: "/logos/clients/z-crest.png", alt: "Z", width: 1251, height: 1216 },
+  { src: "/logos/clients/journey-joy.png", alt: "Journey Joy", width: 1470, height: 1036 },
 ] as const;
 
 export const SERVICES: Service[] = [

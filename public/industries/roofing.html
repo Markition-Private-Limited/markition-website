@@ -40,14 +40,80 @@ header{position:fixed;z-index:50;inset:0 0 auto;height:76px;background:#17191ab8
 @media(max-width:720px){.container{width:calc(100% - 30px)}.section{padding:76px 0}header{height:68px}.navlinks,.navcta{display:none}.menu{display:block}.hero{padding:100px 0 25px}.hero-grid{width:calc(100% - 30px)}.hero h1{font-size:39px}.hero .lead{font-size:16px}.meta{display:grid;gap:8px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.form{padding:20px}.trustgrid{grid-template-columns:1fr 1fr 1fr}.trustgrid strong{grid-column:1/-1}.journey{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line);min-height:0;padding:23px 0}.queries{grid-template-columns:1fr}.service{grid-template-columns:43px 1fr;gap:13px}.service .btn{grid-column:2}.roofgrid,.bagrid{grid-template-columns:1fr}.roof{min-height:350px}.cinema{min-height:570px}.cinema .content{padding-bottom:55px}.whygrid{grid-template-columns:1fr}.whyitem:nth-child(even){padding-left:0;border-left:0}.metrics{grid-template-columns:1fr 1fr}.metric{padding:24px 15px}.metric strong{font-size:29px}.bawrap img{height:350px}.review{min-width:100%}.processgrid{grid-template-columns:1fr}.processitem,.processitem:not(:first-child){padding:25px 0;border-right:0;border-top:1px solid var(--line)}.processitem:first-child{border-top:0}.finalgrid{gap:30px}.footerrow{flex-direction:column}.footerlinks{flex-wrap:wrap}.mobile{display:flex;position:fixed;z-index:60;bottom:0;left:0;right:0;background:#101213f5;padding:9px;gap:8px;backdrop-filter:blur(12px)}.mobile a{flex:1}.mobile .btn{width:100%;min-height:47px}body{padding-bottom:65px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.track,.roof img{transition:none}}
 </style>
+<style>
+.mk-nav-wrap{position:sticky;top:0;z-index:999;height:0;display:flow-root}
+.mk-nav{width:min(1180px,calc(100% - 32px));margin:10px auto 0;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 22px;border-radius:14px;background:rgba(23,25,26,.92);backdrop-filter:blur(20px) saturate(1.8);-webkit-backdrop-filter:blur(20px) saturate(1.8);border:1px solid rgba(200,146,62,.22);box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.mk-nav-logo{display:flex;align-items:center;flex-shrink:0}
+.mk-nav-logo img{height:26px;width:auto;display:block}
+.mk-nav-links{display:flex;gap:2px;align-items:center}
+.mk-nav-links a{color:rgba(255,255,255,.78);font-size:13px;font-weight:600;padding:8px 12px;border-radius:8px;transition:.2s}
+.mk-nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.mk-nav-cta{display:flex;align-items:center;gap:10px}
+.mk-btn-cta{display:inline-flex;align-items:center;gap:8px;background:#C8923E;color:#17191A;font-size:12.5px;font-weight:800;padding:10px 16px;border-radius:7px;white-space:nowrap;transition:.2s}
+.mk-btn-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.mk-nav-toggle{display:none;flex-direction:column;gap:4px;background:none;border:0;padding:6px}
+.mk-nav-toggle span{width:20px;height:2px;background:#fff;border-radius:2px}
+.mk-nav-mobile{display:none;flex-direction:column;width:min(1180px,calc(100% - 32px));margin:8px auto 0;padding:6px;border-radius:14px;background:rgba(23,25,26,.96);border:1px solid rgba(200,146,62,.22);backdrop-filter:blur(20px)}
+.mk-nav-mobile.open{display:flex}
+.mk-nav-mobile a{color:rgba(255,255,255,.82);font-size:14px;font-weight:600;padding:12px 14px;border-radius:9px}
+.mk-nav-mobile a:hover{background:rgba(255,255,255,.08);color:#fff}
+.mk-nav-mobile .mk-btn-cta{justify-content:center;margin-top:6px}
+@media(max-width:860px){.mk-nav-links{display:none}.mk-nav-toggle{display:flex}}
+.mk-footer{background:#17191A;color:#fff}
+.mk-footer-grid{max-width:1200px;margin:0 auto;padding:60px 24px 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:40px 48px}
+.mk-footer-logo{margin-bottom:16px}
+.mk-footer-logo img{height:28px;width:auto;display:block}
+.mk-footer-brand p{font-size:13.5px;line-height:1.75;color:rgba(255,255,255,.55);max-width:260px;margin:0}
+.mk-footer-heading{font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin:0 0 18px}
+.mk-footer-links{display:flex;flex-direction:column;gap:11px}
+.mk-footer-links a{font-size:13.5px;color:rgba(255,255,255,.55);transition:.25s}
+.mk-footer-links a:hover{color:#C8923E}
+.mk-footer-contact{display:flex;flex-direction:column;gap:13px}
+.mk-footer-contact a{font-size:13px;color:rgba(255,255,255,.55);line-height:1.5}
+.mk-footer-contact a:hover{color:#C8923E}
+.mk-footer-socials{display:flex;gap:13px;margin-top:20px}
+.mk-footer-socials a{color:#C8923E;opacity:.8}
+.mk-footer-socials a:hover{opacity:1}
+.mk-footer-bottom{background:#101213;padding:16px 24px}
+.mk-footer-bottom-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.mk-footer-bottom span{font-size:12.5px;color:rgba(255,255,255,.45)}
+.mk-footer-bottom-links a{font-size:12.5px;color:rgba(255,255,255,.45);margin-left:20px}
+@media(max-width:767px){.mk-footer-grid{grid-template-columns:1fr 1fr;gap:32px 20px;padding:48px 20px 40px}.mk-footer-brand{grid-column:1/-1}}
+@media(max-width:479px){.mk-footer-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-<header id="header"><div class="container nav"><a class="logo" href="#">MARKITION</a><nav class="navlinks"><a href="#why">Why Markition</a><a href="#services">Services</a><a href="#process">Process</a><a href="#proof">Results</a><a href="#faq">FAQ</a></nav><a class="navcta" href="#book-audit">Get Free Audit</a><button class="menu" onclick="menu()">☰</button></div></header>
+<div class="mk-nav-wrap">
+  <nav class="mk-nav" aria-label="Primary">
+    <a href="/" class="mk-nav-logo" aria-label="Markition home"><img src="/markition-logo.svg" alt="Markition"></a>
+    <div class="mk-nav-links">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="#services">Services</a>
+      <a href="#proof">Results</a>
+      <a href="#faq">FAQ</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <div class="mk-nav-cta">
+      <a class="mk-btn-cta" href="#book-audit">Get Free Audit <span>→</span></a>
+      <button class="mk-nav-toggle" id="mkNavToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mk-nav-mobile" id="mkNavMobile">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="#services">Services</a>
+    <a href="#proof">Results</a>
+    <a href="#faq">FAQ</a>
+    <a href="/contact">Contact</a>
+    <a class="mk-btn-cta" href="#book-audit">Get Free Audit →</a>
+  </div>
+</div>
 
 <section class="hero">
 <div class="hero-grid">
 <div class="hero-copy reveal"><div class="eyebrow">Digital Marketing for Roofing Services</div><h1>Digital Marketing for Roofing Services That Generates More Qualified Leads.</h1><p class="lead">We help roofing companies turn Google searches, social media and digital traffic into qualified leads, estimate requests and booked roofing jobs.</p><div class="meta"><span>Google Ads</span><span>Local SEO</span><span>Lead Generation</span><span>Conversion Strategy</span></div></div>
-<div class="form reveal" id="book-audit"><h3>Let's Build Your Roofing Growth Plan.</h3><p class="intro">Tell us a little about your business and where you want to grow.</p><form class="leadform" id="hero-form"><div class="fields"><div class="field"><input required name="full_name" placeholder="Full Name"></div><div class="field"><input required name="company" placeholder="Company Name"></div><div class="field"><input required type="email" name="email" placeholder="Work Email"></div><div class="field"><input required type="tel" name="phone" placeholder="Phone"></div><div class="field"><input name="website" placeholder="Website"></div><div class="field"><input required name="area" placeholder="City / Service Area"></div><div class="field"><select required name="service"><option value="">Roofing Services</option><option>Roof Repair</option><option>Roof Replacement</option><option>Residential Roofing</option><option>Commercial Roofing</option><option>Storm Damage Roofing</option><option>Emergency Roofing</option><option>Metal Roofing</option><option>Shingle Roofing</option><option>Flat Roofing</option><option>Tile Roofing</option><option>Other</option></select></div><div class="field"><select name="budget"><option value="">Monthly Marketing Budget</option><option>Under $2,000</option><option>$2,000 – $5,000</option><option>$5,000 – $10,000</option><option>$10,000+</option><option>Not sure yet</option></select></div></div><button class="btn amber" type="submit">Get My Free Roofing Marketing Audit →</button><p class="note">No obligation · No spam · Built around your roofing business</p><div class="status">You're In.<br><strong>Thanks — our team will review your details and get back to you shortly.</strong></div></form></div>
+<div class="form reveal" id="book-audit"><h3>Let's Build Your Roofing Growth Plan.</h3><p class="intro">Tell us a little about your business and where you want to grow.</p><form class="leadform" id="hero-form"><div class="fields"><div class="field"><input required name="full_name" placeholder="Full Name"></div><div class="field"><input required name="company" placeholder="Company Name"></div><div class="field"><input required type="email" name="email" placeholder="Work Email"></div><div class="field"><input required type="tel" name="phone" placeholder="Phone"></div><div class="field"><input name="website" placeholder="Website"></div><div class="field"><input required name="area" placeholder="City / Service Area"></div><div class="field"><select required name="service"><option value="">Roofing Services</option><option>Roof Repair</option><option>Roof Replacement</option><option>Residential Roofing</option><option>Commercial Roofing</option><option>Storm Damage Roofing</option><option>Emergency Roofing</option><option>Metal Roofing</option><option>Shingle Roofing</option><option>Flat Roofing</option><option>Tile Roofing</option><option>Other</option></select></div><div class="field"><select name="budget"><option value="">Monthly Marketing Budget</option><option>Under $2,000</option><option>$2,000 – $5,000</option><option>$5,000 – $10,000</option><option>$10,000+</option><option>Not sure yet</option></select></div></div><div class="g-recaptcha" data-sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr" style="margin:10px 0"></div><button class="btn amber" type="submit">Get My Free Roofing Marketing Audit →</button><p class="note">No obligation · No spam · Built around your roofing business</p><p class="form-error" style="color:#c0392b;font-size:13px;display:none"></p><div class="status">You're In.<br><strong>Thanks — our team will review your details and get back to you shortly.</strong></div></form></div>
 </div></section>
 
 <div class="trust"><div class="container trustgrid"><strong>Built for Roofing Companies That Want More Than Clicks.</strong><span class="trustitem">Google Ads</span><span class="trustitem">SEO</span><span class="trustitem">Meta Ads</span><span class="trustitem">Lead Generation</span><span class="trustitem">Local SEO</span><span class="trustitem">Roofing Marketing</span></div></div>
@@ -99,18 +165,100 @@ header{position:fixed;z-index:50;inset:0 0 auto;height:76px;background:#17191ab8
 
 <section class="section faq" id="faq"><div class="container"><div class="head reveal"><div class="eyebrow">FAQ</div><h2>Questions Roofing Business Owners Ask Before They Start.</h2></div><div class="faqlist reveal"><div class="faqitem"><button class="faqq">Can you target only my service area?<span>+</span></button><div class="faqa"><p>Yes. Campaigns can be structured around the cities, locations and service territories that matter to your roofing business.</p></div></div><div class="faqitem"><button class="faqq">Do you only run Google Ads?<span>+</span></button><div class="faqa"><p>No. The growth stack can include Google Ads, Meta Ads, SEO, social media management, Reels and editing depending on your goals and market.</p></div></div><div class="faqitem"><button class="faqq">Can the landing page be customized for my roofing services?<span>+</span></button><div class="faqa"><p>Yes. The strongest PPC experience is built around the services, locations, audience and offer you actually want to grow.</p></div></div><div class="faqitem"><button class="faqq">Do you guarantee a specific number of leads?<span>+</span></button><div class="faqa"><p>We do not publish or promise unverified lead numbers. Expectations should be based on market, budget, offer, service area and verified campaign data.</p></div></div></div></div></section>
 
-<section class="final"><div class="container finalgrid"><div class="reveal"><div class="eyebrow">Ready To Grow?</div><h2>Ready to Grow Your Roofing Business?</h2><p>Let's build a predictable digital marketing system around the services, locations and growth goals that matter to your roofing company.</p><div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:27px"><a class="btn amber" href="#book-audit">Get My Free Roofing Marketing Audit</a><a class="btn outline" href="#book-audit">Book a Strategy Call</a></div></div><div class="form reveal"><h3>Start With Your Free Audit.</h3><p class="intro">No obligation. No generic pitch. Just a focused review of your growth opportunities.</p><form class="leadform"><div class="fields"><div class="field"><input required placeholder="Full Name"></div><div class="field"><input required placeholder="Company Name"></div><div class="field"><input required type="email" placeholder="Work Email"></div><div class="field"><input required type="tel" placeholder="Phone"></div><div class="field full"><input placeholder="Website"></div><div class="field full"><input required placeholder="City / Service Area"></div></div><button class="btn amber" type="submit">Get My Free Roofing Marketing Audit →</button><p class="note">No obligation · No spam · Built around your roofing business</p><div class="status">You're In.<br><strong>Thanks — our team will review your details and get back to you shortly.</strong></div></form></div></div></section>
+<section class="final"><div class="container finalgrid"><div class="reveal"><div class="eyebrow">Ready To Grow?</div><h2>Ready to Grow Your Roofing Business?</h2><p>Let's build a predictable digital marketing system around the services, locations and growth goals that matter to your roofing company.</p><div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:27px"><a class="btn amber" href="#book-audit">Get My Free Roofing Marketing Audit</a><a class="btn outline" href="#book-audit">Book a Strategy Call</a></div></div><div class="form reveal"><h3>Start With Your Free Audit.</h3><p class="intro">No obligation. No generic pitch. Just a focused review of your growth opportunities.</p><form class="leadform"><div class="fields"><div class="field"><input required name="full_name" placeholder="Full Name"></div><div class="field"><input required name="company" placeholder="Company Name"></div><div class="field"><input required type="email" name="email" placeholder="Work Email"></div><div class="field"><input required type="tel" name="phone" placeholder="Phone"></div><div class="field full"><input name="website" placeholder="Website"></div><div class="field full"><input required name="area" placeholder="City / Service Area"></div></div><div class="g-recaptcha" data-sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr" style="margin:10px 0"></div><button class="btn amber" type="submit">Get My Free Roofing Marketing Audit →</button><p class="note">No obligation · No spam · Built around your roofing business</p><p class="form-error" style="color:#c0392b;font-size:13px;display:none"></p><div class="status">You're In.<br><strong>Thanks — our team will review your details and get back to you shortly.</strong></div></form></div></div></section>
 
-<footer class="footer"><div class="container footerrow"><div><div class="footerbrand">MARKITION</div><small>Digital marketing & technology.</small></div><div class="footerlinks"><a href="#top">Top</a><a href="#services">Services</a><a href="#proof">Results</a><a href="#faq">FAQ</a><a href="https://markition.com" target="_blank" rel="noopener">Markition.com</a></div></div></footer>
+<footer class="mk-footer">
+  <div class="mk-footer-grid">
+    <div class="mk-footer-brand">
+      <div class="mk-footer-logo"><img src="/markition-logo.svg" alt="Markition"></div>
+      <p>Digital marketing & technology for roofing companies that drives qualified leads and booked jobs.</p>
+    </div>
+    <div>
+      <p class="mk-footer-heading">Company</p>
+      <div class="mk-footer-links">
+        <a href="/about">About Us</a>
+        <a href="/services">Services</a>
+        <a href="/portfolio">Portfolio</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+    <div>
+      <p class="mk-footer-heading">On This Page</p>
+      <div class="mk-footer-links">
+        <a href="#why">Why Markition</a>
+        <a href="#services">Services</a>
+        <a href="#proof">Results</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+    <div>
+      <p class="mk-footer-heading">Get In Touch</p>
+      <div class="mk-footer-contact">
+        <a href="https://maps.google.com/?q=117+S+Lexington+St,+Suite+100,+Harrisonville,+MO+64701,+USA">117 S Lexington St, Suite 100<br>Harrisonville, MO 64701, USA</a>
+        <a href="tel:+12174010041">+1 (217) 401-0041</a>
+        <a href="mailto:hey@markition.com">hey@markition.com</a>
+      </div>
+      <div class="mk-footer-socials">
+        <a href="https://x.com/MarkitionPvt" aria-label="X / Twitter" target="_blank" rel="noopener noreferrer">✕</a>
+        <a href="https://linkedin.com/company/markition/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
+        <a href="https://www.instagram.com/markitionmedia" aria-label="Instagram" target="_blank" rel="noopener noreferrer">◎</a>
+      </div>
+    </div>
+  </div>
+  <div class="mk-footer-bottom">
+    <div class="mk-footer-bottom-inner">
+      <span>© 2026 Markition. All rights reserved.</span>
+      <div class="mk-footer-bottom-links"><a href="/terms">Terms of Use</a><a href="/privacy">Privacy Policy</a></div>
+    </div>
+  </div>
+</footer>
 <div class="mobile"><a class="btn amber" href="#book-audit">Get Free Audit</a><a class="btn outline" href="tel:+12174010041" id="call-now">Call Now</a></div><div class="toast" id="toast">Form submitted successfully.</div>
 
 <script>
 const header=document.getElementById('header');addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>20),{passive:true});
 const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('on')),{threshold:.1});document.querySelectorAll('.reveal').forEach(x=>io.observe(x));
-function menu(){const n=document.querySelector('.navlinks');n.style.display=n.style.display==='flex'?'none':'flex';n.style.position='absolute';n.style.top='68px';n.style.left='0';n.style.right='0';n.style.padding='20px';n.style.background='#17191A';n.style.flexDirection='column'}
-document.querySelectorAll('.leadform').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();if(!f.checkValidity())return;const b=f.querySelector('button');b.disabled=true;f.querySelector('.status').style.display='block';f.reset();window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'roofing_audit_form_submit'});if(window.fbq)fbq('track','Lead',{content_name:'Roofing Marketing Audit'});document.getElementById('toast').classList.add('show');setTimeout(()=>document.getElementById('toast').classList.remove('show'),3000)}));
+(function(){
+  var btn=document.getElementById('mkNavToggle');
+  var menu=document.getElementById('mkNavMobile');
+  if(btn&&menu){btn.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });}
+})();
+document.querySelectorAll('.leadform').forEach((f,fi)=>f.addEventListener('submit',async e=>{
+e.preventDefault();
+if(!f.checkValidity())return;
+const errEl=f.querySelector('.form-error');
+const token=window.grecaptcha?grecaptcha.getResponse(fi):'';
+if(!token){if(errEl){errEl.textContent='Please complete the reCAPTCHA.';errEl.style.display='block';}return;}
+if(errEl)errEl.style.display='none';
+const b=f.querySelector('button');b.disabled=true;
+const fd=new FormData(f);
+const name=fd.get('full_name')||'';
+const email=fd.get('email')||'';
+const message='Company: '+(fd.get('company')||'—')+' | Phone: '+(fd.get('phone')||'—')+' | Website: '+(fd.get('website')||'—')+' | Area: '+(fd.get('area')||'—')+'\n\nService: '+(fd.get('service')||'—')+' | Budget: '+(fd.get('budget')||'—');
+try{
+const res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,service:fd.get('service')||'',message,source:'Roofing (static) — '+(fi===0?'Hero Form':'Final Form'),recaptchaToken:token})});
+if(res.ok){
+f.querySelector('.status').style.display='block';
+f.reset();
+if(window.grecaptcha)grecaptcha.reset(fi);
+window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'roofing_audit_form_submit'});
+if(window.fbq)fbq('track','Lead',{content_name:'Roofing Marketing Audit'});
+document.getElementById('toast').classList.add('show');setTimeout(()=>document.getElementById('toast').classList.remove('show'),3000);
+}else{
+const data=await res.json().catch(()=>({}));
+if(errEl){errEl.textContent=data.error||'Something went wrong. Please try again.';errEl.style.display='block';}
+}
+}catch(err){
+if(errEl){errEl.textContent='Something went wrong. Please try again.';errEl.style.display='block';}
+}finally{
+b.disabled=false;
+}
+}));
 document.querySelectorAll('.faqq').forEach(q=>q.addEventListener('click',()=>{let x=q.parentElement,o=x.classList.toggle('open');q.setAttribute('aria-expanded',o);q.querySelector('span').textContent=o?'−':'+'}));
 let ri=0;function count(){return innerWidth<=720?1:innerWidth<=980?2:3}function go(i){let c=count(),max=Math.max(0,3-c);ri=Math.max(0,Math.min(i,max));document.getElementById('track').style.transform=`translateX(-${ri*(100/c)}%)`;document.querySelectorAll('#dots i').forEach((d,n)=>d.classList.toggle('active',n===ri))}function move(d){go(ri+d)}addEventListener('resize',()=>go(ri));
 </script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>

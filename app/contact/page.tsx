@@ -4,7 +4,6 @@ import Footer from "@/components/footer/Footer";
 import ContactForm from "./_components/ContactForm";
 import CursorGrid from "./_components/CursorGrid";
 import ContactCards from "./_components/ContactCards";
-import OfficeClocks from "./_components/OfficeClocks";
 import Reveal from "./_components/Reveal";
 import "./contact.css";
 import "./contact-enhance.css";
@@ -87,16 +86,6 @@ export default function ContactPage() {
             </p>
 
             <ContactCards />
-
-            <div className="ct-hours">
-              <div>
-                <strong>When to reach us</strong>
-                <span>
-                  Send us a message anytime. We&apos;ll get back to you as soon as we can.
-                </span>
-              </div>
-              <OfficeClocks />
-            </div>
           </Reveal>
 
           {/* Right: form */}
@@ -115,7 +104,6 @@ export default function ContactPage() {
       <section className="ct-location">
         <div className="container ct-location-inner">
           <div>
-            <div className="loc-eyebrow">Location</div>
             <h2>Markition, connected globally.</h2>
             <p>
               Serving ambitious businesses in Pakistan, Saudi Arabia and beyond.<br />

@@ -22,6 +22,9 @@ export default function Home() {
       className="min-h-screen w-full bg-[#000028] text-white"
       style={{ fontFamily: "var(--font-inter, Inter, sans-serif)" }}
     >
+      <div style={{ position: "sticky", top: 0, zIndex: 50, height: 0 }}>
+        <Navbar />
+      </div>
       <header
         className="relative bg-[#000028]"
         style={{
@@ -34,7 +37,7 @@ export default function Home() {
         }}
       >
         <TubesCursor />
-        <Navbar />
+        <div aria-hidden="true" className="h-[66px] sm:h-[81px] flex-shrink-0" />
         <main style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
           <Hero />
           <Stats />

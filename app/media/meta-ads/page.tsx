@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PortedPage from "../_components/PortedPage";
+import BookingFormBridge from "../_components/BookingFormBridge";
 import { html, title, description } from "./content";
 import "./page.css";
 
@@ -9,5 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <PortedPage html={html} scope="meta-page" family="a" />;
+  return (
+    <>
+      <PortedPage html={html} scope="meta-page" family="a" />
+      <BookingFormBridge source="Media — Meta Ads Page" />
+    </>
+  );
 }

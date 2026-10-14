@@ -1,34 +1,70 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const TOPICS = ["Digital marketing", "Website / app", "Design & branding", "AI & automation", "Not sure yet"];
 const MAX = 1000;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const [topics, setTopics] = useState<string[]>([]);
   const [message, setMessage] = useState("");
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const toggle = (t: string) =>
     setTopics((cur) => (cur.includes(t) ? cur.filter((x) => x !== t) : [...cur, t]));
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
-    const name = fd.get("name") as string;
-    const email = fd.get("email") as string;
+    const name = (fd.get("name") as string) || "";
+    const email = (fd.get("email") as string) || "";
     const company = (fd.get("company") as string) || "";
-    const subject = encodeURIComponent("Contact enquiry from " + name);
-    const body = encodeURIComponent(
-      "Name: " + name +
-      "\nEmail: " + email +
-      (company ? "\nCompany: " + company : "") +
-      (topics.length ? "\nInterested in: " + topics.join(", ") : "") +
-      "\n\nMessage:\n" + message
-    );
-    setSubmitted(true);
-    window.location.href = "mailto:hey@markition.com?subject=" + subject + "&body=" + body;
+
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setError("Please fill in your name, email and message.");
+      return;
+    }
+    if (!EMAIL_RE.test(email)) {
+      setError("Enter a valid email address.");
+      return;
+    }
+    if (process.env.NODE_ENV !== "development" && !captchaToken) {
+      setError("Please complete the reCAPTCHA.");
+      return;
+    }
+
+    setError("");
+    setSending(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          message: (company ? `Company: ${company}\n` : "") + (topics.length ? `Interested in: ${topics.join(", ")}\n` : "") + `\n${message}`,
+          service: topics.join(", "),
+          source: "Contact Page",
+          recaptchaToken: captchaToken,
+        }),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSending(false);
+    }
   }
 
   if (submitted) {
@@ -39,13 +75,13 @@ export default function ContactForm() {
             <path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-        <h3>Your message is ready to send.</h3>
+        <h3>Message sent!</h3>
         <p>
-          Your email app should open with everything filled in. If it doesn&apos;t, email{" "}
+          Thanks for reaching out. We&apos;ll be in touch soon. You can also email{" "}
           <a href="mailto:hey@markition.com">hey@markition.com</a> directly.
         </p>
         <button type="button" className="ct-link-btn" onClick={() => setSubmitted(false)}>
-          ← Edit message
+          ← Send another message
         </button>
       </div>
     );
@@ -104,8 +140,19 @@ export default function ContactForm() {
         />
       </div>
 
-      <button className="ct-submit" type="submit">
-        <span>Send message</span>
+      <div>
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr"
+          onChange={(token) => { setCaptchaToken(token); setError(""); }}
+          onExpired={() => setCaptchaToken(null)}
+        />
+      </div>
+
+      {error && <p className="ct-error" style={{ color: "#dc2626", fontSize: 13 }}>{error}</p>}
+
+      <button className="ct-submit" type="submit" disabled={sending} style={{ opacity: sending ? 0.6 : 1, cursor: sending ? "not-allowed" : "pointer" }}>
+        <span>{sending ? "Sending…" : "Send message"}</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>

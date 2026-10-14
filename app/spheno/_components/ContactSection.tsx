@@ -1,9 +1,25 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const BUDGET_MIN = 0;
 const BUDGET_MAX = 10000;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const NAME_RE = /^[a-zA-Z\s'\-]{2,100}$/;
+
+function validate(name: string, email: string, message: string, captcha: string | null) {
+  const errs: Record<string, string> = {};
+  if (!name.trim())               errs.name    = 'Name is required.';
+  else if (!NAME_RE.test(name))   errs.name    = 'Only letters, spaces, hyphens and apostrophes. (2–100 chars)';
+  if (!email.trim())              errs.email   = 'Email is required.';
+  else if (!EMAIL_RE.test(email)) errs.email   = 'Enter a valid email address.';
+  if (!message.trim())            errs.message = 'Message is required.';
+  else if (message.trim().length < 10)   errs.message = 'Message must be at least 10 characters.';
+  else if (message.trim().length > 2000) errs.message = 'Message must be under 2000 characters.';
+  if (process.env.NODE_ENV !== 'development' && !captcha) errs.captcha = 'Please complete the reCAPTCHA.';
+  return errs;
+}
 
 const PhoneCallIcon = () => (
   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5599ff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -17,16 +33,25 @@ const fieldClass =
   'w-full bg-transparent border-0 border-b border-white/15 text-[13px] text-white/90 placeholder-white/20 py-1.5 outline-none focus:border-cyan-400/60 transition-colors duration-200';
 const labelClass = 'block text-[12px] font-semibold text-[#C8D8EE] mb-1.5';
 
-const FormField: React.FC<{ label: string; placeholder: string; type: string }> = ({ label, placeholder, type }) => (
+const FormField: React.FC<{ label: string; placeholder: string; type: string; value: string; onChange: (v: string) => void; error?: string }> = ({ label, placeholder, type, value, onChange, error }) => (
   <div>
     <label className={labelClass}>{label}</label>
-    <input type={type} placeholder={placeholder} className={fieldClass} />
+    <input type={type} placeholder={placeholder} value={value} onChange={(e) => onChange(e.target.value)} className={fieldClass} />
+    {error && <p className="text-[11px] text-red-400 mt-1">{error}</p>}
   </div>
 );
 
 export const ContactSection: React.FC = () => {
   const [budgetMin, setBudgetMin] = useState(1000);
   const [budgetMax, setBudgetMax] = useState(5000);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [service, setService] = useState('');
+  const [message, setMessage] = useState('');
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const minPct = ((budgetMin - BUDGET_MIN) / (BUDGET_MAX - BUDGET_MIN)) * 100;
   const maxPct = ((budgetMax - BUDGET_MIN) / (BUDGET_MAX - BUDGET_MIN)) * 100;
@@ -36,6 +61,25 @@ export const ContactSection: React.FC = () => {
   };
   const handleMax = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBudgetMax(Math.max(Number(e.target.value), budgetMin + 500));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const errs = validate(name, email, message, captchaToken);
+    if (Object.keys(errs).length) { setErrors(errs); return; }
+    setErrors({});
+    setStatus('sending');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, service, budgetMin, budgetMax, message, source: 'Spheno Page', recaptchaToken: captchaToken }),
+      });
+      if (res.ok) { setStatus('success'); }
+      else { setStatus('error'); }
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -93,10 +137,10 @@ export const ContactSection: React.FC = () => {
         </div>
 
         {/* ── RIGHT COLUMN – Form ── */}
-        <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-6 lg:pl-6">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6 lg:pl-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-            <FormField label="Full Name" placeholder="Type here" type="text" />
-            <FormField label="Email" placeholder="Type here" type="email" />
+            <FormField label="Full Name" placeholder="Type here" type="text" value={name} onChange={setName} error={errors.name} />
+            <FormField label="Email" placeholder="Type here" type="email" value={email} onChange={setEmail} error={errors.email} />
           </div>
 
           {/* Why contacting */}
@@ -104,7 +148,8 @@ export const ContactSection: React.FC = () => {
             <label className={labelClass}>Why Are You Contacting Us?</label>
             <div className="relative">
               <select
-                defaultValue=""
+                value={service}
+                onChange={(e) => setService(e.target.value)}
                 className="w-full bg-transparent border-0 border-b border-white/15 text-[13px] text-[#8aa4c8] py-1.5 pr-6 outline-none cursor-pointer appearance-none focus:border-cyan-400/60 transition-colors duration-200"
               >
                 <option value="" disabled className="bg-[#0d1e48]">Select a Service</option>
@@ -159,24 +204,46 @@ export const ContactSection: React.FC = () => {
 
           {/* Message */}
           <div>
-            <label className={labelClass}>Your Message (0/2000)</label>
+            <label className={labelClass}>Your Message <span className="text-[#8aa4c8] font-normal">({message.length}/2000)</span></label>
             <textarea
               placeholder="Type here"
               rows={3}
               maxLength={2000}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               className="w-full bg-transparent border-0 border-b border-white/15 text-[13px] text-white/90 placeholder-white/20 py-1.5 outline-none resize-none focus:border-cyan-400/60 transition-colors duration-200"
             />
+            {errors.message && <p className="text-[11px] text-red-400 mt-1">{errors.message}</p>}
+          </div>
+
+          {/* reCAPTCHA */}
+          <div>
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr"
+              theme="dark"
+              onChange={(token) => { setCaptchaToken(token); setErrors((er) => ({ ...er, captcha: '' })); }}
+              onExpired={() => setCaptchaToken(null)}
+            />
+            {errors.captcha && <p className="text-[11px] text-red-400 mt-1.5">{errors.captcha}</p>}
           </div>
 
           {/* Submit */}
           <div>
-            <button
-              type="submit"
-              className="inline-flex items-center gap-2.5 rounded-full border-[1.5px] border-white/25 px-6.5 py-2.5 text-[12.5px] font-semibold text-[#f0f6ff] tracking-wide hover:bg-white/[0.06] hover:border-white/40 transition-all duration-200"
-            >
-              <span className="text-cyan-400 text-[11px]">✦</span>
-              Let&apos;s Build Something Great
-            </button>
+            {status === 'success' ? (
+              <p className="text-[13px] font-semibold text-cyan-400">✦ Message sent! We&apos;ll be in touch soon.</p>
+            ) : status === 'error' ? (
+              <p className="text-[13px] text-red-400">Something went wrong. Please try again or email us directly.</p>
+            ) : (
+              <button
+                type="submit"
+                disabled={status === 'sending'}
+                className="inline-flex items-center gap-2.5 rounded-full border-[1.5px] border-white/25 px-6.5 py-2.5 text-[12.5px] font-semibold text-[#f0f6ff] tracking-wide hover:bg-white/[0.06] hover:border-white/40 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                <span className="text-cyan-400 text-[11px]">✦</span>
+                {status === 'sending' ? 'Sending…' : "Let's Build Something Great"}
+              </button>
+            )}
           </div>
         </form>
       </div>

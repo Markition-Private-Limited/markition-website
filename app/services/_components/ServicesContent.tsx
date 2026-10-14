@@ -36,10 +36,9 @@ const CATEGORIES = [
     services: [
       "Search Engine Optimization (SEO)",
       "Google Ads & PPC",
-      "Paid Social Advertising",
+      "Meta Ads",
       "Social Media Management",
       "Content Strategy & Creation",
-      "Remarketing & Optimization",
     ],
   },
   {
@@ -47,12 +46,14 @@ const CATEGORIES = [
     subtitle: "Creative, Branding & Digital Experiences",
     href: "/contact",
     services: [
-      "Social & Ad Creative",
+      "Professional Camera Production",
       "Motion Graphics & Animation",
-      "Marketing Collateral",
-      "Digital Experience Design",
+      "Social Media Reel Editing",
       "Brand Identity & Logo Design",
       "UI/UX Design",
+      "2D/3D Animations",
+      "Product Design",
+      "Company Profile",
     ],
   },
   {
@@ -61,14 +62,11 @@ const CATEGORIES = [
     href: "/tech",
     services: [
       "Website Development",
-      "E-commerce Development",
-      "Custom Software",
+      "Saas Development",
       "Mobile App Development",
-      "ERP & Business Applications",
-      "POS & Retail Technology",
-      "Enterprise Applications",
-      "System Integrations",
-      "Process Digitization",
+      "ERP & CRM Development",
+
+
     ],
   },
   {

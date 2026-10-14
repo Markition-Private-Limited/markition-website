@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { X, ArrowUpRight, CheckCircle2, User, Phone, Mail, Building2, Shield } from 'lucide-react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { trackConversion } from '../utils/tracking';
 import type { LeadFormData } from '../types';
 
@@ -16,10 +17,12 @@ export function AuditModal({ isOpen, onClose, prefilledService }: AuditModalProp
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     if (!formData.fullName.trim() || !formData.phoneNumber.trim() || !formData.email.trim() || !formData.businessName.trim()) {
@@ -27,11 +30,31 @@ export function AuditModal({ isOpen, onClose, prefilledService }: AuditModalProp
       return;
     }
     setIsSubmitting(true);
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          service: prefilledService || 'General Hair Restoration Marketing',
+          message: `Business: ${formData.businessName} | Phone: ${formData.phoneNumber}\n\nFree audit request via modal.`,
+          source: 'Hair Restoration — Audit Modal',
+          recaptchaToken: captchaToken,
+        }),
+      });
+      if (res.ok) {
+        setIsSubmitted(true);
+        trackConversion('modal_audit_submission', { serviceInterest: prefilledService || 'General Hair Restoration Marketing', businessName: formData.businessName });
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch {
+      setError('Something went wrong. Please try again.');
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      trackConversion('modal_audit_submission', { serviceInterest: prefilledService || 'General Hair Restoration Marketing', businessName: formData.businessName });
-    }, 600);
+    }
   };
 
   return (
@@ -89,6 +112,15 @@ export function AuditModal({ isOpen, onClose, prefilledService }: AuditModalProp
                   <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#1236E8]" />
                   <input id="modalBusiness" type="text" required value={formData.businessName} onChange={(e) => setFormData({ ...formData, businessName: e.target.value })} placeholder="Vale Hair Restoration Institute, Austin TX" className="w-full bg-slate-50 border border-slate-300 focus:border-[#1236E8] focus:bg-white focus:ring-2 focus:ring-[#1236E8]/20 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-[#030A28] font-medium placeholder-slate-400 outline-none transition-all" />
                 </div>
+              </div>
+              <div>
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  size="compact"
+                  sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr"
+                  onChange={(token) => { setCaptchaToken(token); setError(''); }}
+                  onExpired={() => setCaptchaToken(null)}
+                />
               </div>
               <button type="submit" disabled={isSubmitting} className="w-full btn-agency-primary h-12 text-sm font-semibold cursor-pointer mt-2 shadow-md hover:shadow-xl flex items-center justify-center gap-2">
                 <span>{isSubmitting ? 'Analyzing Clinic Data...' : 'Get My Free Audit'}</span>

@@ -8,12 +8,12 @@ import { NAV_LINKS } from "@/lib/constants";
 import { ChevronDown, HamburgerIcon } from "@/lib/icons";
 
 const INTERNAL_LINKS: Record<string, string> = {
+  Home: "/",
   About: "/about",
   Services: "/services",
   "Case Studies": "/case-studies",
   Portfolio: "/portfolio",
   Contact: "/contact",
-  Blog: "/blog",
 };
 
 function scrollToContact() {
@@ -55,6 +55,7 @@ const SERVICES_MENU = {
         { icon: "link",     name: "Off-Page SEO",                  description: "Authority-building link strategies that lift domain rating.", href: "/media/seo" },
         { icon: "chart",    name: "Meta Ads",                      description: "Targeted Facebook & Instagram campaigns that reach the right audience.", href: "/media/meta-ads" },
         { icon: "megaphone",name: "Social Media Page Management",  description: "Consistent posting, community management & analytics.", href: "/media/social-media-page-management" },
+        { icon: "chart",    name: "Video Editing & Content",       description: "Scripts, cuts, colour & motion that turn footage into brand video.", href: "/media/video-editing" },
       ],
     },
     "Enterprise Solution": {

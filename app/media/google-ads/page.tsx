@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PortedPage from "../_components/PortedPage";
 import GoogleAdsEnhancements from "./_components/GoogleAdsEnhancements";
+import BookingFormBridge from "../_components/BookingFormBridge";
 import { html, title, description } from "./content";
 import "./page.css";
 
@@ -17,6 +18,7 @@ export default function Page() {
           capability showcase, process stepper) into the placeholder divs left
           in content.ts — see _components/GoogleAdsEnhancements.tsx */}
       <GoogleAdsEnhancements />
+      <BookingFormBridge source="Media — Google Ads Page" />
     </>
   );
 }

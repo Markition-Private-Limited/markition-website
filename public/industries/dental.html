@@ -79,14 +79,75 @@ body,p,.body-copy,.service-copy,.faq-answer{font-size:var(--body)!important;line
 .eyebrow,.label,.kicker,.section-kicker{font-size:12px!important;line-height:1.4!important;letter-spacing:.12em!important}
 nav,.nav,.header,.btn,.button,input,select,textarea{font-size:14px!important}
 </style>
+<style>
+.mk-nav-wrap{position:sticky;top:0;z-index:999;height:0;display:flow-root}
+.mk-nav{width:min(1180px,calc(100% - 32px));margin:10px auto 0;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 22px;border-radius:14px;background:rgba(7,19,31,.92);backdrop-filter:blur(20px) saturate(1.8);-webkit-backdrop-filter:blur(20px) saturate(1.8);border:1px solid rgba(79,134,247,.25);box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.mk-nav-logo{display:flex;align-items:center;flex-shrink:0}
+.mk-nav-logo img{height:26px;width:auto;display:block}
+.mk-nav-links{display:flex;gap:2px;align-items:center}
+.mk-nav-links a{color:rgba(255,255,255,.78);font-size:13px;font-weight:600;padding:8px 12px;border-radius:8px;transition:.2s}
+.mk-nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.mk-nav-cta{display:flex;align-items:center;gap:10px}
+.mk-btn-cta{display:inline-flex;align-items:center;gap:8px;background:#4f86f7;color:#fff;font-size:12.5px;font-weight:800;padding:10px 16px;border-radius:7px;white-space:nowrap;transition:.2s}
+.mk-btn-cta:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.mk-nav-toggle{display:none;flex-direction:column;gap:4px;background:none;border:0;padding:6px}
+.mk-nav-toggle span{width:20px;height:2px;background:#fff;border-radius:2px}
+.mk-nav-mobile{display:none;flex-direction:column;width:min(1180px,calc(100% - 32px));margin:8px auto 0;padding:6px;border-radius:14px;background:rgba(7,19,31,.96);border:1px solid rgba(79,134,247,.25);backdrop-filter:blur(20px)}
+.mk-nav-mobile.open{display:flex}
+.mk-nav-mobile a{color:rgba(255,255,255,.82);font-size:14px;font-weight:600;padding:12px 14px;border-radius:9px}
+.mk-nav-mobile a:hover{background:rgba(255,255,255,.08);color:#fff}
+.mk-nav-mobile .mk-btn-cta{justify-content:center;margin-top:6px}
+@media(max-width:860px){.mk-nav-links{display:none}.mk-nav-toggle{display:flex}}
+.mk-footer{background:#07131f;color:#fff}
+.mk-footer-grid{max-width:1200px;margin:0 auto;padding:60px 24px 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:40px 48px}
+.mk-footer-logo{margin-bottom:16px}
+.mk-footer-logo img{height:28px;width:auto;display:block}
+.mk-footer-brand p{font-size:13.5px;line-height:1.75;color:rgba(255,255,255,.55);max-width:260px;margin:0}
+.mk-footer-heading{font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin:0 0 18px}
+.mk-footer-links{display:flex;flex-direction:column;gap:11px}
+.mk-footer-links a{font-size:13.5px;color:rgba(255,255,255,.55);transition:.25s}
+.mk-footer-links a:hover{color:#4f86f7}
+.mk-footer-contact{display:flex;flex-direction:column;gap:13px}
+.mk-footer-contact a{font-size:13px;color:rgba(255,255,255,.55);line-height:1.5}
+.mk-footer-contact a:hover{color:#4f86f7}
+.mk-footer-socials{display:flex;gap:13px;margin-top:20px}
+.mk-footer-socials a{color:#4f86f7;opacity:.8}
+.mk-footer-socials a:hover{opacity:1}
+.mk-footer-bottom{background:#050d16;padding:16px 24px}
+.mk-footer-bottom-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.mk-footer-bottom span{font-size:12.5px;color:rgba(255,255,255,.45)}
+.mk-footer-bottom-links a{font-size:12.5px;color:rgba(255,255,255,.45);margin-left:20px}
+@media(max-width:767px){.mk-footer-grid{grid-template-columns:1fr 1fr;gap:32px 20px;padding:48px 20px 40px}.mk-footer-brand{grid-column:1/-1}}
+@media(max-width:479px){.mk-footer-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-<header><div class="wrap nav">
-<a href="#" class="brand">MARKI<i>TION</i></a>
-<nav class="navlinks"><a href="#services">Services</a><a href="#work">Our Approach</a><a href="#proof">Results</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a></nav>
-<div class="navcta"><a class="btn line" href="tel:+12174010041">Call Us</a><a class="btn dark" href="#audit">Free Audit</a></div>
-<button class="hamb">☰</button>
-</div></header>
+<div class="mk-nav-wrap">
+  <nav class="mk-nav" aria-label="Primary">
+    <a href="/" class="mk-nav-logo" aria-label="Markition home"><img src="/markition-logo.svg" alt="Markition"></a>
+    <div class="mk-nav-links">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="#services">Services</a>
+      <a href="#proof">Results</a>
+      <a href="#faq">FAQ</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <div class="mk-nav-cta">
+      <a class="mk-btn-cta" href="#audit">Get Free Audit <span>→</span></a>
+      <button class="mk-nav-toggle" id="mkNavToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mk-nav-mobile" id="mkNavMobile">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="#services">Services</a>
+    <a href="#proof">Results</a>
+    <a href="#faq">FAQ</a>
+    <a href="/contact">Contact</a>
+    <a class="mk-btn-cta" href="#audit">Get Free Audit →</a>
+  </div>
+</div>
 
 <main>
 <section class="hero"><div class="wrap hero-grid">
@@ -104,13 +165,14 @@ nav,.nav,.header,.btn,.button,input,select,textarea{font-size:14px!important}
 <div class="eyebrow">Start Here</div><h3>Let's look at your growth.</h3><p>A focused review of your current marketing, visibility and patient acquisition opportunities.</p>
 <form class="lead-form">
 <div class="fields">
-<div class="field"><label>NAME</label><input required placeholder="Your name"></div>
-<div class="field"><label>PRACTICE</label><input required placeholder="Practice name"></div>
-<div class="field"><label>EMAIL</label><input required type="email" placeholder="you@practice.com"></div>
-<div class="field"><label>PHONE</label><input required type="tel" placeholder="+1 ..."></div>
-<div class="field full"><label>WHAT DO YOU WANT TO GROW?</label><select><option>New patient enquiries</option><option>Dental implants</option><option>Cosmetic dentistry</option><option>Invisalign / orthodontics</option><option>General dentistry</option></select></div>
+<div class="field"><label>NAME</label><input required name="name" placeholder="Your name"></div>
+<div class="field"><label>PRACTICE</label><input required name="practice" placeholder="Practice name"></div>
+<div class="field"><label>EMAIL</label><input required type="email" name="email" placeholder="you@practice.com"></div>
+<div class="field"><label>PHONE</label><input required type="tel" name="phone" placeholder="+1 ..."></div>
+<div class="field full"><label>WHAT DO YOU WANT TO GROW?</label><select name="goal"><option>New patient enquiries</option><option>Dental implants</option><option>Cosmetic dentistry</option><option>Invisalign / orthodontics</option><option>General dentistry</option></select></div>
 </div>
-<button class="btn dark" type="submit">REQUEST MY FREE AUDIT</button><p class="fine">We keep your information private. No spam.</p>
+<div class="g-recaptcha" data-sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr" style="margin:10px 0"></div>
+<button class="btn dark" type="submit">REQUEST MY FREE AUDIT</button><p class="fine">We keep your information private. No spam.</p><p class="form-error" style="color:#c0392b;font-size:13px;display:none"></p>
 </form></div>
 </div>
 </div></section>
@@ -182,11 +244,55 @@ nav,.nav,.header,.btn,.button,input,select,textarea{font-size:14px!important}
 
 <section class="final"><div class="wrap final-grid">
 <div><div class="eyebrow" style="color:#88a2b7">Your Next Step</div><h2 style="margin-top:18px">Let's find where your next patients are coming from.</h2><p class="muted" style="font-size:18px;max-width:650px">Get a focused review of your current marketing and discover what could be improved across Google, Meta, SEO and social.</p><div style="margin-top:30px"><a class="btn light" href="#audit">Book My Free Dental Audit →</a></div></div>
-<div class="final-form"><div class="eyebrow">Free Audit</div><h3>Tell us about your practice.</h3><form class="lead-form"><input required placeholder="Your name"><input required placeholder="Practice name"><input required type="email" placeholder="Email address"><input required placeholder="Phone number"><textarea placeholder="What would you like to improve?"></textarea><button class="btn dark" type="submit">REQUEST MY AUDIT</button><div class="success">Thank you — your request has been received.</div></form></div>
+<div class="final-form"><div class="eyebrow">Free Audit</div><h3>Tell us about your practice.</h3><form class="lead-form"><input required name="name" placeholder="Your name"><input required name="practice" placeholder="Practice name"><input required type="email" name="email" placeholder="Email address"><input required name="phone" placeholder="Phone number"><textarea name="message" placeholder="What would you like to improve?"></textarea><div class="g-recaptcha" data-sitekey="6Lel-8wtAAAAAMQhOiHrfDAYCIKZ_IM2TBlaMSIr" style="margin:10px 0"></div><button class="btn dark" type="submit">REQUEST MY AUDIT</button><p class="form-error" style="color:#c0392b;font-size:13px;display:none"></p><div class="success">Thank you — your request has been received.</div></form></div>
 </div></section>
 </main>
 
-<footer><div class="wrap foot"><div><a class="brand" href="#">MARKI<i>TION</i></a><p>Dental growth through performance marketing.</p></div><div class="foot-links"><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="#audit">Contact</a></div></div></footer>
+<footer class="mk-footer">
+  <div class="mk-footer-grid">
+    <div class="mk-footer-brand">
+      <div class="mk-footer-logo"><img src="/markition-logo.svg" alt="Markition"></div>
+      <p>Dental growth through performance marketing that turns searches into booked patients.</p>
+    </div>
+    <div>
+      <p class="mk-footer-heading">Company</p>
+      <div class="mk-footer-links">
+        <a href="/about">About Us</a>
+        <a href="/services">Services</a>
+        <a href="/portfolio">Portfolio</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+    <div>
+      <p class="mk-footer-heading">On This Page</p>
+      <div class="mk-footer-links">
+        <a href="#work">Our Approach</a>
+        <a href="#services">Services</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+    <div>
+      <p class="mk-footer-heading">Get In Touch</p>
+      <div class="mk-footer-contact">
+        <a href="https://maps.google.com/?q=117+S+Lexington+St,+Suite+100,+Harrisonville,+MO+64701,+USA">117 S Lexington St, Suite 100<br>Harrisonville, MO 64701, USA</a>
+        <a href="tel:+12174010041">+1 (217) 401-0041</a>
+        <a href="mailto:hey@markition.com">hey@markition.com</a>
+      </div>
+      <div class="mk-footer-socials">
+        <a href="https://x.com/MarkitionPvt" aria-label="X / Twitter" target="_blank" rel="noopener noreferrer">✕</a>
+        <a href="https://linkedin.com/company/markition/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
+        <a href="https://www.instagram.com/markitionmedia" aria-label="Instagram" target="_blank" rel="noopener noreferrer">◎</a>
+      </div>
+    </div>
+  </div>
+  <div class="mk-footer-bottom">
+    <div class="mk-footer-bottom-inner">
+      <span>© 2026 Markition. All rights reserved.</span>
+      <div class="mk-footer-bottom-links"><a href="/terms">Terms of Use</a><a href="/privacy">Privacy Policy</a></div>
+    </div>
+  </div>
+</footer>
 <div class="mobile"><a href="#audit">FREE DENTAL AUDIT</a><a href="tel:+12174010041">CALL NOW</a></div>
 
 <script>
@@ -204,12 +310,43 @@ function slide(dir){
 document.getElementById('prev').onclick=()=>slide(-1);document.getElementById('next').onclick=()=>slide(1);
 window.addEventListener('resize',()=>slide(0));
 
-document.querySelectorAll('.lead-form').forEach(form=>form.addEventListener('submit',e=>{
+document.querySelectorAll('.lead-form').forEach((form,fi)=>form.addEventListener('submit',async e=>{
  e.preventDefault();
  if(!form.checkValidity()){form.reportValidity();return}
- const success=form.querySelector('.success');if(success)success.style.display='block';
- form.reset();
+ const errEl=form.querySelector('.form-error');
+ const token=window.grecaptcha?grecaptcha.getResponse(fi):'';
+ if(!token){if(errEl){errEl.textContent='Please complete the reCAPTCHA.';errEl.style.display='block';}return}
+ if(errEl)errEl.style.display='none';
+ const btn=form.querySelector('button');btn.disabled=true;
+ const fd=new FormData(form);
+ const name=fd.get('name')||'';
+ const email=fd.get('email')||'';
+ const message='Practice: '+(fd.get('practice')||'—')+' | Phone: '+(fd.get('phone')||'—')+'\n\n'+(fd.get('message')||fd.get('goal')||'Free audit request.');
+ try{
+  const res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,service:fd.get('goal')||'',message,source:'Dental (static) — '+(fi===0?'Hero Form':'Final Form'),recaptchaToken:token})});
+  if(res.ok){
+   const success=form.querySelector('.success');if(success)success.style.display='block';
+   form.reset();
+   if(window.grecaptcha)grecaptcha.reset(fi);
+  }else{
+   const data=await res.json().catch(()=>({}));
+   if(errEl){errEl.textContent=data.error||'Something went wrong. Please try again.';errEl.style.display='block';}
+  }
+ }catch(err){
+  if(errEl){errEl.textContent='Something went wrong. Please try again.';errEl.style.display='block';}
+ }finally{
+  btn.disabled=false;
+ }
 }));
+(function(){
+  var btn=document.getElementById('mkNavToggle');
+  var menu=document.getElementById('mkNavMobile');
+  if(btn&&menu){btn.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });}
+})();
 </script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>
