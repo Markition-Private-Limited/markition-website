@@ -627,7 +627,7 @@ allLeadForms.forEach((form,fi)=>{
       name:fd.get('name')||'',email:fd.get('email')||'',
       phone:fd.get('phone')||'',website:fd.get('website')||'',
       service:fd.get('service')||'',budget:fd.get('budget')||'',
-      message:(fd.get('clinic')?`Clinic: ${fd.get('clinic')}\n`:'')+(fd.get('city')?`City: ${fd.get('city')}`:''),
+      message:'Clinic: '+(fd.get('clinic')||'—')+' | Phone: '+(fd.get('phone')||'—')+' | Website: '+(fd.get('website')||'—')+' | Location: '+(fd.get('city')||fd.get('location')||'—')+'\nService: '+(fd.get('service')||'—')+' | Budget: '+(fd.get('budget')||'—'),
       recaptchaToken:captcha
     };
     try{

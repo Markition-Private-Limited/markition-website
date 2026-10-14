@@ -815,7 +815,7 @@ allForms.forEach((form,fi)=>{
       name:fd.get('name')||'',email:fd.get('email')||'',
       phone:fd.get('phone')||'',website:fd.get('website')||'',
       service:fd.get('service')||'',budget:fd.get('budget')||'',
-      message:fd.get('message')||'',recaptchaToken:captcha
+      message:'Clinic: '+(fd.get('clinic')||fd.get('name')||'—')+' | Phone: '+(fd.get('phone')||'—')+' | Website: '+(fd.get('website')||'—')+' | Location: '+(fd.get('location')||fd.get('city')||'—')+'\nService: '+(fd.get('service')||'—')+' | Budget: '+(fd.get('budget')||'—'),recaptchaToken:captcha
     };
     try{
       const res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
