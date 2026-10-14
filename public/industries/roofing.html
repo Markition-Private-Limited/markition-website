@@ -11,7 +11,7 @@
 <link rel="canonical" href="[CANONICAL_URL]">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#17191A;--graphite:#24282A;--slate:#30383B;--ivory:#F5F3EE;--stone:#E7E3DA;--paper:#F8F8F6;--amber:#C8923E;--copper:#A87537;--muted:#687073;--line:#17191A1a;--display:"Manrope","Lemon Milk","Satoshi","Plus Jakarta Sans","Instrument Sans",sans-serif;--body:"DM Sans",Inter,Arial,sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;overflow-x:hidden}a{text-decoration:none;color:inherit}img{width:100%;display:block}button,input,select{font:inherit}button{cursor:pointer}
@@ -40,25 +40,88 @@ header{position:fixed;z-index:50;inset:0 0 auto;height:76px;background:#17191ab8
 @media(max-width:720px){.container{width:calc(100% - 30px)}.section{padding:76px 0}header{height:68px}.navlinks,.navcta{display:none}.menu{display:block}.hero{padding:100px 0 25px}.hero-grid{width:calc(100% - 30px)}.hero h1{font-size:39px}.hero .lead{font-size:16px}.meta{display:grid;gap:8px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.form{padding:20px}.trustgrid{grid-template-columns:1fr 1fr 1fr}.trustgrid strong{grid-column:1/-1}.journey{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line);min-height:0;padding:23px 0}.queries{grid-template-columns:1fr}.service{grid-template-columns:43px 1fr;gap:13px}.service .btn{grid-column:2}.roofgrid,.bagrid{grid-template-columns:1fr}.roof{min-height:350px}.cinema{min-height:570px}.cinema .content{padding-bottom:55px}.whygrid{grid-template-columns:1fr}.whyitem:nth-child(even){padding-left:0;border-left:0}.metrics{grid-template-columns:1fr 1fr}.metric{padding:24px 15px}.metric strong{font-size:29px}.bawrap img{height:350px}.review{min-width:100%}.processgrid{grid-template-columns:1fr}.processitem,.processitem:not(:first-child){padding:25px 0;border-right:0;border-top:1px solid var(--line)}.processitem:first-child{border-top:0}.finalgrid{gap:30px}.footerrow{flex-direction:column}.footerlinks{flex-wrap:wrap}.mobile{display:flex;position:fixed;z-index:60;bottom:0;left:0;right:0;background:#101213f5;padding:9px;gap:8px;backdrop-filter:blur(12px)}.mobile a{flex:1}.mobile .btn{width:100%;min-height:47px}body{padding-bottom:65px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.track,.roof img{transition:none}}
 </style>
-<style>
+<style id="mk-nav-css">
+:root{--nav-accent:#C8923E}
 .mk-nav-wrap{position:sticky;top:0;z-index:999;height:0;display:flow-root}
-.mk-nav{width:min(1180px,calc(100% - 32px));margin:10px auto 0;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 22px;border-radius:14px;background:rgba(23,25,26,.92);backdrop-filter:blur(20px) saturate(1.8);-webkit-backdrop-filter:blur(20px) saturate(1.8);border:1px solid rgba(200,146,62,.22);box-shadow:0 10px 40px rgba(0,0,0,.35)}
-.mk-nav-logo{display:flex;align-items:center;flex-shrink:0}
-.mk-nav-logo img{height:26px;width:auto;display:block}
-.mk-nav-links{display:flex;gap:2px;align-items:center}
-.mk-nav-links a{color:rgba(255,255,255,.78);font-size:13px;font-weight:600;padding:8px 12px;border-radius:8px;transition:.2s}
-.mk-nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
-.mk-nav-cta{display:flex;align-items:center;gap:10px}
-.mk-btn-cta{display:inline-flex;align-items:center;gap:8px;background:#C8923E;color:#17191A;font-size:12.5px;font-weight:800;padding:10px 16px;border-radius:7px;white-space:nowrap;transition:.2s}
-.mk-btn-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
-.mk-nav-toggle{display:none;flex-direction:column;gap:4px;background:none;border:0;padding:6px}
-.mk-nav-toggle span{width:20px;height:2px;background:#fff;border-radius:2px}
-.mk-nav-mobile{display:none;flex-direction:column;width:min(1180px,calc(100% - 32px));margin:8px auto 0;padding:6px;border-radius:14px;background:rgba(23,25,26,.96);border:1px solid rgba(200,146,62,.22);backdrop-filter:blur(20px)}
-.mk-nav-mobile.open{display:flex}
-.mk-nav-mobile a{color:rgba(255,255,255,.82);font-size:14px;font-weight:600;padding:12px 14px;border-radius:9px}
-.mk-nav-mobile a:hover{background:rgba(255,255,255,.08);color:#fff}
-.mk-nav-mobile .mk-btn-cta{justify-content:center;margin-top:6px}
-@media(max-width:860px){.mk-nav-links{display:none}.mk-nav-toggle{display:flex}}
+.mk-nav-pill{position:relative;width:min(1180px,calc(100% - 32px));margin:0 auto;font-family:'Plus Jakarta Sans',sans-serif}
+.mk-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 24px;border-radius:14px;margin-top:10px;background:linear-gradient(135deg,rgba(200,146,62,.55) 0%,rgba(14,10,6,1) 45%);backdrop-filter:blur(20px) saturate(1.8);-webkit-backdrop-filter:blur(20px) saturate(1.8);border:1px solid rgba(200,146,62,.4);box-shadow:0 2px 24px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08)}
+.mk-nav-logo img{height:28px;width:auto;display:block}
+.mk-nav-links{display:flex;align-items:center;gap:2px;flex:1;justify-content:center}
+.mk-nav-links a,.mk-nav-drop-btn{color:rgba(255,255,255,.75);font-size:13px;font-weight:400;padding:7px 10px;border-radius:8px;text-decoration:none;transition:.15s;background:none;border:none;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;font-family:inherit}
+.mk-nav-links a:hover,.mk-nav-drop-btn:hover,.mk-nav-drop-btn.open{color:#fff;background:rgba(255,255,255,.07)}
+.mk-chevron{display:inline-flex;transition:transform .2s;font-style:normal;font-size:10px}
+.mk-nav-drop-btn.open .mk-chevron{transform:rotate(180deg)}
+.mk-nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.mk-btn-cta{display:inline-flex;align-items:center;gap:6px;background:var(--nav-accent);color:#fff;font-size:12.5px;font-weight:600;padding:8px 16px;border-radius:6px;text-decoration:none;white-space:nowrap;transition:.15s;border:none}
+.mk-btn-cta:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.mk-nav-toggle{display:none;flex-direction:column;gap:4.5px;background:rgba(255,255,255,.08);border:none;padding:8px;border-radius:8px;cursor:pointer;align-items:center;justify-content:center;width:34px;height:34px}
+.mk-nav-toggle span{width:18px;height:1.8px;background:#fff;border-radius:2px;display:block;transition:.2s}
+/* ── Dropdown shell ── */
+.mk-drop{position:absolute;top:calc(100% + 10px);left:0;right:0;background:linear-gradient(rgba(200,146,62,.18),rgba(200,146,62,.18)),rgb(14,10,6);border:1px solid rgba(200,146,62,.28);border-radius:18px;box-shadow:0 24px 80px rgba(0,0,0,.7);padding:28px 32px;z-index:50;animation:mkFade .25s ease}
+@keyframes mkFade{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.mk-drop-eyebrow{margin:0 0 18px;font-size:11px;font-weight:700;letter-spacing:.15em;color:rgba(255,255,255,.4);text-transform:uppercase}
+/* ── Services ── */
+.mk-serv-grid{display:grid;grid-template-columns:186px 1fr;gap:32px}
+.mk-serv-tabs{border-right:1px solid rgba(255,255,255,.08);padding-right:20px;display:flex;flex-direction:column;gap:2px}
+.mk-tab{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:9px 12px;border-radius:9px;background:none;border:none;cursor:pointer;font-size:14px;font-weight:500;color:rgba(255,255,255,.72);transition:.15s;font-family:inherit}
+.mk-tab.active{background:rgba(75,142,255,.12);color:#fff;font-weight:700}
+.mk-tab:hover:not(.active){background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)}
+.mk-serv-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px 16px}
+.mk-svc-item{display:flex;align-items:center;gap:12px;text-decoration:none}
+.mk-svc-icon{flex-shrink:0;width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#4B8EFF;transition:.15s}
+.mk-svc-item:hover .mk-svc-icon{background:rgba(75,142,255,.15);border-color:rgba(75,142,255,.35)}
+.mk-svc-name{font-size:13.5px;font-weight:700;color:#fff;line-height:1.3;transition:.15s}
+.mk-svc-item:hover .mk-svc-name{color:#4B8EFF}
+/* ── Solutions ── */
+.mk-sol-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
+.mk-sol-title{font-size:26px;font-weight:800;background:linear-gradient(135deg,#fff 30%,#4B8EFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 4px}
+.mk-sol-sub{font-size:12.5px;color:rgba(255,255,255,.38);margin:0}
+.mk-close-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:.15s;flex-shrink:0}
+.mk-close-btn:hover{background:rgba(255,255,255,.14);color:#fff}
+.mk-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(75,142,255,.5) 30%,rgba(34,197,244,.4) 70%,transparent);margin:14px 0 24px}
+.mk-sol-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0 20px}
+.mk-sol-col{display:flex;flex-direction:column;padding:14px;border-radius:16px;border-left:1px solid transparent;transition:background .2s,transform .2s;cursor:pointer}
+.mk-sol-col+.mk-sol-col{border-left-color:rgba(255,255,255,.1)}
+.mk-sol-col:hover{background:rgba(255,255,255,.04);transform:translateY(-3px)}
+.mk-sol-bar{height:3px;border-radius:99px;margin-bottom:14px}
+.mk-sol-img{height:120px;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;box-shadow:0 6px 20px rgba(0,0,0,.25);transition:.25s}
+.mk-sol-img:hover{transform:scale(1.04);box-shadow:0 12px 32px rgba(0,0,0,.4)}
+.mk-sol-img-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(4px);transform:scale(1.1);transition:filter .3s}
+.mk-sol-img:hover .mk-sol-img-bg{filter:blur(0) brightness(1.15)}
+.mk-sol-label{position:relative;z-index:2;color:#fff;font-size:18px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;text-align:center;padding:0 8px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.5))}
+.mk-sol-desc{font-size:12px;color:rgba(255,255,255,.55);line-height:1.7;margin:14px 0 12px;flex:1}
+.mk-sol-link{font-size:12px;font-weight:700;color:#4B8EFF;text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:.15s}
+.mk-sol-link:hover{color:#80AEFF;gap:9px}
+/* ── Industries ── */
+.mk-ind-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px}
+.mk-ind-eyebrow{margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.13em;color:#4B8EFF;text-transform:uppercase}
+.mk-ind-title{margin:0;font-size:22px;font-weight:800;color:#fff}
+.mk-ind-divider{height:1px;background:rgba(255,255,255,.07);margin-bottom:18px}
+.mk-ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.mk-ind-card{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);text-decoration:none;transition:.15s}
+.mk-ind-card:hover{background:rgba(75,142,255,.12);border-color:rgba(75,142,255,.35);transform:translateY(-2px)}
+.mk-ind-icon{flex-shrink:0;width:36px;height:36px;border-radius:8px;background:rgba(75,142,255,.15);border:1px solid rgba(75,142,255,.2);display:flex;align-items:center;justify-content:center;color:#4B8EFF}
+.mk-ind-name{font-size:15px;font-weight:700;color:#fff;margin:0 0 4px}
+.mk-ind-desc{font-size:12px;color:rgba(255,255,255,.5);line-height:1.5;margin:0}
+/* ── Mobile menu ── */
+.mk-mobile{display:none;flex-direction:column;width:min(1180px,calc(100% - 32px));margin:8px auto 0;border-radius:14px;background:linear-gradient(135deg,rgba(200,146,62,.5) 0%,rgba(14,10,6,1) 45%);border:1px solid rgba(200,146,62,.3);backdrop-filter:blur(20px);overflow:hidden;font-family:'Plus Jakarta Sans',sans-serif}
+.mk-mobile.open{display:flex}
+.mk-mob-row{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;font-size:13.5px;color:rgba(255,255,255,.75);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);background:none;border-left:none;border-right:none;border-top:none;cursor:pointer;width:100%;text-align:left;font-family:inherit;transition:.15s}
+.mk-mob-row:hover{color:#fff;background:rgba(255,255,255,.05)}
+.mk-mob-acc{overflow:hidden;max-height:0;transition:max-height .28s cubic-bezier(.4,0,.2,1)}
+.mk-mob-acc.open{max-height:600px}
+.mk-mob-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 12px 12px}
+.mk-mob-card{display:flex;flex-direction:column;gap:5px;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.04);text-decoration:none;transition:.15s}
+.mk-mob-card:hover{background:rgba(75,142,255,.1);border-color:rgba(75,142,255,.3)}
+.mk-mob-card-icon{width:30px;height:30px;border-radius:8px;background:rgba(75,142,255,.15);border:1px solid rgba(75,142,255,.2);display:flex;align-items:center;justify-content:center;color:#4B8EFF;margin-bottom:2px}
+.mk-mob-card-name{font-size:12.5px;font-weight:700;color:#fff;line-height:1.3}
+.mk-mob-card-desc{font-size:11px;color:rgba(255,255,255,.5);line-height:1.4}
+.mk-mob-cta{padding:12px;border-top:1px solid rgba(255,255,255,.05)}
+.mk-mob-cta a{display:block;text-align:center;background:var(--nav-accent);color:#fff;font-size:13.5px;font-weight:600;padding:10px;border-radius:7px;text-decoration:none;transition:.15s}
+.mk-mob-cta a:hover{filter:brightness(1.1)}
+@media(max-width:1024px){.mk-nav-links{display:none}.mk-nav-toggle{display:flex}}
+</style>
+<style>
 .mk-footer{background:#17191A;color:#fff}
 .mk-footer-grid{max-width:1200px;margin:0 auto;padding:60px 24px 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:40px 48px}
 .mk-footer-logo{margin-bottom:16px}
@@ -84,31 +147,224 @@ header{position:fixed;z-index:50;inset:0 0 auto;height:76px;background:#17191ab8
 </head>
 <body>
 <div class="mk-nav-wrap">
-  <nav class="mk-nav" aria-label="Primary">
-    <a href="/" class="mk-nav-logo" aria-label="Markition home"><img src="/markition-logo.svg" alt="Markition"></a>
-    <div class="mk-nav-links">
-      <a href="/">Home</a>
-      <a href="/about">About</a>
-      <a href="#services">Services</a>
-      <a href="#proof">Results</a>
-      <a href="#faq">FAQ</a>
-      <a href="/contact">Contact</a>
+  <div class="mk-nav-pill">
+    <nav class="mk-nav" aria-label="Primary">
+      <a href="/" class="mk-nav-logo" aria-label="Markition home"><img src="/markition-logo.svg" alt="Markition"></a>
+      <div class="mk-nav-links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <button class="mk-nav-drop-btn" id="mkServBtn" aria-expanded="false">Services <i class="mk-chevron">&#9660;</i></button>
+        <button class="mk-nav-drop-btn" id="mkSolBtn"  aria-expanded="false">Solutions <i class="mk-chevron">&#9660;</i></button>
+        <button class="mk-nav-drop-btn" id="mkIndBtn"  aria-expanded="false">Industries <i class="mk-chevron">&#9660;</i></button>
+        <a href="/case-studies">Case Studies</a>
+        <a href="/portfolio">Portfolio</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="mk-nav-right">
+        <a href="/contact" class="mk-btn-cta">Book Free Consultation <span aria-hidden="true">&#8594;</span></a>
+        <button class="mk-nav-toggle" id="mkToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+
+    <!-- Services mega dropdown -->
+    <div class="mk-drop" id="mkServDrop" hidden>
+      <p class="mk-drop-eyebrow">All Services</p>
+      <div class="mk-serv-grid">
+        <div class="mk-serv-tabs" id="mkServTabs"><button class="mk-tab active" data-key="tech">Tech Solution</button><button class="mk-tab" data-key="marketing">Digital Marketing</button><button class="mk-tab" data-key="enterprise">Enterprise Solution</button><button class="mk-tab" data-key="ai">AI Solutions</button><button class="mk-tab" data-key="industry">Industry Solutions</button></div>
+        <div class="mk-serv-items" id="mkServItems"></div>
+      </div>
     </div>
-    <div class="mk-nav-cta">
-      <a class="mk-btn-cta" href="#book-audit">Get Free Audit <span>→</span></a>
-      <button class="mk-nav-toggle" id="mkNavToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+
+    <!-- Solutions mega dropdown -->
+    <div class="mk-drop" id="mkSolDrop" hidden>
+      <div class="mk-sol-header">
+        <div><p class="mk-sol-title">Explore Our Solutions</p><p class="mk-sol-sub">End-to-end digital &amp; AI solutions for every business need</p></div>
+        <button class="mk-close-btn" id="mkSolClose">&#10005;</button>
+      </div>
+      <div class="mk-divider"></div>
+      <div class="mk-sol-grid">
+<div class="mk-sol-col" onclick="window.open('/media','_blank','noopener,noreferrer')">
+  <div class="mk-sol-bar" style="background:linear-gradient(90deg,#20D9FF,#1236E8)"></div>
+  <div class="mk-sol-img">
+    <div class="mk-sol-img-bg" style="background-image:linear-gradient(145deg,rgba(8,14,44,.18),rgba(10,20,60,.32)),url(/solutions/media-bg.webp)"></div>
+    <span class="mk-sol-label">Media</span>
+  </div>
+  <p class="mk-sol-desc">Google Ads, SEO, social media management & paid campaigns that turn traffic into measurable growth.</p>
+  <a class="mk-sol-link" href="/media" target="_blank" rel="noopener noreferrer">Explore Media <span>&#8594;</span></a>
+</div>
+<div class="mk-sol-col" onclick="window.open('/tech','_blank','noopener,noreferrer')">
+  <div class="mk-sol-bar" style="background:linear-gradient(90deg,#1236E8,#20D9FF)"></div>
+  <div class="mk-sol-img">
+    <div class="mk-sol-img-bg" style="background-image:linear-gradient(145deg,rgba(8,14,44,.18),rgba(10,20,60,.32)),url(/solutions/tech-bg.webp)"></div>
+    <span class="mk-sol-label">Technologies</span>
+  </div>
+  <p class="mk-sol-desc">Custom software, web apps, mobile platforms & SaaS products engineered for scale and peak performance.</p>
+  <a class="mk-sol-link" href="/tech" target="_blank" rel="noopener noreferrer">Explore Technologies <span>&#8594;</span></a>
+</div>
+<div class="mk-sol-col" onclick="window.open('/design-lab','_blank','noopener,noreferrer')">
+  <div class="mk-sol-bar" style="background:linear-gradient(90deg,#20D9FF,#1236E8,#20D9FF)"></div>
+  <div class="mk-sol-img">
+    <div class="mk-sol-img-bg" style="background-image:linear-gradient(145deg,rgba(8,14,44,.18),rgba(10,20,60,.32)),url(/solutions/designlab-bg.webp)"></div>
+    <span class="mk-sol-label">Design Lab</span>
+  </div>
+  <p class="mk-sol-desc">Brand identity, UI/UX design, motion graphics & print — creative work that makes your brand impossible to ignore.</p>
+  <a class="mk-sol-link" href="/design-lab" target="_blank" rel="noopener noreferrer">Explore Design Lab <span>&#8594;</span></a>
+</div>
+<div class="mk-sol-col" onclick="window.open('/spheno','_blank','noopener,noreferrer')">
+  <div class="mk-sol-bar" style="background:linear-gradient(90deg,#1236E8,#20D9FF,#1236E8)"></div>
+  <div class="mk-sol-img">
+    <div class="mk-sol-img-bg" style="background-image:linear-gradient(145deg,rgba(8,14,44,.18),rgba(10,20,60,.32)),url(/solutions/spheno-bg.webp)"></div>
+    <span class="mk-sol-label">SPHENO AI</span>
+  </div>
+  <p class="mk-sol-desc">AI agents, chatbots, voice AI & workflow automation that make your business operate intelligently.</p>
+  <a class="mk-sol-link" href="/spheno" target="_blank" rel="noopener noreferrer">Explore SPHENO AI <span>&#8594;</span></a>
+</div>
+      </div>
     </div>
-  </nav>
-  <div class="mk-nav-mobile" id="mkNavMobile">
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="#services">Services</a>
-    <a href="#proof">Results</a>
-    <a href="#faq">FAQ</a>
-    <a href="/contact">Contact</a>
-    <a class="mk-btn-cta" href="#book-audit">Get Free Audit →</a>
+
+    <!-- Industries dropdown -->
+    <div class="mk-drop" id="mkIndDrop" hidden>
+      <div class="mk-ind-header">
+        <div><p class="mk-ind-eyebrow">Industry-Specific Marketing</p><p class="mk-ind-title">Choose Your Industry</p></div>
+        <button class="mk-close-btn" id="mkIndClose">&#10005;</button>
+      </div>
+      <div class="mk-ind-divider"></div>
+      <div class="mk-ind-grid">
+<a class="mk-ind-card" href="/industries/dental"><div class="mk-ind-icon"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><p class="mk-ind-name">Dental</p><p class="mk-ind-desc">Google Ads, SEO & lead gen for dental practices</p></div></a>
+<a class="mk-ind-card" href="/industries/roofing"><div class="mk-ind-icon"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 3v18M3 9h6M3 15h6M15 9h3M15 15h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><p class="mk-ind-name">Roofing</p><p class="mk-ind-desc">Google Ads, SEO & lead gen for roofing contractors</p></div></a>
+<a class="mk-ind-card" href="/industries/hair-restoration"><div class="mk-ind-icon"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="20" x2="12" y2="4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="6" y1="20" x2="6" y2="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><p class="mk-ind-name">Hair Restoration</p><p class="mk-ind-desc">Patient lead generation for hair transplant & restoration clinics</p></div></a>
+<a class="mk-ind-card" href="/industries/aesthetician-clinics"><div class="mk-ind-icon"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><p class="mk-ind-name">Aesthetician Clinics</p><p class="mk-ind-desc">Client acquisition for med spas & aesthetic clinics</p></div></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mk-mobile" id="mkMobile">
+    <a href="/" class="mk-mob-row">Home</a>
+    <a href="/about" class="mk-mob-row">About</a>
+    <button class="mk-mob-row" onclick="mkAcc('mkMobServAcc',this)">Services <i class="mk-chevron">&#9660;</i></button>
+    <div class="mk-mob-acc" id="mkMobServAcc"><div class="mk-mob-grid"><a class="mk-mob-card" href="/tech" target="_blank" rel="noopener noreferrer"><div class="mk-mob-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="8 6 2 12 8 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mk-mob-card-name">Tech Solution</span><span class="mk-mob-card-desc">Web, mobile & SaaS platforms</span></a>
+<a class="mk-mob-card" href="/media" target="_blank" rel="noopener noreferrer"><div class="mk-mob-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mk-mob-card-name">Digital Marketing</span><span class="mk-mob-card-desc">Google Ads, SEO & social</span></a>
+<a class="mk-mob-card" href="/tech#solutions" target="_blank" rel="noopener noreferrer"><div class="mk-mob-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 3v18M3 9h6M3 15h6M15 9h3M15 15h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mk-mob-card-name">Enterprise</span><span class="mk-mob-card-desc">ERP, CRM & systems</span></a>
+<a class="mk-mob-card" href="#" target="_blank" rel="noopener noreferrer"><div class="mk-mob-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="16" r="1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="15" cy="16" r="1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mk-mob-card-name">AI Solutions</span><span class="mk-mob-card-desc">Agents, chatbots & automation</span></a>
+<a class="mk-mob-card" href="#" target="_blank" rel="noopener noreferrer"><div class="mk-mob-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="20" x2="12" y2="4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="6" y1="20" x2="6" y2="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mk-mob-card-name">Industry Solutions</span><span class="mk-mob-card-desc">Fintech, healthcare & more</span></a></div></div>
+    <button class="mk-mob-row" onclick="mkAcc('mkMobSolAcc',this)">Solutions <i class="mk-chevron">&#9660;</i></button>
+    <div class="mk-mob-acc" id="mkMobSolAcc"><div class="mk-mob-grid"><a class="mk-mob-card" href="/media" target="_blank" rel="noopener noreferrer"><div class="mk-mob-card-icon" style="background:linear-gradient(90deg,#20D9FF,#1236E8)"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mk-mob-card-name">Media</span><span class="mk-mob-card-desc">Google Ads, SEO, social media management & paid campaig&hellip;</span></a>
+<a class="mk-mob-card" href="/tech" target="_blank" rel="noopener noreferrer"><div class="mk-mob-card-icon" style="background:linear-gradient(90deg,#1236E8,#20D9FF)"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mk-mob-card-name">Technologies</span><span class="mk-mob-card-desc">Custom software, web apps, mobile platforms & SaaS prod&hellip;</span></a>
+<a class="mk-mob-card" href="/design-lab" target="_blank" rel="noopener noreferrer"><div class="mk-mob-card-icon" style="background:linear-gradient(90deg,#20D9FF,#1236E8,#20D9FF)"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mk-mob-card-name">Design Lab</span><span class="mk-mob-card-desc">Brand identity, UI/UX design, motion graphics & print —&hellip;</span></a>
+<a class="mk-mob-card" href="/spheno" target="_blank" rel="noopener noreferrer"><div class="mk-mob-card-icon" style="background:linear-gradient(90deg,#1236E8,#20D9FF,#1236E8)"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mk-mob-card-name">SPHENO AI</span><span class="mk-mob-card-desc">AI agents, chatbots, voice AI & workflow automation tha&hellip;</span></a></div></div>
+    <button class="mk-mob-row" onclick="mkAcc('mkMobIndAcc',this)">Industries <i class="mk-chevron">&#9660;</i></button>
+    <div class="mk-mob-acc" id="mkMobIndAcc"><div class="mk-mob-grid"><a class="mk-mob-card" href="/industries/dental"><div class="mk-mob-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mk-mob-card-name">Dental</span><span class="mk-mob-card-desc">Google Ads, SEO & lead gen for dental practices</span></a>
+<a class="mk-mob-card" href="/industries/roofing"><div class="mk-mob-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 3v18M3 9h6M3 15h6M15 9h3M15 15h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mk-mob-card-name">Roofing</span><span class="mk-mob-card-desc">Google Ads, SEO & lead gen for roofing contractors</span></a>
+<a class="mk-mob-card" href="/industries/hair-restoration"><div class="mk-mob-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="20" x2="12" y2="4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="6" y1="20" x2="6" y2="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mk-mob-card-name">Hair Restoration</span><span class="mk-mob-card-desc">Patient lead generation for hair transplant & restoration clinics</span></a>
+<a class="mk-mob-card" href="/industries/aesthetician-clinics"><div class="mk-mob-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mk-mob-card-name">Aesthetician Clinics</span><span class="mk-mob-card-desc">Client acquisition for med spas & aesthetic clinics</span></a></div></div>
+    <a href="/case-studies" class="mk-mob-row">Case Studies</a>
+    <a href="/portfolio" class="mk-mob-row">Portfolio</a>
+    <a href="/contact" class="mk-mob-row">Contact</a>
+    <div class="mk-mob-cta"><a href="/contact">Book Free Consultation &#8594;</a></div>
   </div>
 </div>
+<script>
+(function(){
+  var SVC={"tech":[{"icon":"code","name":"Software Development","href":"/tech#services"},{"icon":"building","name":"Enterprise Solution","href":"/tech#solutions"},{"icon":"mobile","name":"Mobile App Engineering","href":"/tech#services"},{"icon":"cloud","name":"SaaS Platforms","href":"/tech#services"},{"icon":"chart","name":"Web Apps & Portals","href":"/tech#services"},{"icon":"cart","name":"Commerce & Marketplaces","href":"/tech#services"}],"marketing":[{"icon":"bolt","name":"Google Ads","href":"/media/google-ads"},{"icon":"chart","name":"Social Media Marketing","href":"#"},{"icon":"seo","name":"On-Page SEO","href":"/media/seo"},{"icon":"link","name":"Off-Page SEO","href":"/media/seo"},{"icon":"chart","name":"Meta Ads","href":"/media/meta-ads"},{"icon":"megaphone","name":"Social Media Page Management","href":"/media/social-media-page-management"},{"icon":"chart","name":"Video Editing & Content","href":"/media/video-editing"}],"enterprise":[{"icon":"building","name":"ERP & Odoo Suite","href":"#"},{"icon":"code","name":"CRM Development","href":"#"},{"icon":"bolt","name":"Operation Systems","href":"#"},{"icon":"chart","name":"Payroll Outsourcing","href":"#"},{"icon":"lock","name":"HR Automation","href":"#"},{"icon":"mobile","name":"Attendance Systems","href":"#"}],"ai":[{"icon":"robot","name":"AI Agents","href":"#"},{"icon":"star","name":"Generative AI","href":"#"},{"icon":"chat","name":"AI Chatbots","href":"#"},{"icon":"bolt","name":"Workflow Automation","href":"#"},{"icon":"cloud","name":"LLM Integration","href":"#"},{"icon":"lock","name":"RAG Pipelines","href":"#"}],"industry":[{"icon":"chart","name":"Fintech Solutions","href":"#"},{"icon":"building","name":"Healthcare Solutions","href":"#"},{"icon":"cart","name":"Retail & E-Commerce","href":"#"},{"icon":"bolt","name":"Transportation Solutions","href":"#"},{"icon":"code","name":"Real Estate Tech","href":"#"},{"icon":"mobile","name":"EdTech Platforms","href":"#"}]};
+  var ICO={
+    code: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="8 6 2 12 8 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    star: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    chart: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="20" x2="12" y2="4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="6" y1="20" x2="6" y2="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    building: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 3v18M3 9h6M3 15h6M15 9h3M15 15h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    mobile: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="18" x2="12.01" y2="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    cloud: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    bolt: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    pen: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    robot: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="16" r="1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="15" cy="16" r="1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    chat: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    lock: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    cart: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="21" r="1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    seo: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="21" y1="21" x2="16.65" y2="16.65" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    link: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    megaphone: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+  };
+  var activeTab='tech';
+  var timers={};
+
+  function renderItems(key){
+    var el=document.getElementById('mkServItems');
+    if(!el)return;
+    el.innerHTML=(SVC[key]||[]).map(function(it){
+      return '<a class="mk-svc-item" href="'+(it.href||'#')+'" target="_blank" rel="noopener noreferrer"><div class="mk-svc-icon">'+(ICO[it.icon]||ICO.star)+'</div><span class="mk-svc-name">'+it.name+'</span></a>';
+    }).join('');
+  }
+
+  function openDrop(id){
+    ['mkServDrop','mkSolDrop','mkIndDrop'].forEach(function(d){
+      var el=document.getElementById(d);
+      if(el)el.hidden=(d!==id);
+    });
+    ['mkServBtn','mkSolBtn','mkIndBtn'].forEach(function(b){
+      var el=document.getElementById(b);
+      if(el)el.classList.toggle('open',b===id.replace('Drop','Btn'));
+    });
+    if(id==='mkServDrop')renderItems(activeTab);
+  }
+
+  function closeAll(){
+    ['mkServDrop','mkSolDrop','mkIndDrop'].forEach(function(d){
+      var el=document.getElementById(d);
+      if(el)el.hidden=true;
+    });
+    ['mkServBtn','mkSolBtn','mkIndBtn'].forEach(function(b){
+      var el=document.getElementById(b);
+      if(el)el.classList.remove('open');
+    });
+  }
+
+  function delay(key,fn){clearTimeout(timers[key]);timers[key]=setTimeout(fn,150);}
+  function cancel(key){clearTimeout(timers[key]);}
+
+  [['mkServBtn','mkServDrop'],['mkSolBtn','mkSolDrop'],['mkIndBtn','mkIndDrop']].forEach(function(pair){
+    var btn=document.getElementById(pair[0]);
+    var drop=document.getElementById(pair[1]);
+    if(!btn||!drop)return;
+    btn.addEventListener('click',function(){drop.hidden?openDrop(pair[1]):closeAll();});
+    btn.addEventListener('mouseenter',function(){cancel('c');openDrop(pair[1]);});
+    btn.addEventListener('mouseleave',function(){delay('c',closeAll);});
+    drop.addEventListener('mouseenter',function(){cancel('c');});
+    drop.addEventListener('mouseleave',function(){delay('c',closeAll);});
+  });
+
+  var tabsEl=document.getElementById('mkServTabs');
+  if(tabsEl){
+    tabsEl.addEventListener('click',function(e){
+      var b=e.target.closest('.mk-tab');if(!b)return;
+      tabsEl.querySelectorAll('.mk-tab').forEach(function(t){t.classList.remove('active');});
+      b.classList.add('active');activeTab=b.dataset.key;renderItems(activeTab);
+    });
+    tabsEl.addEventListener('mouseover',function(e){
+      var b=e.target.closest('.mk-tab');if(!b)return;
+      tabsEl.querySelectorAll('.mk-tab').forEach(function(t){t.classList.remove('active');});
+      b.classList.add('active');activeTab=b.dataset.key;renderItems(activeTab);
+    });
+  }
+
+  document.getElementById('mkSolClose')&&document.getElementById('mkSolClose').addEventListener('click',closeAll);
+  document.getElementById('mkIndClose')&&document.getElementById('mkIndClose').addEventListener('click',closeAll);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll();});
+
+  document.getElementById('mkToggle')&&document.getElementById('mkToggle').addEventListener('click',function(){
+    var mob=document.getElementById('mkMobile');
+    var open=mob.classList.toggle('open');
+    this.setAttribute('aria-expanded',open);
+    closeAll();
+  });
+})();
+
+function mkAcc(id,btn){
+  var acc=document.getElementById(id);
+  var open=acc.classList.toggle('open');
+  var ch=btn.querySelector('.mk-chevron');
+  if(ch)ch.style.transform=open?'rotate(180deg)':'';
+}
+</script>
 
 <section class="hero">
 <div class="hero-grid">
@@ -217,14 +473,7 @@ header{position:fixed;z-index:50;inset:0 0 auto;height:76px;background:#17191ab8
 <script>
 const header=document.getElementById('header');addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>20),{passive:true});
 const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('on')),{threshold:.1});document.querySelectorAll('.reveal').forEach(x=>io.observe(x));
-(function(){
-  var btn=document.getElementById('mkNavToggle');
-  var menu=document.getElementById('mkNavMobile');
-  if(btn&&menu){btn.addEventListener('click',function(){
-    var open=menu.classList.toggle('open');
-    btn.setAttribute('aria-expanded',open?'true':'false');
-  });}
-})();
+
 document.querySelectorAll('.leadform').forEach((f,fi)=>f.addEventListener('submit',async e=>{
 e.preventDefault();
 if(!f.checkValidity())return;
