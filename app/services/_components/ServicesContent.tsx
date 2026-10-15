@@ -34,11 +34,11 @@ const CATEGORIES = [
     subtitle: "Digital Marketing & Growth",
     href: "/contact",
     services: [
-      "Search Engine Optimization (SEO)",
-      "Google Ads & PPC",
-      "Meta Ads",
-      "Social Media Management",
-      "Content Strategy & Creation",
+      { name: "Search Engine Optimization (SEO)", href: "/media/seo" },
+      { name: "Google Ads & PPC", href: "/media/google-ads" },
+      { name: "Meta Ads", href: "/media/meta-ads" },
+      { name: "Social Media Management", href: "/media/social-media-page-management" },
+      { name: "Content Strategy & Creation", href: "/media/video-editing" },
     ],
   },
   {
@@ -155,10 +155,14 @@ function ServicesList() {
 
         <div className="svc-service-list">
           {CATEGORIES.map((cat, ci) => {
+            /* Normalize services to { name, href }, falling back to the category href */
+            const items = cat.services.map((s) =>
+              typeof s === "string" ? { name: s, href: cat.href } : s
+            );
             /* Pair services into rows of 2 */
-            const rows: string[][] = [];
-            for (let i = 0; i < cat.services.length; i += 2) {
-              rows.push(cat.services.slice(i, i + 2));
+            const rows: (typeof items)[] = [];
+            for (let i = 0; i < items.length; i += 2) {
+              rows.push(items.slice(i, i + 2));
             }
             return (
               <div key={ci} className="svc-cat-block">
@@ -173,14 +177,14 @@ function ServicesList() {
                 {/* Service rows */}
                 {rows.map((pair, ri) => (
                   <div key={ri} className="svc-service-row svc-reveal" style={{ transitionDelay: `${Math.min(ri * 40, 320)}ms` }}>
-                    <a className="svc-service-item" href={cat.href}>
+                    <a className="svc-service-item" href={pair[0].href}>
                       <span className="svc-item-left-arrow" aria-hidden="true">↗</span>
-                      <span className="svc-service-name">{pair[0]}</span>
+                      <span className="svc-service-name">{pair[0].name}</span>
                     </a>
                     {pair[1] ? (
-                      <a className="svc-service-item" href={cat.href}>
+                      <a className="svc-service-item" href={pair[1].href}>
                         <span className="svc-item-left-arrow" aria-hidden="true">↗</span>
-                        <span className="svc-service-name">{pair[1]}</span>
+                        <span className="svc-service-name">{pair[1].name}</span>
                       </a>
                     ) : (
                       <div className="svc-service-item svc-empty" aria-hidden="true" />
